@@ -1,0 +1,130 @@
+﻿/* ==========================================================================
+=Accordions and Toogles
+========================================================================== */
+
+/* =Accordion
+========================================================================== */
+	
+.accordion { margin-bottom: 50px; }
+
+.accordion-item {
+	position: relative;
+	display: block;
+	padding: 20px 25px;
+	border: 1px solid #e0e0e0;
+	margin-bottom: 15px;
+	font-size: 18px;
+	line-height: 18px;
+	-webkit-transition: all 0.3s;
+			transition: all 0.3s;	
+}
+	
+a.accordion-item { color: #6d6d6d; }
+	
+.accordion-item:after {
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	width: 60px;
+	height: 60px;  
+	background-color: rgba(0, 33, 56, 0.75);
+	color: #fff;
+	font-size: 18px;
+	line-height: 60px;
+	text-align: center;
+	content: "+";
+}
+	
+.accordion-item.active:after { content: "-"; }
+	
+.accordion-item:hover,
+.accordion-item.active {
+	border-color: #3a4e6a;
+	background-color: rgba(0, 33, 56, 0.75) ;
+	color: #fff;
+	text-decoration: none; 
+}
+	
+.accordion-item-content { 
+	display: none; 
+	padding: 15px 60px 15px 25px;
+}
+	
+/*
+	* 1. Clearfix hack 
+	*/
+	 
+.accordion-item-content:after { /* 1 */
+	visibility: hidden;
+	display: block;
+	height: 0;
+	font-size: 0;
+	content: " ";
+	clear: both;
+}
+	
+/* =Toogle
+========================================================================== */
+	
+.toggle { margin-bottom: 50px; }
+
+.toggle-item {
+	position: relative;
+	display: block;
+	padding: 17px 25px;
+	border: 1px solid #e0e0e0;
+	margin-bottom: 5px;
+	font-size: 18px;
+	line-height: 18px;
+	-webkit-transition: all 0.3s;
+			transition: all 0.3s;	
+}
+	
+a.toggle-item { color: #6d6d6d; }
+	
+.toggle-item:after {
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	width: 54px;
+	height: 54px;  
+	background-color: rgba(0, 33, 56, 0.75);
+	color: #fff;
+	font-size: 18px;
+	line-height: 54px;
+	text-align: center;
+	content: "+";
+}
+	
+.toggle-item.active:after { content: "-"; }
+	
+.toggle-item:hover,
+.toggle-item.active {
+	border-color: #3a4e6a;
+	background-color: rgba(0, 33, 56, 0.75) ;
+	color: #fff;
+	text-decoration: none; 
+}
+	
+.toggle-item-content { 
+	display: none; 
+	padding: 15px 54px 15px 25px;
+}
+	
+/*
+	* 1. Clearfix hack 
+	*/
+	 
+.toggle-item-content:after { /* 1 */
+	visibility: hidden;
+	display: block;
+	height: 0;
+	font-size: 0;
+	content: " ";
+	clear: both;
+}
+	
+@media (max-width: 767px) {		
+	.toggle-item-content,
+	.accordion-item-content { padding: 15px 0; }
+}

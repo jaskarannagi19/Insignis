@@ -1,0 +1,6 @@
+/*
+ * jQuery Sticky Footer v0.1.0 (https://github.com/the-software-factory/jquery-sticky-footer)
+ * Copyright (c) 2015 Vendini srl <vendini@pec.it>
+ * Licensed under MIT (https://github.com/the-software-factory/jquery-sticky-footer/blob/master/LICENSE.md)
+ */
+.is-sticky-footer-enabled{height:100%}.is-sticky-footer-enabled .sticky-footer-sibling{min-height:100%}.is-sticky-footer-enabled .sticky-footer-sibling::after{content:"";display:block}

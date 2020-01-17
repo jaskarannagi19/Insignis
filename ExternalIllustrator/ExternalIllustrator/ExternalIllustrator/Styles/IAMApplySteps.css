@@ -1,0 +1,297 @@
+﻿.iam-wizard-step { 
+	position: relative;
+	margin-bottom: 50px;
+	list-style: none;
+	text-align: center; 
+}
+	
+.iam-wizard-step:before {
+	position: absolute;
+	z-index: 1;
+	top: 60px;
+	left: 135px;
+	display: block;
+	width: 74%;
+	border-top: 1px solid #e0e0e0;
+	content: "";
+}
+	
+.iam-wizard-step li { 
+	float: left;
+	width: 25%;  
+}
+	
+.iam-wizard-step li i,
+.iam-wizard-step li h1,
+.iam-wizard-step li img {
+	position: relative;
+	z-index: 2;
+	display: block;
+	width: 120px; 
+	height: 120px;
+	overflow: hidden;  
+	border: 1px solid #e0e0e0;
+	margin: 0 auto 20px;
+	background-color: #fff;
+	background-clip: padding-box;
+	color: #111;
+	font-size: 48px; 
+	line-height: 120px;
+	-webkit-transition: all 0.3s;
+			transition: all 0.3s; 
+}
+	
+/*.iam-wizard-step li:hover i,
+.iam-wizard-step li:hover h1 {
+	background-color: rgba(0, 33, 56, 0.75);
+	color: #fff;
+}*/
+
+.iam-wizard-step li.current i,
+.iam-wizard-step li.current h1,
+.iam-wizard-step li.current img {
+	position: relative;
+	z-index: 2;
+	display: block;
+	width: 120px; 
+	height: 120px;
+	overflow: hidden;  
+	border: 1px solid #e0e0e0;
+	margin: 0 auto 20px;
+	background-color: rgba(0, 33, 56, 0.75);
+	color: #fff;
+	background-clip: padding-box;
+	font-size: 48px; 
+	line-height: 120px;
+	-webkit-transition: all 0.3s;
+			transition: all 0.3s; 
+}
+	
+/*.iam-wizard-step li.current:hover i,
+.iam-wizard-step li.current:hover h1 {
+	background-color: #fff;
+	color: #111;
+}*/
+
+.iam-wizard-step.three-items li { width: 33.3333333333%; }
+.iam-wizard-step.four-items li { width: 25%; }
+.iam-wizard-step.five-items li { width: 20%; }
+
+.iam-check-box-unselected { 
+	position: relative; 
+	margin-bottom: 50px;
+	text-align: center; 
+}
+		
+.iam-check-box-unselected > span { 
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	border: 1px solid #e0e0e0;
+	margin-bottom: 30px;  
+	text-align: center;
+	-webkit-transition: all 0.2s;
+			transition: all 0.2s;
+}
+	
+.iam-check-box-unselected > span i {
+	display: inline-block;
+	font-size: 25px;
+	line-height: 48px;
+	-webkit-transition: all 0.2s;
+			transition: all 0.2s;
+}
+	
+.iam-check-box-unselected > img { margin-bottom: 10px; }
+	
+.iam-check-box-unselected h4 { margin-bottom: 30px; }
+	
+.iam-check-box-unselected .btn { margin-top: 10px; }
+	
+.iam-check-box-unselected .icon-box-content {}	
+	
+.iam-check-box-unselected:hover > span {
+	background-color: rgba(0, 33, 56, 0.75);
+	color: #fff;
+	-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+}
+	
+.iam-check-box-unselected:hover > span i {
+	-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+}
+
+.iam-check-box-selected { 
+	position: relative; 
+	margin-bottom: 50px;
+	text-align: center; 
+	-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+}
+		
+.iam-check-box-selected > span { 
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	border: 1px solid #e0e0e0;
+	margin-bottom: 30px;  
+	text-align: center;
+	-webkit-transition: all 0.2s;
+			transition: all 0.2s;
+	background-color: rgba(0, 33, 56, 0.75);
+	color: #fff;
+}
+	
+.iam-check-box-selected > span i {
+	display: inline-block;
+	font-size: 25px;
+	line-height: 48px;
+	-webkit-transition: all 0.2s;
+			transition: all 0.2s;
+}
+	
+.iam-check-box-selected > img { margin-bottom: 10px; }
+	
+.iam-check-box-selected h4 { margin-bottom: 30px; }
+	
+.iam-check-box-selected .btn { margin-top: 10px; }
+	
+.iam-check-box-selected .icon-box-content {}	
+	
+.iam-check-box-selected:hover > span {
+	-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+}
+	
+.iam-check-box-selected:hover > span i {
+	-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+}
+
+.iam-radio-unselected { 
+	/*position: relative; */
+	margin-bottom: 50px;
+	text-align: center; 
+}
+		
+.iam-radio-unselected > span { 
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	border: 1px solid #e0e0e0;
+	margin-bottom: 30px;  
+	text-align: center;
+	-webkit-transition: all 0.2s;
+			transition: all 0.2s;
+}
+	
+.iam-radio-unselected > span i {
+	display: inline-block;
+	font-size: 25px;
+	line-height: 48px;
+	-webkit-transition: all 0.2s;
+			transition: all 0.2s;
+}
+	
+.iam-radio-unselected > img { margin-bottom: 10px; }
+	
+.iam-radio-unselected h4 { margin-bottom: 30px; }
+	
+.iam-radio-unselected .btn { margin-top: 10px; }
+	
+.iam-radio-unselected .icon-box-content {}	
+	
+.iam-radio-unselected:hover > span {
+	background-color: rgba(0, 33, 56, 0.75);
+	color: #fff;
+	-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+}
+	
+.iam-radio-unselected:hover > span i {
+	-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+}
+
+.iam-radio-selected { 
+	/*position: relative; */
+	margin-bottom: 50px;
+	text-align: center; 
+	-webkit-transform: rotate(45deg);
+			transform: rotate(45deg);
+}
+		
+.iam-radio-selected > span { 
+	display: inline-block;
+	width: 48px;
+	height: 48px;
+	border: 1px solid #e0e0e0;
+	margin-bottom: 30px;  
+	text-align: center;
+	-webkit-transition: all 0.2s;
+			transition: all 0.2s;
+	background-color: rgba(0, 33, 56, 0.75);
+	color: #fff;
+}
+	
+.iam-radio-selected > span i {
+	display: inline-block;
+	font-size: 25px;
+	line-height: 48px;
+	-webkit-transition: all 0.2s;
+			transition: all 0.2s;
+}
+	
+.iam-radio-selected > img { margin-bottom: 10px; }
+	
+.iam-radio-selected h4 { margin-bottom: 30px; }
+	
+.iam-radio-selected .btn { margin-top: 10px; }
+	
+.iam-radio-selected .icon-box-content {}	
+	
+.iam-radio-selected:hover > span {
+	-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+}
+	
+.iam-radio-selected:hover > span i {
+	-webkit-transform: rotate(-45deg);
+			transform: rotate(-45deg);
+}
+
+.table-simple { 
+	border: none;
+    text-align: left;
+    padding: 0;
+    margin:0;
+}
+.table-simple th{
+	border: none; 
+}
+.table-simple td {
+	border: none; 
+}
+.table-simple thead{
+	border: none; 
+}
+.table-simple tbody{
+	border: none; 
+}
+
+.table-simple tbody tr{
+	border: none; 
+}
+
+.table-simple tbody tr td {
+	border: none; 
+    background: none;
+    background-color: transparent;
+    text-align: left;
+    padding: 0;
+    margin:0;
+}
+
+.table-simple tbody tr:nth-child(odd) td { background-color: transparent; }
+.table-simple tbody tr:nth-child(odd) th { background-color: transparent; }	

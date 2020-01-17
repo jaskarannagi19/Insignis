@@ -1,0 +1,874 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<InsignisAM>
+  <fscsProtection>
+    <parentCompany shortName="BankofIrelandplc" fullName="Bank of Ireland plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>Bank of Ireland UK, Post Office (Savings accounts earlier than 7 Oct 2015? Read here)</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="AAFinancialServices" fullName="AA Financial Services" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="AdamCompanyplc" fullName="Adam &amp; Company plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="AdamCompany" fullName="Adam &amp; Company" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="AirdrieSavingsBank" fullName="Airdrie Savings Bank" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="AirdrieSavingsBank" fullName="Airdrie Savings Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="AldermoreBankplc" fullName="Aldermore Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="Aldermore" fullName="Aldermore" />
+        <provider shortName="AldermoreCorporate" fullName="Aldermore Corporate" />
+        <provider shortName="AldermoreBusiness" fullName="Aldermore Business" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="SantanderUKplc" fullName="Santander UK plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>Bradford &amp; Bingley, Cahoot, Santander</note>
+        <note>Alliance &amp; Leicester, Bradford &amp; Bingley, Santander</note>
+        <note>Alliance &amp; Leicester, Bradford &amp; Bingley, Cahoot</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="AllianceLeicester" fullName="Alliance &amp; Leicester" />
+        <provider shortName="Cahoot" fullName="Cahoot" />
+        <provider shortName="Santander" fullName="Santander" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="AIBGroupUKplc" fullName="AIB Group (UK) plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>First Trust Bank (NI)</note>
+        <note>Allied Irish Bank (GB)</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="AlliedIrishBankGB" fullName="Allied Irish Bank (GB)" />
+        <provider shortName="FirstTrustBankNI" fullName="First Trust Bank (NI)" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedintheIsleofMan" fullName="Licensed in the Isle of Man" countryOfOrigin="Isle of Man" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="AIBInternationalSavingsLtd" fullName="AIB International Savings Ltd" />
+        <provider shortName="NationwideInternational" fullName="Nationwide International" />
+        <provider shortName="PermanentBankInternationalLtd" fullName="Permanent Bank International Ltd" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ArbuthnotLathamCo" fullName="Arbuthnot Latham &amp; Co" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ArbuthnotLathamCo" fullName="Arbuthnot Latham &amp; Co" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="AxisBankLtd" fullName="Axis Bank Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="AxisBankUKLtd" fullName="Axis Bank UK Ltd" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BankofChinaUKLimited" fullName="Bank of China (UK) Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BankofChinaUK" fullName="Bank of China (UK)" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BankofCyprusUKLimited" fullName="Bank of Cyprus UK Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BankofCyprusUK" fullName="Bank of Cyprus UK" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BankofIrelandUKplc" fullName="Bank of Ireland (UK) plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>AA, Post Office</note>
+        <note>Bank of Ireland UK, AA</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BankofIrelandUK" fullName="Bank of Ireland UK" />
+        <provider shortName="PostOffice" fullName="Post Office" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BankofLondonandtheMiddleEastplc" fullName="Bank of London and the Middle East plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BankofLondonandTheMiddleEast" fullName="Bank of London and The Middle East" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BankandClients" fullName="Bank and Clients Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BankandClients" fullName="Bank and Clients Limited" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="FCEBankPlc" fullName="FCE Bank Plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="FordMoney" fullName="Ford Money" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BankofScotlandplc" fullName="Bank of Scotland plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>Aviva, BM Savings, Birmingham Midshires, Halifax, Intelligent Finance, Saga</note>
+        <note>Bank of Scotland, Halifax, Intelligent Finance, Saga</note>
+        <note>Bank of Scotland, BM Savings, Birmingham Midshires, Intelligent Finance, Saga</note>
+        <note>Aviva, Bank of Scotland, BM Savings, Birmingham Midshires, Halifax, Saga</note>
+        <note>Bank of Scotland, BM Savings, Birmingham Midshires, Halifax, Intelligent Finance</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BankofScotland" fullName="Bank of Scotland" />
+        <provider shortName="BMSavingsBirminghamMidshires" fullName="BM Savings (Birmingham Midshires)" />
+        <provider shortName="Halifax" fullName="Halifax" />
+        <provider shortName="IntelligentFinance" fullName="Intelligent Finance" />
+        <provider shortName="Saga" fullName="Saga" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BarclaysBankplc" fullName="Barclays Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>Standard Life Cash Savings, Barclays Direct (previously ING Direct)</note>
+        <note>Standard Life Cash Savings, Barclays</note>
+        <note>Barclays Bank, Barclays Direct (previously ING Direct)</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BarclaysBank" fullName="Barclays Bank" />
+        <provider shortName="BarclaysDirectpreviouslyINGDirect" fullName="Barclays Direct (previously ING Direct)" />
+        <provider shortName="StandardLifeCashSavings" fullName="Standard Life Cash Savings" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedinGibraltarGuernseyIsleofManandJersey" fullName="Licensed in Gibraltar, Guernsey, Isle of Man and Jersey" countryOfOrigin="Gibraltar, Guernsey, Isle of Man, Jersey" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BarclaysWealthandInvestmentManagement" fullName="Barclays Wealth and Investment Management" />
+        <provider shortName="RBSInternational" fullName="RBS International" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="YorkshireBuildingSociety" fullName="Yorkshire Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>Chelsea BS, Norwich &amp; Peterborough BS, Yorkshire BS</note>
+        <note>Barnsley BS, Norwich &amp; Peterborough BS, Yorkshire BS</note>
+        <note>Barnsley BS, Chelsea BS, Yorkshire BS</note>
+        <note>Barnsley BS, Chelsea BS, Norwich &amp; Peterborough BS</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BarnsleyBuildingSociety" fullName="Barnsley Building Society" />
+        <provider shortName="ChelseaBuildingSociety" fullName="Chelsea Building Society" />
+        <provider shortName="NorwichPeterboroughBuildingSociety" fullName="Norwich &amp; Peterborough Building Society" />
+        <provider shortName="YorkshireBuildingSociety" fullName="Yorkshire Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BathBuildingSociety" fullName="Bath Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BathBuildingSociety" fullName="Bath Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BeverleyBuildingSociety" fullName="Beverley Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BeverleyBuildingSociety" fullName="Beverley Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="TheCooperativeBankplc" fullName="The Co-operative Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>Smile, The Co-operative Bank</note>
+        <note>Britannia, The Co-operative Bank</note>
+        <note>Britannia, Smile</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="Britannia" fullName="Britannia" />
+        <provider shortName="Smile" fullName="Smile" />
+        <provider shortName="TheCooperativeBank" fullName="The Co-operative Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BrownShipleyCoLimited" fullName="Brown Shipley &amp; Co Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BrownShipley" fullName="Brown Shipley" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="BuckinghamshireBuildingSociety" fullName="Buckinghamshire Building Society" countryOfOrigin="IK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="BuckinghamshireBuildingSociety" fullName="Buckinghamshire Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ButterfieldBankUKLtd" fullName="Butterfield Bank (UK) Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ButterfieldPrivateBank" fullName="Butterfield Private Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CambridgeCountiesBank" fullName="Cambridge &amp; Counties Bank" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CambridgeCountiesBank" fullName="Cambridge &amp; Counties Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CambridgeBuildingSociety" fullName="Cambridge Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CambridgeBuildingSociety" fullName="Cambridge Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CaterAllenLtd" fullName="Cater Allen Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CaterAllenPrivateBank" fullName="Cater Allen Private Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="TheCharityBankLtd" fullName="The Charity Bank Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CharityBank" fullName="Charity Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CharterCourtFinancialServicesLtd" fullName="Charter Court Financial Services Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CharterSavingsBank" fullName="Charter Savings Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CHoareCo" fullName="C Hoare &amp; Co" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CHoareCo" fullName="C Hoare &amp; Co" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ChorleyDistrictBuildingSociety" fullName="Chorley &amp; District Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ChorleyDistrictBuildingSociety" fullName="Chorley &amp; District Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CitibankInternationalplc" fullName="Citibank International plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="Citibank" fullName="Citibank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CloseBrothersLimited" fullName="Close Brothers Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CloseSavings" fullName="Close Savings" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ClydesdaleBankplc" fullName="Clydesdale Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>Yorkshire Bank</note>
+        <note>Clydesdale Bank</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ClydesdaleBank" fullName="Clydesdale Bank" />
+        <provider shortName="YorkshireBank" fullName="Yorkshire Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="Couttsco" fullName="Coutts &amp; co" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CouttsCo" fullName="Coutts &amp; Co" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CoventryBuildingSociety" fullName="Coventry Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>Stroud &amp; Swindon BS</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CoventryBuildingSociety" fullName="Coventry Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CreditSuisseUKLimited" fullName="Credit Suisse (UK) Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CreditSuisseUK" fullName="Credit Suisse (UK)" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="CumberlandBuildingSociety" fullName="Cumberland Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="CumberlandBuildingSociety" fullName="Cumberland Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="NorthernBankLimited" fullName="Northern Bank Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="DanskeBank" fullName="Danske Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="DarlingtonBuildingSociety" fullName="Darlington Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="DarlingtonBuildingSociety" fullName="Darlington Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="DudleyBuildingSociety" fullName="Dudley Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="DudleyBuildingSociety" fullName="Dudley Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="DuncanLawrieLimited" fullName="Duncan Lawrie Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="DuncanLawriePrivateBank" fullName="Duncan Lawrie Private Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="EarlShiltonBuildingSociety" fullName="Earl Shilton Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="EarlShiltonBuildingSociety" fullName="Earl Shilton Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="EcologyBuildingSociety" fullName="Ecology Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="EcologyBuildingSociety" fullName="Ecology Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="EFGPrivateBankLimited" fullName="EFG Private Bank Limited" countryOfOrigin="" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="EFGPrivateBank" fullName="EFG Private Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="NationalCountiesBuildingSociety" fullName="National Counties Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>National Counties Building Society</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="FamilyBuildingSociety" fullName="Family Building Society" />
+        <provider shortName="NationalCountiesBuildingSociety" fullName="National Counties Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="FidorBankAG" fullName="Fidor Bank AG" countryOfOrigin="Germany" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="FidorBank" fullName="Fidor Bank " />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="HSBCBankplc" fullName="HSBC Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>HSBC</note>
+        <note>first direct</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="firstdirect" fullName="first direct" />
+        <provider shortName="HSBC" fullName="HSBC" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="" fullName="" countryOfOrigin="FBN Bank (UK) Ltd" >
+      <bankingLicense>
+        <note>UK</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="FirstSave" fullName="FirstSave" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="FurnessBuildingSociety" fullName="Furness Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="FurnessBuildingSociety" fullName="Furness Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="GECapitalBankLtd" fullName="GE Capital Bank Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <note>GE Capital Bank Ltd</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="GECapitalDirect" fullName="GE Capital Direct" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="HampshireTrustplc" fullName="Hampshire Trust plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="HampshireTrustBank" fullName="Hampshire Trust Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="SvenskaHandelsbankenAB" fullName="Svenska Handelsbanken AB" countryOfOrigin="EEA - Sweden" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="Handelsbanken" fullName="Handelsbanken" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="HanleyEconomicBuildingSociety" fullName="Hanley Economic Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="HanleyEconomicBuildingSociety" fullName="Hanley Economic Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="HarpendenBuildingSociety" fullName="Harpenden Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="HarpendenBuildingSociety" fullName="Harpenden Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="HarrodsBankLtd" fullName="Harrods Bank Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="HarrodsBank" fullName="Harrods Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="HinckleyRugbyBuildingSociety" fullName="Hinckley &amp; Rugby Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="HinckleyRugbyBuildingSociety" fullName="Hinckley &amp; Rugby Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="HolmesdaleBuildingSociety" fullName="Holmesdale Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="HolmesdaleBuildingSociety" fullName="Holmesdale Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedinGuernseyIsleofManandJersey" fullName="Licensed in Guernsey, Isle of Man and Jersey" countryOfOrigin="Jersey, Guernsey, Isle of Man" >
+      <bankingLicense>
+        <note>Licensed in Jersey, Guernsey, Isle of Man</note>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="HSBCExpat" fullName="HSBC Expat" />
+        <provider shortName="KleinwortBensonChannelIslandsLimited" fullName="Kleinwort Benson (Channel Islands) Limited" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="HSBcPrivateBankUKLimited" fullName="HSBc Private Bank (UK) Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="HSBCPrivateBankUKLimited" fullName="HSBC Private Bank (UK) Limited" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ICICIBankUKplc" fullName="ICICI Bank UK plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ICICIBankUK" fullName="ICICI Bank UK" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="IkanoBankAB" fullName="Ikano Bank AB" countryOfOrigin="Sweden" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="IkanoBank" fullName="Ikano Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedinGuernseyandJersey" fullName="Licensed in Guernsey and Jersey" countryOfOrigin="Guernsey, Jersey" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="InvestecBankChannelIslandsLtd" fullName="Investec Bank (Channel Islands) Ltd" />
+        <provider shortName="RoyalBankofCanadaCI" fullName="Royal Bank of Canada (CI)" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="InvestecBankplc" fullName="Investec Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="InvestecBankplc" fullName="Investec Bank plc" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="IpswichBuildingSociety" fullName="Ipswich Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="IpswichBuildingSociety" fullName="Ipswich Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="IslamicBankofBritain" fullName="Islamic Bank of Britain" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="IslamicBankofBritain" fullName="Islamic Bank of Britain" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedintheIsleofManBank" fullName="Licensed in the Isle of Man Bank" countryOfOrigin="Isle of Man" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="IsleofManBank" fullName="Isle of Man Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="JordanInternationalBank" fullName="Jordan International Bank" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="JordanInternationalBank" fullName="Jordan International Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="JPMorganEuropeLimited" fullName="JP Morgan Europe Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="JPMorgan" fullName="JP Morgan" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="JulianHodgeBankLtd" fullName="Julian Hodge Bank Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="HodgeBank" fullName="Julian Hodge Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="KleinwortBensonBankLimited" fullName="Kleinwort Benson Bank Limited" countryOfOrigin="Jersey, Isle of Man, Guernsey" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="KleinwortBensonBank" fullName="Kleinwort Benson Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="OneSavingsplc" fullName="OneSavings plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="KentReliance" fullName="Kent Reliance" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LeedsBuildingSociety" fullName="Leeds Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="LeedsBuildingSociety" fullName="Leeds Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LeekUnitedBuildingSociety" fullName="Leek United Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="LeekUnitedBuildingSociety" fullName="Leek United Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LloydsTSBBankplc" fullName="Lloyds TSB Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="LloydsBank" fullName="Lloyds Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedinGibraltarJerseyGuernseyIsleofMan" fullName="Licensed in Gibraltar, Jersey, Guernsey, Isle of Man" countryOfOrigin="Gibraltar, Guernsey, isle of man, Jersey" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="LloydsBankInternational" fullName="Lloyds Bank International" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LloydsTSBPrivateBanking" fullName="Lloyds TSB Private Banking" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="LloydsPrivateBanking" fullName="Lloyds Private Banking" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LoughboroughBuildingSociety" fullName="Loughborough Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="LoughboroughBuildingSociety" fullName="Loughborough Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ManchesterBuildingSociety" fullName="Manchester Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ManchesterBuildingSociety" fullName="Manchester Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="MansfieldBuildingSociety" fullName="Mansfield Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="MansfieldBuildingSociety" fullName="Mansfield Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="MarketHarboroughBuildingSociety" fullName="Market Harborough Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="MarketHarboroughBuildingSociety" fullName="Market Harborough Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="MarksSpencerFinancialServicesplc" fullName="Marks &amp; Spencer Financial Services plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="MarksSpencerBank" fullName="Marks &amp; Spencer Bank" />
+        <provider shortName="MSBank" fullName="M&amp;S Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="MarsdenBuildingSociety" fullName="Marsden Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="MarsdenBuildingSociety" fullName="Marsden Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="MeltonMowbrayBuildingSociety" fullName="Melton Mowbray Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="MeltonMowbrayBuildingSociety" fullName="Melton Mowbray Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="MetroBank" fullName="Metro Bank" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="MetroBank" fullName="Metro Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="MonmouthshireBuildingSociety" fullName="Monmouthshire Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="MonmouthshireBuildingSociety" fullName="Monmouthshire Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="AnexecutiveagencyoftheChancelloroftheExchequer" fullName="An executive agency of the Chancellor of the Exchequer" countryOfOrigin="100% backed by HM Treasury" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="NationalSavingsInvestments" fullName="National Savings &amp; Investments" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="NationwideBuildingSociety" fullName="Nationwide Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="NationwideBS" fullName="Nationwide Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="NationalWestminsterBankplc" fullName="National Westminster Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="NatWest" fullName="NatWest" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedinGibralterGuernsey" fullName="Licensed in Gibralter, Guernsey" countryOfOrigin="Gibraltar, Guernsey, Isle of Man, Jersey" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="NatWestOffshore" fullName="NatWest Offshore" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedintheIsleofManJerseyandUK" fullName="Licensed in the Isle of Man, Jersey and UK" countryOfOrigin="Isle of Man, Jersey" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="NedbankPrivateWealth" fullName="Nedbank Private Wealth" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="NewburyBuildingSociety" fullName="Newbury Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="NewburyBuildingSociety" fullName="Newbury Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="NewcastleBuildingSociety" fullName="Newcastle Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="NewcastleBuildingSociety" fullName="Newcastle Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="NottinghamBuildingSociety" fullName="Nottingham Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="NottinghamBuildingSociety" fullName="Nottingham Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ParagonBankplc" fullName="Paragon Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ParagonBank" fullName="Paragon Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="PenrithBuildingSociety" fullName="Penrith Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="PenrithBuildingSociety" fullName="Penrith Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="PrincipalityBuildingSociety" fullName="Principality Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="PrincipalityBuildingSociety" fullName="Principality Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ProgressiveBuildingSociety" fullName="Progressive Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ProgressiveBuildingSociety" fullName="Progressive Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="OakNorthBankLtd" fullName="OakNorth Bank Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="OakNorthBank" fullName="OakNorth Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="RRaphaelSonsplc" fullName="R Raphael &amp; Sons plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="RaphaelsBank" fullName="Raphaels Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="RCIBanque" fullName="RCI Banque" countryOfOrigin="France" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="RCIBank" fullName="RCI Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="RoyalBankofScotland" fullName="Royal Bank of Scotland" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="RoyalBankofScotland" fullName="Royal Bank of Scotland" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="SaffronBuildingSociety" fullName="Saffron Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="SaffronBS" fullName="Saffron Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="SainsburysBankplc" fullName="Sainsburys Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="SainsburysBank" fullName="Sainsburys Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedinJersey" fullName="Licensed in Jersey" countryOfOrigin="Jersey" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="SantanderPrivateBanking" fullName="Santander Private Banking" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="SchrodersCoLimited" fullName="Schroders &amp; Co Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="SchroderCo" fullName="Schroder &amp; Co" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ScottishBuildingSociety" fullName="Scottish Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ScottishBuildingSociety" fullName="Scottish Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ScottishWidowsBank" fullName="Scottish Widows Bank" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ScottishWidowsBank" fullName="Scottish Widows Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="SecureTrustBankplc" fullName="Secure Trust Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="SecureTrustBank" fullName="Secure Trust Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ShawbrookBankLimited" fullName="Shawbrook Bank Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ShawbrookBank" fullName="Shawbrook Bank" />
+        <provider shortName="ShawbrookBankLimited" fullName="Shawbrook Bank Limited" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="TalosSecuritiesLimited" fullName="TalosSecurities Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="Selftrade" fullName="Selftrade" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="SGHambrosBankLimited" fullName="SG Hambros Bank Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="SGHambrosPrivateBanking" fullName="SG Hambros Private Banking" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="SkiptonBuildingSociety" fullName="Skipton Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="SkiptonBuildingSociety" fullName="Skipton Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedinGuernsey" fullName="Licensed in Guernsey" countryOfOrigin="Guernsey" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="SkiptonInternationalLimited" fullName="Skipton International Limited" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="StaffordRailwayBuildingSociety" fullName="Stafford Railway Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="StaffordRailwayBuildingSociety" fullName="Stafford Railway Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="LicensedinJerseyIsleofMan" fullName="Licensed in Jersey, Isle of Man" countryOfOrigin="Isle of Man/Jersey" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="StandardBankOffshore" fullName="Standard Bank Offshore" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="StateBankofIndia" fullName="State Bank of India" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="StateBankofIndia" fullName="State Bank of India" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="SwanseaBuildingSociety" fullName="Swansea Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="SwanseaBuildingSociety" fullName="Swansea Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="TeachersBuildingSociety" fullName="Teachers Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="TeachersBuildingSociety" fullName="Teachers Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="TescoPersonalFinanceplc" fullName="Tesco Personal Finance plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="TescoBank" fullName="Tesco Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="TiptonCoseleyBuildingSociety" fullName="Tipton &amp; Coseley Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="TiptonCoseleyBuildingSociety" fullName="Tipton &amp; Coseley Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="TriodosBankNV" fullName="Triodos Bank NV" countryOfOrigin="EEA “ Netherlands" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="TriodosBank" fullName="Triodos Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="TurkishBankUKLtd" fullName="Turkish Bank (UK) Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="TurkishBankUK" fullName="Turkish Bank (UK)" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="TSBBankplc" fullName="TSB Bank plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="TSB" fullName="TSB" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="UlsterBankLimited" fullName="Ulster Bank Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="UlsterBank" fullName="Ulster Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="UnitedNationalBankLimited" fullName="United National Bank Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="UnitedBankUK" fullName="United Bank UK" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="UnitedTrustBankLimited" fullName="United Trust Bank Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="UnitedTrustBank" fullName="United Trust Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="VanquisBankLtd" fullName="Vanquis Bank Ltd" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="VanquisBank" fullName="Vanquis Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="VernonBuildingSociety" fullName="Vernon Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="VernonBuildingSociety" fullName="Vernon Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="VirginMoneyplc" fullName="Virgin Money plc" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="VirginMoney" fullName="Virgin Money" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="WeatherbysBankLimited" fullName="Weatherbys Bank Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="WeatherbysBankLimited" fullName="Weatherbys Bank Limited" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="WesleyanBankLimited" fullName="Wesleyan Bank Limited" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="WesleyanBank" fullName="Wesleyan Bank" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="WestBromwichBuildingSociety" fullName="West Bromwich Building Society" countryOfOrigin="UK" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="WestBromwichBuildingSociety" fullName="West Bromwich Building Society" />
+      </bankingLicense>
+    </parentCompany>
+    <parentCompany shortName="ZurichBankInternationalLtd" fullName="Zurich Bank International Ltd" countryOfOrigin="Isle of Man" >
+      <bankingLicense>
+        <protection currencyCode="GBP" value="85000" />
+        <provider shortName="ZurichBankInternationalLtd" fullName="Zurich Bank International Ltd" />
+      </bankingLicense>
+    </parentCompany>
+  </fscsProtection>
+</InsignisAM>

@@ -1,0 +1,304 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Site.master.cs" Inherits="Insignis.Asset.Management.External.Illustrator.Site" %>
+<!DOCTYPE html>
+<html lang="en-GB" xmlns="https://www.w3.org/1999/xhtml">
+    <head runat="server">
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/> 
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1,requiresActiveX=true"/>
+
+        <link rel="shortcut icon" href="https://www.insigniscash.com/wp-content/uploads/2017/02/ico.png" />
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="https://www.insigniscash.com/wp-content/uploads/2017/02/ico.png" />
+        <title>Insignis Asset Management</title>
+
+		<script type="text/javascript">
+			var siteURL = "https://www.insigniscash.com";
+			var themePath = "https://www.insigniscash.com/wp-content/themes/integrity-wp";
+		</script>
+
+        <link rel='stylesheet' id='gridcss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/css/grid.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='basecss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/css/base.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='layoutcss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/css/layout.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='elementscss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/css/elements.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='shopcss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/woocommerce/woocommerce.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='pluginfontawesomecsscss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/css/fontawesome/font-awesome.min.css?ver=4.4' type='text/css' media='all' />
+        <link rel='stylesheet' id='pluginiconfontcustomcsscss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/css/iconfontcustom/icon-font-custom.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='pluginfontcss'  href='https://fonts.googleapis.com/css?family=Oswald%3A400%2C300%2C700&#038;ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='googlefontsPTSanscss'  href='https://fonts.googleapis.com/css?family=PT+Sans%3Aregular%2Citalic%2C700%2C700italic&#038;ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='googlefontsOpensanscss'  href='https://fonts.googleapis.com/css?family=Open+Sans%3A300%2C300italic%2Cregular%2Citalic%2C600%2C600italic%2C700%2C700italic%2C800%2C800italic&#038;ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='pluginanimationscss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/animations/animate.min.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='pluginbxslidercsscss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/bxslider/jquery.bxslider.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='pluginmagnificpopupcsscss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/magnificpopup/magnific-popup.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='themestylecss'  href='https://www.insigniscash.com/wp-content/themes/integrity-wp/style.css?ver=4.2.2' type='text/css' media='all' />
+        <link rel='stylesheet' id='pluginjqueryconfirm' href='https://www.insigniscash.com/clients/Styles/jquery-confirm.css' type='text/css' media='all' />
+        <style id='themestyleinlinecss' type='text/css'>
+            .ewf-debug-message { 
+                background-color: #FCFCFC;
+                border-left: 4px solid #7ad03a;
+                box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+                padding:12px;
+                margin:20px;
+                color:#555; 
+            }
+            @media (min-width: 1025px) {
+                #header.stuck  .sf-menu > li > a, #header.stuck  .sf-menu > li.dropdown > a {
+                    padding: 33px 20px; 
+                }
+                #header.stuck  #custom-search-button { 
+                    top: 11px; 
+                }
+                #header.stuck  #custom-search-form { 
+                    top: 61px; 
+                }
+            }
+            @media (min-width: 1400px) {
+                #header.stuck  .sf-menu > li > a, #header.stuck  .sf-menu > li.dropdown > a {
+                    padding: 33px 22px; 
+                }
+            }
+            .recentcomments a{
+                display:inline !important;
+                padding:0 !important;
+                margin:0 !important;
+            }
+	        #header-top {
+		        background-color: #0a253e;
+		        color: #ffffff;
+	        }
+	        #footer { 
+		        background-color: #0a253e;
+		        color: #ffffff;
+	        }
+            .btn {
+                border: 1px solid #ffa64d;
+                border-bottom: 1px solid #6080b9;
+                background-color: #ffa64d;
+                color: #fff;
+                margin-top: 10px;
+                padding-left: 20px;
+                padding-right: 20px;
+                font: 12px 'Open Sans';
+            }
+            button,
+	        input[type="reset"],
+	        input[type="submit"],
+	        input[type="button"]{
+                border: 1px solid #ffa64d;
+                border-bottom: 1px solid #6080b9;
+                background-color: #ffa64d;
+                color: #fff;
+                margin-top: 10px;
+                padding-left: 20px;
+                padding-right: 20px;
+                font: 12px 'Open Sans';
+            }
+             
+	        #page-header-overlay { 
+		        position: absolute;
+		        top: 0;
+		        right: 0;
+		        bottom: 0;
+		        left: 0;
+		        background-color: #6080b9;
+	        }
+
+	        .sf-menu li:hover > a,
+	        .sf-menu li.sfHover > a {
+		        color: #6080b9;
+	        }
+
+	        a, 
+	        a:visited { 
+		        color: #6080b9; 
+		        text-decoration: none; 
+	        }
+
+            a.btn{
+                color:white;
+            }
+
+	        .tabs-container .tabs-menu li a:hover,
+	        .tabs-container .tabs-menu li.active a {
+		        border-top-color: #6080b9;
+		        background-color: #6080b9;
+	        }
+
+            .ui-widget-header {
+                background: #6080b9;
+	            color: #ffffff;
+	            font-weight: bold;
+            }
+
+	        table th { 
+		        border-top: none;
+		        background-color: #6080b9;
+		        color: #fff;
+		        font-size: 16px;
+	        }
+
+	        #footer-bottom { 
+		        background-color: #001121;
+		        color: #ffffff;	
+	        }
+        </style>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-includes/js/jquery/jquery.js?ver=1.11.2'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=1.2.1'></script>
+        <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.insigniscash.com/xmlrpc.php?rsd" />
+        <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.insigniscash.com/wp-includes/wlwmanifest.xml" /> 
+        <link rel='canonical' href='https://www.insigniscash.com/' />
+        <link rel='shortlink' href='https://www.insigniscash.com/' />
+        <script type="text/javascript">
+            var currentFontSize = "";
+            var arrayOfFontSizes = "xx-small|x-small|small|medium|large|x-large|xx-large"
+            function IncreaseScreenFont() {
+                if (currentFontSize.length == 0) {
+                    currentFontSize = "medium";
+                } else {
+                    var fontSizes = arrayOfFontSizes.split("|");
+                    for (var i = 0; i < fontSizes.length; i++) {
+                        if (fontSizes[i] == currentFontSize) {
+                            if (i + 1 < fontSizes.length) {
+                                currentFontSize = fontSizes[i + 1];
+                                break;
+                            }
+                        }
+                    }
+                }
+                document.body.style.fontSize = currentFontSize;
+                return false;
+            }
+            function DecreaseScreenFont() {
+                if (currentFontSize.length == 0) {
+                    currentFontSize = "small";
+                } else {
+                    var fontSizes = arrayOfFontSizes.split("|");
+                    for (var i = 0; i < fontSizes.length; i++) {
+                        if (fontSizes[i] == currentFontSize) {
+                            if (i - 1 > 0) {
+                                currentFontSize = fontSizes[i - 1];
+                                break;
+                            }
+                        }
+                    }
+                }
+                document.body.style.fontSize = currentFontSize;
+                return false;
+            }
+        </script>
+        <asp:ContentPlaceHolder ID="ContentHead" runat="server">
+        </asp:ContentPlaceHolder>
+    </head>
+    <body class="home page page-id-9 page-template-default ewf-sticky-header"> 
+        <form id="form1" runat="server">
+	        <div id="wrap">
+		        <!--<div id="header-top">-->
+		            <!-- /// HEADER TOP  //////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+			        <!--<div class="container">-->
+                        <asp:ContentPlaceHolder ID="ContentHeaderTop" runat="server">
+                        </asp:ContentPlaceHolder>
+			        <!--</div>--><!-- end .container-->
+		            <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+		        <!--</div>--><!-- end #header-top -->
+		        <div id="header-wrap">
+			        <div id="header"> 
+    			        <!-- /// HEADER  //////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+				        <div class="container">
+                            <asp:ContentPlaceHolder ID="ContentHeader" runat="server">
+                            </asp:ContentPlaceHolder>
+				        </div><!-- end .container -->		
+    			        <!-- //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+			        </div><!-- end #header -->
+		        </div>
+		        <div id="content">
+    		        <!-- /// CONTENT  //////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                    <asp:ContentPlaceHolder ID="ContentPreBody" runat="server">
+                    </asp:ContentPlaceHolder>
+                    <div class="container" id="_masterContentBodyContainer" runat="server">
+                        <asp:ContentPlaceHolder ID="ContentBody" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+    		        <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->	
+		        </div><!-- end #content -->
+		        <!--<div id="footer">-->
+                    <!-- /// FOOTER     ///////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                    <!--<div class="container">-->
+                        <asp:ContentPlaceHolder ID="ContentFooter" runat="server">
+                        </asp:ContentPlaceHolder>
+                    <!--</div>-->
+		        <!--</div>--><!-- end #footer -->		
+		        <div id="footer-bottom" style="background-color: #0A253E;">
+                    <!-- /// FOOTER BOTTOM  ///////////////////////////////////////////////////////////////////////////////////////////////////// -->
+                    <div class="container">
+                        <asp:ContentPlaceHolder ID="ContentFooterBottom" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+		        </div>
+    	    </div><!-- end #wrap -->
+	        <a id="back-to-top" href="#"><i class="ifc-up4"></i></a>	
+        </form>
+        <script type="text/javascript">
+            if (document.getElementById("ContentBody__panelNotify") != null) {
+                if (document.getElementById("ContentBody__panelNotify").style.display == "block") {
+                    jQuery('#ContentBody__panelNotify').delay(5000).fadeOut(400);
+                }
+            }
+        </script>
+	    <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/animations/animate.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/viewport/jquery.viewport.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/easing/jquery.easing.1.3.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/simpleplaceholder/jquery.simpleplaceholder.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/superfish/superfish.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/superfish/hoverIntent.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/bxslider/jquery.bxslider.min.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/magnificpopup/jquery.magnific-popup.min.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/easypiechart/jquery.easypiechart.min.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/easytabs/jquery.easytabs.min.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/twitter/twitterfetcher.js?ver=1.0'></script>
+        <!--<script type='text/javascript' src='https://maps.google.com/maps/api/js?sensor=false&#038;ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/gmap/jquery.gmap.min.js?ver=1.0'></script>-->
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/plugins.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/wp-content/themes/integrity-wp/layout/js/scripts.js?ver=1.0'></script>
+        <script type='text/javascript' src='https://www.insigniscash.com/clients/Scripts/jquery-confirm.js?ver=1.0'></script>
+        <script type="text/javascript">
+            function jConfirmSubmit(Message) {
+                jconfirm({
+                    title: 'Confirm Submit',
+                    content: Message,
+                    confirm: function () {
+                        document.forms['form1'].submit();
+                    },
+                    cancel: function () {
+                    }
+                });
+                return false;
+            }
+
+            function jConfirmNavigation(Message, URL) {
+                jconfirm({
+                    title: 'Confirm Navigation',
+                    content: Message,
+                    confirm: function () {
+                        window.location = URL;
+                    },
+                    cancel: function () {
+                    }
+                });
+                return false;
+            }
+
+            function jAlert(Message) {
+                jconfirm({
+                    title: 'Alert',
+                    content: Message,
+                    cancelButton: false,
+                    confirm: function () {
+                    }
+                });
+                return false;
+            }
+
+            window.onunload = function dummy() { };
+        </script>
+        <asp:ContentPlaceHolder ID="ContentBelowFooter" runat="server">
+        </asp:ContentPlaceHolder>
+    </body>
+</html>

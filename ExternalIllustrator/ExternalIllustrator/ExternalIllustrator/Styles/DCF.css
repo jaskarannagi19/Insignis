@@ -1,0 +1,179 @@
+﻿.dcfSectionHeader {
+    background-color: #213b55;
+    margin-bottom: 5px;
+}
+
+.dcfSectionBody {
+    font-weight:normal;
+}
+
+.dcfEvenRow {
+    background-color: linen;
+}
+
+.dcfColumnHeader {
+    color: white;
+    font-size: 20px;
+    padding:5px;
+}
+
+.dcfColumn {
+    font-size: 16px;
+    padding-top:10px;
+}
+
+.dcfColumnItalicText{
+    font-style:italic;
+}
+
+.dcfColumnBoldText{
+    font-weight: bold;
+}
+
+.dcfColumnCenterText {
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.dcfSubSectionDark {
+    background-color: #bfbfbf;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.dcfSubSectionBlue {
+    background-color: blue;
+    padding: 5px;
+    margin-bottom: 5px;
+    font-weight:bold;
+    color:white;
+}
+
+.dcfSubSectionLight {
+    background-color: #f2f2f2;
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+.dcfSubSectionCentred {
+    color: #6787ad;
+    text-align: center;
+    padding:20px;
+}
+
+.dcfColumnSmallText{
+    font-size: 10px;
+    display:block;
+}
+
+.dcf-horizontal-process-builder {
+    position: relative;
+    margin-bottom: 50px;
+    list-style: none;
+    text-align: center;
+}
+
+.dcf-horizontal-process-builder:before {
+    position: absolute;
+    z-index: 1;
+    top: 60px;
+    left: 135px;
+    display: block;
+    width: 74%;
+    border-top: 1px solid #e0e0e0;
+    content: "";
+}
+
+.dcf-horizontal-process-builder li {
+    float: left;
+    width: 25%;
+}
+
+.dcf-horizontal-process-builder li i,
+.dcf-horizontal-process-builder li h1,
+.dcf-horizontal-process-builder li img {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    margin: 0 auto 20px;
+    background-color: #fff;
+    background-clip: padding-box;
+    color: #111;
+    font-size: 48px;
+    line-height: 120px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.dcf-horizontal-process-builder li h2 {
+    position: relative;
+    z-index: 2;
+    display: block;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border: 1px solid #e0e0e0;
+    margin: 0 auto 20px;
+    background-clip: padding-box;
+    font-size: 48px;
+    line-height: 120px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    background-color: #4fb7ff;
+    color: #fff;
+}
+
+.dcf-horizontal-process-builder.one-item li {
+    width: 100%;
+}
+
+.dcf-horizontal-process-builder.two-items li {
+    width: 50%;
+}
+
+.dcf-horizontal-process-builder.three-items li {
+    width: 33.3333333333%;
+}
+
+.dcf-horizontal-process-builder.four-items li {
+    width: 25%;
+}
+
+.dcf-horizontal-process-builder.five-items li {
+    width: 20%;
+}
+
+.dcf-process-description {
+padding: 0 10px;
+}
+
+@media (max-width: 767px) {
+
+    .dcf-horizontal-process-builder li {
+        float: none;
+        width: 100%;
+        margin-bottom: 40px;
+    }
+
+    .dcf-horizontal-process-builder:before {
+        content: none;
+    }
+
+    .dcf-horizontal-process-builder.three-items li {
+        width: 100%;
+    }
+
+    .dcf-horizontal-process-builder.four-items li {
+        width: 100%;
+    }
+
+    .dcf-horizontal-process-builder.five-items li {
+        width: 100%;
+    }
+}
+

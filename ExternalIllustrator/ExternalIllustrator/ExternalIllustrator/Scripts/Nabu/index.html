@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html xmlns="https://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="Scripts/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="Scripts//Nabu/nabu-framework.js" type="text/javascript"></script>
+    <script src="Scripts//Nabu/nabu-globalisation.js" type="text/javascript"></script>
+    <script src="Scripts//Nabu/nabu-authentication.js" type="text/javascript"></script>
+</head>
+<body>
+    <p id="_errorMessage" style="color:red;"/>
+    <div id="_panelLogin" style="display:none;">
+        <table>
+            <tr>
+                <td>
+                    <p>Email Address</p>
+                </td>
+                <td>
+                    <input type="email" id="_userAccountName" autocomplete="off" autofocus />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <p>Password</p>
+                </td>
+                <td>
+                    <input type="password" id="_userAccountPassword" autocomplete="off" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <p id="_loginStatusMessage" style="color:red;" />
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <input type="button" id="_loginButton" value="Login" style="display:inline;" />
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+        window.onload = function(){
+            nabuFrameworkInitialise('https://localhost:8071', 'b5add981-6d54-4745-95eb-4baeed0959a9', 'Octavo Gate', true);
+
+            nabuGlobalisationGetLanguageBySystemName('English', '_panelLogin', '_errorMessage');
+
+            jQuery(function ($) {
+                $("#_loginButton").click(function () {
+                    if(document.getElementById("_loginStatusMessage")!=null)
+                        document.getElementById("_loginStatusMessage").innerHTML = "";
+
+                    var userName = document.getElementById("_userAccountName").value;
+                    var password = document.getElementById("_userAccountPassword").value;
+                    if (userName.length > 0 && password.length > 0) {
+                        nabuAuthenticationRedirectOnLogin = "LoggedIn.html";
+                        nabuAuthenticationRedirectOnPasswordExpired = "PasswordExpired.html";
+                        if (document.getElementById('_loginButton') != null)
+                            document.getElementById('_loginButton').style.display = 'none';
+                        nabuAuthenticationLogin(userName, password, '_loginButton', '_loginStatusMessage');
+                    }
+                    else {
+                        if (document.getElementById("_loginStatusMessage") != null)
+                            document.getElementById("_loginStatusMessage").innerHTML = "Please enter valid username and password combination.";
+                    }
+                });
+            });
+        }
+    </script>
+</body>
+</html>

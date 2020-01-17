@@ -1,0 +1,352 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{CF18E67D-8F07-4011-97FC-CDDA15BFF849}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Insignis.Asset.Management.External.Illustrator</RootNamespace>
+    <AssemblyName>ExternalIllustrator</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <TargetFrameworkProfile />
+    <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.8.1.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuAbstraction\bin\Debug\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuAbstraction\bin\Debug\Microsoft.Win32.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuDOL\bin\Debug\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuAbstraction, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuAbstraction\bin\Debug\NabuAbstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuDOL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuDOL\bin\Debug\NabuDOL.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuEncryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuPreferences\bin\Debug\NabuEncryption.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuEntities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuPreferences\bin\Debug\NabuEntities.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuPreferences, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuPreferences\bin\Debug\NabuPreferences.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Config\FeeMatrix.xml" />
+    <Content Include="Config\FSCSProtection.xml" />
+    <Content Include="Default.html" />
+    <Content Include="Illustrator\GenerateTemplatedIllustration.aspx" />
+    <Content Include="Illustrator\pta.aspx" />
+    <Content Include="Illustrator\SCurveAvailableTo.aspx" />
+    <Content Include="Global.asax" />
+    <Content Include="HttpError.aspx" />
+    <Content Include="Images\Cog.png" />
+    <Content Include="Images\InsignisAMLogoPrintable.png" />
+    <Content Include="Images\InsignisCashSolutionsLogo.png" />
+    <Content Include="Images\InsignisInterestRateEnvironment.png" />
+    <Content Include="Images\InsignisPortfolioChanges.png" />
+    <Content Include="Images\InsignisPortfolioReview.png" />
+    <Content Include="Images\InsignisPotentialImprovements.png" />
+    <Content Include="Images\Insignis_Cash_Solutions_Logo.jpg" />
+    <Content Include="Images\PDFIcon32x32.png" />
+    <Content Include="Images\ui-icons_888888_256x240.png" />
+    <Content Include="Scripts\DCF.js" />
+    <Content Include="Scripts\IntroducerDialog.js" />
+    <Content Include="Styles\tablesort.css" />
+    <Content Include="Styles\DCFNew.css" />
+    <Content Include="Styles\DCF.css" />
+    <Content Include="Styles\floop.css" />
+    <Content Include="Styles\floop2.css" />
+    <Content Include="Styles\images\ui-bg_diagonals-thick_20_666666_40x40.png" />
+    <Content Include="Styles\images\ui-bg_highlight-soft_100_eeeeee_1x100.png" />
+    <Content Include="Styles\images\ui-icons_222222_256x240.png" />
+    <Content Include="Styles\images\ui-icons_888888_256x240.png" />
+    <Content Include="Images\uploadifive-cancel.png" />
+    <Content Include="RunTimeError.aspx" />
+    <Content Include="Scripts\jquery-confirm.js" />
+    <Content Include="Scripts\jquery-ui.min.js" />
+    <Content Include="Scripts\jquery.sticky-footer.min.js" />
+    <Content Include="Scripts\jquery.uploadifive.js" />
+    <Content Include="Scripts\IAMApplySteps.js" />
+    <Content Include="Scripts\IAMCookie.js" />
+    <Content Include="Scripts\IAMTriangle.js" />
+    <Content Include="Scripts\moment-with-locales.js" />
+    <Content Include="Scripts\Nabu\nabu-qti-client.js" />
+    <Content Include="Scripts\RGraph\RGraph.bar.js" />
+    <Content Include="Scripts\RGraph\RGraph.bipolar.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.annotate.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.context.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.core.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.csv.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.deprecated.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.dynamic.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.effects.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.key.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.resizing.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.tooltips.js" />
+    <Content Include="Scripts\RGraph\RGraph.common.zoom.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.background.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.circle.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.image.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.marker1.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.marker2.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.marker3.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.poly.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.rect.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.text.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.xaxis.js" />
+    <Content Include="Scripts\RGraph\RGraph.drawing.yaxis.js" />
+    <Content Include="Scripts\RGraph\RGraph.fuel.js" />
+    <Content Include="Scripts\RGraph\RGraph.funnel.js" />
+    <Content Include="Scripts\RGraph\RGraph.gantt.js" />
+    <Content Include="Scripts\RGraph\RGraph.gauge.js" />
+    <Content Include="Scripts\RGraph\RGraph.hbar.js" />
+    <Content Include="Scripts\RGraph\RGraph.hprogress.js" />
+    <Content Include="Scripts\RGraph\RGraph.line.js" />
+    <Content Include="Scripts\RGraph\RGraph.meter.js" />
+    <Content Include="Scripts\RGraph\RGraph.modaldialog.js" />
+    <Content Include="Scripts\RGraph\RGraph.odo.js" />
+    <Content Include="Scripts\RGraph\RGraph.pie.js" />
+    <Content Include="Scripts\RGraph\RGraph.radar.js" />
+    <Content Include="Scripts\RGraph\RGraph.rose.js" />
+    <Content Include="Scripts\RGraph\RGraph.rscatter.js" />
+    <Content Include="Scripts\RGraph\RGraph.scatter.js" />
+    <Content Include="Scripts\RGraph\RGraph.thermometer.js" />
+    <Content Include="Scripts\RGraph\RGraph.vprogress.js" />
+    <Content Include="Scripts\RGraph\RGraph.waterfall.js" />
+    <Content Include="Site.Master" />
+    <Content Include="Styles\AccordionToggle.css" />
+    <Content Include="Styles\IAMApplySteps.css" />
+    <Content Include="Styles\jquery-confirm.css" />
+    <Content Include="Styles\jquery-ui.css" />
+    <Content Include="Styles\jquery.sticky-footer.min.css" />
+    <Content Include="Styles\OGFixedTable.css" />
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Template\459\Insignis FourPage Introducer.pptx" />
+    <Content Include="Template\459\Insignis OnePage Introducer.pptx" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Scripts\Nabu\index.html" />
+    <Content Include="Scripts\jquery-1.11.3.min.js" />
+    <Content Include="Scripts\Nabu\nabu-audio.js" />
+    <Content Include="Scripts\Nabu\nabu-audit.js" />
+    <Content Include="Scripts\Nabu\nabu-authentication.js" />
+    <Content Include="Scripts\Nabu\nabu-cms.js" />
+    <Content Include="Scripts\Nabu\nabu-configuration.js" />
+    <Content Include="Scripts\Nabu\nabu-content.js" />
+    <Content Include="Scripts\Nabu\nabu-core.js" />
+    <Content Include="Scripts\Nabu\nabu-education.js" />
+    <Content Include="Scripts\Nabu\nabu-error.js" />
+    <Content Include="Scripts\Nabu\nabu-financial.js" />
+    <Content Include="Scripts\Nabu\nabu-framework.js" />
+    <Content Include="Scripts\Nabu\nabu-globalisation.js" />
+    <Content Include="Scripts\Nabu\nabu-healthcare.js" />
+    <Content Include="Scripts\Nabu\nabu-item.js" />
+    <Content Include="Scripts\Nabu\nabu-operations.js" />
+    <Content Include="Scripts\Nabu\nabu-peopleandplaces.js" />
+    <Content Include="Scripts\Nabu\nabu-planning.js" />
+    <Content Include="Scripts\Nabu\nabu-publicity.js" />
+    <Content Include="Scripts\Nabu\nabu-reporting.js" />
+    <Content Include="Scripts\Nabu\nabu-response.js" />
+    <Content Include="Scripts\Nabu\nabu-scoring.js" />
+    <Content Include="Scripts\Nabu\nabu-social.js" />
+    <Content Include="Scripts\Nabu\nabu-system.js" />
+    <Content Include="Scripts\Nabu\nabu-tweeting.js" />
+    <Content Include="Scripts\Nabu\nabu-utility.js" />
+    <Content Include="Scripts\Nabu\nabu-workflow.js" />
+    <Content Include="Styles\uploadifive.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\UI\Controls\OGFixedTable.cs" />
+    <Compile Include="Helper\UI\Controls\RateGuage.cs" />
+    <Compile Include="Helper\UI\Currency.cs" />
+    <Compile Include="Helper\UI\Footer.cs" />
+    <Compile Include="Helper\UI\Header.cs" />
+    <Compile Include="Helper\UI\Image.cs" />
+    <Compile Include="Helper\UI\Menu.cs" />
+    <Compile Include="Illustrator\GenerateTemplatedIllustration.aspx.cs">
+      <DependentUpon>GenerateTemplatedIllustration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Illustrator\GenerateTemplatedIllustration.aspx.designer.cs">
+      <DependentUpon>GenerateTemplatedIllustration.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Illustrator\pta.aspx.cs">
+      <DependentUpon>pta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Illustrator\pta.aspx.designer.cs">
+      <DependentUpon>pta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Illustrator\SCurveAvailableTo.aspx.cs">
+      <DependentUpon>SCurveAvailableTo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Illustrator\SCurveAvailableTo.aspx.designer.cs">
+      <DependentUpon>SCurveAvailableTo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\DomainRoot.cs" />
+    <Compile Include="Helper\MultiLingual.cs" />
+    <Compile Include="Helper\TextFormatter.cs" />
+    <Compile Include="Helper\UI\Form.cs" />
+    <Compile Include="Helper\UI\Notify.cs" />
+    <Compile Include="HttpError.aspx.cs">
+      <DependentUpon>HttpError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="HttpError.aspx.designer.cs">
+      <DependentUpon>HttpError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RunTimeError.aspx.cs">
+      <DependentUpon>RunTimeError.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="RunTimeError.aspx.designer.cs">
+      <DependentUpon>RunTimeError.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Site.Master.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Site.Master.designer.cs">
+      <DependentUpon>Site.Master</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Output\" />
+    <Folder Include="Preferences\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Admin\InsignisPowerPointGenerator\InsignisPowerPointGenerator.csproj">
+      <Project>{c730abcc-26cb-4471-9a3f-44ddef4f149b}</Project>
+      <Name>InsignisPowerPointGenerator</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Clients\InsignisFSCSConfig\InsignisFSCSConfig.csproj">
+      <Project>{2c7310b1-0eef-4619-948a-ff42b40c392c}</Project>
+      <Name>InsignisFSCSConfig</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Clients\InsignisHelper\InsignisHelper.csproj">
+      <Project>{f15b84e2-bc9c-4361-8bb0-f46e9ff9075a}</Project>
+      <Name>InsignisHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Clients\InsignisReports\InsignisReports.csproj">
+      <Project>{3552e26c-b870-4ffc-bdde-e27032fc90cb}</Project>
+      <Name>InsignisReports</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Clients\InsignisTools\InsignisTools.csproj">
+      <Project>{143bc34e-d3ff-4768-aac1-c1e6fdbc12e3}</Project>
+      <Name>InsignisTools</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>49472</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:65531/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

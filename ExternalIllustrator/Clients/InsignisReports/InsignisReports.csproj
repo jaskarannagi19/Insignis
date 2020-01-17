@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3552E26C-B870-4FFC-BDDE-E27032FC90CB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Insignis.Asset.Management.Reports</RootNamespace>
+    <AssemblyName>InsignisReports</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="NabuAbstraction, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuAbstraction\bin\Debug\NabuAbstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuEncryption, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuAbstraction\bin\Debug\NabuEncryption.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuEntities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuAbstraction\bin\Debug\NabuEntities.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Custom\Report\HubAccount.cs" />
+    <Compile Include="Custom\Report\NewDepositsWithinPeriodReport.cs" />
+    <Compile Include="Custom\Report\ReconciliationOfClientTransactionReport.cs" />
+    <Compile Include="Custom\Report\TotalFundsReport.cs" />
+    <Compile Include="Custom\Report\UnfundedClientsReport.cs" />
+    <Compile Include="Helper\BaseRow.cs" />
+    <Compile Include="Helper\ListCell.cs" />
+    <Compile Include="Helper\LiteralCell.cs" />
+    <Compile Include="Helper\Cell.cs" />
+    <Compile Include="Helper\CenterAlignedCell.cs" />
+    <Compile Include="Helper\Chart\Bar.cs" />
+    <Compile Include="Helper\Chart\HorizontalBarChart.cs" />
+    <Compile Include="Helper\Chart\BaseChart.cs" />
+    <Compile Include="Helper\ColumnSumFormulaCell.cs" />
+    <Compile Include="Helper\ContainerElement.cs" />
+    <Compile Include="Helper\DecimalCell.cs" />
+    <Compile Include="Helper\Escape.cs" />
+    <Compile Include="Helper\FormulaCell.cs" />
+    <Compile Include="Helper\GenericReport.cs" />
+    <Compile Include="Helper\HeaderCell.cs" />
+    <Compile Include="Helper\ImageCell.cs" />
+    <Compile Include="Helper\ImageElement.cs" />
+    <Compile Include="Helper\IntegerCell.cs" />
+    <Compile Include="Helper\LineBreak.cs" />
+    <Compile Include="Helper\PageBreak.cs" />
+    <Compile Include="Helper\Paragraph.cs" />
+    <Compile Include="Helper\ReportContent.cs" />
+    <Compile Include="Helper\ReportElement.cs" />
+    <Compile Include="Helper\RightAlignedCell.cs" />
+    <Compile Include="Helper\Row.cs" />
+    <Compile Include="Helper\SubHeading.cs" />
+    <Compile Include="Helper\Table.cs" />
+    <Compile Include="Helper\TextCell.cs" />
+    <Compile Include="Helper\Theme.cs" />
+    <Compile Include="Helper\TransparentRow.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RenderAbstraction.cs" />
+    <Compile Include="Standard\Currency.cs" />
+    <Compile Include="Standard\Portfolio\BespokeAccount.cs" />
+    <Compile Include="Standard\Portfolio\GemProduct.cs" />
+    <Compile Include="Standard\Portfolio\Generator.cs" />
+    <Compile Include="Standard\Portfolio\HubAccount.cs" />
+    <Compile Include="Standard\Portfolio\PortfolioSummaryParamater.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\InsignisHelper\InsignisHelper.csproj">
+      <Project>{f15b84e2-bc9c-4361-8bb0-f46e9ff9075a}</Project>
+      <Name>InsignisHelper</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
