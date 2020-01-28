@@ -1,0 +1,76 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
+    <UserSecretsId>aspnet-InsignisIllustrationGenerator-721F131A-7D33-4169-A07E-DDB1A34698ED</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20200123103711_IllustrationDetail.cs" />
+    <Compile Remove="Data\Migrations\20200123103711_IllustrationDetail.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200123103818_IllustrationDetail.cs" />
+    <Compile Remove="Data\Migrations\20200123103818_IllustrationDetail.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\font\font-awesome\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\font\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\js\common-js.js" />
+    <None Include="wwwroot\js\jqBootstrapValidation.js" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\opesansfont\opensans-bold-webfont.woff2" />
+    <None Include="wwwroot\opesansfont\opensans-extrabold-webfont.woff2" />
+    <None Include="wwwroot\opesansfont\opensans-light-webfont.woff2" />
+    <None Include="wwwroot\opesansfont\opensans-regular-webfont.woff2" />
+    <None Include="wwwroot\opesansfont\opensans-semibold-webfont.woff2" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min--.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery.min.js" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="DocumentFormat.OpenXml" Version="2.10.0" />
+    <PackageReference Include="FreeSpire.Presentation" Version="4.11.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Admin\InsignisActionLogging\InsignisActionLogging.csproj" />
+    <ProjectReference Include="..\..\Admin\InsignisPowerPointGenerator\InsignisPowerPointGenerator.csproj" />
+    <ProjectReference Include="..\..\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator.csproj" />
+    <ProjectReference Include="..\..\InsignisConsoleApps\InsignisLoaderConfig\InsignisLoaderConfig.csproj" />
+    <ProjectReference Include="..\InsignisFSCSConfig\InsignisFSCSConfig.csproj" />
+    <ProjectReference Include="..\InsignisHelper\InsignisHelper.csproj" />
+    <ProjectReference Include="..\InsignisReports\InsignisReports.csproj" />
+    <ProjectReference Include="..\InsignisTools\InsignisTools.csproj" />
+  </ItemGroup>
+
+
+  <ItemGroup>
+    <Reference Include="NabuAbstraction">
+      <HintPath>..\..\Admin\InsignisPowerPointGenerator\bin\Debug\NabuAbstraction.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuDOL">
+      <HintPath>..\..\InsignisConsoleApps\InsignisLoaderConfig\bin\Debug\NabuDOL.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuEncryption">
+      <HintPath>..\..\ExternalIllustrator\ExternalIllustrator\bin\NabuEncryption.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuEntities">
+      <HintPath>..\..\InsignisConsoleApps\InsignisLoaderConfig\bin\Debug\NabuEntities.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuPreferences">
+      <HintPath>..\..\ExternalIllustrator\ExternalIllustrator\bin\NabuPreferences.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
