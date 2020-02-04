@@ -20,11 +20,11 @@
             <div class="summary-gray-backgrund">
                 <div class="row">
                     <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>16,285.50</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>14,395.50</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.proposedPortfolio.AnnualGrossInterestEarned</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.proposedPortfolio.AnnualNetInterestEarned</span></p></div>
                     <hr class="gray-line">
-                    <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>1.723%</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>1.523%</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.proposedPortfolio.GrossAverageYield%</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.proposedPortfolio.NetAverageYield%</span></p></div>
                 </div>
             </div>
         </div>
@@ -42,70 +42,28 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="d-flex">
-                                <a href="#">
-                                    <td class="col-4">Aldermore Bank</td>
-                                    <td class="col-3">5 Year Bond (Term)</td>
-                                    <td class="col-2 right">2.05%</td>
-                                    <td class="col-3 right">85,000.00</td>
-                                </a>
-                            </tr>
+                            @for (int i = 0; i < @Model.proposedPortfolio.ProposedInvestments.Count(); i++)
+                            {
 
-                            <tr class="d-flex">
-                                <td class="col-4">Close Brothers Treasury</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
+                                <tr class="d-flex">
+                                    <a href="#">
+                                        <td class="col-4">@Model.proposedPortfolio.ProposedInvestments[i].InstitutionName</td>
+                                        <td class="col-3">@Model.proposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
+                                        <td class="col-2 right">@Model.proposedPortfolio.ProposedInvestments[i].Rate</td>
+                                        <td class="col-3 right">@Model.proposedPortfolio.ProposedInvestments[i].DepositSize</td>
+                                    </a>
+                                </tr>
 
-                            <tr class="d-flex">
-                                <td class="col-4">Hodge Bank</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
 
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
+
+                            }
+
+                            
                             <tr class="d-flex">
                                 <td class="col-4">&nbsp;</td>
                                 <td class="col-3">&nbsp;</td>
                                 <td class="col-2 right">&nbsp;</td>
-                                <td class="col-3 right table-total">765,000.00</td>
+                                <td class="col-3 right table-total">@Model.TotalDeposit</td>
                             </tr>
 
                         </tbody>
@@ -115,7 +73,9 @@
                 <div class="clear1"></div>
                 <div class="right">
                     <button type="submit" class="btn btn-primary">Back</button>
-                    <button type="submit" class="btn btn-primary">Generate Illustration</button>
+                    <form action="@Url.Action("GenerateIllustration","Home")">
+                        <button type="submit" class="btn btn-primary">Generate Illustration</button>
+                    </form>
                 </div>
 
             </div>

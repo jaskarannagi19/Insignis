@@ -119,20 +119,13 @@ namespace InsignisIllustrationGenerator.Controllers
                 HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(illustrationInfo));
 
 
-                Insignis.Asset.Management.Tools.Sales.SCurveOutput proposedPortfolio = null;
-
-
-
+                model.proposedPortfolio = null;
                 Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
                 
                 scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
 
-                Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(false, scurve.heatmap);
-
-
-
-
-
+                Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo,false, scurve.heatmap);
+                
 
 
                 string fscsProtectionConfigFile = AppSettings.ClientConfigRoot;// ConfigurationManager.AppSettings["clientConfigRoot"];
@@ -154,7 +147,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 
 
-                proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+                model.proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
             }
             return View(model);
         }
@@ -172,7 +165,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
 
-        public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
+        public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(Session sessionData,bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
         {
 
             
@@ -183,11 +176,8 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             Octavo.Gate.Nabu.Preferences.Preference prefTotalAvailableToDeposit = scurvePreferences.GetChildPreference("TotalAvailableToDeposit");
-            prefTotalAvailableToDeposit.Value = "750000";
+            prefTotalAvailableToDeposit.Value = sessionData.TotalDeposit.ToString();  //Total Deposits from our model
             scurvePreferences.SetChildPreference(prefTotalAvailableToDeposit);
-
-
-
 
 
             Octavo.Gate.Nabu.Preferences.Preference prefAvailableTo = scurvePreferences.GetChildPreference("AvailableTo");
@@ -213,15 +203,33 @@ namespace InsignisIllustrationGenerator.Controllers
             Octavo.Gate.Nabu.Preferences.Preference prefNumberOfLiquidityRequirements = scurvePreferences.GetChildPreference("NumberOfLiquidityRequirements");
 
 
+
+            List<string> _liquidityAmount = new List<string>();
+            //DONOT CHANGE THE ORDER
+            _liquidityAmount.Add(sessionData.EasyAccess.ToString());
+            _liquidityAmount.Add(sessionData.ThreeMonths.ToString());
+            _liquidityAmount.Add(sessionData.NineMonths.ToString());
+            _liquidityAmount.Add(sessionData.TwoYears.ToString());
+            _liquidityAmount.Add(sessionData.OneMonth.ToString());
+            _liquidityAmount.Add(sessionData.SixMonths.ToString());
+            _liquidityAmount.Add(sessionData.OneYear.ToString());
+            _liquidityAmount.Add(sessionData.ThreeYears.ToString());
+
+            //9th , 10th, 11th unknown fields find more.
+            _liquidityAmount.Add("");
+            _liquidityAmount.Add("");
+            _liquidityAmount.Add("");
+
+
+
             for (int i = 1; i <= Convert.ToInt32(prefNumberOfLiquidityRequirements.Value); i++)
             {
                 
-                string liquidityAmount = null;//Multiple amounts goes here 50000,400000,300000
+                string liquidityAmount = _liquidityAmount[i-1];
+                
                 if (liquidityAmount == null || liquidityAmount.Trim().Length == 0)
                     liquidityAmount = "0.00";
                 scurvePreferences.SetChildPreference(new Octavo.Gate.Nabu.Preferences.Preference("LiquidityAmount_" + i, liquidityAmount));
-
-
             }
             Octavo.Gate.Nabu.Preferences.Preference prefFeeDiscount = scurvePreferences.GetChildPreference("FeeDiscount");
 
@@ -401,19 +409,28 @@ namespace InsignisIllustrationGenerator.Controllers
             Octavo.Gate.Nabu.Encryption.EncryptorDecryptor decryptor = new Octavo.Gate.Nabu.Encryption.EncryptorDecryptor();
             string qsTemplateFile = "C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Template\\1\\illustration.pptx";
             System.IO.FileInfo templateFile = new System.IO.FileInfo(qsTemplateFile);
+            string prefixName = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss");
+
+            string requiredOutputNameWithoutExtension = prefixName + "_CashIllustration";
 
 
-            string requiredOutputNameWithoutExtension = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss") + "_CashIllustration";
-            Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate("ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss"), textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
 
+            Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
+
+           string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
             
+            System.IO.File.Delete(filename);
+
 
             Presentation presentation = new Presentation();
-            presentation.LoadFromFile("C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Output\\ICS-20200203-200246\\ICS-20200203-200246_CashIllustration.pptx");
-            presentation.SaveToFile("C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Output\\ICS-20200203-200246\\ICS-20200203-200246_CashIllustration12.pdf", Spire.Presentation.FileFormat.PDF);
+            
+            presentation.LoadFromFile(AppSettings.illustrationOutputInternalFolder +"\\"+ prefixName +"\\"+ requiredOutputNameWithoutExtension + ".pptx");
+            presentation.SaveToFile(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf", Spire.Presentation.FileFormat.PDF);
 
+            byte[] filedata = System.IO.File.ReadAllBytes(filename);
 
-            return View();
+            //return View();
+            return File(filedata, "application/pdf");
         }
 
 

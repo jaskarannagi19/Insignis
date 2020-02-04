@@ -45,5 +45,8 @@ namespace InsignisIllustrationGenerator.Models
         public double? ThreeYearsPlus { get; set; }
         [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Total Deposits")]
         public double? TotalDeposit { get; set; }
+
+
+        public Insignis.Asset.Management.Tools.Sales.SCurveOutput proposedPortfolio { get; set; }
     }
 }
