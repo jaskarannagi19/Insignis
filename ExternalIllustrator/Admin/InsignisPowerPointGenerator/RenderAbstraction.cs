@@ -67,9 +67,9 @@ namespace Insignis.Asset.Management.PowerPoint.Generator
                                                     System.IO.FileInfo fi = new System.IO.FileInfo(internalFacingOutputFolder + pUniqueReference + "\\" + pRequiredOutputNameWithoutExtension + ".pptx");
 
                                                     Spire.Presentation.Presentation presentation = new Spire.Presentation.Presentation();
-                                                    presentation.LoadFromFile(internalFacingOutputFolder + pUniqueReference + "\\" + pRequiredOutputNameWithoutExtension + ".pptx");
+                                                    presentation.LoadFromFile(internalFacingOutputFolder + pUniqueReference + "\\" + pRequiredOutputNameWithoutExtension + ".pptx");                                                  
                                                     presentation.SaveToFile(internalFacingOutputFolder + pUniqueReference + "\\" + pRequiredOutputNameWithoutExtension + ".pdf", Spire.Presentation.FileFormat.PDF);
-
+                                                    
                                                     extendedReportContent.OtherFiles.Add(internalFacingOutputFolder + pUniqueReference + "\\" + pRequiredOutputNameWithoutExtension + ".pdf");
 
                                                     publicFacingOutputFolder += pUniqueReference;

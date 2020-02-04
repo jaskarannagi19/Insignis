@@ -595,6 +595,7 @@ namespace Insignis.Asset.Management.External.Illustrator.Illustrator
                         {
                             System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(organisationIDFolder);
                             Octavo.Gate.Nabu.Entities.Core.Organisation organisation = coreAbstraction.GetOrganisation(Convert.ToInt32(di.Name), (int)multiLingual.language.LanguageID);
+                            organisation.Name = "INSIGNIS";
                             bool showTemplate = false;
                             if (organisation.Name.ToUpper().StartsWith("INSIGNIS"))
                                 showTemplate = true;

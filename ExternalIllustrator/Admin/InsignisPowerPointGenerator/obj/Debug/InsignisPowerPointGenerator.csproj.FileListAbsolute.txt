@@ -69,9 +69,6 @@ D:\insignis\InsignisPowerPointGenerator\InsignisPowerPointGenerator\bin\Debug\In
 D:\insignis\InsignisPowerPointGenerator\InsignisPowerPointGenerator\bin\Debug\MySql.Data.xml
 D:\insignis\InsignisPowerPointGenerator\InsignisPowerPointGenerator\bin\Debug\DocumentFormat.OpenXml.xml
 D:\insignis\InsignisPowerPointGenerator\InsignisPowerPointGenerator\obj\Debug\InsignisPowerPointGenerator.csproj.CopyComplete
-D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\obj\Debug\InsignisPowerPointGenerator.csprojAssemblyReference.cache
-D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\obj\Debug\InsignisPowerPointGenerator.dll
-D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\obj\Debug\InsignisPowerPointGenerator.pdb
 D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\bin\Debug\InsignisPowerPointGenerator.dll.config
 D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\bin\Debug\InsignisPowerPointGenerator.dll
 D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\bin\Debug\InsignisPowerPointGenerator.pdb
@@ -84,4 +81,7 @@ D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\bin\Debug\Nabu
 D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\bin\Debug\InsignisReports.pdb
 D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\bin\Debug\InsignisActionLogging.pdb
 D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\bin\Debug\InsignisHelper.pdb
+D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\obj\Debug\InsignisPowerPointGenerator.csprojAssemblyReference.cache
 D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\obj\Debug\InsignisPowerPointGenerator.csproj.CopyComplete
+D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\obj\Debug\InsignisPowerPointGenerator.dll
+D:\insignis\ExternalIllustrator\Admin\InsignisPowerPointGenerator\obj\Debug\InsignisPowerPointGenerator.pdb

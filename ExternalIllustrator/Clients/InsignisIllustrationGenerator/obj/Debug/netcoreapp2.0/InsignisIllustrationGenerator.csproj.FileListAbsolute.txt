@@ -1,0 +1,3 @@
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp2.0\InsignisIllustrationGenerator.csprojAssemblyReference.cache
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp2.0\InsignisIllustrationGenerator.AssemblyInfoInputs.cache
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp2.0\InsignisIllustrationGenerator.AssemblyInfo.cs

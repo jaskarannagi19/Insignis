@@ -10,5 +10,8 @@ namespace InsignisIllustrationGenerator.Helper
         public string illustrationOutputPublicFacingFolder { get; set; }
         public string illustrationOutputInternalFolder { get; set; }
         public string preferencesRoot { get; set; }
+        public string ClientConfigRoot { get; set; }
+        public string ErrorLog { get; set; }
+        public string InsignisAM { get; set; }
     }
 }

@@ -55,12 +55,9 @@ D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\InsignisHelper.d
 D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\InsignisLoaderConfig.dll
 D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\NabuDOL.dll
 D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\NabuExtensionsCalendarHelper.dll
-D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\MySql.Data.dll
 D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\InsignisLoaderConfig.pdb
 D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\InsignisFSCSConfig.pdb
 D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\InsignisHelper.pdb
-D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\NabuDOL.pdb
-D:\insignis\ExternalIllustrator\Clients\InsignisTools\bin\Debug\MySql.Data.xml
 D:\insignis\ExternalIllustrator\Clients\InsignisTools\obj\Debug\InsignisTools.csprojAssemblyReference.cache
 D:\insignis\ExternalIllustrator\Clients\InsignisTools\obj\Debug\InsignisTools.csproj.CopyComplete
 D:\insignis\ExternalIllustrator\Clients\InsignisTools\obj\Debug\InsignisTools.dll
