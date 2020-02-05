@@ -14,6 +14,10 @@ using Microsoft.Extensions.Options;
 using Octavo.Gate.Nabu.Abstraction;
 using Octavo.Gate.Nabu.Entities.Financial;
 using Spire.Presentation;
+using System.Net.Http;
+using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
+using InsignisIllustrationGenerator.Data;
 
 namespace InsignisIllustrationGenerator.Controllers
 {
@@ -22,6 +26,7 @@ namespace InsignisIllustrationGenerator.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly AutoMapper.IMapper _mapper;
         private readonly IConfiguration _configuration;
+        private readonly ApplicationDbContext _context;
         private AppSettings AppSettings { get; set; }
 
         private MultiLingual multiLingual;
@@ -43,8 +48,8 @@ namespace InsignisIllustrationGenerator.Controllers
             //Set Info in session
             var session = new Session() { PartnerEmailAddress = "p.artner@partorg.com", PartnerName = "Peter Artner", PartnerOrganisation = "PartOrg Ltd.", PartnerTelephone = "01226 1234 567" };
 
-            HttpContext.Session.SetString("SessionPartner",JsonConvert.SerializeObject(session));
-            
+            HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(session));
+
 
             //if (Session["_partnerOrganisation"] != null && Session["_partnerOrganisation"].ToString().Length > 0 &&
             //   Session["_partnerName"] != null && Session["_partnerName"].ToString().Length > 0 &&
@@ -60,16 +65,18 @@ namespace InsignisIllustrationGenerator.Controllers
             //}
 
 
-        } 
+        }
 
-
-        public HomeController(ILogger<HomeController> logger, AutoMapper.IMapper mapper, IOptions<AppSettings> settings)
+        private readonly BankHelper _bankHelper;
+        public HomeController(ILogger<HomeController> logger, AutoMapper.IMapper mapper, IOptions<AppSettings> settings, ApplicationDbContext context)
         {
             _logger = logger;
             _mapper = mapper;
             AppSettings = settings.Value;
-            multiLingual = new MultiLingual(AppSettings,"English");
+            multiLingual = new MultiLingual(AppSettings, "English");
             financialAbstraction = new FinancialAbstraction(AppSettings.InsignisAM, Octavo.Gate.Nabu.Entities.DatabaseType.MSSQL, ConfigurationManager.AppSettings.Get("errorLog"));
+            _context = context;
+            _bankHelper = new BankHelper(mapper,context);
         }
 
         public IActionResult Index()
@@ -88,12 +95,12 @@ namespace InsignisIllustrationGenerator.Controllers
             model.PartnerEmail = partnerInfo.PartnerEmailAddress;
             model.PartnerName = partnerInfo.PartnerName;
             model.PartnerOrganisation = partnerInfo.PartnerOrganisation;
-            
+
             //render view
             return View(model);
         }
 
-        
+
         public IActionResult Calculate(IllustrationDetailViewModel model)
         {
             /*
@@ -121,11 +128,11 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 model.proposedPortfolio = null;
                 Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
-                
+
                 scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
 
-                Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo,false, scurve.heatmap);
-                
+                Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
+
 
 
                 string fscsProtectionConfigFile = AppSettings.ClientConfigRoot;// ConfigurationManager.AppSettings["clientConfigRoot"];
@@ -143,9 +150,9 @@ namespace InsignisIllustrationGenerator.Controllers
                 institutionInclusion.Children[14].Value = "true";
                 institutionInclusion.Children[15].Value = "true";
 
-                
 
-                
+
+
 
                 model.proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
             }
@@ -165,10 +172,10 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
 
-        public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(Session sessionData,bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
+        public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(Session sessionData, bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
         {
 
-            
+
 
             Octavo.Gate.Nabu.Preferences.Manager preferencesManager = new Octavo.Gate.Nabu.Preferences.Manager(AppSettings.preferencesRoot + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters("Insignis") + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters("p.artner@partorg.com"));
             Octavo.Gate.Nabu.Preferences.Preference scurvePreferences = preferencesManager.GetPreference("Sales.Tools.SCurve.Settings", 1, "Settings");
@@ -224,9 +231,9 @@ namespace InsignisIllustrationGenerator.Controllers
 
             for (int i = 1; i <= Convert.ToInt32(prefNumberOfLiquidityRequirements.Value); i++)
             {
-                
-                string liquidityAmount = _liquidityAmount[i-1];
-                
+
+                string liquidityAmount = _liquidityAmount[i - 1];
+
                 if (liquidityAmount == null || liquidityAmount.Trim().Length == 0)
                     liquidityAmount = "0.00";
                 scurvePreferences.SetChildPreference(new Octavo.Gate.Nabu.Preferences.Preference("LiquidityAmount_" + i, liquidityAmount));
@@ -377,7 +384,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
         public IActionResult GenerateIllustration()
-        
+
         {
             /*
              Generate Illustration for using the data
@@ -396,7 +403,7 @@ namespace InsignisIllustrationGenerator.Controllers
             textReplacements.Add(new KeyValuePair<string, string>("CLIENTTYPE", "Joint"));
             textReplacements.Add(new KeyValuePair<string, string>("INTROORG", ""));
             textReplacements.Add(new KeyValuePair<string, string>("FEEDISCOUNT", "100%"));
-            textReplacements.Add(new KeyValuePair<string, string>("FEE",""));
+            textReplacements.Add(new KeyValuePair<string, string>("FEE", ""));
             textReplacements.Add(new KeyValuePair<string, string>("CHARGE", ""));
             textReplacements.Add(new KeyValuePair<string, string>("TOTAL", "10,0000"));
             textReplacements.Add(new KeyValuePair<string, string>("PROTECTION", "65000"));
@@ -410,17 +417,17 @@ namespace InsignisIllustrationGenerator.Controllers
             string qsTemplateFile = "C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Template\\1\\illustration.pptx";
             System.IO.FileInfo templateFile = new System.IO.FileInfo(qsTemplateFile);
             string prefixName = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss");
-            
+
             string requiredOutputNameWithoutExtension = prefixName + "_CashIllustration";
 
             Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
             string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
-            
+
             System.IO.File.Delete(filename);
 
             Presentation presentation = new Presentation();
-            
-            presentation.LoadFromFile(AppSettings.illustrationOutputInternalFolder +"\\"+ prefixName +"\\"+ requiredOutputNameWithoutExtension + ".pptx");
+
+            presentation.LoadFromFile(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pptx");
             presentation.SaveToFile(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf", Spire.Presentation.FileFormat.PDF);
 
             byte[] filedata = System.IO.File.ReadAllBytes(filename);
@@ -428,9 +435,6 @@ namespace InsignisIllustrationGenerator.Controllers
             //return View();
             return File(filedata, "application/pdf");
         }
-
-
-
 
         public IActionResult Privacy()
         {
@@ -442,5 +446,24 @@ namespace InsignisIllustrationGenerator.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+        public async Task<bool> GetProductsData()
+        {
+            /*
+             Get Product from API and bind with interface
+             */
+            using var client = new HttpClient();
+            
+            var products = await client.GetStringAsync("https://test.insigniscash.com/Admin/API/Illustrator/Query.aspx?method=Catalogue&format=JSON&apikey=d6446736-2f17-4a16-8d8f-13226169f68a");
+
+            
+            var bankProducts = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Insignis.Asset.Management.Illustrator.Interface.Bank>>(products);
+
+            _bankHelper.SaveBank(bankProducts);
+            
+            return true;
+
+        }
+
     }
 }

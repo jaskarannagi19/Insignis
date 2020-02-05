@@ -19,7 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsignisReports", "..\Clien
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsignisActionLogging", "..\Admin\InsignisActionLogging\InsignisActionLogging.csproj", "{00A35D60-D5B2-43ED-B67E-1194B8B0CA95}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsignisIllustrationGenerator", "..\Clients\InsignisIllustrationGenerator\InsignisIllustrationGenerator.csproj", "{469AA2DE-492A-409A-BB29-5AF4F978D3B4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InsignisIllustrationGenerator", "..\Clients\InsignisIllustrationGenerator\InsignisIllustrationGenerator.csproj", "{469AA2DE-492A-409A-BB29-5AF4F978D3B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InsignisIllustratorInterface", "..\Clients\InsignisIllustratorInterface\InsignisIllustratorInterface.csproj", "{7A061BFB-8BC0-4B64-96DD-48A927BE6F9E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{469AA2DE-492A-409A-BB29-5AF4F978D3B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{469AA2DE-492A-409A-BB29-5AF4F978D3B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{469AA2DE-492A-409A-BB29-5AF4F978D3B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7A061BFB-8BC0-4B64-96DD-48A927BE6F9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A061BFB-8BC0-4B64-96DD-48A927BE6F9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A061BFB-8BC0-4B64-96DD-48A927BE6F9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A061BFB-8BC0-4B64-96DD-48A927BE6F9E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

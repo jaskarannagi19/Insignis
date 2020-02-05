@@ -14,6 +14,8 @@ namespace InsignisIllustrationGenerator.Manager
         public AutoMapperHelper()
         {
             CreateMap<IllustrationDetailViewModel, IllustrationDetail>();
+            CreateMap<Insignis.Asset.Management.Illustrator.Interface.Bank, Bank>();
+            CreateMap<Insignis.Asset.Management.Illustrator.Interface.Product, Product>();
         }
     }
 

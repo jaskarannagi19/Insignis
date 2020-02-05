@@ -15,9 +15,25 @@ namespace InsignisIllustrationGenerator.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.0.0")
+                .HasAnnotation("ProductVersion", "3.1.1")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.Bank", b =>
+                {
+                    b.Property<int>("BankID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("BankName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FitchRating")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("BankID");
+
+                    b.ToTable("Bank");
+                });
 
             modelBuilder.Entity("InsignisIllustrationGenerator.Data.IllustrationDetail", b =>
                 {
@@ -74,6 +90,102 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IllustrationDetails");
+                });
+
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.Product", b =>
+                {
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("BankID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InterestPaid")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsAvailableToCourtOfProtectionHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToIncorporatedCharityHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToJointHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToLargeCorporateHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToLocalAuthorityHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToPersonalHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToPersonalTrustHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToPowerOfAttorneyHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToSIPPHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToSMEHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToSSASHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToTrustHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsAvailableToUnincorporatedCharityHubAccounts")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LiquidityType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaximumDeposit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MinimumDeposit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NoticeDays")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NoticeText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductCode")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RateFor100KDeposit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RateFor250KDeposit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("RateFor50KDeposit")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TermDays")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TermText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ProductID");
+
+                    b.HasIndex("BankID");
+
+                    b.ToTable("Product");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -270,6 +382,13 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.Product", b =>
+                {
+                    b.HasOne("InsignisIllustrationGenerator.Data.Bank", null)
+                        .WithMany("Products")
+                        .HasForeignKey("BankID");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

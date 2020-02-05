@@ -95,6 +95,9 @@
               "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
                 "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
               },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj"
+              },
               "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
                 "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
               },
@@ -147,6 +150,12 @@
               "target": "Package",
               "version": "[3.1.1, )"
             },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
             "Microsoft.Extensions.Logging.Debug": {
               "target": "Package",
               "version": "[3.0.0, )"
@@ -188,6 +197,17 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj",
+        "projectName": "InsignisIllustratorInterface",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj"
+      },
+      "frameworks": {
+        "net461": {}
       }
     },
     "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {

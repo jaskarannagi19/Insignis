@@ -4,3 +4,8 @@ C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\obj\Debug\InsignisIllustrat
 C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.csproj.CoreCompileInputs.cache
 C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.dll
 C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.pdb
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\bin\Debug\InsignisIllustratorInterface.dll
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\bin\Debug\InsignisIllustratorInterface.pdb
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.csprojAssemblyReference.cache
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.dll
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.pdb

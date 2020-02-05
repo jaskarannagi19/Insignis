@@ -31,3 +31,4 @@ D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\bin\Debug\InsignisFSC
 D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\bin\Debug\InsignisFSCSConfig.pdb
 D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\obj\Debug\InsignisFSCSConfig.dll
 D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\obj\Debug\InsignisFSCSConfig.pdb
+D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\obj\Debug\InsignisFSCSConfig.csprojAssemblyReference.cache

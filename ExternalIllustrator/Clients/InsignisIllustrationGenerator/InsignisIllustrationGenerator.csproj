@@ -10,6 +10,10 @@
     <Compile Remove="Data\Migrations\20200123103711_IllustrationDetail.Designer.cs" />
     <Compile Remove="Data\Migrations\20200123103818_IllustrationDetail.cs" />
     <Compile Remove="Data\Migrations\20200123103818_IllustrationDetail.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200205101222_BankDetails.cs" />
+    <Compile Remove="Data\Migrations\20200205101222_BankDetails.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200205113951_ProductBankRelation.cs" />
+    <Compile Remove="Data\Migrations\20200205113951_ProductBankRelation.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -48,6 +52,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
     <PackageReference Include="Spire.Presentation" Version="5.1.0" />
@@ -63,6 +71,7 @@
     <ProjectReference Include="..\..\InsignisConsoleApps\InsignisLoaderConfig\InsignisLoaderConfig.csproj" />
     <ProjectReference Include="..\InsignisFSCSConfig\InsignisFSCSConfig.csproj" />
     <ProjectReference Include="..\InsignisHelper\InsignisHelper.csproj" />
+    <ProjectReference Include="..\InsignisIllustratorInterface\InsignisIllustratorInterface.csproj" />
     <ProjectReference Include="..\InsignisReports\InsignisReports.csproj" />
     <ProjectReference Include="..\InsignisTools\InsignisTools.csproj" />
   </ItemGroup>
