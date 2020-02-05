@@ -410,17 +410,13 @@ namespace InsignisIllustrationGenerator.Controllers
             string qsTemplateFile = "C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Template\\1\\illustration.pptx";
             System.IO.FileInfo templateFile = new System.IO.FileInfo(qsTemplateFile);
             string prefixName = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss");
-
+            
             string requiredOutputNameWithoutExtension = prefixName + "_CashIllustration";
 
-
-
             Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
-
-           string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
+            string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
             
             System.IO.File.Delete(filename);
-
 
             Presentation presentation = new Presentation();
             

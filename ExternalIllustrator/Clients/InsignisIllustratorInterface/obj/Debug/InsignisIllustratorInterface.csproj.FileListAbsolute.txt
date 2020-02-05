@@ -1,0 +1,6 @@
+C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\bin\Debug\InsignisIllustratorInterface.dll
+C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\bin\Debug\InsignisIllustratorInterface.pdb
+C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.csprojAssemblyReference.cache
+C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.csproj.CoreCompileInputs.cache
+C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.dll
+C:\InsignisAM\NET\Admin\InsignisIllustratorInterface\obj\Debug\InsignisIllustratorInterface.pdb
