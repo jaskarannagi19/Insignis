@@ -37,17 +37,5 @@ namespace InsignisIllustrationGenerator.Manager
             return true;
 
         }
-
-        public bool SaveProduct(List<Insignis.Asset.Management.Illustrator.Interface.Bank> bankProducts)
-        {
-            List<Product> _productList = new List<Product>();
-            _productList = _mapper.Map(bankProducts, _productList);
-
-            _context.Product.AddRange(_productList);
-            _context.SaveChanges();
-
-            return true;
-        }
-
     }
 }

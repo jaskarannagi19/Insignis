@@ -1,9 +1,8 @@
 ﻿using InsignisIllustrationGenerator.Data;
+using InsignisIllustrationGenerator.Manager;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -13,18 +12,26 @@ namespace InsignisIllustrationGenerator.Scheduler
     {
         
         private readonly DataProvider _dataProvider;
+        private BankHelper _bankHelper;
+        private AutoMapper.IMapper _mapper;
 
 
         private ApplicationDbContext _context;
 
-        public FetchDataTask(DataProvider data)//IServiceProvider serviceProvider)
+        private readonly IServiceProvider _serviceProvider;
+
+        public FetchDataTask(DataProvider data)
+        {
+            _dataProvider = data;    
+        }
+
+
+        public FetchDataTask(DataProvider data ,IServiceProvider serviceProvider, AutoMapper.IMapper mapper)
         {
 
-            //using (IServiceScope scope = serviceProvider.CreateScope())
-            //{
-            //    _context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            //}
-            _dataProvider = data;    
+            _serviceProvider = serviceProvider;
+            _dataProvider = data;
+            _mapper = mapper;
 
         }
 
@@ -33,6 +40,15 @@ namespace InsignisIllustrationGenerator.Scheduler
             while (!cancellationToken.IsCancellationRequested)
             {
                 var result = await _dataProvider.UpdateString(cancellationToken);
+
+                using (IServiceScope scope = _serviceProvider.CreateScope())
+                {
+                    _context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                    
+                    _bankHelper = new BankHelper(_mapper, _context);
+                    _bankHelper.SaveBank(result);
+                }
+
                 await Task.Delay(TimeSpan.FromSeconds(15), cancellationToken);
             }
         }
@@ -41,14 +57,5 @@ namespace InsignisIllustrationGenerator.Scheduler
         {
             throw new NotImplementedException();
         }
-
-        //protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        //{
-        //    while (!stoppingToken.IsCancellationRequested)
-        //    {
-        //        var result = await _dataProvider.UpdateString(stoppingToken);
-        //        await Task.Delay(TimeSpan.FromSeconds(15), stoppingToken);
-        //    }
-        //}
     }
 }

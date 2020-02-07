@@ -168,20 +168,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
 
-        public async Task<bool> GetProductsData()
-        {
-
-            var result = _dataprovider.BankProducts;
-            return true;
-            
-        }
-
-
-
-
-
-
-
 
 
         public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(Session sessionData, bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
