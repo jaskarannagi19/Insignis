@@ -28,39 +28,10 @@ namespace InsignisIllustrationGenerator.Manager
             _bankList = _mapper.Map(bank, _bankList);
 
 
-            _context.Bank.AddRange(_bankList);
+            
 
-            //var dbBank = _context.Bank.ToList();
-
-            //var saveList = new List<Bank>();
-
-            //foreach (var bb in _bankList)
-            //{
-            //    //CHeck if bank exit in dbList
-            //    if (!dbBank.Any(b => b.BankID== bb.BankID)) {
-            //        saveList.Add(bb);
-            //    }
-
-            //}
-
-
-            //var productList = new List<Product>();
-            //foreach (var item in _bankList)
-            //{
-            //    foreach (var product in item.Products)
-            //    {
-            //        //product.Bank = item;
-            //        productList.Add(product);
-            //    }
-                
-            //}
-
-            //_context.Bank.AddRange(saveList);
-
-
-            //_context.Product.AddRange(productList);
-
-
+            //_context.Bank.AddRange(_bankList);
+            _context.AttachRange(_bankList);
             _context.SaveChanges();
 
             return true;

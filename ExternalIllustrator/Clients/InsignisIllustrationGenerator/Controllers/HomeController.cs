@@ -18,6 +18,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using InsignisIllustrationGenerator.Data;
+using InsignisIllustrationGenerator.Scheduler;
 
 namespace InsignisIllustrationGenerator.Controllers
 {
@@ -27,6 +28,10 @@ namespace InsignisIllustrationGenerator.Controllers
         private readonly AutoMapper.IMapper _mapper;
         private readonly IConfiguration _configuration;
         private readonly ApplicationDbContext _context;
+
+        private readonly FetchDataTask _fetchDataTask;
+        private readonly DataProvider _dataprovider;
+
         private AppSettings AppSettings { get; set; }
 
         private MultiLingual multiLingual;
@@ -76,7 +81,8 @@ namespace InsignisIllustrationGenerator.Controllers
             multiLingual = new MultiLingual(AppSettings, "English");
             financialAbstraction = new FinancialAbstraction(AppSettings.InsignisAM, Octavo.Gate.Nabu.Entities.DatabaseType.MSSQL, ConfigurationManager.AppSettings.Get("errorLog"));
             _context = context;
-            _bankHelper = new BankHelper(mapper,context);
+            _bankHelper = new BankHelper(mapper,_context);
+            _dataprovider = new DataProvider();
         }
 
         public IActionResult Index()
@@ -445,24 +451,6 @@ namespace InsignisIllustrationGenerator.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
-
-        public async Task<bool> GetProductsData()
-        {
-            /*
-             Get Product from API and bind with interface
-             */
-            using var client = new HttpClient();
-            
-            var products = await client.GetStringAsync("https://test.insigniscash.com/Admin/API/Illustrator/Query.aspx?method=Catalogue&format=JSON&apikey=d6446736-2f17-4a16-8d8f-13226169f68a");
-
-            
-            var bankProducts = Newtonsoft.Json.JsonConvert.DeserializeObject<List<Insignis.Asset.Management.Illustrator.Interface.Bank>>(products);
-
-            _bankHelper.SaveBank(bankProducts);
-            
-            return true;
-
         }
 
     }

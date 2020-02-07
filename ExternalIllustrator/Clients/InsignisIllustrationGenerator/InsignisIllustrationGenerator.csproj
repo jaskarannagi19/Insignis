@@ -111,9 +111,4 @@
     </Content>
   </ItemGroup>
 
-
-  <ItemGroup>
-    <Folder Include="Scheduler\" />
-  </ItemGroup>
-
 </Project>

@@ -14,6 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using AutoMapper;
 using InsignisIllustrationGenerator.Manager;
+using InsignisIllustrationGenerator.Scheduler;
 
 namespace InsignisIllustrationGenerator
 {
@@ -51,7 +52,10 @@ namespace InsignisIllustrationGenerator
             services.Configure<Helper.AppSettings>(Configuration.GetSection("AppSettings"));
 
             services.AddAutoMapper(typeof(AutoMapperHelper));
-            
+
+            //services.AddSingleton<DataProvider>();
+            services.AddSingleton<FetchDataTask>();
+
 
         }
 
