@@ -24,18 +24,24 @@ namespace InsignisIllustrationGenerator.Manager
             /*
              Saves Bank as well as Product Data into API.
              */
+
             List<Bank> _bankList = new List<Bank>();
             _bankList = _mapper.Map(bank, _bankList);
 
-
-            
+            Bank bank2 = new Bank();
+            bank2 = _bankList[0];
+            _bankList.Add(bank2);
 
             //_context.Bank.AddRange(_bankList);
-            _context.AttachRange(_bankList);
+            //_context.AttachRange(_bankList);
+
+            
+            _context.UpdateRange(_bankList);
+            
+            
+            
             _context.SaveChanges();
-
             return true;
-
         }
     }
 }

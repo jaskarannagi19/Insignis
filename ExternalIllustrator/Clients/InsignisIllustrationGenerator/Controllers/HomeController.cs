@@ -14,9 +14,6 @@ using Microsoft.Extensions.Options;
 using Octavo.Gate.Nabu.Abstraction;
 using Octavo.Gate.Nabu.Entities.Financial;
 using Spire.Presentation;
-using System.Net.Http;
-using System.Threading.Tasks;
-using Newtonsoft.Json.Linq;
 using InsignisIllustrationGenerator.Data;
 using InsignisIllustrationGenerator.Scheduler;
 
@@ -29,8 +26,7 @@ namespace InsignisIllustrationGenerator.Controllers
         private readonly IConfiguration _configuration;
         private readonly ApplicationDbContext _context;
 
-        private readonly FetchDataTask _fetchDataTask;
-        private readonly DataProvider _dataprovider;
+        
 
         private AppSettings AppSettings { get; set; }
 
@@ -72,8 +68,8 @@ namespace InsignisIllustrationGenerator.Controllers
 
         }
 
-        private readonly BankHelper _bankHelper;
-        public HomeController(ILogger<HomeController> logger, AutoMapper.IMapper mapper, IOptions<AppSettings> settings, ApplicationDbContext context, DataProvider data)
+        //private readonly BankHelper _bankHelper;
+        public HomeController(ILogger<HomeController> logger, AutoMapper.IMapper mapper, IOptions<AppSettings> settings, ApplicationDbContext context)
         {
             _logger = logger;
             _mapper = mapper;
@@ -81,8 +77,8 @@ namespace InsignisIllustrationGenerator.Controllers
             multiLingual = new MultiLingual(AppSettings, "English");
             financialAbstraction = new FinancialAbstraction(AppSettings.InsignisAM, Octavo.Gate.Nabu.Entities.DatabaseType.MSSQL, ConfigurationManager.AppSettings.Get("errorLog"));
             _context = context;
-            _bankHelper = new BankHelper(mapper,_context);
-            _dataprovider = data; 
+            //_bankHelper = new BankHelper(mapper,_context);
+            
         }
 
         public IActionResult Index()
