@@ -21,7 +21,7 @@ namespace InsignisIllustrationGenerator.Scheduler
             _httpClient = new HttpClient();
         }
 
-        public async Task UpdateString(CancellationToken stoppingToken)
+        public async Task<List<Insignis.Asset.Management.Illustrator.Interface.Bank>> UpdateString(CancellationToken stoppingToken)
         {
             try
             {
@@ -38,11 +38,10 @@ namespace InsignisIllustrationGenerator.Scheduler
             {
                 Console.WriteLine(ex);
             }
+            return BankProducts;
         }
 
-
-
-        public List<Insignis.Asset.Management.Illustrator.Interface.Bank> BankProducts { get; private set; } 
+        public List<Insignis.Asset.Management.Illustrator.Interface.Bank> BankProducts { get; set; } 
 
     }
 

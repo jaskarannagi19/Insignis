@@ -73,7 +73,7 @@ namespace InsignisIllustrationGenerator.Controllers
         }
 
         private readonly BankHelper _bankHelper;
-        public HomeController(ILogger<HomeController> logger, AutoMapper.IMapper mapper, IOptions<AppSettings> settings, ApplicationDbContext context)
+        public HomeController(ILogger<HomeController> logger, AutoMapper.IMapper mapper, IOptions<AppSettings> settings, ApplicationDbContext context, DataProvider data)
         {
             _logger = logger;
             _mapper = mapper;
@@ -82,7 +82,7 @@ namespace InsignisIllustrationGenerator.Controllers
             financialAbstraction = new FinancialAbstraction(AppSettings.InsignisAM, Octavo.Gate.Nabu.Entities.DatabaseType.MSSQL, ConfigurationManager.AppSettings.Get("errorLog"));
             _context = context;
             _bankHelper = new BankHelper(mapper,_context);
-            _dataprovider = new DataProvider();
+            _dataprovider = data; 
         }
 
         public IActionResult Index()
@@ -168,7 +168,13 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
 
+        public async Task<bool> GetProductsData()
+        {
 
+            var result = _dataprovider.BankProducts;
+            return true;
+            
+        }
 
 
 
