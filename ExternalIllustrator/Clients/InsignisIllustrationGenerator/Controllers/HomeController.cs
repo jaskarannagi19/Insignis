@@ -33,7 +33,6 @@ namespace InsignisIllustrationGenerator.Controllers
         private MultiLingual multiLingual;
         private readonly BankHelper _bankHelper;
 
-
         private FinancialAbstraction financialAbstraction { get; set; }
 
 
@@ -148,49 +147,15 @@ namespace InsignisIllustrationGenerator.Controllers
                 Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
 
-
-
-                //get all banks and products
-
-                
-                if (model.OneMonth != null)
+                foreach (var childern in institutionInclusion.Children)
                 {
-                   Product product = _bankHelper.GetBestOneMonthProduct(model.OneMonth);
-
-                   var selectedbank = product.Bank;
-
-                    for (int i = 0; i < institutionInclusion.Children.Count; i++)
-                    {
-                        institutionInclusion.Children[i].Value = "false";
-                        if (selectedbank.BankID == Convert.ToInt32(institutionInclusion.Children[i].Name))
-                        {
-                            institutionInclusion.Children[i].Value = "true";
-                        }
-                    }
-
-                    
+                    childern.Value = "true";
                 }
-
-
-
-                //institutionInclusion.Children[0].Value = "true";
-                //institutionInclusion.Children[12].Value = "true";
-                //institutionInclusion.Children[13].Value = "true";
-                //institutionInclusion.Children[14].Value = "true";
-                //institutionInclusion.Children[15].Value = "true";
-
-
-
-
 
                 model.proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
             }
             return View(model);
         }
-
-
-
-
 
 
         public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(Session sessionData, bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
@@ -405,7 +370,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
         public IActionResult GenerateIllustration()
-
         {
             /*
              Generate Illustration for using the data
@@ -456,6 +420,68 @@ namespace InsignisIllustrationGenerator.Controllers
             //return View();
             return File(filedata, "application/pdf");
         }
+
+        
+        public IActionResult Update(bool removeBank, string bankId, IllustrationDetailViewModel model)
+        {
+
+            var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+
+            model.proposedPortfolio = null;
+            Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
+            scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
+
+            Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
+
+
+
+            string fscsProtectionConfigFile = AppSettings.ClientConfigRoot;// ConfigurationManager.AppSettings["clientConfigRoot"];
+            if (fscsProtectionConfigFile.EndsWith("\\") == false)
+                fscsProtectionConfigFile += "\\";
+            fscsProtectionConfigFile += "FSCSProtection.xml";
+
+            Octavo.Gate.Nabu.Preferences.Manager preferencesManager = new Octavo.Gate.Nabu.Preferences.Manager(AppSettings.preferencesRoot + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerOrganisation) + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerEmailAddress));
+
+            Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
+
+
+            foreach (var childern in institutionInclusion.Children)
+            {
+                if(childern.Name != bankId) { 
+                childern.Value = "true";
+                }
+                else
+                {
+                    childern.Value = "false";
+                }
+            }
+
+            model.proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+            model.ClientName = illustrationInfo.ClientName;
+            model.TotalDeposit = illustrationInfo.TotalDeposit;
+            model.ClientType = illustrationInfo.ClientType;
+            model.Currency = illustrationInfo.Currency;
+            model.EasyAccess = illustrationInfo.EasyAccess;
+            model.NineMonths = illustrationInfo.NineMonths;
+            model.OneMonth = illustrationInfo.OneMonth;
+            model.OneYear = illustrationInfo.OneYear;
+            model.PartnerEmail = illustrationInfo.PartnerEmailAddress;
+            model.PartnerName = illustrationInfo.PartnerName;
+            model.PartnerOrganisation = illustrationInfo.PartnerOrganisation;
+            model.SixMonths = illustrationInfo.SixMonths;
+            model.ThreeMonths = illustrationInfo.ThreeMonths;
+            model.ThreeYearsPlus = illustrationInfo.ThreeYears;
+            model.TwoYears = illustrationInfo.TwoYears;
+
+
+            return View("Calculate", model);
+        }
+
+
+
+
+
+    
 
         public IActionResult Privacy()
         {

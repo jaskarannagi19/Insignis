@@ -19,51 +19,7 @@ namespace InsignisIllustrationGenerator.Manager
             _context = context;
         }
 
-        public Product GetBestOneMonthProduct(double? amount)
-        {
-            /*
-             Get banks and products from db
-             Returns:- List of bank
-             */
-            //Insignis.Asset.Management.Illustrator.Interface.Product result = null;
-            
-            List<Product> dbBanksProduct = null;
-            
-            Product bestPro= null;
-
-
-
-            if (amount >= 250000)
-            {
-                dbBanksProduct = _context.Product.Where(x => x.TermDays == "30").Include(x=>x.Bank).ToList();
-                bestPro = dbBanksProduct[0];
-
-                foreach (var product in dbBanksProduct)
-                {
-                    if (Convert.ToDouble(product.RateFor250KDeposit) > Convert.ToDouble(bestPro.RateFor250KDeposit)) {
-                        bestPro = product;
-                    };
-
-                }
-
-
-
-            }
-            else if(Convert.ToDouble(amount) > 100000)
-            {
-                //TODO 
-                //dbBanksProduct = _context.Product.Where(x => x.TermDays == "30" & x.Rate).ToList();
-            }
-            else
-            {
-                //TODO
-
-            }
-
-            //var response = _mapper.Map(bestPro, result);
-            
-            return bestPro;
-        }
+        
 
         public bool SaveBankAndProducts(List<Insignis.Asset.Management.Illustrator.Interface.Bank> bank)
         {
