@@ -21,11 +21,11 @@ namespace InsignisIllustrationGenerator.Scheduler
             _httpClient = new HttpClient();
         }
 
-        public async Task<List<Insignis.Asset.Management.Illustrator.Interface.Bank>> UpdateString(CancellationToken stoppingToken)
+        public async Task<List<Insignis.Asset.Management.Illustrator.Interface.Bank>> UpdateString()
         {
             try
             {
-                var response = await _httpClient.GetAsync(apiUrl, stoppingToken);
+                var response = await _httpClient.GetAsync(apiUrl);
 
                 if (response.IsSuccessStatusCode)
                 {

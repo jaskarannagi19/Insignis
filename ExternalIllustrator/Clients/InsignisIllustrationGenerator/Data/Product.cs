@@ -41,6 +41,9 @@ namespace InsignisIllustrationGenerator.Data
         public bool IsAvailableToUnincorporatedCharityHubAccounts { get; set; }
         public bool IsAvailableToCourtOfProtectionHubAccounts { get; set; }
 
-        
+        [ForeignKey("BankID")]
+        public virtual Bank Bank { get; set; }
+
+
     }
 }

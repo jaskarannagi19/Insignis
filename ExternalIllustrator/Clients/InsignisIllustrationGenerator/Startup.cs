@@ -53,8 +53,8 @@ namespace InsignisIllustrationGenerator
 
             services.AddAutoMapper(typeof(AutoMapperHelper));
 
-            services.AddSingleton<DataProvider>();
-            services.AddSingleton<IHostedService,FetchDataTask>();
+            //services.AddSingleton<DataProvider>();
+            //services.AddSingleton<IHostedService,FetchDataTask>();
 
 
         }

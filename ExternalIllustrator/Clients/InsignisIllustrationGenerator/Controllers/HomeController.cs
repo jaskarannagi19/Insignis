@@ -31,6 +31,7 @@ namespace InsignisIllustrationGenerator.Controllers
         private AppSettings AppSettings { get; set; }
 
         private MultiLingual multiLingual;
+        private readonly BankHelper _bankHelper;
 
 
         private FinancialAbstraction financialAbstraction { get; set; }
@@ -77,7 +78,7 @@ namespace InsignisIllustrationGenerator.Controllers
             multiLingual = new MultiLingual(AppSettings, "English");
             financialAbstraction = new FinancialAbstraction(AppSettings.InsignisAM, Octavo.Gate.Nabu.Entities.DatabaseType.MSSQL, ConfigurationManager.AppSettings.Get("errorLog"));
             _context = context;
-            //_bankHelper = new BankHelper(mapper,_context);
+            _bankHelper = new BankHelper(mapper,_context);
             
         }
 
@@ -146,11 +147,37 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
-                institutionInclusion.Children[0].Value = "true";
-                institutionInclusion.Children[12].Value = "true";
-                institutionInclusion.Children[13].Value = "true";
-                institutionInclusion.Children[14].Value = "true";
-                institutionInclusion.Children[15].Value = "true";
+
+
+
+                //get all banks and products
+
+                
+                if (model.OneMonth != null)
+                {
+                   Product product = _bankHelper.GetBestOneMonthProduct(model.OneMonth);
+
+                   var selectedbank = product.Bank;
+
+                    for (int i = 0; i < institutionInclusion.Children.Count; i++)
+                    {
+                        institutionInclusion.Children[i].Value = "false";
+                        if (selectedbank.BankID == Convert.ToInt32(institutionInclusion.Children[i].Name))
+                        {
+                            institutionInclusion.Children[i].Value = "true";
+                        }
+                    }
+
+                    
+                }
+
+
+
+                //institutionInclusion.Children[0].Value = "true";
+                //institutionInclusion.Children[12].Value = "true";
+                //institutionInclusion.Children[13].Value = "true";
+                //institutionInclusion.Children[14].Value = "true";
+                //institutionInclusion.Children[15].Value = "true";
 
 
 
