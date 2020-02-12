@@ -3,84 +3,85 @@
     ViewData["Title"] = "Calculate";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+    <form action="@Url.Action("GenerateIllustration","Home")" method="post">
+        <div class="middle-section">
+            <div class="container">
+                <div class="blue-background">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-6"><p>Name:<br><span>@Model.PartnerName</span></p></div>
+                        <div class="col-lg-4 col-sm-6"><p>Organisation:<br><span>@Model.PartnerOrganisation</span></p></div>
+                        <div class="col-lg-4 col-sm-12"><p>Email:<br><span>@Model.PartnerEmail</span></p></div>
+                        <hr class="blue-line">
+                        <div class="col-lg-4 col-sm-6"><p>Name / Reference:<br><span>@Model.ClientName</span></p></div>
+                        <div class="col-lg-4 col-sm-6"><p>Client Type:<br><span>@Model.ClientType</span></p></div>
+                    </div>
+                </div>
+                <h4 class="heading-1">Summary</h4>
+                <div class="summary-gray-backgrund">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit</span></p></div>
+                        <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.proposedPortfolio.AnnualGrossInterestEarned</span></p></div>
+                        <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.proposedPortfolio.AnnualNetInterestEarned</span></p></div>
+                        <hr class="gray-line">
+                        <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.proposedPortfolio.GrossAverageYield%</span></p></div>
+                        <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.proposedPortfolio.NetAverageYield%</span></p></div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="col-lg-10 offset-lg-1 col-sm-12">
+                    <h4 class="heading-1">Deposits</h4>
+                    <div class="deposits-table">
+                        <table class="table table-striped table-bordered">
+                            <thead class="thead-dark">
+                                <tr class="d-flex">
+                                    <th class="col-4">Institution</th>
+                                    <th class="col-3">Term</th>
+                                    <th class="col-2 right">Rate</th>
+                                    <th class="col-3 right">Deposit Size</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @for (int i = 0; i < @Model.proposedPortfolio.ProposedInvestments.Count(); i++)
+                                {
 
-<div class="middle-section">
-    <div class="container">
-        <div class="blue-background">
-            <div class="row">
-                <div class="col-lg-4 col-sm-6"><p>Name:<br><span>@Model.PartnerName</span></p></div>
-                <div class="col-lg-4 col-sm-6"><p>Organisation:<br><span>@Model.PartnerOrganisation</span></p></div>
-                <div class="col-lg-4 col-sm-12"><p>Email:<br><span>@Model.PartnerEmail</span></p></div>
-                <hr class="blue-line">
-                <div class="col-lg-4 col-sm-6"><p>Name / Reference:<br><span>@Model.ClientName</span></p></div>
-                <div class="col-lg-4 col-sm-6"><p>Client Type:<br><span>@Model.ClientType</span></p></div>
+                                    <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
+                                        <a href="#">
+                                            <td class="col-4 instituteName">@Model.proposedPortfolio.ProposedInvestments[i].InstitutionName</td>
+                                            <td class="col-3 instituteLiquidity">@Model.proposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
+                                            <td class="col-2 right">@Model.proposedPortfolio.ProposedInvestments[i].Rate</td>
+                                            <td class="col-3 right instituteDeposit">
+                                                @Model.proposedPortfolio.ProposedInvestments[i].DepositSize
+                                                <input type="hidden" class="instituteID" value="@Model.proposedPortfolio.ProposedInvestments[i].InstitutionID" />
+                                            </td>
+                                        </a>
+                                    </tr>
+                                }
+
+
+                                <tr class="d-flex">
+                                    <td class="col-4">&nbsp;</td>
+                                    <td class="col-3">&nbsp;</td>
+                                    <td class="col-2 right">&nbsp;</td>
+                                    <td class="col-3 right table-total">@Model.TotalDeposit</td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                        <p class="gray-light-small">*Please click on a row to update deposit details</p>
+                    </div>
+                    <div class="clear1"></div>
+                    <div class="right">
+                        <button type="submit" class="btn btn-primary">Back</button>
+                        <input type="hidden" asp-for="@Model.proposedPortfolio" value="@Model.proposedPortfolio"/>
+                        <button type="submit" class="btn btn-primary">Generate Illustration</button>
+
+                    </div>
+
+                </div>
             </div>
         </div>
-        <h4 class="heading-1">Summary</h4>
-        <div class="summary-gray-backgrund">
-            <div class="row">
-                <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit</span></p></div>
-                <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.proposedPortfolio.AnnualGrossInterestEarned</span></p></div>
-                <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.proposedPortfolio.AnnualNetInterestEarned</span></p></div>
-                <hr class="gray-line">
-                <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.proposedPortfolio.GrossAverageYield%</span></p></div>
-                <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.proposedPortfolio.NetAverageYield%</span></p></div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <div class="col-lg-10 offset-lg-1 col-sm-12">
-            <h4 class="heading-1">Deposits</h4>
-            <div class="deposits-table">
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr class="d-flex">
-                            <th class="col-4">Institution</th>
-                            <th class="col-3">Term</th>
-                            <th class="col-2 right">Rate</th>
-                            <th class="col-3 right">Deposit Size</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (int i = 0; i < @Model.proposedPortfolio.ProposedInvestments.Count(); i++)
-                        {
-                           
-                            <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
-                                <a href="#">
-                                    <td class="col-4 instituteName">@Model.proposedPortfolio.ProposedInvestments[i].InstitutionName</td>
-                                    <td class="col-3 instituteLiquidity">@Model.proposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
-                                    <td class="col-2 right">@Model.proposedPortfolio.ProposedInvestments[i].Rate</td>
-                                    <td class="col-3 right instituteDeposit">@Model.proposedPortfolio.ProposedInvestments[i].DepositSize
-                                    <input type="hidden" class="instituteID" value="@Model.proposedPortfolio.ProposedInvestments[i].InstitutionID" />
-                                    </td>
-                                </a>
-                            </tr>
-                        }
-
-
-                        <tr class="d-flex">
-                            <td class="col-4">&nbsp;</td>
-                            <td class="col-3">&nbsp;</td>
-                            <td class="col-2 right">&nbsp;</td>
-                            <td class="col-3 right table-total">@Model.TotalDeposit</td>
-                        </tr>
-
-                    </tbody>
-                </table>
-                <p class="gray-light-small">*Please click on a row to update deposit details</p>
-            </div>
-            <div class="clear1"></div>
-            <div class="right">
-                <button type="submit" class="btn btn-primary">Back</button>
-                <form action="@Url.Action("GenerateIllustration","Home")">
-                    <button type="submit" class="btn btn-primary">Generate Illustration</button>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
-
+    </form>
 
 
 

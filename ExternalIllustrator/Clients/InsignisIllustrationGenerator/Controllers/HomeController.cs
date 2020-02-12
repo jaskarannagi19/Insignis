@@ -137,15 +137,12 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
 
-
-
                 string fscsProtectionConfigFile = AppSettings.ClientConfigRoot;// ConfigurationManager.AppSettings["clientConfigRoot"];
                 if (fscsProtectionConfigFile.EndsWith("\\") == false)
                     fscsProtectionConfigFile += "\\";
                 fscsProtectionConfigFile += "FSCSProtection.xml";
 
                 Octavo.Gate.Nabu.Preferences.Manager preferencesManager = new Octavo.Gate.Nabu.Preferences.Manager(AppSettings.preferencesRoot + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerOrganisation) + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerEmailAddress));
-
                 Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
 
@@ -155,9 +152,13 @@ namespace InsignisIllustrationGenerator.Controllers
                 }
 
                 model.proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
-                illustrationInfo.ProposedPortfolio = model.proposedPortfolio;
 
-                HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(illustrationInfo));
+                SCurveOutput sStore = new SCurveOutput();
+
+                sStore = _mapper.Map(model.proposedPortfolio, sStore);
+                
+
+                HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
 
 
             }
@@ -374,7 +375,7 @@ namespace InsignisIllustrationGenerator.Controllers
         }
 
 
-        public IActionResult GenerateIllustration()
+        public IActionResult GenerateIllustration(IllustrationDetailViewModel model)
         {
             /*
              Generate Illustration for using the data
@@ -384,6 +385,18 @@ namespace InsignisIllustrationGenerator.Controllers
                 View
 
              */
+
+            var generatedInvestments = JsonConvert.DeserializeObject<SCurveOutput>(HttpContext.Session.GetString("GeneratedPorposals")); //scurve output
+
+
+
+            //Insignis.Asset.Management.Tools.Sales.SCurveOutput _sc= new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
+            
+            
+            model.proposedPortfolio =_mapper.Map(generatedInvestments, new Insignis.Asset.Management.Tools.Sales.SCurveOutput());
+
+
+
 
             Octavo.Gate.Nabu.Encryption.EncryptorDecryptor decryptor = new Octavo.Gate.Nabu.Encryption.EncryptorDecryptor();
             string qsTemplateFile = "C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Template\\1\\illustration.pptx";
@@ -407,13 +420,42 @@ namespace InsignisIllustrationGenerator.Controllers
             textReplacements.Add(new KeyValuePair<string, string>("CHARGE", ""));
             textReplacements.Add(new KeyValuePair<string, string>("TOTAL", illustrationInfo.TotalDeposit.ToString()));
             textReplacements.Add(new KeyValuePair<string, string>("PROTECTION", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("NETYIELD", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", model.proposedPortfolio.GrossAverageYield.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", model.proposedPortfolio.AnnualGrossInterestEarned.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("NETYIELD", model.proposedPortfolio.NetAverageYield.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", model.proposedPortfolio.AnnualNetInterestEarned.ToString()));
 
-
+            for (int i = 0; i < 30; i++)
+            {
             
+                        string institutionName = " ";
+                        string termDescription = " ";
+                        string rate = " ";
+                        string deposit = " ";
+                        string interest = " ";
+                try { 
+                    
+                        institutionName = model.proposedPortfolio.ProposedInvestments[i].InstitutionName;
+                        termDescription = model.proposedPortfolio.ProposedInvestments[i].InvestmentTerm.GetText();// heatmapTerm.InvestmentTerm.GetText();
+                        rate = model.proposedPortfolio.ProposedInvestments[i].Rate.ToString("0.00") + "%";
+                        deposit = model.proposedPortfolio.ProposedInvestments[i].DepositSize.ToString();
+                        interest = model.proposedPortfolio.ProposedInvestments[i].AnnualInterest.ToString();
+                }
+                catch
+                {
+
+                }
+
+                        textReplacements.Add(new KeyValuePair<string, string>("INSTITUTION" + i.ToString("00"), institutionName));
+                        textReplacements.Add(new KeyValuePair<string, string>("TERM" + i.ToString("00"), termDescription));
+                        textReplacements.Add(new KeyValuePair<string, string>("RATE" + i.ToString("00"), rate));
+                        textReplacements.Add(new KeyValuePair<string, string>("DEPOSIT" + i.ToString("00"), deposit));
+                        textReplacements.Add(new KeyValuePair<string, string>("INTEREST" + i.ToString("00"), interest));
+    
+                }
+                 
+
+
 
             Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
             string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
