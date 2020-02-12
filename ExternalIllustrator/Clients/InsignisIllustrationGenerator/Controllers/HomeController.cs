@@ -16,6 +16,8 @@ using Octavo.Gate.Nabu.Entities.Financial;
 using Spire.Presentation;
 using InsignisIllustrationGenerator.Data;
 using InsignisIllustrationGenerator.Scheduler;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace InsignisIllustrationGenerator.Controllers
 {
@@ -125,7 +127,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 illustrationInfo.TwoYears = model.TwoYears;
                 illustrationInfo.ThreeYears = model.ThreeYearsPlus;
                 illustrationInfo.TotalDeposit = model.TotalDeposit;
-                HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(illustrationInfo));
+                
 
 
                 model.proposedPortfolio = null;
@@ -153,6 +155,11 @@ namespace InsignisIllustrationGenerator.Controllers
                 }
 
                 model.proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+                illustrationInfo.ProposedPortfolio = model.proposedPortfolio;
+
+                HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(illustrationInfo));
+
+
             }
             return View(model);
         }
@@ -160,8 +167,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
         public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(Session sessionData, bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
         {
-
-
 
             Octavo.Gate.Nabu.Preferences.Manager preferencesManager = new Octavo.Gate.Nabu.Preferences.Manager(AppSettings.preferencesRoot + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters("Insignis") + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters("p.artner@partorg.com"));
             Octavo.Gate.Nabu.Preferences.Preference scurvePreferences = preferencesManager.GetPreference("Sales.Tools.SCurve.Settings", 1, "Settings");
@@ -379,24 +384,6 @@ namespace InsignisIllustrationGenerator.Controllers
                 View
 
              */
-            Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction powerpointRenderAbstraction = new Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction(AppSettings.illustrationOutputInternalFolder, AppSettings.illustrationOutputPublicFacingFolder);
-            List<KeyValuePair<string, string>> textReplacements = new List<KeyValuePair<string, string>>();
-
-            textReplacements.Add(new KeyValuePair<string, string>("REFERENCE", "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss")));
-            textReplacements.Add(new KeyValuePair<string, string>("DATE", DateTime.Now.ToString("dd/MM/yyyy")));
-            textReplacements.Add(new KeyValuePair<string, string>("CLIENTNAME", "Ajaybir Jaskaran"));
-            textReplacements.Add(new KeyValuePair<string, string>("CLIENTTYPE", "Joint"));
-            textReplacements.Add(new KeyValuePair<string, string>("INTROORG", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("FEEDISCOUNT", "100%"));
-            textReplacements.Add(new KeyValuePair<string, string>("FEE", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("CHARGE", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("TOTAL", "10,0000"));
-            textReplacements.Add(new KeyValuePair<string, string>("PROTECTION", "65000"));
-            textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", "200%"));
-            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", "16"));
-            textReplacements.Add(new KeyValuePair<string, string>("NETYIELD", "17"));
-            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", "19"));
-
 
             Octavo.Gate.Nabu.Encryption.EncryptorDecryptor decryptor = new Octavo.Gate.Nabu.Encryption.EncryptorDecryptor();
             string qsTemplateFile = "C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Template\\1\\illustration.pptx";
@@ -404,6 +391,29 @@ namespace InsignisIllustrationGenerator.Controllers
             string prefixName = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss");
 
             string requiredOutputNameWithoutExtension = prefixName + "_CashIllustration";
+
+            Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction powerpointRenderAbstraction = new Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction(AppSettings.illustrationOutputInternalFolder, AppSettings.illustrationOutputPublicFacingFolder);
+            List<KeyValuePair<string, string>> textReplacements = new List<KeyValuePair<string, string>>();
+
+            var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+
+            textReplacements.Add(new KeyValuePair<string, string>("REFERENCE", prefixName));
+            textReplacements.Add(new KeyValuePair<string, string>("DATE", DateTime.Now.ToString("dd/MM/yyyy")));
+            textReplacements.Add(new KeyValuePair<string, string>("CLIENTNAME", illustrationInfo.ClientName));
+            textReplacements.Add(new KeyValuePair<string, string>("CLIENTTYPE", illustrationInfo.ClientType.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("INTROORG", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("FEEDISCOUNT", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("FEE", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("CHARGE", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("TOTAL", illustrationInfo.TotalDeposit.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("PROTECTION", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("NETYIELD", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", ""));
+
+
+            
 
             Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
             string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
@@ -422,10 +432,12 @@ namespace InsignisIllustrationGenerator.Controllers
         }
 
         
-        public IActionResult Update(bool removeBank, string bankId, IllustrationDetailViewModel model)
+        public IActionResult Update(string includeBank, string bankId, string updatedAmount)
         {
 
+
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            IllustrationDetailViewModel model = new IllustrationDetailViewModel();
 
             model.proposedPortfolio = null;
             Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
@@ -445,9 +457,10 @@ namespace InsignisIllustrationGenerator.Controllers
             Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
 
+            
             foreach (var childern in institutionInclusion.Children)
             {
-                if(childern.Name != bankId) { 
+                if(childern.Name != bankId || includeBank == "on") { 
                 childern.Value = "true";
                 }
                 else
@@ -455,10 +468,28 @@ namespace InsignisIllustrationGenerator.Controllers
                     childern.Value = "false";
                 }
             }
+            
 
+            model.proposedPortfolio = illustrationInfo.ProposedPortfolio;
             model.proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+
+            decimal? moneyLeft = null;
+            decimal total = 0;
+
+            var newInvest = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
+            foreach (var investment in model.proposedPortfolio.ProposedInvestments)
+            {
+                if(investment.DepositSize != Convert.ToDecimal(updatedAmount) && investment.InstitutionID ==Convert.ToInt32(bankId))
+                {
+                    moneyLeft = investment.DepositSize - Convert.ToDecimal(updatedAmount);
+                    investment.DepositSize = Convert.ToDecimal(updatedAmount);
+                }
+                total = total + investment.DepositSize;
+            }
+            
+
             model.ClientName = illustrationInfo.ClientName;
-            model.TotalDeposit = illustrationInfo.TotalDeposit;
+            model.TotalDeposit =Convert.ToDouble(total);
             model.ClientType = illustrationInfo.ClientType;
             model.Currency = illustrationInfo.Currency;
             model.EasyAccess = illustrationInfo.EasyAccess;
@@ -472,16 +503,9 @@ namespace InsignisIllustrationGenerator.Controllers
             model.ThreeMonths = illustrationInfo.ThreeMonths;
             model.ThreeYearsPlus = illustrationInfo.ThreeYears;
             model.TwoYears = illustrationInfo.TwoYears;
-
-
             return View("Calculate", model);
+
         }
-
-
-
-
-
-    
 
         public IActionResult Privacy()
         {

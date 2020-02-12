@@ -50,7 +50,9 @@
                                     <td class="col-4 instituteName">@Model.proposedPortfolio.ProposedInvestments[i].InstitutionName</td>
                                     <td class="col-3 instituteLiquidity">@Model.proposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
                                     <td class="col-2 right">@Model.proposedPortfolio.ProposedInvestments[i].Rate</td>
-                                    <td class="col-3 right instituteDeposit">@Model.proposedPortfolio.ProposedInvestments[i].DepositSize</td>
+                                    <td class="col-3 right instituteDeposit">@Model.proposedPortfolio.ProposedInvestments[i].DepositSize
+                                    <input type="hidden" class="instituteID" value="@Model.proposedPortfolio.ProposedInvestments[i].InstitutionID" />
+                                    </td>
                                 </a>
                             </tr>
                         }
@@ -112,13 +114,15 @@
                                 <tr class="d-flex">
                                     <td class="col-2 center">
                                         <div class="custom-control custom-checkbox mr-sm-2">
-                                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing" checked>
+                                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing" name="includeBank" checked="checked">
                                             <label class="custom-control-label" for="customControlAutosizing"></label>
                                         </div>
                                     </td>
                                     <td id="bankName" class="col-3 center"></td>
                                     <td id="liquidity" class="col-3 center"></td>
-                                    <td id="deposit" class="col-4 right"><input type="text" class="form-control" id="" placeholder="00.000"></td>
+                                    <td  class="col-4 right"><input type="text" class="form-control" id="updatedAmount" placeholder="00.000" name="updatedAmount" />
+                                    <input type="hidden" id="bankID" name="bankID" />
+                                    </td>
                                 </tr>
                                 <tr class="d-flex">
                                     <td class="col-2 center">&nbsp;</td>
@@ -148,9 +152,11 @@
             var instName = $(event.target).closest('tr').find('.instituteName').text();
             var liquidity = $(event.target).closest('tr').find('.instituteLiquidity').text();
             var deposit = $(event.target).closest('tr').find('.instituteDeposit').text();
+            var bankID = $(event.target).closest('tr').find('.instituteID').val();
             $("#bankName").text(instName);
             $("#liquidity").text(liquidity);
-            $("#deposit").text(deposit);
+            $("#updatedAmount").val(deposit);
+            $("#bankID").val(bankID)
             $('#exampleModal').modal('show');
         });
     });
