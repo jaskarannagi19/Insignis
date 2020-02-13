@@ -173,3 +173,9 @@ D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\obj\Debu
 D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\obj\Debug\ExternalIllustrator.csproj.CopyComplete
 D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\obj\Debug\ExternalIllustrator.dll
 D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\obj\Debug\ExternalIllustrator.pdb
+D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\bin\Spire.License.dll
+D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\bin\Spire.Pdf.dll
+D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\bin\Microsoft.mshtml.dll
+D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\bin\Spire.License.xml
+D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\bin\Spire.Pdf.xml
+D:\insignis\ExternalIllustrator\ExternalIllustrator\ExternalIllustrator\bin\Spire.Presentation.xml

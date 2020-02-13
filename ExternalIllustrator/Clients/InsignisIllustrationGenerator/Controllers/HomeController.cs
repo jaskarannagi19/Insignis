@@ -49,6 +49,7 @@ namespace InsignisIllustrationGenerator.Controllers
              */
 
             //Set Info in session
+            
             var session = new Session() { PartnerEmailAddress = "p.artner@partorg.com", PartnerName = "Peter Artner", PartnerOrganisation = "PartOrg Ltd.", PartnerTelephone = "01226 1234 567" };
 
             HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(session));

@@ -76,6 +76,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Projects\OctavoGate\Nabu\Framework\NabuPreferences\bin\Debug\NabuPreferences.dll</HintPath>
     </Reference>
+    <Reference Include="Spire.License, Version=1.3.7.46, Culture=neutral, PublicKeyToken=b1144360237c8b3f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Presentation.4.1.0\lib\net46\Spire.License.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Pdf, Version=5.1.26.18046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Presentation.4.1.0\lib\net46\Spire.Pdf.dll</HintPath>
+    </Reference>
+    <Reference Include="Spire.Presentation, Version=4.1.21.10046, Culture=neutral, PublicKeyToken=663f351905198cb3, processorArchitecture=MSIL">
+      <HintPath>..\packages\FreeSpire.Presentation.4.1.0\lib\net46\Spire.Presentation.dll</HintPath>
+    </Reference>
     <Reference Include="Syncfusion.Compression.Portable, Version=17.4200.0.44, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
       <HintPath>..\packages\Syncfusion.Compression.Net.Core.17.4.0.44\lib\netstandard2.0\Syncfusion.Compression.Portable.dll</HintPath>
     </Reference>
