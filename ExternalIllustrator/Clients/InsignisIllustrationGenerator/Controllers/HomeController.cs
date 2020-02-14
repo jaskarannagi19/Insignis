@@ -18,6 +18,7 @@ using InsignisIllustrationGenerator.Data;
 using InsignisIllustrationGenerator.Scheduler;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace InsignisIllustrationGenerator.Controllers
 {
@@ -28,12 +29,14 @@ namespace InsignisIllustrationGenerator.Controllers
         private readonly IConfiguration _configuration;
         private readonly ApplicationDbContext _context;
 
-        
+
 
         private AppSettings AppSettings { get; set; }
 
         private MultiLingual multiLingual;
         private readonly BankHelper _bankHelper;
+        private readonly IllustrationHelper _illustrationHelper;
+
 
         private FinancialAbstraction financialAbstraction { get; set; }
 
@@ -49,7 +52,7 @@ namespace InsignisIllustrationGenerator.Controllers
              */
 
             //Set Info in session
-            
+
             var session = new Session() { PartnerEmailAddress = "p.artner@partorg.com", PartnerName = "Peter Artner", PartnerOrganisation = "PartOrg Ltd.", PartnerTelephone = "01226 1234 567" };
 
             HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(session));
@@ -80,8 +83,9 @@ namespace InsignisIllustrationGenerator.Controllers
             multiLingual = new MultiLingual(AppSettings, "English");
             financialAbstraction = new FinancialAbstraction(AppSettings.InsignisAM, Octavo.Gate.Nabu.Entities.DatabaseType.MSSQL, ConfigurationManager.AppSettings.Get("errorLog"));
             _context = context;
-            _bankHelper = new BankHelper(mapper,_context);
-            
+            _bankHelper = new BankHelper(mapper, _context);
+             _illustrationHelper = new IllustrationHelper(mapper, _context);
+
         }
 
         public IActionResult Index()
@@ -113,7 +117,8 @@ namespace InsignisIllustrationGenerator.Controllers
              Arguments:- IllustrationDetailViewModel 
              Returns:- View and Errors
              */
-            if (ModelState.IsValid) {
+            if (ModelState.IsValid)
+            {
                 var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
 
                 illustrationInfo.ClientName = model.ClientName;
@@ -128,10 +133,10 @@ namespace InsignisIllustrationGenerator.Controllers
                 illustrationInfo.TwoYears = model.TwoYears;
                 illustrationInfo.ThreeYears = model.ThreeYearsPlus;
                 illustrationInfo.TotalDeposit = model.TotalDeposit;
-                
 
 
-                model.proposedPortfolio = null;
+
+                model.ProposedPortfolio = null;
                 Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
 
                 scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
@@ -152,12 +157,15 @@ namespace InsignisIllustrationGenerator.Controllers
                     childern.Value = "true";
                 }
 
-                model.proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+                model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
 
                 SCurveOutput sStore = new SCurveOutput();
 
-                sStore = _mapper.Map(model.proposedPortfolio, sStore);
-                
+                sStore = _mapper.Map(model.ProposedPortfolio, sStore);
+
+
+                //Database save our database Super User get 
+
 
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
 
@@ -392,9 +400,9 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             //Insignis.Asset.Management.Tools.Sales.SCurveOutput _sc= new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
-            
-            
-            model.proposedPortfolio =_mapper.Map(generatedInvestments, new Insignis.Asset.Management.Tools.Sales.SCurveOutput());
+
+
+            model.ProposedPortfolio = _mapper.Map(generatedInvestments, new Insignis.Asset.Management.Tools.Sales.SCurveOutput());
 
 
 
@@ -421,47 +429,54 @@ namespace InsignisIllustrationGenerator.Controllers
             textReplacements.Add(new KeyValuePair<string, string>("CHARGE", ""));
             textReplacements.Add(new KeyValuePair<string, string>("TOTAL", illustrationInfo.TotalDeposit.ToString()));
             textReplacements.Add(new KeyValuePair<string, string>("PROTECTION", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", model.proposedPortfolio.GrossAverageYield.ToString()));
-            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", model.proposedPortfolio.AnnualGrossInterestEarned.ToString()));
-            textReplacements.Add(new KeyValuePair<string, string>("NETYIELD", model.proposedPortfolio.NetAverageYield.ToString()));
-            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", model.proposedPortfolio.AnnualNetInterestEarned.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", model.ProposedPortfolio.GrossAverageYield.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", model.ProposedPortfolio.AnnualGrossInterestEarned.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("NETYIELD", model.ProposedPortfolio.NetAverageYield.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", model.ProposedPortfolio.AnnualNetInterestEarned.ToString()));
+            string institutionName = " ";
+            string termDescription = " ";
+            string rate = " ";
+            string deposit = " ";
+            string interest = " ";
+           // for (int i = 0; i < 30; i++) 
+            for (int i = 0; i < model.ProposedPortfolio.ProposedInvestments.Count; i++)
 
-            for (int i = 0; i < 30; i++)
             {
-            
-                        string institutionName = " ";
-                        string termDescription = " ";
-                        string rate = " ";
-                        string deposit = " ";
-                        string interest = " ";
-                try { 
-                    
-                        institutionName = model.proposedPortfolio.ProposedInvestments[i].InstitutionName;
-                        termDescription = model.proposedPortfolio.ProposedInvestments[i].InvestmentTerm.GetText();// heatmapTerm.InvestmentTerm.GetText();
-                        rate = model.proposedPortfolio.ProposedInvestments[i].Rate.ToString("0.00") + "%";
-                        deposit = model.proposedPortfolio.ProposedInvestments[i].DepositSize.ToString();
-                        interest = model.proposedPortfolio.ProposedInvestments[i].AnnualInterest.ToString();
+                 institutionName = " ";
+                 termDescription = " ";
+                 rate = " ";
+                 deposit = " ";
+                 interest = " ";
+
+                try
+                {
+
+                    institutionName = model.ProposedPortfolio.ProposedInvestments[i].InstitutionName;
+                    termDescription = model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.GetText();// heatmapTerm.InvestmentTerm.GetText();
+                    rate = model.ProposedPortfolio.ProposedInvestments[i].Rate.ToString("0.00") + "%";
+                    deposit = model.ProposedPortfolio.ProposedInvestments[i].DepositSize.ToString();
+                    interest = model.ProposedPortfolio.ProposedInvestments[i].AnnualInterest.ToString();
                 }
                 catch
                 {
 
                 }
 
-                        textReplacements.Add(new KeyValuePair<string, string>("INSTITUTION" + i.ToString("00"), institutionName));
-                        textReplacements.Add(new KeyValuePair<string, string>("TERM" + i.ToString("00"), termDescription));
-                        textReplacements.Add(new KeyValuePair<string, string>("RATE" + i.ToString("00"), rate));
-                        textReplacements.Add(new KeyValuePair<string, string>("DEPOSIT" + i.ToString("00"), deposit));
-                        textReplacements.Add(new KeyValuePair<string, string>("INTEREST" + i.ToString("00"), interest));
-    
-                }
-                 
+                textReplacements.Add(new KeyValuePair<string, string>("INSTITUTION" + i.ToString("00"), institutionName));
+                textReplacements.Add(new KeyValuePair<string, string>("TERM" + i.ToString("00"), termDescription));
+                textReplacements.Add(new KeyValuePair<string, string>("RATE" + i.ToString("00"), rate));
+                textReplacements.Add(new KeyValuePair<string, string>("DEPOSIT" + i.ToString("00"), deposit));
+                textReplacements.Add(new KeyValuePair<string, string>("INTEREST" + i.ToString("00"), interest));
+
+            }
+
+            SaveIllustraion(model);
 
 
-
-            Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
+            Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, false);
             string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
 
-            System.IO.File.Delete(filename);
+            //System.IO.File.Delete(filename);
 
             Presentation presentation = new Presentation();
 
@@ -470,11 +485,16 @@ namespace InsignisIllustrationGenerator.Controllers
 
             byte[] filedata = System.IO.File.ReadAllBytes(filename);
 
-            //return View();
-            return File(filedata, "application/pdf");
+            ViewBag.PDF = filename;
+            return View();
+            //return File(filedata, "application/pdf");
         }
 
-        
+        private async Task<bool> SaveIllustraion(IllustrationDetailViewModel model)
+        {
+            return await _illustrationHelper.SaveIllustraionAsync(model);
+        }
+
         public IActionResult Update(string includeBank, string bankId, string updatedAmount)
         {
 
@@ -482,7 +502,7 @@ namespace InsignisIllustrationGenerator.Controllers
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
             IllustrationDetailViewModel model = new IllustrationDetailViewModel();
 
-            model.proposedPortfolio = null;
+            model.ProposedPortfolio = null;
             Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
             scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
 
@@ -500,39 +520,40 @@ namespace InsignisIllustrationGenerator.Controllers
             Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
 
-            
+
             foreach (var childern in institutionInclusion.Children)
             {
-                if(childern.Name != bankId || includeBank == "on") { 
-                childern.Value = "true";
+                if (childern.Name != bankId || includeBank == "on")
+                {
+                    childern.Value = "true";
                 }
                 else
                 {
                     childern.Value = "false";
                 }
             }
-            
 
-            model.proposedPortfolio = illustrationInfo.ProposedPortfolio;
-            model.proposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+
+            model.ProposedPortfolio = illustrationInfo.ProposedPortfolio;
+            model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
 
             decimal? moneyLeft = null;
             decimal total = 0;
 
             var newInvest = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
-            foreach (var investment in model.proposedPortfolio.ProposedInvestments)
+            foreach (var investment in model.ProposedPortfolio.ProposedInvestments)
             {
-                if(investment.DepositSize != Convert.ToDecimal(updatedAmount) && investment.InstitutionID ==Convert.ToInt32(bankId))
+                if (investment.DepositSize != Convert.ToDecimal(updatedAmount) && investment.InstitutionID == Convert.ToInt32(bankId))
                 {
                     moneyLeft = investment.DepositSize - Convert.ToDecimal(updatedAmount);
                     investment.DepositSize = Convert.ToDecimal(updatedAmount);
                 }
                 total = total + investment.DepositSize;
             }
-            
+
 
             model.ClientName = illustrationInfo.ClientName;
-            model.TotalDeposit =Convert.ToDouble(total);
+            model.TotalDeposit = Convert.ToDouble(total);
             model.ClientType = illustrationInfo.ClientType;
             model.Currency = illustrationInfo.Currency;
             model.EasyAccess = illustrationInfo.EasyAccess;

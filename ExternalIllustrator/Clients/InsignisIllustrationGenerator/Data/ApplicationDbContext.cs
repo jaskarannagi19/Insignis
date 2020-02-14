@@ -13,6 +13,14 @@ namespace InsignisIllustrationGenerator.Data
         {
 
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Insignis.Asset.Management.Clients.Helper.InvestmentTerm>().HasNoKey();
+        
+            base.OnModelCreating(modelBuilder);
+        }
+
         //Database Entities
         public DbSet<IllustrationDetail> IllustrationDetails { get; set; }
         public DbSet<Bank> Bank { get; set; }
