@@ -461,17 +461,19 @@ namespace InsignisIllustrationGenerator.Controllers
             Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
             string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
 
-            System.IO.File.Delete(filename);
+            //System.IO.File.Delete(filename);
 
-            Presentation presentation = new Presentation();
+            //Presentation presentation = new Presentation();
 
-            presentation.LoadFromFile(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pptx");
-            presentation.SaveToFile(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf", Spire.Presentation.FileFormat.PDF);
+            //presentation.LoadFromFile(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pptx");
+            //presentation.SaveToFile(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf", Spire.Presentation.FileFormat.PDF);
 
-            byte[] filedata = System.IO.File.ReadAllBytes(filename);
+            //byte[] filedata = System.IO.File.ReadAllBytes(filename);
 
-            //return View();
-            return File(filedata, "application/pdf");
+            ViewBag.PDF = extendedReportContent.URI;
+
+            return View();
+            //return File(filedata, "application/pdf");
         }
 
         

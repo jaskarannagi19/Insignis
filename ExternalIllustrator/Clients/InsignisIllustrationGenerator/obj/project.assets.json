@@ -42,6 +42,23 @@
           "lib/netstandard1.3/DocumentFormat.OpenXml.dll": {}
         }
       },
+      "FreeSpire.Presentation/4.1.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Drawing.Common": "4.5.0",
+          "System.Text.Encoding.CodePages": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Spire.License.dll": {},
+          "lib/netstandard2.0/Spire.Pdf.dll": {},
+          "lib/netstandard2.0/Spire.Presentation.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Spire.License.dll": {},
+          "lib/netstandard2.0/Spire.Pdf.dll": {},
+          "lib/netstandard2.0/Spire.Presentation.dll": {}
+        }
+      },
       "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
         "type": "package",
         "compile": {
@@ -1213,38 +1230,6 @@
             "assetType": "native",
             "rid": "win-x86"
           }
-        }
-      },
-      "Spire.PDF/6.1.8": {
-        "type": "package",
-        "dependencies": {
-          "System.Drawing.Common": "4.7.0",
-          "System.Text.Encoding.CodePages": "4.7.0"
-        },
-        "compile": {
-          "lib/netcoreapp3.0/Spire.License.dll": {},
-          "lib/netcoreapp3.0/Spire.Pdf.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.0/Spire.License.dll": {},
-          "lib/netcoreapp3.0/Spire.Pdf.dll": {}
-        }
-      },
-      "Spire.Presentation/5.1.0": {
-        "type": "package",
-        "dependencies": {
-          "System.Drawing.Common": "4.7.0",
-          "System.Text.Encoding.CodePages": "4.7.0"
-        },
-        "compile": {
-          "lib/netcoreapp3.0/Spire.License.dll": {},
-          "lib/netcoreapp3.0/Spire.Pdf.dll": {},
-          "lib/netcoreapp3.0/Spire.Presentation.dll": {}
-        },
-        "runtime": {
-          "lib/netcoreapp3.0/Spire.License.dll": {},
-          "lib/netcoreapp3.0/Spire.Pdf.dll": {},
-          "lib/netcoreapp3.0/Spire.Presentation.dll": {}
         }
       },
       "System.AppContext/4.3.0": {
@@ -2979,6 +2964,40 @@
         "lib/net46/DocumentFormat.OpenXml.xml",
         "lib/netstandard1.3/DocumentFormat.OpenXml.dll",
         "lib/netstandard1.3/DocumentFormat.OpenXml.xml"
+      ]
+    },
+    "FreeSpire.Presentation/4.1.0": {
+      "sha512": "6eJNsK0YPBPITyNCAC2rdPeV6CfzfarAfnA3YomHCdoA/Dh9ZisDOcrpW6DNs45wgK/Tcq2pvOguGIOsgEyBcA==",
+      "type": "package",
+      "path": "freespire.presentation/4.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "freespire.presentation.4.1.0.nupkg.sha512",
+        "freespire.presentation.nuspec",
+        "lib/net20/Spire.License.dll",
+        "lib/net20/Spire.License.xml",
+        "lib/net20/Spire.Pdf.dll",
+        "lib/net20/Spire.Presentation.dll",
+        "lib/net20/Spire.Presentation.xml",
+        "lib/net40/Spire.License.dll",
+        "lib/net40/Spire.License.xml",
+        "lib/net40/Spire.Pdf.dll",
+        "lib/net40/Spire.Presentation.dll",
+        "lib/net40/Spire.Presentation.xml",
+        "lib/net46/Spire.License.dll",
+        "lib/net46/Spire.License.xml",
+        "lib/net46/Spire.Pdf.dll",
+        "lib/net46/Spire.Pdf.xml",
+        "lib/net46/Spire.Presentation.dll",
+        "lib/net46/Spire.Presentation.xml",
+        "lib/netstandard2.0/Spire.License.dll",
+        "lib/netstandard2.0/Spire.License.xml",
+        "lib/netstandard2.0/Spire.Pdf.dll",
+        "lib/netstandard2.0/Spire.Pdf.xml",
+        "lib/netstandard2.0/Spire.Presentation.dll",
+        "lib/netstandard2.0/Spire.Presentation.xml",
+        "license.txt"
       ]
     },
     "Microsoft.AspNetCore.Cryptography.Internal/3.1.1": {
@@ -4795,94 +4814,6 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
-      ]
-    },
-    "Spire.PDF/6.1.8": {
-      "sha512": "y3GKM6VID37HbUPqdjToob2wX3e0NuxkKkmU0oy6Cl+L0bB6pUYa0lth9tukIdc6eSulVWzfxwpQhML7ErA1nQ==",
-      "type": "package",
-      "path": "spire.pdf/6.1.8",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net20/Spire.License.dll",
-        "lib/net20/Spire.License.xml",
-        "lib/net20/Spire.Pdf.XML",
-        "lib/net20/Spire.Pdf.dll",
-        "lib/net40-client/Spire.License.dll",
-        "lib/net40-client/Spire.License.xml",
-        "lib/net40-client/Spire.Pdf.XML",
-        "lib/net40-client/Spire.Pdf.dll",
-        "lib/net40/Spire.License.dll",
-        "lib/net40/Spire.License.xml",
-        "lib/net40/Spire.Pdf.XML",
-        "lib/net40/Spire.Pdf.dll",
-        "lib/net46/Spire.License.dll",
-        "lib/net46/Spire.License.xml",
-        "lib/net46/Spire.Pdf.dll",
-        "lib/net46/Spire.Pdf.xml",
-        "lib/netcoreapp2.0/Spire.License.dll",
-        "lib/netcoreapp2.0/Spire.License.xml",
-        "lib/netcoreapp2.0/Spire.Pdf.dll",
-        "lib/netcoreapp2.0/Spire.Pdf.xml",
-        "lib/netcoreapp3.0/Spire.License.dll",
-        "lib/netcoreapp3.0/Spire.License.xml",
-        "lib/netcoreapp3.0/Spire.Pdf.dll",
-        "lib/netcoreapp3.0/Spire.Pdf.xml",
-        "lib/netstandard2.0/Spire.License.dll",
-        "lib/netstandard2.0/Spire.License.xml",
-        "lib/netstandard2.0/Spire.Pdf.dll",
-        "lib/netstandard2.0/Spire.Pdf.xml",
-        "license.txt",
-        "spire.pdf.6.1.8.nupkg.sha512",
-        "spire.pdf.nuspec"
-      ]
-    },
-    "Spire.Presentation/5.1.0": {
-      "sha512": "Ca+7Y2oivOYfOso9kPveGkv5vlZJdMIdbzdFM6qdWp3KDhLLzVJuaHXF4MeW4ihPyeScI5nFqYBYXM9B+IRd7Q==",
-      "type": "package",
-      "path": "spire.presentation/5.1.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "lib/net20/Spire.License.dll",
-        "lib/net20/Spire.License.xml",
-        "lib/net20/Spire.Pdf.dll",
-        "lib/net20/Spire.Pdf.xml",
-        "lib/net20/Spire.Presentation.dll",
-        "lib/net20/Spire.Presentation.xml",
-        "lib/net40/Spire.License.dll",
-        "lib/net40/Spire.License.xml",
-        "lib/net40/Spire.Pdf.dll",
-        "lib/net40/Spire.Pdf.xml",
-        "lib/net40/Spire.Presentation.dll",
-        "lib/net40/Spire.Presentation.xml",
-        "lib/net46/Spire.License.dll",
-        "lib/net46/Spire.License.xml",
-        "lib/net46/Spire.Pdf.dll",
-        "lib/net46/Spire.Pdf.xml",
-        "lib/net46/Spire.Presentation.dll",
-        "lib/net46/Spire.Presentation.xml",
-        "lib/netcoreapp2.0/Spire.License.dll",
-        "lib/netcoreapp2.0/Spire.License.xml",
-        "lib/netcoreapp2.0/Spire.Pdf.dll",
-        "lib/netcoreapp2.0/Spire.Pdf.xml",
-        "lib/netcoreapp2.0/Spire.Presentation.dll",
-        "lib/netcoreapp2.0/Spire.Presentation.xml",
-        "lib/netcoreapp3.0/Spire.License.dll",
-        "lib/netcoreapp3.0/Spire.License.xml",
-        "lib/netcoreapp3.0/Spire.Pdf.dll",
-        "lib/netcoreapp3.0/Spire.Pdf.xml",
-        "lib/netcoreapp3.0/Spire.Presentation.dll",
-        "lib/netcoreapp3.0/Spire.Presentation.xml",
-        "lib/netstandard2.0/Spire.License.dll",
-        "lib/netstandard2.0/Spire.License.xml",
-        "lib/netstandard2.0/Spire.Pdf.dll",
-        "lib/netstandard2.0/Spire.Pdf.xml",
-        "lib/netstandard2.0/Spire.Presentation.dll",
-        "lib/netstandard2.0/Spire.Presentation.xml",
-        "license.txt",
-        "spire.presentation.5.1.0.nupkg.sha512",
-        "spire.presentation.nuspec"
       ]
     },
     "System.AppContext/4.3.0": {
@@ -9314,6 +9245,7 @@
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 7.0.0",
       "DocumentFormat.OpenXml >= 2.8.1",
       "ExternalIllustrator >= 1.0.0",
+      "FreeSpire.Presentation >= 4.1.0",
       "InsignisActionLogging >= 1.0.0",
       "InsignisFSCSConfig >= 1.0.0",
       "InsignisHelper >= 1.0.0",
@@ -9330,8 +9262,6 @@
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.1",
       "Microsoft.Extensions.Logging.Debug >= 3.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.0.0",
-      "Spire.PDF >= 6.1.8",
-      "Spire.Presentation >= 5.1.0",
       "System.Configuration.ConfigurationManager >= 4.7.0",
       "System.Data.SqlClient >= 4.8.0"
     ]
@@ -9409,6 +9339,10 @@
             "target": "Package",
             "version": "[2.8.1, )"
           },
+          "FreeSpire.Presentation": {
+            "target": "Package",
+            "version": "[4.1.0, )"
+          },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",
             "version": "[3.1.1, )"
@@ -9442,14 +9376,6 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[3.0.0, )"
-          },
-          "Spire.PDF": {
-            "target": "Package",
-            "version": "[6.1.8, )"
-          },
-          "Spire.Presentation": {
-            "target": "Package",
-            "version": "[5.1.0, )"
           },
           "System.Configuration.ConfigurationManager": {
             "target": "Package",
