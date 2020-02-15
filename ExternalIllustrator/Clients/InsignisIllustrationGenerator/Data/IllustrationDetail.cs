@@ -14,11 +14,15 @@ namespace InsignisIllustrationGenerator.Data
         public string PartnerEmail { get; set; }
         public string ClientName { get; set; }
         public int ClientType { get; set; }
+        public string AdviserName { get; set; }
+        public string IllustrationUniqueReference { get; set; }
+        public DateTime GenerateDate { get; set; }
+        public string Status { get; set; }
         public string Currency { get; set; }
 
         //Liquidity Requirements
         public double EasyAccess { get; set; }
-        public double OneMonth { get; set; } 
+        public double OneMonth { get; set; }
         public double ThreeMonths { get; set; }
         public double SixMonths { get; set; }
         public double NineMonths { get; set; }
@@ -26,5 +30,7 @@ namespace InsignisIllustrationGenerator.Data
         public double TwoYears { get; set; }
         public double ThreeYearsPlus { get; set; }
         public double TotalDeposit { get; set; }
+
+        public List<ProposedPortfolio> IllustrationProposedPortfolio { get; set; }
     }
 }
