@@ -53,9 +53,7 @@ namespace InsignisIllustrationGenerator.Controllers
             var session = new Session() { PartnerEmailAddress = "p.artner@partorg.com", PartnerName = "Peter Artner", PartnerOrganisation = "PartOrg Ltd.", PartnerTelephone = "01226 1234 567" };
 
             HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(session));
-
-
-            //if (Session["_partnerOrganisation"] != null && Session["_partnerOrganisation"].ToString().Length > 0 &&
+             //if (Session["_partnerOrganisation"] != null && Session["_partnerOrganisation"].ToString().Length > 0 &&
             //   Session["_partnerName"] != null && Session["_partnerName"].ToString().Length > 0 &&
             //   Session["_partnerEmailAddress"] != null && Session["_partnerEmailAddress"].ToString().Length > 0 &&
             //   Session["_partnerTelephone"] != null && Session["_partnerTelephone"].ToString().Length > 0)
@@ -94,13 +92,34 @@ namespace InsignisIllustrationGenerator.Controllers
             //Set Dumy Session
             SetSession();
             //Get Session Values;
-            var partnerInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            var partnerInfo  = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            IllustrationDetailViewModel illustrationInfo = null;
 
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
+            {
+                illustrationInfo = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
+            }
             IllustrationDetailViewModel model = new IllustrationDetailViewModel();
             model.PartnerEmail = partnerInfo.PartnerEmailAddress;
             model.PartnerName = partnerInfo.PartnerName;
             model.PartnerOrganisation = partnerInfo.PartnerOrganisation;
 
+
+            if (illustrationInfo != null)
+            {
+                model.ClientName = illustrationInfo.ClientName;
+                model.ClientType = illustrationInfo.ClientType;
+                model.Currency = illustrationInfo.Currency;
+                model.EasyAccess = illustrationInfo.EasyAccess;
+                model.OneMonth = illustrationInfo.OneMonth;
+                model.ThreeMonths = illustrationInfo.ThreeMonths;
+                model.SixMonths = illustrationInfo.SixMonths;
+                model.NineMonths = illustrationInfo.NineMonths;
+                model.OneYear = illustrationInfo.OneYear;
+                model.TwoYears = illustrationInfo.TwoYears;
+                model.ThreeYearsPlus = illustrationInfo.ThreeYearsPlus;
+                model.TotalDeposit = illustrationInfo.TotalDeposit;
+            }
             //render view
             return View(model);
         }
@@ -113,9 +132,11 @@ namespace InsignisIllustrationGenerator.Controllers
              Arguments:- IllustrationDetailViewModel 
              Returns:- View and Errors
              */
-            if (ModelState.IsValid) {
-                var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
 
+            if (ModelState.IsValid) {
+           
                 illustrationInfo.ClientName = model.ClientName;
                 illustrationInfo.ClientType = model.ClientType;
                 illustrationInfo.Currency = model.Currency;
@@ -157,10 +178,9 @@ namespace InsignisIllustrationGenerator.Controllers
                 SCurveOutput sStore = new SCurveOutput();
 
                 sStore = _mapper.Map(model.proposedPortfolio, sStore);
-                
 
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
-
+               
 
             }
             return View(model);

@@ -72,8 +72,10 @@
                     </div>
                     <div class="clear1"></div>
                     <div class="right">
-                        <button type="submit" class="btn btn-primary">Back</button>
-                        <input type="hidden" asp-for="@Model.proposedPortfolio" value="@Model.proposedPortfolio"/>
+                        @Html.ActionLink("Back", "Index", "Home",null, new { @class = "btn btn-primary" })
+                   
+                        @* <button type="button" class="btn btn-primary" action="/Home">Back</button>*@
+                        <input type="hidden" asp-for="@Model.proposedPortfolio" value="@Model.proposedPortfolio" />
                         <button type="submit" class="btn btn-primary">Generate Illustration</button>
 
                     </div>
