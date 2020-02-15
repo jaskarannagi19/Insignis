@@ -31,6 +31,6 @@ namespace InsignisIllustrationGenerator.Data
         public double ThreeYearsPlus { get; set; }
         public double TotalDeposit { get; set; }
 
-        public ICollection<ProposedPortfolio> IllustrationProposedPortfolio { get; set; }
+        public List<ProposedPortfolio> IllustrationProposedPortfolio { get; set; }
     }
 }

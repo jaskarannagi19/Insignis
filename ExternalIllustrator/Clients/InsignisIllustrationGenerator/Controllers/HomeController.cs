@@ -397,8 +397,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
             var generatedInvestments = JsonConvert.DeserializeObject<SCurveOutput>(HttpContext.Session.GetString("GeneratedPorposals")); //scurve output
 
-
-
             //Insignis.Asset.Management.Tools.Sales.SCurveOutput _sc= new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
 
 
@@ -490,14 +488,13 @@ namespace InsignisIllustrationGenerator.Controllers
             //return File(filedata, "application/pdf");
         }
 
-        private async Task<bool> SaveIllustraion(IllustrationDetailViewModel model)
+        private bool SaveIllustraion(IllustrationDetailViewModel model)
         {
-            return await _illustrationHelper.SaveIllustraionAsync(model);
+            return  _illustrationHelper.SaveIllustraionAsync(model);
         }
 
         public IActionResult Update(string includeBank, string bankId, string updatedAmount)
         {
-
 
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
             IllustrationDetailViewModel model = new IllustrationDetailViewModel();

@@ -42,6 +42,9 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AdviserName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ClientName")
                         .HasColumnType("nvarchar(max)");
 
@@ -53,6 +56,12 @@ namespace InsignisIllustrationGenerator.Data.Migrations
 
                     b.Property<double>("EasyAccess")
                         .HasColumnType("float");
+
+                    b.Property<DateTime>("GenerateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("IllustrationUniqueReference")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("NineMonths")
                         .HasColumnType("float");
@@ -74,6 +83,9 @@ namespace InsignisIllustrationGenerator.Data.Migrations
 
                     b.Property<double>("SixMonths")
                         .HasColumnType("float");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("ThreeMonths")
                         .HasColumnType("float");
@@ -186,6 +198,47 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                     b.HasIndex("BankID");
 
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.ProposedPortfolio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("AnnualInterest")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("DepositSize")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("IllustrationDetailId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IllustrationID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InstitutionID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InstitutionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InstitutionShortName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InvestmentTerm")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IllustrationDetailId");
+
+                    b.ToTable("ProposedPortfolio");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -386,9 +439,16 @@ namespace InsignisIllustrationGenerator.Data.Migrations
 
             modelBuilder.Entity("InsignisIllustrationGenerator.Data.Product", b =>
                 {
-                    b.HasOne("InsignisIllustrationGenerator.Data.Bank", null)
+                    b.HasOne("InsignisIllustrationGenerator.Data.Bank", "Bank")
                         .WithMany("Products")
                         .HasForeignKey("BankID");
+                });
+
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.ProposedPortfolio", b =>
+                {
+                    b.HasOne("InsignisIllustrationGenerator.Data.IllustrationDetail", "IllustrationDetail")
+                        .WithMany("IllustrationProposedPortfolio")
+                        .HasForeignKey("IllustrationDetailId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

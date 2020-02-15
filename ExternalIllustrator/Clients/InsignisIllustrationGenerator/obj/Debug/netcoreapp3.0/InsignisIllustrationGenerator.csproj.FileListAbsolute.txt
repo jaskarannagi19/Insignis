@@ -211,3 +211,8 @@ D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\InsignisIllustratorInterface.dll
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\InsignisIllustratorInterface.pdb
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.MvcApplicationPartsAssemblyInfo.cs
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.MvcApplicationPartsAssemblyInfo.cache
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_SearchParameter.cshtml.g.cs
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\Razor\Views\SuperUser\IllustrationList.cshtml.g.cs
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\Razor\Views\SuperUser\_IllustrationList.cshtml.g.cs

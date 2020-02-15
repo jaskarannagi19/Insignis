@@ -14,6 +14,7 @@ namespace InsignisIllustrationGenerator.Controllers
     public class SuperUserController : Controller
     {
 
+        private readonly 
         public SuperUserController(ILogger<HomeController> logger, AutoMapper.IMapper mapper, IOptions<AppSettings> settings, ApplicationDbContext context)
         {
 
@@ -22,9 +23,10 @@ namespace InsignisIllustrationGenerator.Controllers
         public IActionResult IllustrationList()
         {
 
-         
+            GetIllustrationList
             return View();
         }
+        [HttpPost]
         public IActionResult IllustrationList(SearchParameterViewModel searchParameter)
         {
 

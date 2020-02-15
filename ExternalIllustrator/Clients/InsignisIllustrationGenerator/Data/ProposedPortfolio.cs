@@ -16,7 +16,7 @@ namespace InsignisIllustrationGenerator.Data
         public string InstitutionShortName { get; set; }
         public decimal DepositSize { get; set; }
         public decimal Rate { get; set; }
-     
+
         public string InvestmentTerm { get; set; }
         public decimal AnnualInterest { get; set; }
         public IllustrationDetail IllustrationDetail { get; set; }

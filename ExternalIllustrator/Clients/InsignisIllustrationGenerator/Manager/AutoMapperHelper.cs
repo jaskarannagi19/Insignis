@@ -14,15 +14,20 @@ namespace InsignisIllustrationGenerator.Manager
         public AutoMapperHelper()
         {
 
-         //CreateMap<Insignis.Asset.Management.Tools.Sales.SCurveOutput, ProposedPortfolio>().ForMember(f=>f.InvestmentTerm,opt=>opt.MapFrom(src=>src.ProposedInvestments.)
-            CreateMap<IllustrationDetailViewModel, IllustrationDetail>().ForMember(f=>f.IllustrationProposedPortfolio, opt => opt.MapFrom(src => src.ProposedPortfolio));
+            CreateMap<Insignis.Asset.Management.Tools.Sales.SCurveOutput, SCurveOutput>();
+            
+            
+            
+            
+            CreateMap<IllustrationDetailViewModel, IllustrationDetail>().ForMember(f=>f.IllustrationProposedPortfolio, t=>t.Ignore());
+
             CreateMap<Insignis.Asset.Management.Illustrator.Interface.Bank, Bank>();
             CreateMap<Insignis.Asset.Management.Illustrator.Interface.Product, Product>();
             CreateMap<Product,Insignis.Asset.Management.Illustrator.Interface.Product>();
 
 
           //  CreateMap<Insignis.Asset.Management.Tools.Sales.SCurveOutput, SCurveOutput>();
-          //  CreateMap<InsignisIllustrationGenerator.Models.SCurveOutput,Insignis.Asset.Management.Tools.Sales.SCurveOutput>();
+            CreateMap<InsignisIllustrationGenerator.Models.SCurveOutput,Insignis.Asset.Management.Tools.Sales.SCurveOutput>();
             
 
 

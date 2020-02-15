@@ -43,6 +43,7 @@
           "Microsoft.EntityFrameworkCore.Tools": "3.1.1",
           "Microsoft.Extensions.Logging.Debug": "3.0.0",
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "3.0.0",
+          "Spire.PDF": "6.1.8",
           "Spire.Presentation": "5.1.0",
           "System.Configuration.ConfigurationManager": "4.7.0",
           "System.Data.SqlClient": "4.8.0",
@@ -1393,7 +1394,7 @@
           }
         }
       },
-      "Spire.Presentation/5.1.0": {
+      "Spire.PDF/6.1.8": {
         "dependencies": {
           "System.Drawing.Common": "4.7.0",
           "System.Text.Encoding.CodePages": "4.7.0"
@@ -1404,9 +1405,21 @@
             "fileVersion": "1.3.8.320"
           },
           "lib/netcoreapp3.0/Spire.Pdf.dll": {
-            "assemblyVersion": "6.1.4.2330",
-            "fileVersion": "6.1.4.2330"
-          },
+            "assemblyVersion": "6.1.8.2330",
+            "fileVersion": "6.1.8.2330"
+          }
+        },
+        "compile": {
+          "lib/netcoreapp3.0/Spire.License.dll": {},
+          "lib/netcoreapp3.0/Spire.Pdf.dll": {}
+        }
+      },
+      "Spire.Presentation/5.1.0": {
+        "dependencies": {
+          "System.Drawing.Common": "4.7.0",
+          "System.Text.Encoding.CodePages": "4.7.0"
+        },
+        "runtime": {
           "lib/netcoreapp3.0/Spire.Presentation.dll": {
             "assemblyVersion": "5.1.3.9330",
             "fileVersion": "5.1.3.9330"
@@ -1414,7 +1427,6 @@
         },
         "compile": {
           "lib/netcoreapp3.0/Spire.License.dll": {},
-          "lib/netcoreapp3.0/Spire.Pdf.dll": {},
           "lib/netcoreapp3.0/Spire.Presentation.dll": {}
         }
       },
@@ -4831,6 +4843,13 @@
       "sha512": "sha512-YhEdSQUsTx+C8m8Bw7ar5/VesXvCFMItyZF7G1AUY+OM0VPZUOeAVpJ4Wl6fydBGUYZxojTDR3I6Bj/+BPkJNA==",
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
+    },
+    "Spire.PDF/6.1.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-y3GKM6VID37HbUPqdjToob2wX3e0NuxkKkmU0oy6Cl+L0bB6pUYa0lth9tukIdc6eSulVWzfxwpQhML7ErA1nQ==",
+      "path": "spire.pdf/6.1.8",
+      "hashPath": "spire.pdf.6.1.8.nupkg.sha512"
     },
     "Spire.Presentation/5.1.0": {
       "type": "package",
