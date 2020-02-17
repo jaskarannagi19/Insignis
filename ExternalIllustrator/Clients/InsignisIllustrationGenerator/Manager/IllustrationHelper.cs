@@ -54,7 +54,7 @@ namespace InsignisIllustrationGenerator.Manager
 
         internal async Task< IEnumerable<IllustrationListViewModel>> GetIllustrationListAsync(SearchParameterViewModel searchParameter)
         {
-            var IllustrationDetails = await _context.IllustrationDetails.ToListAsync();
+            var IllustrationDetails = await _context.IllustrationDetails.Include(x=>x.IllustrationProposedPortfolio).ToListAsync();
 
             if (searchParameter != null) {
                 IllustrationDetails = IllustrationDetails.Where(f =>
@@ -68,9 +68,10 @@ namespace InsignisIllustrationGenerator.Manager
                 & ((searchParameter.IllustrationFrom.HasValue | f.GenerateDate > searchParameter.IllustrationFrom)
                 & (searchParameter.IllustrationTo.HasValue | f.GenerateDate < searchParameter.IllustrationTo))).ToList();
             }
-            var illustrationDetail = _mapper.Map<List<IllustrationListViewModel>>(IllustrationDetails);
+            List<IllustrationListViewModel> response = new List<IllustrationListViewModel>();
+            response = _mapper.Map(IllustrationDetails, response);
 
-            return illustrationDetail;
+            return response;
         }
     }
 }

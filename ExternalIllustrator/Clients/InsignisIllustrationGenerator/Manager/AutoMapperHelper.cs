@@ -15,6 +15,7 @@ namespace InsignisIllustrationGenerator.Manager
         {
 
             CreateMap<Insignis.Asset.Management.Tools.Sales.SCurveOutput, SCurveOutput>();
+            //to database entity
             CreateMap<IllustrationDetailViewModel, IllustrationDetail>().ForMember(f=>f.IllustrationProposedPortfolio, t=>t.Ignore());
 
             CreateMap<Insignis.Asset.Management.Illustrator.Interface.Bank, Bank>();
@@ -24,9 +25,9 @@ namespace InsignisIllustrationGenerator.Manager
 
           //  CreateMap<Insignis.Asset.Management.Tools.Sales.SCurveOutput, SCurveOutput>();
             CreateMap<InsignisIllustrationGenerator.Models.SCurveOutput,Insignis.Asset.Management.Tools.Sales.SCurveOutput>();
-            
 
-
+            //Map to view model
+            CreateMap<IllustrationDetail, IllustrationListViewModel>();
         }
     }
 
