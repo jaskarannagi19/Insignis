@@ -1,6 +1,7 @@
 ﻿using InsignisIllustrationGenerator.Data;
 using InsignisIllustrationGenerator.Helper;
 using InsignisIllustrationGenerator.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -49,6 +50,27 @@ namespace InsignisIllustrationGenerator.Manager
             _context.SaveChanges();
             var IsSave = false;
             return  IsSave;
+        }
+
+        internal async Task< IEnumerable<IllustrationListViewModel>> GetIllustrationListAsync(SearchParameterViewModel searchParameter)
+        {
+            var IllustrationDetails = await _context.IllustrationDetails.ToListAsync();
+
+            if (searchParameter != null) {
+                IllustrationDetails = IllustrationDetails.Where(f =>
+                //Advisor Search
+                (string.IsNullOrEmpty(searchParameter.AdviserName) | f.AdviserName.Contains(searchParameter.AdviserName))
+                //Client Search
+                & (string.IsNullOrEmpty(searchParameter.ClientName) | f.ClientName.Contains(searchParameter.ClientName))
+                //Company Search
+                & (string.IsNullOrEmpty(searchParameter.CompanyName) | f.ClientName.Contains(searchParameter.CompanyName))
+                //Company Search
+                & ((searchParameter.IllustrationFrom.HasValue | f.GenerateDate > searchParameter.IllustrationFrom)
+                & (searchParameter.IllustrationTo.HasValue | f.GenerateDate < searchParameter.IllustrationTo))).ToList();
+            }
+            var illustrationDetail = _mapper.Map<List<IllustrationListViewModel>>(IllustrationDetails);
+
+            return illustrationDetail;
         }
     }
 }

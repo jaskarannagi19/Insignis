@@ -56,7 +56,7 @@ namespace InsignisIllustrationGenerator.Controllers
             var session = new Session() { PartnerEmailAddress = "p.artner@partorg.com", PartnerName = "Peter Artner", PartnerOrganisation = "PartOrg Ltd.", PartnerTelephone = "01226 1234 567" };
 
             HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(session));
-             //if (Session["_partnerOrganisation"] != null && Session["_partnerOrganisation"].ToString().Length > 0 &&
+            //if (Session["_partnerOrganisation"] != null && Session["_partnerOrganisation"].ToString().Length > 0 &&
             //   Session["_partnerName"] != null && Session["_partnerName"].ToString().Length > 0 &&
             //   Session["_partnerEmailAddress"] != null && Session["_partnerEmailAddress"].ToString().Length > 0 &&
             //   Session["_partnerTelephone"] != null && Session["_partnerTelephone"].ToString().Length > 0)
@@ -82,7 +82,7 @@ namespace InsignisIllustrationGenerator.Controllers
             financialAbstraction = new FinancialAbstraction(AppSettings.InsignisAM, Octavo.Gate.Nabu.Entities.DatabaseType.MSSQL, ConfigurationManager.AppSettings.Get("errorLog"));
             _context = context;
             _bankHelper = new BankHelper(mapper, _context);
-             _illustrationHelper = new IllustrationHelper(mapper, _context);
+            _illustrationHelper = new IllustrationHelper(mapper, _context);
 
         }
 
@@ -96,7 +96,7 @@ namespace InsignisIllustrationGenerator.Controllers
             //Set Dumy Session
             SetSession();
             //Get Session Values;
-            var partnerInfo  = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            var partnerInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
             IllustrationDetailViewModel illustrationInfo = null;
 
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
@@ -128,6 +128,21 @@ namespace InsignisIllustrationGenerator.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> PreviousIllustration()
+        {
+
+
+            IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
+
+            return View(illustrationList.ToList());
+
+        }
+
+        private async Task<IEnumerable<IllustrationListViewModel>> GetIllustrationListAsync(SearchParameterViewModel searchParameter = null)
+        {
+
+            return await _illustrationHelper.GetIllustrationListAsync(searchParameter);
+        }
 
         public IActionResult Calculate(IllustrationDetailViewModel model)
         {
@@ -139,8 +154,9 @@ namespace InsignisIllustrationGenerator.Controllers
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
             HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
 
-            if (ModelState.IsValid) {
-           
+            if (ModelState.IsValid)
+            {
+
                 illustrationInfo.ClientName = model.ClientName;
                 illustrationInfo.ClientType = model.ClientType;
                 illustrationInfo.Currency = model.Currency;
@@ -188,7 +204,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
-               
+
 
             }
             return View(model);
@@ -456,15 +472,15 @@ namespace InsignisIllustrationGenerator.Controllers
             string rate = " ";
             string deposit = " ";
             string interest = " ";
-           // for (int i = 0; i < 30; i++) 
+            // for (int i = 0; i < 30; i++) 
             for (int i = 0; i < model.ProposedPortfolio.ProposedInvestments.Count; i++)
 
             {
-                 institutionName = " ";
-                 termDescription = " ";
-                 rate = " ";
-                 deposit = " ";
-                 interest = " ";
+                institutionName = " ";
+                termDescription = " ";
+                rate = " ";
+                deposit = " ";
+                interest = " ";
 
                 try
                 {
@@ -511,7 +527,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
         private bool SaveIllustraion(IllustrationDetailViewModel model)
         {
-            return  _illustrationHelper.SaveIllustraionAsync(model);
+            return _illustrationHelper.SaveIllustraionAsync(model);
         }
 
         public IActionResult Update(string includeBank, string bankId, string updatedAmount)
