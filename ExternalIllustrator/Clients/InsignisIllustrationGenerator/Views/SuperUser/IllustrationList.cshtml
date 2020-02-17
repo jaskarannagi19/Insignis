@@ -1,4 +1,4 @@
-﻿@model List<IllustrationDetailViewModel>
+﻿@model List<IllustrationListViewModel>
 @{
     ViewData["Title"] = "IllustrationList";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -72,102 +72,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="d-flex">
-                                <td class="col-2">Ruby</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Kally</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2"><span class="disabled-gray">Herry</span></td>
-                                <td class="col-2"><span class="disabled-gray">Jone Jone</span></td>
-                                <td class="col-2"><span class="disabled-gray">XZY-ABC</span></td>
-                                <td class="col-3"><span class="disabled-gray">ICS-20191230-203445</span></td>
-                                <td class="col-2"><span class="disabled-gray">25/10/2019</span></td>
-                                <td class="col-1"><span class="disabled-gray">Deleted</span></td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Anny</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Joo</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Accepted</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Ruby</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Ruby</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Ruby</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Ruby</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Ruby</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Ruby</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-2">Ruby</td>
-                                <td class="col-2">Giles Hutson</td>
-                                <td class="col-2">XZY-ABC</td>
-                                <td class="col-3">ICS-20191230-203445</td>
-                                <td class="col-2">25/10/2019</td>
-                                <td class="col-1">Created</td>
-                            </tr>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="d-flex">
+                                    <td class="col-2">@item.AdviserName</td>
+                                    <td class="col-2">@item.ClientName</td>
+                                    <td class="col-2">@item.CompanyName</td>
+                                    <td class="col-3">@item.IllustrationUniqueReference</td>
+                                    <td class="col-2">@item.GenerateDate</td>
+                                    <td class="col-1">@item.Status</td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                 </div>

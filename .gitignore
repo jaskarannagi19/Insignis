@@ -6,4 +6,12 @@
 /ExternalIllustrator/ExternalIllustrator/.vs/ExternalIllustrator
 /ExternalIllustrator/ExternalIllustrator/.vs
 /ExternalIllustrator/ExternalIllustrator/ExternalIllustrator/Output
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ExternalIllustrator/Clients/InsignisIllustrationGenerator/bin/Debug/netcoreapp3.0
+/ExternalIllustrator/ExternalIllustrator/.vs/ExternalIllustrator
+/ExternalIllustrator/ExternalIllustrator/.vs
+/ExternalIllustrator/ExternalIllustrator/ExternalIllustrator/Output
 /ExternalIllustrator/Clients/InsignisIllustrationGenerator/obj

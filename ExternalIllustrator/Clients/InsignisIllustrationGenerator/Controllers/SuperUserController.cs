@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using InsignisIllustrationGenerator.Data;
 using InsignisIllustrationGenerator.Helper;
+using InsignisIllustrationGenerator.Manager;
 using InsignisIllustrationGenerator.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -14,29 +15,30 @@ namespace InsignisIllustrationGenerator.Controllers
     public class SuperUserController : Controller
     {
 
-        //private readonly 
+        private readonly IllustrationHelper _illustrationHelper;
         public SuperUserController(ILogger<HomeController> logger, AutoMapper.IMapper mapper, IOptions<AppSettings> settings, ApplicationDbContext context)
         {
-
+            _illustrationHelper = new IllustrationHelper(mapper, context);
         }
 
-        public IActionResult IllustrationList()
+        public async Task<IActionResult> IllustrationListAsync()
         {
-
             //GetIllustrationList
-            return View();
-        }
-        [HttpPost]
-        public IActionResult IllustrationList(SearchParameterViewModel searchParameter)
-        {
-
-            var IllustrationsList = GetIllustrationsList(searchParameter);
-                    return View();
+            IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
+            return View(illustrationList.ToList());
         }
 
-        private List<IllustrationListViewModel> GetIllustrationsList(SearchParameterViewModel searchParameter)
+        private async Task<IEnumerable<IllustrationListViewModel>> GetIllustrationListAsync(SearchParameterViewModel searchParameter = null)
         {
-            return new List<IllustrationListViewModel>();
+
+            return await _illustrationHelper.GetIllustrationListAsync(searchParameter);
         }
+
+        private async Task<IEnumerable<IllustrationListViewModel>> GetIllustrationsListAsync(SearchParameterViewModel searchParameter = null)
+        {
+
+            return await _illustrationHelper.GetIllustrationListAsync(searchParameter);
+        }
+
     }
 }
