@@ -14,13 +14,13 @@
                     <div class="col-lg-4 col-sm-12"><p>Email:<br><span>@Model.PartnerEmail</span></p></div>
                     <hr class="blue-line">
                     <div class="col-lg-4 col-sm-6"><p>Client Name / Reference:<br><span>@Model.ClientName</span></p></div>
-                    <div class="col-lg-4 col-sm-6"><p>Client Type:<br><span>@(Model.ClientType==1)?Individual:Joint</span></p></div>
+                    <div class="col-lg-4 col-sm-6"><p>Client Type:<br><span>@(Model.ClientType == 1)?Individual:Joint</span></p></div>
                 </div>
             </div>
             <h4 class="heading-1">Summary</h4>
             <div class="summary-gray-backgrund">
                 <div class="row">
-                    <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit)</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit.Value)</span></p></div>
                     <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.AnnualGrossInterestEarned)</span></p></div>
                     <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.AnnualNetInterestEarned)</span></p></div>
                     <hr class="gray-line">
@@ -44,27 +44,27 @@
                         </thead>
                         <tbody>
                             @for (int i = 0; i < @Model.ProposedPortfolio.ProposedInvestments.Count(); i++)
-                                {
+                            {
 
-                            <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
-                                <a href="#">
-                                    <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
-                                    <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
-                                    <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate</td>
-                                    <td class="col-3 right instituteDeposit">
-                                        @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize
-                                        <input type="hidden" class="instituteID" value="@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID" />
-                                    </td>
-                                </a>
-                            </tr>
-                                }
+                                <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
+                                    <a href="#">
+                                        <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
+                                        <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
+                                        <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate</td>
+                                        <td class="col-3 right instituteDeposit">
+                                            @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize
+                                            <input type="hidden" class="instituteID" value="@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID" />
+                                        </td>
+                                    </a>
+                                </tr>
+                            }
 
 
                             <tr class="d-flex">
                                 <td class="col-4">&nbsp;</td>
                                 <td class="col-3">&nbsp;</td>
                                 <td class="col-2 right">&nbsp;</td>
-                                <td class="col-3 right table-total">@TextFormatter.FormatTwoDecimal(System.Decimal.Parse(Model.TotalDeposit.Value))</td>
+                                <td class="col-3 right table-total">@TextFormatter.FormatTwoDecimal(Model.TotalDeposit.Value))</td>
                             </tr>
 
                         </tbody>
@@ -73,7 +73,7 @@
                 </div>
                 <div class="clear1"></div>
                 <div class="right">
-                    @Html.ActionLink("Back", "Index", "Home",null, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-primary" })
 
                     @* <button type="button" class="btn btn-primary" action="/Home">Back</button>*@
                     <input type="hidden" asp-for="@Model.ProposedPortfolio" value="@Model.ProposedPortfolio" />
