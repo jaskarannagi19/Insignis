@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Home Page";
 }
-
+@using InsignisIllustrationGenerator.Helper
 
     <div class="middle-section">
         <div class="container">
@@ -20,6 +20,7 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Partner Name</label>
+                                     
                                         <input type="text" class="form-control" id="" asp-for="@Model.PartnerName" value="@Model.PartnerName" placeholder="Partner Name" readonly="readonly">
                                     </div>
                                     <div class="form-group col-md-6">

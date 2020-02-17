@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InsignisIllustrationGenerator.Manager;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,7 +13,11 @@ namespace InsignisIllustrationGenerator.Models
         public string PartnerName { get; set; }
         public string PartnerOrganisation { get; set; }
         public string PartnerEmail { get; set; }
-        
+
+
+        public string IllustrationUniqueReference { get; set; }
+
+
         [Required(ErrorMessage ="Client Name is required")]
         [Display(Name ="Client Name")]
         [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,50}", ErrorMessage = "Invalid Client Name")]
@@ -47,6 +52,6 @@ namespace InsignisIllustrationGenerator.Models
         public double? TotalDeposit { get; set; }
 
         public Insignis.Asset.Management.Tools.Sales.SCurveOutput ProposedPortfolio { get; set; }
-        
+        public string AdviserName { get; internal set; }
     }
 }

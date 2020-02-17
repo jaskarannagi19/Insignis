@@ -27,5 +27,6 @@ namespace InsignisIllustrationGenerator.Manager
         public double? ThreeYears { get; set; }
         public double? TotalDeposit { get; set; }
         public Insignis.Asset.Management.Tools.Sales.SCurveOutput ProposedPortfolio{get;set;}
+        public string AdvisorName { get; internal set; }
     }
 }
