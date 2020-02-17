@@ -8,9 +8,9 @@ namespace InsignisIllustrationGenerator.Helper
     public class TextFormatter
     {
 
-        public static string FormatTwoDecimal(decimal amount )
+        public static string FormatTwoDecimal(dynamic amount)
         {
-            
+
             return string.Format("{0,0:0.00}", amount);
 
 
