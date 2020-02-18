@@ -129,16 +129,28 @@ namespace InsignisIllustrationGenerator.Controllers
             //render view
             return View(model);
         }
+        [HttpPost]
+        public async Task<IActionResult> PreviousIllustration(SearchParameterViewModel searchParameter)
+        {
+
+
+            IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync(searchParameter);
+
+            return PartialView("_IllustrationList",   illustrationList.ToList());
+
+        }
 
         public async Task<IActionResult> PreviousIllustration()
         {
 
 
-            IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
-
+            // IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
+            IEnumerable<IllustrationListViewModel> illustrationList = GetIllustrationListAsync().Result;
             return View(illustrationList.ToList());
 
+
         }
+
 
         private async Task<IEnumerable<IllustrationListViewModel>> GetIllustrationListAsync(SearchParameterViewModel searchParameter = null)
         {
@@ -211,11 +223,12 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
+                HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
 
-
+                return View(model);
             }
-            HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
-            return View(model);
+         
+            return View();
         }
 
 

@@ -10,7 +10,9 @@ namespace InsignisIllustrationGenerator.Models
     public class IllustrationDetailViewModel
     {
         public int Id { get; set; }
+        
         public string PartnerName { get; set; }
+
         public string PartnerOrganisation { get; set; }
         public string PartnerEmail { get; set; }
 
@@ -18,7 +20,7 @@ namespace InsignisIllustrationGenerator.Models
         public string IllustrationUniqueReference { get; set; }
 
 
-        [Required(ErrorMessage ="Client Name is required")]
+        [Required(ErrorMessage = "Please enter client name.")]
         [Display(Name ="Client Name")]
         [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,50}", ErrorMessage = "Invalid Client Name")]
         public string ClientName { get; set; }
@@ -48,8 +50,11 @@ namespace InsignisIllustrationGenerator.Models
         public double? TwoYears { get; set; }
         [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Three Years Plus")]
         public double? ThreeYearsPlus { get; set; }
+        
         [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Total Deposits")]
-        public double? TotalDeposit { get; set; }
+        [Range(1,double.MaxValue,ErrorMessage = "Please Enter at Least One Liquidity Amount")]
+     
+        public double TotalDeposit { get; set; }
 
         public Insignis.Asset.Management.Tools.Sales.SCurveOutput ProposedPortfolio { get; set; }
         public string AdviserName { get; internal set; }

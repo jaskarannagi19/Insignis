@@ -20,7 +20,7 @@
             <h4 class="heading-1">Summary</h4>
             <div class="summary-gray-backgrund">
                 <div class="row">
-                    <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit.Value)</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit)</span></p></div>
                     <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.AnnualGrossInterestEarned)</span></p></div>
                     <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.AnnualNetInterestEarned)</span></p></div>
                     <hr class="gray-line">
@@ -64,7 +64,7 @@
                                 <td class="col-4">&nbsp;</td>
                                 <td class="col-3">&nbsp;</td>
                                 <td class="col-2 right">&nbsp;</td>
-                                <td class="col-3 right table-total">@TextFormatter.FormatTwoDecimal(Model.TotalDeposit.Value))</td>
+                                <td class="col-3 right table-total">@TextFormatter.FormatTwoDecimal(Model.TotalDeposit))</td>
                             </tr>
 
                         </tbody>
