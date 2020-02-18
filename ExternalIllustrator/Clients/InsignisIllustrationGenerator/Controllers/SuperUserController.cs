@@ -39,6 +39,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
             return await _illustrationHelper.GetIllustrationListAsync(searchParameter);
         }
+        
 
     }
 }
