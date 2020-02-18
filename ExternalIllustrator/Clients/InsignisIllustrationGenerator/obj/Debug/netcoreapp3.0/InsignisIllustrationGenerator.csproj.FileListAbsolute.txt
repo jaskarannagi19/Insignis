@@ -216,3 +216,5 @@ D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.MvcApplicationPartsAssemblyInfo.cs
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.MvcApplicationPartsAssemblyInfo.cache
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_IllustrationList.cshtml.g.cs
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\Razor\Views\Home\PreviousIllustration.cshtml.g.cs
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_illustrationDetails.cshtml.g.cs

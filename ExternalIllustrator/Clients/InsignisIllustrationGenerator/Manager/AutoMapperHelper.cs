@@ -28,6 +28,10 @@ namespace InsignisIllustrationGenerator.Manager
 
             //Map to view model
             CreateMap<IllustrationDetail, IllustrationListViewModel>();
+            CreateMap<IllustrationDetail, IllustrationDetailViewModel>();
+
+
+
         }
     }
 

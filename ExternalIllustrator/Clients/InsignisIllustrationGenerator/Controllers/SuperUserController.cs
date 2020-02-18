@@ -34,12 +34,22 @@ namespace InsignisIllustrationGenerator.Controllers
             return await _illustrationHelper.GetIllustrationListAsync(searchParameter);
         }
 
-        private async Task<IEnumerable<IllustrationListViewModel>> GetIllustrationsListAsync(SearchParameterViewModel searchParameter = null)
+        //Get Single Illustration Details
+        public IActionResult GetIllustration(string uniqueReferenceId)
         {
+            /*
+             Get summary details of Illustration from unique reference ID 
+             
+            Arguments:- 
+                unique illustration id eg:-
+             
+            Return:-
+                View with Illustration Details
+             */
+            var result = _illustrationHelper.GetIllustrationByByUniqueReferenceAsync(uniqueReferenceId);
 
-            return await _illustrationHelper.GetIllustrationListAsync(searchParameter);
+            return View("_illustrationDetails", result);
+
         }
-        
-
     }
 }

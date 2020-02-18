@@ -1,34 +1,34 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj": {}
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj": {}
   },
   "projects": {
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj",
         "projectName": "InsignisActionLogging",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj"
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj"
       },
       "frameworks": {
         "net461": {}
       }
     },
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj",
         "projectName": "InsignisPowerPointGenerator",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj",
         "frameworks": {
           "net461": {
             "projectReferences": {
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
               }
             }
           }
@@ -38,42 +38,39 @@
         "net461": {}
       }
     },
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj",
         "projectName": "InsignisFSCSConfig",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
       },
       "frameworks": {
         "net461": {}
       }
     },
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj",
         "projectName": "InsignisHelper",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
       },
       "frameworks": {
         "net461": {}
       }
     },
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj",
         "projectName": "InsignisIllustrationGenerator",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj",
-        "packagesPath": "C:\\Users\\Elite-Yogesh\\.nuget\\packages\\",
-        "outputPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\obj\\",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj",
+        "packagesPath": "C:\\Users\\singh\\.nuget\\packages\\",
+        "outputPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Elite-Yogesh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\singh\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -86,32 +83,32 @@
         "frameworks": {
           "netcoreapp3.0": {
             "projectReferences": {
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj"
+              "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj"
+              "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj"
               }
             }
           }
@@ -198,32 +195,32 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj",
         "projectName": "InsignisIllustratorInterface",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj"
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj"
       },
       "frameworks": {
         "net461": {}
       }
     },
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj",
         "projectName": "InsignisReports",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj",
         "frameworks": {
           "net461": {
             "projectReferences": {
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
               }
             }
           }
@@ -233,23 +230,23 @@
         "net461": {}
       }
     },
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj",
         "projectName": "InsignisTools",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj",
         "frameworks": {
           "net461": {
             "projectReferences": {
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj"
+              "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj"
               }
             }
           }
@@ -259,29 +256,29 @@
         "net461": {}
       }
     },
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj",
         "projectName": "ExternalIllustrator",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj",
         "frameworks": {
           "net461": {
             "projectReferences": {
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
               },
-              "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj": {
-                "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj"
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj"
               }
             }
           }
@@ -291,12 +288,12 @@
         "net461": {}
       }
     },
-    "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj": {
+    "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj",
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj",
         "projectName": "InsignisLoaderConfig",
-        "projectPath": "D:\\Project\\Insignis\\jaskarn\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj"
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj"
       },
       "frameworks": {
         "net461": {}

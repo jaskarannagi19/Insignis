@@ -142,13 +142,9 @@ namespace InsignisIllustrationGenerator.Controllers
 
         public async Task<IActionResult> PreviousIllustration()
         {
-
-
             // IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
             IEnumerable<IllustrationListViewModel> illustrationList = GetIllustrationListAsync().Result;
             return View(illustrationList.ToList());
-
-
         }
 
 
@@ -166,7 +162,6 @@ namespace InsignisIllustrationGenerator.Controllers
              Returns:- View and Errors
              */
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
-
 
             if (ModelState.IsValid)
             {

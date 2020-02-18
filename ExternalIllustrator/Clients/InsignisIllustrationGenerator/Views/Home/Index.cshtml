@@ -19,7 +19,7 @@
                         <p class="heading-1">Create a Portfolio</p>
                         <div asp-validation-summary="All" class="text-danger"></div>
                        @* <form method="post" action="@Url.Action("Calculate","Home")">*@
-                            @using (Html.BeginForm())
+                            @using (Html.BeginForm("Calculate","Home"))
                             {
                                 <div class="form-row">
                                     <div class="form-group col-md-6">

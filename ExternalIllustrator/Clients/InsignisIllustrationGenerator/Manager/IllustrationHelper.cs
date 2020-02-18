@@ -1,4 +1,5 @@
-﻿using InsignisIllustrationGenerator.Data;
+﻿
+using InsignisIllustrationGenerator.Data;
 using InsignisIllustrationGenerator.Helper;
 using InsignisIllustrationGenerator.Models;
 using Microsoft.EntityFrameworkCore;
@@ -72,6 +73,40 @@ namespace InsignisIllustrationGenerator.Manager
             response = _mapper.Map(IllustrationDetails, response);
 
             return response;
+        }
+
+        internal  IllustrationDetailViewModel GetIllustrationByByUniqueReferenceAsync(string uniqueReferenceID)
+        {
+            /*
+             Get illustration from unique reference id from db
+            Arguments:-
+                Unique Reference ID
+            Return:-
+                Illustration DetailViewModel
+             */
+            IllustrationDetail dbIllustration = _context.IllustrationDetails.Include(x=>x.IllustrationProposedPortfolio).SingleOrDefault(x => x.IllustrationUniqueReference == uniqueReferenceID);
+            //map db entity to view model ProposedPortfolio. Investment count is 0 after Mapping
+            IllustrationDetailViewModel result = _mapper.Map<IllustrationDetailViewModel>(dbIllustration);
+            result.ProposedPortfolio = new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
+            //result.ProposedPortfolio.ProposedInvestments = new List<Insignis.Asset.Management.Tools.Sales.SCurveOutputRow>();
+
+            Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
+
+            Insignis.Asset.Management.Clients.Helper.InvestmentTerm term= new Insignis.Asset.Management.Clients.Helper.InvestmentTerm();
+            foreach (var item in dbIllustration.IllustrationProposedPortfolio)
+            {
+                row.AnnualInterest = item.AnnualInterest;
+                row.DepositSize = item.DepositSize;
+                row.InstitutionName = item.InstitutionName;
+                row.Rate = item.Rate;
+                row.InvestmentTerm = term;
+                row.InvestmentTerm.TermText = item.InvestmentTerm;
+                row.InstitutionShortName = item.InstitutionShortName;
+                result.ProposedPortfolio.ProposedInvestments.Add(row);
+            }
+
+            return result;
+
         }
     }
 }

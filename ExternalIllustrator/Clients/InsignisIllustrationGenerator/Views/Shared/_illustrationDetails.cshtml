@@ -5,23 +5,23 @@
         <div class="container">
             <div class="blue-background">
                 <div class="row">
-                    <div class="col-lg-4 col-sm-6"><p>Name:<br><span>@Model.ClientName</span></p></div>
+                    <div class="col-lg-4 col-sm-6"><p>Name:<br><span>@Model.PartnerName</span></p></div>
                     <div class="col-lg-4 col-sm-6"><p>Organisation:<br><span>@Model.PartnerOrganisation</span></p></div>
                     <div class="col-lg-4 col-sm-12"><p>Email:<br><span>@Model.PartnerEmail</span></p></div>
                     <hr class="blue-line">
                     <div class="col-lg-4 col-sm-6"><p>Name / Reference:<br><span>@Model.ClientName</span></p></div>
-                    <div class="col-lg-4 col-sm-6"><p>Client Type:<br><span>Individual</span></p></div>
+                    <div class="col-lg-4 col-sm-6"><p>Client Type:<br><span>@Model.ClientType</span></p></div>
                 </div>
             </div>
             <h4 class="heading-1">Summary</h4>
             <div class="summary-gray-backgrund">
                 <div class="row">
                     <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>16,285.50</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>14,395.50</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.ProposedPortfolio.AnnualGrossInterestEarned</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.ProposedPortfolio.AnnualNetInterestEarned</span></p></div>
                     <hr class="gray-line">
-                    <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>1.723%</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>1.523%</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.ProposedPortfolio.GrossAverageYield</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.ProposedPortfolio.NetAverageYield</span></p></div>
                 </div>
             </div>
         </div>
@@ -41,76 +41,16 @@
                         <tbody>
                             @for (int i = 0; i < @Model.ProposedPortfolio.ProposedInvestments.Count(); i++)
                             {
-
                                 <tr class="d-flex">
                                     <a href="#">
-                                        <td class="col-4">Model.ProposedPortfolio.ProposedInvestmentsAldermore Bank</td>
-                                        <td class="col-3">5 Year Bond (Term)</td>
-                                        <td class="col-2 right">2.05%</td>
-                                        <td class="col-3 right">85,000.00</td>
+                                        <td class="col-4">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
+                                        <td class="col-3">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm</td>
+                                        <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate</td>
+                                        <td class="col-3 right">@Model.ProposedPortfolio.ProposedInvestments[i].DepositSize</td>
                                     </a>
                                 </tr>
 
-
                             }
-
-
-                            <tr class="d-flex">
-                                <td class="col-4">Close Brothers Treasury</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-
-                            <tr class="d-flex">
-                                <td class="col-4">Hodge Bank</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">OakNorth</td>
-                                <td class="col-3">5 Year Bond (Term)</td>
-                                <td class="col-2 right">2.05%</td>
-                                <td class="col-3 right">85,000.00</td>
-                            </tr>
-                            <tr class="d-flex">
-                                <td class="col-4">&nbsp;</td>
-                                <td class="col-3">&nbsp;</td>
-                                <td class="col-2 right">&nbsp;</td>
-                                <td class="col-3 right table-total">765,000.00</td>
-                            </tr>
 
                         </tbody>
                     </table>
