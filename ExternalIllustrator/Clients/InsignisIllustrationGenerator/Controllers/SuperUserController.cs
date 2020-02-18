@@ -21,10 +21,10 @@ namespace InsignisIllustrationGenerator.Controllers
             _illustrationHelper = new IllustrationHelper(mapper, context);
         }
 
-        public async Task<IActionResult> IllustrationListAsync()
+        public  IActionResult IllustrationList()
         {
             //GetIllustrationList
-            IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
+            IEnumerable<IllustrationListViewModel> illustrationList =  GetIllustrationListAsync().Result;
             return View(illustrationList.ToList());
         }
 

@@ -104,6 +104,8 @@ namespace InsignisIllustrationGenerator.Controllers
                 illustrationInfo = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
             }
             IllustrationDetailViewModel model = new IllustrationDetailViewModel();
+
+            model.AdviserName = partnerInfo.PartnerName; ;
             model.PartnerEmail = partnerInfo.PartnerEmailAddress;
             model.PartnerName = partnerInfo.PartnerName;
             model.PartnerOrganisation = partnerInfo.PartnerOrganisation;
@@ -127,16 +129,28 @@ namespace InsignisIllustrationGenerator.Controllers
             //render view
             return View(model);
         }
+        [HttpPost]
+        public async Task<IActionResult> PreviousIllustration(SearchParameterViewModel searchParameter)
+        {
+
+
+            IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync(searchParameter);
+
+            return PartialView("_IllustrationList",   illustrationList.ToList());
+
+        }
 
         public async Task<IActionResult> PreviousIllustration()
         {
 
 
-            IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
-
+            // IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
+            IEnumerable<IllustrationListViewModel> illustrationList = GetIllustrationListAsync().Result;
             return View(illustrationList.ToList());
 
+
         }
+
 
         private async Task<IEnumerable<IllustrationListViewModel>> GetIllustrationListAsync(SearchParameterViewModel searchParameter = null)
         {
@@ -152,7 +166,7 @@ namespace InsignisIllustrationGenerator.Controllers
              Returns:- View and Errors
              */
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
-            HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
+
 
             if (ModelState.IsValid)
             {
@@ -169,13 +183,17 @@ namespace InsignisIllustrationGenerator.Controllers
                 illustrationInfo.TwoYears = model.TwoYears;
                 illustrationInfo.ThreeYears = model.ThreeYearsPlus;
                 illustrationInfo.TotalDeposit = model.TotalDeposit;
-
+                illustrationInfo.AdvisorName = model.PartnerName;
 
 
                 model.ProposedPortfolio = null;
+
+
+
                 Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
 
                 scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
+                //scurve.LoadHeatmap(7, model.Currency, AppSettings.preferencesRoot);
 
                 Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
 
@@ -188,6 +206,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
 
+                
                 foreach (var childern in institutionInclusion.Children)
                 {
                     childern.Value = "true";
@@ -204,10 +223,12 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
+                HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
 
-
+                return View(model);
             }
-            return View(model);
+         
+            return View();
         }
 
 
@@ -420,7 +441,7 @@ namespace InsignisIllustrationGenerator.Controllers
         }
 
 
-        public IActionResult GenerateIllustration(IllustrationDetailViewModel model)
+        public IActionResult GenerateIllustration()
         {
             /*
              Generate Illustration for using the data
@@ -430,11 +451,14 @@ namespace InsignisIllustrationGenerator.Controllers
                 View
 
              */
-
+            IllustrationDetailViewModel model = null;
+            //Getting Input Illustration from InputProposal Session
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))model = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
+           
             var generatedInvestments = JsonConvert.DeserializeObject<SCurveOutput>(HttpContext.Session.GetString("GeneratedPorposals")); //scurve output
 
             //Insignis.Asset.Management.Tools.Sales.SCurveOutput _sc= new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
-
+           
 
             model.ProposedPortfolio = _mapper.Map(generatedInvestments, new Insignis.Asset.Management.Tools.Sales.SCurveOutput());
 
@@ -444,24 +468,25 @@ namespace InsignisIllustrationGenerator.Controllers
             Octavo.Gate.Nabu.Encryption.EncryptorDecryptor decryptor = new Octavo.Gate.Nabu.Encryption.EncryptorDecryptor();
             string qsTemplateFile = "C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Template\\1\\illustration.pptx";
             System.IO.FileInfo templateFile = new System.IO.FileInfo(qsTemplateFile);
-            string prefixName = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss");
 
+            string prefixName = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss");
+            model.IllustrationUniqueReference = prefixName;
             string requiredOutputNameWithoutExtension = prefixName + "_CashIllustration";
 
             Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction powerpointRenderAbstraction = new Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction(AppSettings.illustrationOutputInternalFolder, AppSettings.illustrationOutputPublicFacingFolder);
             List<KeyValuePair<string, string>> textReplacements = new List<KeyValuePair<string, string>>();
 
-            var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            //var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
 
             textReplacements.Add(new KeyValuePair<string, string>("REFERENCE", prefixName));
             textReplacements.Add(new KeyValuePair<string, string>("DATE", DateTime.Now.ToString("dd/MM/yyyy")));
-            textReplacements.Add(new KeyValuePair<string, string>("CLIENTNAME", illustrationInfo.ClientName));
-            textReplacements.Add(new KeyValuePair<string, string>("CLIENTTYPE", illustrationInfo.ClientType.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("CLIENTNAME", model.ClientName));
+            textReplacements.Add(new KeyValuePair<string, string>("CLIENTTYPE", model.ClientType.ToString()));
             textReplacements.Add(new KeyValuePair<string, string>("INTROORG", ""));
             textReplacements.Add(new KeyValuePair<string, string>("FEEDISCOUNT", ""));
             textReplacements.Add(new KeyValuePair<string, string>("FEE", ""));
             textReplacements.Add(new KeyValuePair<string, string>("CHARGE", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("TOTAL", illustrationInfo.TotalDeposit.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("TOTAL", model.TotalDeposit.ToString()));
             textReplacements.Add(new KeyValuePair<string, string>("PROTECTION", ""));
             textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", model.ProposedPortfolio.GrossAverageYield.ToString()));
             textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", model.ProposedPortfolio.AnnualGrossInterestEarned.ToString()));

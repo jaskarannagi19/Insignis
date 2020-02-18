@@ -26,7 +26,14 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"d1d25852c481d14369478c03154f6e54f9328a44", @"/Views/Home/Calculate.cshtml")]
+#nullable restore
+#line 6 "D:\Project\Insignis\jaskarn\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
+using InsignisIllustrationGenerator.Helper;
+
+#line default
+#line hidden
+#nullable disable
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"2d20cc265fe9193237df5e6d427db60126b754b2", @"/Views/Home/Calculate.cshtml")]
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"1bc31017ea0574b4bf5a5115fd6862ed4d7895b5", @"/Views/_ViewImports.cshtml")]
     public class Views_Home_Calculate : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<IllustrationDetailViewModel>
     {
@@ -58,6 +65,8 @@ using InsignisIllustrationGenerator.Models;
         #pragma warning disable 1998
         public async override global::System.Threading.Tasks.Task ExecuteAsync()
         {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2d20cc265fe9193237df5e6d427db60126b754b24309", async() => {
+                WriteLiteral("\r\n    <div class=\"middle-section\">\r\n        <div class=\"container\">\r\n            <div class=\"blue-background\">\r\n                <div class=\"row\">\r\n                    <div class=\"col-lg-4 col-sm-6\"><p>Name:<br><span>");
 #nullable restore
 #line 2 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
   
@@ -77,7 +86,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</span></p></div>\r\n                        <div class=\"col-lg-4 col-sm-6\"><p>Organisation:<br><span>");
+                WriteLiteral("</span></p></div>\r\n                    <div class=\"col-lg-4 col-sm-6\"><p>Organisation:<br><span>");
 #nullable restore
 #line 12 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                             Write(Model.PartnerOrganisation);
@@ -85,7 +94,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</span></p></div>\r\n                        <div class=\"col-lg-4 col-sm-12\"><p>Email:<br><span>");
+                WriteLiteral("</span></p></div>\r\n                    <div class=\"col-lg-4 col-sm-12\"><p>Email:<br><span>");
 #nullable restore
 #line 13 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                       Write(Model.PartnerEmail);
@@ -93,7 +102,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</span></p></div>\r\n                        <hr class=\"blue-line\">\r\n                        <div class=\"col-lg-4 col-sm-6\"><p>Name / Reference:<br><span>");
+                WriteLiteral("</span></p></div>\r\n                    <hr class=\"blue-line\">\r\n                    <div class=\"col-lg-4 col-sm-6\"><p>Client Name / Reference:<br><span>");
 #nullable restore
 #line 15 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                                 Write(Model.ClientName);
@@ -101,7 +110,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</span></p></div>\r\n                        <div class=\"col-lg-4 col-sm-6\"><p>Client Type:<br><span>");
+                WriteLiteral("</span></p></div>\r\n                    <div class=\"col-lg-4 col-sm-6\"><p>Client Type:<br><span>");
 #nullable restore
 #line 16 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                            Write(Model.ClientType);
@@ -109,13 +118,13 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral(@"</span></p></div>
-                    </div>
+                WriteLiteral(@"?Individual:Joint</span></p></div>
                 </div>
-                <h4 class=""heading-1"">Summary</h4>
-                <div class=""summary-gray-backgrund"">
-                    <div class=""row"">
-                        <div class=""col-lg-4 col-sm-4""><p>Total deposited:<br><span>");
+            </div>
+            <h4 class=""heading-1"">Summary</h4>
+            <div class=""summary-gray-backgrund"">
+                <div class=""row"">
+                    <div class=""col-lg-4 col-sm-4""><p>Total deposited:<br><span>");
 #nullable restore
 #line 22 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                                Write(Model.TotalDeposit);
@@ -123,7 +132,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</span></p></div>\r\n                        <div class=\"col-lg-4 col-sm-4\"><p>Annual gross interest earned:<br><span>");
+                WriteLiteral("</span></p></div>\r\n                    <div class=\"col-lg-4 col-sm-4\"><p>Annual gross interest earned:<br><span>");
 #nullable restore
 #line 23 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                                             Write(Model.ProposedPortfolio.AnnualGrossInterestEarned);
@@ -131,7 +140,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</span></p></div>\r\n                        <div class=\"col-lg-4 col-sm-4\"><p>Annual net interest earned:<br><span>");
+                WriteLiteral("</span></p></div>\r\n                    <div class=\"col-lg-4 col-sm-4\"><p>Annual net interest earned:<br><span>");
 #nullable restore
 #line 24 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                                           Write(Model.ProposedPortfolio.AnnualNetInterestEarned);
@@ -139,7 +148,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</span></p></div>\r\n                        <hr class=\"gray-line\">\r\n                        <div class=\"col-lg-4 col-sm-4\"><p>Gross average yield:<br><span>");
+                WriteLiteral("</span></p></div>\r\n                    <hr class=\"gray-line\">\r\n                    <div class=\"col-lg-4 col-sm-4\"><p>Gross average yield:<br><span>");
 #nullable restore
 #line 26 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                                    Write(Model.ProposedPortfolio.GrossAverageYield);
@@ -147,7 +156,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("%</span></p></div>\r\n                        <div class=\"col-lg-4 col-sm-4\"><p>Net average yield:<br><span>");
+                WriteLiteral("%</span></p></div>\r\n                    <div class=\"col-lg-4 col-sm-4\"><p>Net average yield:<br><span>");
 #nullable restore
 #line 27 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                                  Write(Model.ProposedPortfolio.NetAverageYield);
@@ -156,23 +165,23 @@ using InsignisIllustrationGenerator.Models;
 #line hidden
 #nullable disable
                 WriteLiteral(@"%</span></p></div>
-                    </div>
                 </div>
             </div>
-            <div class=""container"">
-                <div class=""col-lg-10 offset-lg-1 col-sm-12"">
-                    <h4 class=""heading-1"">Deposits</h4>
-                    <div class=""deposits-table"">
-                        <table class=""table table-striped table-bordered"">
-                            <thead class=""thead-dark"">
-                                <tr class=""d-flex"">
-                                    <th class=""col-4"">Institution</th>
-                                    <th class=""col-3"">Term</th>
-                                    <th class=""col-2 right"">Rate</th>
-                                    <th class=""col-3 right"">Deposit Size</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+        </div>
+        <div class=""container"">
+            <div class=""col-lg-10 offset-lg-1 col-sm-12"">
+                <h4 class=""heading-1"">Deposits</h4>
+                <div class=""deposits-table"">
+                    <table class=""table table-striped table-bordered"">
+                        <thead class=""thead-dark"">
+                            <tr class=""d-flex"">
+                                <th class=""col-4"">Institution</th>
+                                <th class=""col-3"">Term</th>
+                                <th class=""col-2 right"">Rate</th>
+                                <th class=""col-3 right"">Deposit Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
 ");
 #nullable restore
 #line 45 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
@@ -183,7 +192,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("                                    <tr data-id=");
+                WriteLiteral("                                <tr data-id=");
 #nullable restore
 #line 48 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                            Write(i);
@@ -191,7 +200,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral(" id=\"bankDetailRow\" class=\"d-flex\" data-target=\".bd-example-modal-lg\">\r\n                                        <a href=\"#\">\r\n                                            <td class=\"col-4 instituteName\">");
+                WriteLiteral(" id=\"bankDetailRow\" class=\"d-flex\" data-target=\".bd-example-modal-lg\">\r\n                                    <a href=\"#\">\r\n                                        <td class=\"col-4 instituteName\">");
 #nullable restore
 #line 50 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                        Write(Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName);
@@ -199,7 +208,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</td>\r\n                                            <td class=\"col-3 instituteLiquidity\">");
+                WriteLiteral("</td>\r\n                                        <td class=\"col-3 instituteLiquidity\">");
 #nullable restore
 #line 51 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                             Write(Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText);
@@ -207,7 +216,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</td>\r\n                                            <td class=\"col-2 right\">");
+                WriteLiteral("</td>\r\n                                        <td class=\"col-2 right\">");
 #nullable restore
 #line 52 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                Write(Model.ProposedPortfolio.ProposedInvestments[i].Rate);
@@ -215,7 +224,7 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("</td>\r\n                                            <td class=\"col-3 right instituteDeposit\">\r\n                                                ");
+                WriteLiteral("</td>\r\n                                        <td class=\"col-3 right instituteDeposit\">\r\n                                            ");
 #nullable restore
 #line 54 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                            Write(Model.ProposedPortfolio.ProposedInvestments[i].DepositSize);
@@ -223,8 +232,8 @@ using InsignisIllustrationGenerator.Models;
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral("\r\n                                                <input type=\"hidden\" class=\"instituteID\"");
-                BeginWriteAttribute("value", " value=\"", 3899, "\"", 3968, 1);
+                WriteLiteral("\r\n                                            <input type=\"hidden\" class=\"instituteID\"");
+                BeginWriteAttribute("value", " value=\"", 3961, "\"", 4030, 1);
 #nullable restore
 #line 55 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
 WriteAttributeValue("", 3907, Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID, 3907, 61, false);
@@ -233,7 +242,7 @@ WriteAttributeValue("", 3907, Model.ProposedPortfolio.ProposedInvestments[i].Ins
 #line hidden
 #nullable disable
                 EndWriteAttribute();
-                WriteLiteral(" />\r\n                                            </td>\r\n                                        </a>\r\n                                    </tr>\r\n");
+                WriteLiteral(" />\r\n                                        </td>\r\n                                    </a>\r\n                                </tr>\r\n");
 #nullable restore
 #line 59 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                 }
@@ -243,11 +252,11 @@ WriteAttributeValue("", 3907, Model.ProposedPortfolio.ProposedInvestments[i].Ins
 #nullable disable
                 WriteLiteral(@"
 
-                                <tr class=""d-flex"">
-                                    <td class=""col-4"">&nbsp;</td>
-                                    <td class=""col-3"">&nbsp;</td>
-                                    <td class=""col-2 right"">&nbsp;</td>
-                                    <td class=""col-3 right table-total"">");
+                            <tr class=""d-flex"">
+                                <td class=""col-4"">&nbsp;</td>
+                                <td class=""col-3"">&nbsp;</td>
+                                <td class=""col-2 right"">&nbsp;</td>
+                                <td class=""col-3 right table-total"">");
 #nullable restore
 #line 66 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                                                                    Write(Model.TotalDeposit);
@@ -255,16 +264,16 @@ WriteAttributeValue("", 3907, Model.ProposedPortfolio.ProposedInvestments[i].Ins
 #line default
 #line hidden
 #nullable disable
-                WriteLiteral(@"</td>
-                                </tr>
+                WriteLiteral(@")</td>
+                            </tr>
 
-                            </tbody>
-                        </table>
-                        <p class=""gray-light-small"">*Please click on a row to update deposit details</p>
-                    </div>
-                    <div class=""clear1""></div>
-                    <div class=""right"">
-                        ");
+                        </tbody>
+                    </table>
+                    <p class=""gray-light-small"">*Please click on a row to update deposit details</p>
+                </div>
+                <div class=""clear1""></div>
+                <div class=""right"">
+                    ");
 #nullable restore
 #line 75 "D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\Views\Home\Calculate.cshtml"
                    Write(Html.ActionLink("Back", "Index", "Home",null, new { @class = "btn btn-primary" }));
@@ -307,7 +316,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_InputTagHelper.For = ModelExpressionProvid
                 }
                 Write(__tagHelperExecutionContext.Output);
                 __tagHelperExecutionContext = __tagHelperScopeManager.End();
-                WriteLiteral("\r\n                        <button type=\"submit\" class=\"btn btn-primary\">Generate Illustration</button>\r\n\r\n                    </div>\r\n\r\n                </div>\r\n            </div>\r\n        </div>\r\n    ");
+                WriteLiteral("\r\n                    <button type=\"submit\" class=\"btn btn-primary\">Generate Illustration</button>\r\n\r\n                </div>\r\n\r\n            </div>\r\n        </div>\r\n    </div>\r\n");
             }
             );
             __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.TagHelpers.FormTagHelper>();
@@ -375,15 +384,16 @@ AddHtmlAttributeValue("", 146, Url.Action("GenerateIllustration","Home"), 146, 4
                                     </td>
                                     <td id=""bankName"" class=""col-3 center""></td>
                                     <td id=""liquidity"" class=""col-3 center""></td>
-                                    <td  class=""col-4 right""><input type=""text"" class=""form-control"" id=""updatedAmount"" placeholder=""00.000"" name=""updatedAmount"" />
-                                    <input type=""hidden"" id=""bankID"" name=""bankID"" />
+                                    <td class=""col-4 right"">
+                                        <input type=""text"" class=""form-control"" id=""updatedAmount"" placeholder=""00.000"" name=""updatedAmount"" />
+                                        <input type=""hidden"" id=""bankID"" name=""bankID"" />
                                     </td>
                                 </tr>
                                 <tr class=""d-flex"">
                                     <td class=""col-2 center"">&nbsp;</td>
                                     <td class=""col-3 center"">&nbsp;</td>
-                                    <td class=""col-3 cente");
-                WriteLiteral(@"r"">&nbsp;</td>
+             ");
+                WriteLiteral(@"                       <td class=""col-3 center"">&nbsp;</td>
                                     <td class=""col-4 right ipad-button"">
                                         <button type=""button"" class=""btn btn-primary"" data-dismiss=""modal"">Cancel</button>
                                         <button type=""submit"" class=""btn btn-primary"" id=""updateInstitution"">Update</button>
@@ -450,20 +460,7 @@ AddHtmlAttributeValue("", 6109, Url.Action("Update","Home"), 6109, 28, false);
     //        $.ajax({
     //            type: ""POST"",
     //            url: ""../../Home/Update""");
-            WriteLiteral(@",
-    //            data: { bankId: ""47"" },
-    //            success: function (success) {
-    //                debugger;
-    //                console.log(""Done"");
-    //            },
-                
-    //        });
-
-    //    })
-
-    //});
-
-</script>");
+            WriteLiteral(",\r\n    //            data: { bankId: \"47\" },\r\n    //            success: function (success) {\r\n    //                debugger;\r\n    //                console.log(\"Done\");\r\n    //            },\r\n\r\n    //        });\r\n\r\n    //    })\r\n\r\n    //});\r\n\r\n</script>");
         }
         #pragma warning restore 1998
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]

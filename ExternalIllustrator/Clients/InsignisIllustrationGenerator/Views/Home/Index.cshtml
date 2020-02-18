@@ -2,24 +2,29 @@
 @{
     ViewData["Title"] = "Home Page";
 }
+@using InsignisIllustrationGenerator.Helper
 
-
-    <div class="middle-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <div class="right"><a href="#" class="btn btn-primary">Previous Illustrations</a></div>
+<div class="middle-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="right">
+                    @Html.ActionLink("Previous Illustrations", "PreviousIllustration", "Home", null, new { @class = "btn btn-primary" })
                 </div>
-                <div class="col-md-10 offset-md-1 col-sm-12">
-                    <div class="illustration-generator">
-                        <h4 class="heading-1">Illustration Generator</h4>
-                        <div class="gray-bg">
-                            <p class="heading-1">Create a Portfolio</p>
-                            <div asp-validation-summary="All" class="text-danger"></div>
-                            <form method="post" action="@Url.Action("Calculate","Home")">
+            </div>
+            <div class="col-md-10 offset-md-1 col-sm-12">
+                <div class="illustration-generator">
+                    <h4 class="heading-1">Illustration Generator</h4>
+                    <div class="gray-bg">
+                        <p class="heading-1">Create a Portfolio</p>
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                       @* <form method="post" action="@Url.Action("Calculate","Home")">*@
+                            @using (Html.BeginForm())
+                            {
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Partner Name</label>
+
                                         <input type="text" class="form-control" id="" asp-for="@Model.PartnerName" value="@Model.PartnerName" placeholder="Partner Name" readonly="readonly">
                                     </div>
                                     <div class="form-group col-md-6">
@@ -31,8 +36,10 @@
                                         <input type="email" class="form-control" id="" placeholder="Partner Email" asp-for="@Model.PartnerEmail" value="@Model.PartnerEmail">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Client Name / Reference</label>
-                                        <input type="text" class="form-control" id="" asp-for="@Model.ClientName" value="@Model.ClientName" placeholder="Client Name / Reference">
+                                        <label for="inputPassword4">Client Name</label>
+                                        @*<input type="text" class="form-control" id="" asp-for="@Model.ClientName" value="@Model.ClientName" placeholder="Client Name / Reference">*@
+                                        @Html.TextBoxFor(model => model.ClientName,new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(model => model.ClientName,null,new { @class = "text-danger" })
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Client Type (£85,000 per bank)</label>
@@ -44,9 +51,9 @@
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Currency</label>
                                         <select id="" class="form-control" asp-for="@Model.Currency">
-                                            <option selected>GBP - £</option>
-                                            <option>EUR - €</option>
-                                            <option>USD - $</option>
+                                            <option selected value="GBP">GBP - £</option>
+                                            <option value="EUR">EUR - €</option>
+                                            <option value="USD">USD - $</option>
                                         </select>
                                     </div>
 
@@ -54,76 +61,80 @@
 
                                 <div class="margin-t-20"></div>
                                 <p class="heading-1">Liquidity Requirements</p>
+                                @Html.ValidationMessageFor(model => model.TotalDeposit, "", new { @class = "text-danger" })
+
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Easy Access</label>
+                                        <label for="@Model.EasyAccess">Easy Access</label>
                                         <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.EasyAccess" value="@Model.EasyAccess">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputPassword4">1 Month</label>
+                                        <label for="@Model.OneMonth">1 Month</label>
                                         <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.OneMonth" value="@Model.OneMonth">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4">3 Months</label>
+                                        <label for="@Model.ThreeMonths">3 Months</label>
                                         <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.ThreeMonths" value="@Model.ThreeMonths">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputPassword4">6 Months</label>
+                                        <label for="@Model.SixMonths">6 Months</label>
                                         <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.SixMonths" value="@Model.SixMonths">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4">9 Months</label>
+                                        <label for="@Model.NineMonths">9 Months</label>
                                         <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.NineMonths" value="@Model.NineMonths">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputPassword4">1 Year</label>
+                                        <label for="@Model.OneYear">1 Year</label>
                                         <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.OneYear" value="@Model.OneYear">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4">2 Year</label>
+                                        <label for="@Model.TwoYears">2 Year</label>
                                         <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.TwoYears" value="@Model.TwoYears">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputPassword4">3+ Years</label>
+                                        <label for="@Model.ThreeYearsPlus">3+ Years</label>
                                         <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.ThreeYearsPlus" value="@Model.ThreeYearsPlus">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputEmail4">Total Deposit</label>
-                                        <input type="text" class="form-control" id="txtTotalDeposit" placeholder="£0.00" asp-for="@Model.TotalDeposit" value="@Model.TotalDeposit">
+                                        <label for="@Model.TotalDeposit">Total Deposit</label>
+                                        <input type="text" class="form-control" id="txtTotalDeposit" placeholder="£0.00" asp-for="@Model.TotalDeposit" value="@Model.TotalDeposit" value="0.00"  readonly="readonly">
+
                                     </div>
                                     <div class="form-group col-md-6 margin-t-20">
-                                        @Html.ActionLink("Rest", "Index", "", new { @class = "btn btn-primary" })
-                                        <input type="reset" class="btn btn-primary" value="Reset" />
-                                        <input type="submit" class="btn btn-primary" value="Calculate">
+                                        @Html.ActionLink("Reset", "Index", "Home", new { @class = "btn btn-primary" })
+                                        @*<input type="reset" class="btn btn-primary" value="Reset" />*@
+                                        <button type="submit" class="btn btn-primary">Calculate</button>
                                     </div>
 
                                 </div>
-                            </form>
-                        </div>
-
+                            }
+                            @*</form>*@
                     </div>
+
                 </div>
             </div>
         </div>
-
     </div>
-    <script>
 
-        $('.price').keyup(function () {
-            debugger;
+</div>
+<script>
 
-            // initialize the sum (total price) to zero
-            var sum = 0;
+    $('.price').keyup(function () {
+        debugger;
 
-            // we use jQuery each() to loop through all the textbox with 'price' class
-            // and compute the sum for each loop
-            $('.price').each(function () {
-                sum += Number($(this).val());
-            });
+        // initialize the sum (total price) to zero
+        var sum = 0;
 
-            // set the computed value to 'totalPrice' textbox
-            $('#txtTotalDeposit').val(sum.toFixed(2));
-
+        // we use jQuery each() to loop through all the textbox with 'price' class
+        // and compute the sum for each loop
+        $('.price').each(function () {
+            sum += Number($(this).val());
         });
 
-    </script>
+        // set the computed value to 'totalPrice' textbox
+        $('#txtTotalDeposit').val(sum.toFixed(2));
+
+    });
+
+</script>

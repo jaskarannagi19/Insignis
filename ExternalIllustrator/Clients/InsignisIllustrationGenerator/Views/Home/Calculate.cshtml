@@ -1,89 +1,90 @@
 ﻿@model IllustrationDetailViewModel
-@{
-    ViewData["Title"] = "Calculate";
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
-    <form action="@Url.Action("GenerateIllustration","Home")" method="post">
-        <div class="middle-section">
-            <div class="container">
-                <div class="blue-background">
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-6"><p>Name:<br><span>@Model.PartnerName</span></p></div>
-                        <div class="col-lg-4 col-sm-6"><p>Organisation:<br><span>@Model.PartnerOrganisation</span></p></div>
-                        <div class="col-lg-4 col-sm-12"><p>Email:<br><span>@Model.PartnerEmail</span></p></div>
-                        <hr class="blue-line">
-                        <div class="col-lg-4 col-sm-6"><p>Name / Reference:<br><span>@Model.ClientName</span></p></div>
-                        <div class="col-lg-4 col-sm-6"><p>Client Type:<br><span>@Model.ClientType</span></p></div>
-                    </div>
-                </div>
-                <h4 class="heading-1">Summary</h4>
-                <div class="summary-gray-backgrund">
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit</span></p></div>
-                        <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.ProposedPortfolio.AnnualGrossInterestEarned</span></p></div>
-                        <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.ProposedPortfolio.AnnualNetInterestEarned</span></p></div>
-                        <hr class="gray-line">
-                        <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.ProposedPortfolio.GrossAverageYield%</span></p></div>
-                        <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.ProposedPortfolio.NetAverageYield%</span></p></div>
-                    </div>
+@*@{
+        ViewData["Title"] = "Calculate";
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }*@
+@using InsignisIllustrationGenerator.Helper
+<form action="@Url.Action("GenerateIllustration","Home")" method="post">
+    <div class="middle-section">
+        <div class="container">
+            <div class="blue-background">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6"><p>Name:<br><span>@Model.PartnerName</span></p></div>
+                    <div class="col-lg-4 col-sm-6"><p>Organisation:<br><span>@Model.PartnerOrganisation</span></p></div>
+                    <div class="col-lg-4 col-sm-12"><p>Email:<br><span>@Model.PartnerEmail</span></p></div>
+                    <hr class="blue-line">
+                    <div class="col-lg-4 col-sm-6"><p>Client Name / Reference:<br><span>@Model.ClientName</span></p></div>
+                    <div class="col-lg-4 col-sm-6"><p>Client Type:<br><span>@(Model.ClientType == 1)?Individual:Joint</span></p></div>
                 </div>
             </div>
-            <div class="container">
-                <div class="col-lg-10 offset-lg-1 col-sm-12">
-                    <h4 class="heading-1">Deposits</h4>
-                    <div class="deposits-table">
-                        <table class="table table-striped table-bordered">
-                            <thead class="thead-dark">
-                                <tr class="d-flex">
-                                    <th class="col-4">Institution</th>
-                                    <th class="col-3">Term</th>
-                                    <th class="col-2 right">Rate</th>
-                                    <th class="col-3 right">Deposit Size</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @for (int i = 0; i < @Model.ProposedPortfolio.ProposedInvestments.Count(); i++)
-                                {
-
-                                    <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
-                                        <a href="#">
-                                            <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
-                                            <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
-                                            <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate</td>
-                                            <td class="col-3 right instituteDeposit">
-                                                @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize
-                                                <input type="hidden" class="instituteID" value="@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID" />
-                                            </td>
-                                        </a>
-                                    </tr>
-                                }
-
-
-                                <tr class="d-flex">
-                                    <td class="col-4">&nbsp;</td>
-                                    <td class="col-3">&nbsp;</td>
-                                    <td class="col-2 right">&nbsp;</td>
-                                    <td class="col-3 right table-total">@Model.TotalDeposit</td>
-                                </tr>
-
-                            </tbody>
-                        </table>
-                        <p class="gray-light-small">*Please click on a row to update deposit details</p>
-                    </div>
-                    <div class="clear1"></div>
-                    <div class="right">
-                        @Html.ActionLink("Back", "Index", "Home",null, new { @class = "btn btn-primary" })
-                   
-                        @* <button type="button" class="btn btn-primary" action="/Home">Back</button>*@
-                        <input type="hidden" asp-for="@Model.ProposedPortfolio" value="@Model.ProposedPortfolio" />
-                        <button type="submit" class="btn btn-primary">Generate Illustration</button>
-
-                    </div>
-
+            <h4 class="heading-1">Summary</h4>
+            <div class="summary-gray-backgrund">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit)</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.AnnualGrossInterestEarned)</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.AnnualNetInterestEarned)</span></p></div>
+                    <hr class="gray-line">
+                    <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.GrossAverageYield)%</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.NetAverageYield)%</span></p></div>
                 </div>
             </div>
         </div>
-    </form>
+        <div class="container">
+            <div class="col-lg-10 offset-lg-1 col-sm-12">
+                <h4 class="heading-1">Deposits</h4>
+                <div class="deposits-table">
+                    <table class="table table-striped table-bordered">
+                        <thead class="thead-dark">
+                            <tr class="d-flex">
+                                <th class="col-4">Institution</th>
+                                <th class="col-3">Term</th>
+                                <th class="col-2 right">Rate</th>
+                                <th class="col-3 right">Deposit Size</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (int i = 0; i < @Model.ProposedPortfolio.ProposedInvestments.Count(); i++)
+                            {
+
+                                <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
+                                    <a href="#">
+                                        <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
+                                        <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
+                                        <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate</td>
+                                        <td class="col-3 right instituteDeposit">
+                                            @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize
+                                            <input type="hidden" class="instituteID" value="@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID" />
+                                        </td>
+                                    </a>
+                                </tr>
+                            }
+
+
+                            <tr class="d-flex">
+                                <td class="col-4">&nbsp;</td>
+                                <td class="col-3">&nbsp;</td>
+                                <td class="col-2 right">&nbsp;</td>
+                                <td class="col-3 right table-total">@TextFormatter.FormatTwoDecimal(Model.TotalDeposit))</td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <p class="gray-light-small">*Please click on a row to update deposit details</p>
+                </div>
+                <div class="clear1"></div>
+                <div class="right">
+                    @Html.ActionLink("Back", "Index", "Home", null, new { @class = "btn btn-primary" })
+
+                    @* <button type="button" class="btn btn-primary" action="/Home">Back</button>*@
+                    <input type="hidden" asp-for="@Model.ProposedPortfolio" value="@Model.ProposedPortfolio" />
+                    <button type="submit" class="btn btn-primary">Generate Illustration</button>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</form>
 
 
 
@@ -123,8 +124,9 @@
                                     </td>
                                     <td id="bankName" class="col-3 center"></td>
                                     <td id="liquidity" class="col-3 center"></td>
-                                    <td  class="col-4 right"><input type="text" class="form-control" id="updatedAmount" placeholder="00.000" name="updatedAmount" />
-                                    <input type="hidden" id="bankID" name="bankID" />
+                                    <td class="col-4 right">
+                                        <input type="text" class="form-control" id="updatedAmount" placeholder="00.000" name="updatedAmount" />
+                                        <input type="hidden" id="bankID" name="bankID" />
                                     </td>
                                 </tr>
                                 <tr class="d-flex">
@@ -177,7 +179,7 @@
     //                debugger;
     //                console.log("Done");
     //            },
-                
+
     //        });
 
     //    })
