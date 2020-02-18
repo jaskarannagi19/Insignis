@@ -75,7 +75,7 @@ namespace InsignisIllustrationGenerator.Manager
             return response;
         }
 
-        internal  IllustrationDetailViewModel GetIllustrationByByUniqueReferenceAsync(string uniqueReferenceID)
+        internal  IllustrationDetailViewModel GetIllustrationByByUniqueReference(string uniqueReferenceID)
         {
             /*
              Get illustration from unique reference id from db
@@ -106,7 +106,6 @@ namespace InsignisIllustrationGenerator.Manager
             }
 
             return result;
-
         }
     }
 }

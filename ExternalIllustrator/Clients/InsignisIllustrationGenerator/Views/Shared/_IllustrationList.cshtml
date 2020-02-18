@@ -18,10 +18,9 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr class="d-flex">
-                            @*<td class="col-2">
-                                    @Html.DisplayFor(modelItem => item.Id)
-                                </td>*@
+                        
+                    
+                        <tr class="d-flex" id="bankDetailRow">
                             <td class="col-2">
                                 @Html.DisplayFor(modelItem => item.AdviserName)
                             </td>
@@ -33,6 +32,7 @@
                             </td>
                             <td class="col-3">
                                 @Html.DisplayFor(modelItem => item.IllustrationUniqueReference)
+                                @Html.HiddenFor(modelItem => item.IllustrationUniqueReference)
                             </td>
                             <td class="col-2">
                                 @Html.DisplayFor(modelItem => item.GenerateDate)
@@ -40,12 +40,8 @@
                             <td class="col-1">
                                 @Html.DisplayFor(modelItem => item.Status)
                             </td>
-                            @*<td>
-                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-                                </td>*@
                         </tr>
+                    
                     }
                 </tbody>
             </table>
@@ -54,4 +50,16 @@
     </div>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $(document).on("click", "#bankDetailRow", function () {
+            var illustrationUniqueReference = $(event.target).closest('tr').find('#item_IllustrationUniqueReference').val();
+            debugger;
+            window.location = "/SuperUser/GetIllustration?uniqueReferenceId=" + illustrationUniqueReference; 
 
+
+
+
+        });
+    });
+</script>

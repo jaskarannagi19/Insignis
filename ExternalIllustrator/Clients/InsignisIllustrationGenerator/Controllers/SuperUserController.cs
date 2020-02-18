@@ -33,8 +33,27 @@ namespace InsignisIllustrationGenerator.Controllers
 
             return await _illustrationHelper.GetIllustrationListAsync(searchParameter);
         }
-
+        
+        [HttpPost]
         //Get Single Illustration Details
+        public IActionResult GetIllustrationByID(string uniqueReferenceId)
+        {
+            /*
+             Get summary details of Illustration from unique reference ID 
+             
+            Arguments:- 
+                unique illustration id eg:-
+             
+            Return:-
+                View with Illustration Details
+             */
+            var result = _illustrationHelper.GetIllustrationByByUniqueReference(uniqueReferenceId);
+
+            return View("_illustrationDetails", result);
+
+        }
+
+
         public IActionResult GetIllustration(string uniqueReferenceId)
         {
             /*
@@ -46,10 +65,12 @@ namespace InsignisIllustrationGenerator.Controllers
             Return:-
                 View with Illustration Details
              */
-            var result = _illustrationHelper.GetIllustrationByByUniqueReferenceAsync(uniqueReferenceId);
+            var result = _illustrationHelper.GetIllustrationByByUniqueReference(uniqueReferenceId);
 
             return View("_illustrationDetails", result);
 
         }
+
+
     }
 }

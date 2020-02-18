@@ -1,0 +1,8 @@
+D:\insignis\ExternalIllustrator\InsignisConsoleApps\InsignisLoaderConfig\bin\Release\InsignisLoaderConfig.dll
+D:\insignis\ExternalIllustrator\InsignisConsoleApps\InsignisLoaderConfig\bin\Release\InsignisLoaderConfig.pdb
+D:\insignis\ExternalIllustrator\InsignisConsoleApps\InsignisLoaderConfig\bin\Release\NabuDOL.dll
+D:\insignis\ExternalIllustrator\InsignisConsoleApps\InsignisLoaderConfig\bin\Release\NabuEntities.dll
+D:\insignis\ExternalIllustrator\InsignisConsoleApps\InsignisLoaderConfig\obj\Release\InsignisLoaderConfig.csprojAssemblyReference.cache
+D:\insignis\ExternalIllustrator\InsignisConsoleApps\InsignisLoaderConfig\obj\Release\InsignisLoaderConfig.csproj.CopyComplete
+D:\insignis\ExternalIllustrator\InsignisConsoleApps\InsignisLoaderConfig\obj\Release\InsignisLoaderConfig.dll
+D:\insignis\ExternalIllustrator\InsignisConsoleApps\InsignisLoaderConfig\obj\Release\InsignisLoaderConfig.pdb

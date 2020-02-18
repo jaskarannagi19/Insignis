@@ -1,0 +1,5 @@
+D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\bin\Release\InsignisFSCSConfig.dll
+D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\bin\Release\InsignisFSCSConfig.pdb
+D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\obj\Release\InsignisFSCSConfig.csprojAssemblyReference.cache
+D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\obj\Release\InsignisFSCSConfig.dll
+D:\insignis\ExternalIllustrator\Clients\InsignisFSCSConfig\obj\Release\InsignisFSCSConfig.pdb
