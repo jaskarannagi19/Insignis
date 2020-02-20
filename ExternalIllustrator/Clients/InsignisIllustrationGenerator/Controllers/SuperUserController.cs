@@ -16,9 +16,13 @@ namespace InsignisIllustrationGenerator.Controllers
     {
 
         private readonly IllustrationHelper _illustrationHelper;
+        private readonly IOptions<AppSettings> _appSettings;
+        
         public SuperUserController(ILogger<HomeController> logger, AutoMapper.IMapper mapper, IOptions<AppSettings> settings, ApplicationDbContext context)
         {
             _illustrationHelper = new IllustrationHelper(mapper, context);
+            _appSettings = settings;
+        
         }
 
         public  IActionResult IllustrationList()
@@ -50,6 +54,8 @@ namespace InsignisIllustrationGenerator.Controllers
                 View with Illustration Details
              */
             var result = _illustrationHelper.GetIllustrationByByUniqueReference(uniqueReferenceId);
+            
+            ViewBag.URL = _appSettings.Value.illustrationOutputPublicFacingFolder + "/" + uniqueReferenceId + "/" + uniqueReferenceId + "_CashIllustration.pdf";
 
             return View("_illustrationDetails", result);
 

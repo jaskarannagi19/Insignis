@@ -54,8 +54,6 @@ namespace InsignisIllustrationGenerator.Manager
         }
 
         internal async Task< IEnumerable<IllustrationListViewModel>> GetIllustrationListAsync(SearchParameterViewModel searchParameter)
-        
-        
         {
             var IllustrationDetails = await _context.IllustrationDetails.Include(x=>x.IllustrationProposedPortfolio).ToListAsync();
 
@@ -91,10 +89,10 @@ namespace InsignisIllustrationGenerator.Manager
             DateTime? IllustrationFrom = Convert.ToDateTime(searchParameter.IllustrationFrom);
             DateTime? IllustrationTo = Convert.ToDateTime(searchParameter.IllustrationTo);
 
-            searchParameter.ClientName = string.IsNullOrEmpty(searchParameter.ClientName) ? "" : searchParameter.ClientName;
-            searchParameter.CompanyName = string.IsNullOrEmpty(searchParameter.CompanyName) ? "" : searchParameter.CompanyName;
-            searchParameter.AdvisorName = string.IsNullOrEmpty(searchParameter.AdvisorName) ? "" : searchParameter.AdvisorName;
-            searchParameter.IllustrationUniqueReference = string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) ? "" : searchParameter.IllustrationUniqueReference;
+            searchParameter.ClientName = string.IsNullOrEmpty(searchParameter.ClientName) ? "" : searchParameter.ClientName.ToLower();
+            searchParameter.CompanyName = string.IsNullOrEmpty(searchParameter.CompanyName) ? "" : searchParameter.CompanyName.ToLower();
+            searchParameter.AdvisorName = string.IsNullOrEmpty(searchParameter.AdvisorName) ? "" : searchParameter.AdvisorName.ToLower();
+            searchParameter.IllustrationUniqueReference = string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) ? "" : searchParameter.IllustrationUniqueReference.ToLower();
             
             
             if (searchParameter != null)
@@ -102,13 +100,13 @@ namespace InsignisIllustrationGenerator.Manager
                 IllustrationDetails = IllustrationDetails.Where(f =>
                 
                 //Advisor Search
-                (string.IsNullOrEmpty(searchParameter.AdvisorName) | f.AdviserName.Contains(searchParameter.AdvisorName))
+                (string.IsNullOrEmpty(searchParameter.AdvisorName) | f.AdviserName.ToLower().Contains(searchParameter.AdvisorName))
                 //Client Search
-                &(string.IsNullOrEmpty(searchParameter.ClientName) | f.ClientName.Contains(searchParameter.ClientName))
+                &(string.IsNullOrEmpty(searchParameter.ClientName) | f.ClientName.ToLower().Contains(searchParameter.ClientName))
                 //Company Search
-                & (string.IsNullOrEmpty(searchParameter.CompanyName) | f.ClientName.Contains(searchParameter.CompanyName))
+                & (string.IsNullOrEmpty(searchParameter.CompanyName) | f.ClientName.ToLower().Contains(searchParameter.CompanyName))
                 //Company Search
-                &(string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) | f.IllustrationUniqueReference.Contains(searchParameter.IllustrationUniqueReference))
+                &(string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) | f.IllustrationUniqueReference.ToLower().Contains(searchParameter.IllustrationUniqueReference))
 
                 & ((IllustrationFrom.HasValue | f.GenerateDate > IllustrationFrom)
                 & (IllustrationTo.HasValue | f.GenerateDate < IllustrationTo))).ToList();
@@ -118,11 +116,6 @@ namespace InsignisIllustrationGenerator.Manager
 
             return response;
         }
-
-
-
-
-
 
         internal  IllustrationDetailViewModel GetIllustrationByByUniqueReference(string uniqueReferenceID)
         {

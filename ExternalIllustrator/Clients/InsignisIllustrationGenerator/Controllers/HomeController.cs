@@ -492,9 +492,8 @@ namespace InsignisIllustrationGenerator.Controllers
             string rate = " ";
             string deposit = " ";
             string interest = " ";
-            // for (int i = 0; i < 30; i++) 
-            for (int i = 0; i < model.ProposedPortfolio.ProposedInvestments.Count; i++)
 
+            for (int i = 0; i < 30; i++) 
             {
                 institutionName = " ";
                 termDescription = " ";
