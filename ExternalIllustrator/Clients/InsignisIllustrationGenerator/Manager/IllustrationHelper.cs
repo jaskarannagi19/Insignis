@@ -28,6 +28,7 @@ namespace InsignisIllustrationGenerator.Manager
 
             var illustrationDetail = _mapper.Map<IllustrationDetailViewModel, IllustrationDetail>(model);
 
+            illustrationDetail.Status = "CREATED";
             illustrationDetail.IllustrationProposedPortfolio = new List<ProposedPortfolio>();
             ProposedPortfolio folio = new ProposedPortfolio();
             foreach (var item in model.ProposedPortfolio.ProposedInvestments)

@@ -14,7 +14,17 @@
                     <div class="col-lg-4 col-sm-12"><p>Email:<br><span>@Model.PartnerEmail</span></p></div>
                     <hr class="blue-line">
                     <div class="col-lg-4 col-sm-6"><p>Client Name / Reference:<br><span>@Model.ClientName</span></p></div>
-                    <div class="col-lg-4 col-sm-6"><p>Client Type:<br><span>@(Model.ClientType == 1)?Individual:Joint</span></p></div>
+                    <div class="col-lg-4 col-sm-6">
+                        <p>
+                            Client Type:<br>
+                            @if (Model.ClientType == 0){
+                                <span>Individual</span>
+                            }
+                            else{
+                                <span>Joint</span>
+                            }
+                        </p>
+                    </div>
                 </div>
             </div>
             <h4 class="heading-1">Summary</h4>
