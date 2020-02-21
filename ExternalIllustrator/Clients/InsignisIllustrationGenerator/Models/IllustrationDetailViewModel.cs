@@ -19,7 +19,6 @@ namespace InsignisIllustrationGenerator.Models
 
         public string IllustrationUniqueReference { get; set; }
 
-
         [Required(ErrorMessage = "Please enter client name.")]
         [Display(Name ="Client Name")]
         [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,50}", ErrorMessage = "Invalid Client Name")]
@@ -61,5 +60,7 @@ namespace InsignisIllustrationGenerator.Models
         public DateTime GenerateDate { get; set; }
 
         public string Status   { get; set; }
+        public string Comment { get; set; }
+        public string ReferredBy { get; set; }
     }
 }

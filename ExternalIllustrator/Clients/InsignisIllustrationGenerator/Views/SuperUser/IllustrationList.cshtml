@@ -64,7 +64,10 @@
 
 </div>
 <script>
-    $(document).ready(function () { LoadData(); })
+    $(document).ready(function () {
+        LoadData();
+    })
+
     $(document).on("click", "#bankDetailRow", function () {
         var illustrationUniqueReference = $(this).closest('tr').find('#item_IllustrationUniqueReference').val();
 
@@ -104,8 +107,54 @@
     });
 
 
+
+    function check_advisorName(letters) {
+        debugger;
+        var regex = /^[0-9]+$/;
+        if (regex.test(letters) == false) {
+            $("#validationError").text("Advisor name must be in digits only");
+            return false;
+        }
+        return true;
+    }
+    function check_CompanyName(letters) {
+        var regex = /^[a-zA-Z0-9-;:,.&$£€#/\\. ""]{0,160}/
+        if (regex.test(letters) == false) {
+            $("#validationError").text("Advisor name must be in digits only");
+            return false;
+        }
+        return true;
+    }
+
+
+     function check_ClientName(letters) {
+        var regex =/^[a-zA-Z0-9-_,£$/\\. ""]{0,60}/
+        if (regex.test(letters) == false) {
+            $("#validationError").text("Advisor name must be in digits only");
+            return false;
+        }
+        return true;
+    }
+
+     function check_IllustrationName(letters) {
+        var regex =/^[a-zA-Z0-9-_]+$/ 
+        if (regex.test(letters) == false) {
+            $("#validationError").text("Advisor name must be in digits only");
+            return false;
+        }
+        return true;
+    }
+
     $(document).on("click", "#btnSearch", function () {
-        LoadData();
+        //validation
+        var ad = check_advisorName($("#AdvisorName").val())
+        var cn=check_ClientName($("#ClientName").val())
+        var ccn=check_CompanyName($("#CompanyName").val())
+        var ci= check_IllustrationName($("#IllustrationUniqueReference").val())
+
+        
+            LoadData();
+        
     });
 
     var LoadData = function () {

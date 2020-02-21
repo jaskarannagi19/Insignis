@@ -74,11 +74,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
             return Json(new { Data = $"{string.Join(",", sbheader)}\r\n{sb.ToString()}", FileName = "Illustration.csv" });
 
-
-            /// File(buffer, "text/csv", "Illustration.csv");
-
-
-
         }
         //Get Single Illustration Details
 

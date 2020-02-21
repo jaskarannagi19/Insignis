@@ -30,10 +30,10 @@ namespace InsignisIllustrationGenerator.Manager
 
             illustrationDetail.Status = "CREATED";
             illustrationDetail.IllustrationProposedPortfolio = new List<ProposedPortfolio>();
-            ProposedPortfolio folio = new ProposedPortfolio();
+            
             foreach (var item in model.ProposedPortfolio.ProposedInvestments)
             {
-
+                ProposedPortfolio folio = new ProposedPortfolio();
                 folio.InvestmentTerm = item.InvestmentTerm.TermText;
                 folio.AnnualInterest = item.AnnualInterest;
                 folio.DepositSize = item.DepositSize;
@@ -61,9 +61,8 @@ namespace InsignisIllustrationGenerator.Manager
 
 
         internal IEnumerable<IllustrationListViewModel> GetIllustrationList(SearchParameterViewModel searchParameter)
-
         {
-            var IllustrationDetails = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).ToList();
+            var IllustrationDetails = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x=>x.GenerateDate).ToList();
 
             //DateTime? IllustrationFrom = Convert.ToDateTime(searchParameter.IllustrationFrom);
             //DateTime? IllustrationTo = Convert.ToDateTime(searchParameter.IllustrationTo);
@@ -111,11 +110,12 @@ namespace InsignisIllustrationGenerator.Manager
             result.ProposedPortfolio = new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
             //result.ProposedPortfolio.ProposedInvestments = new List<Insignis.Asset.Management.Tools.Sales.SCurveOutputRow>();
 
-            Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
-
-            Insignis.Asset.Management.Clients.Helper.InvestmentTerm term = new Insignis.Asset.Management.Clients.Helper.InvestmentTerm();
+            
             foreach (var item in dbIllustration.IllustrationProposedPortfolio)
             {
+                Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
+
+                Insignis.Asset.Management.Clients.Helper.InvestmentTerm term = new Insignis.Asset.Management.Clients.Helper.InvestmentTerm();
                 row.AnnualInterest = item.AnnualInterest;
                 row.DepositSize = item.DepositSize;
                 row.InstitutionName = item.InstitutionName;
@@ -127,6 +127,27 @@ namespace InsignisIllustrationGenerator.Manager
             }
 
             return result;
+        }
+
+
+
+        internal bool UpdateIllustrationStatus(string comment, string referredBy, string status, string uniqueReferenceId)
+        {
+            IllustrationDetail illustration = _context.IllustrationDetails.First(x => x.IllustrationUniqueReference == uniqueReferenceId);
+
+            illustration.Status = status;
+            illustration.Comment = comment;
+            illustration.ReferredBy = referredBy;
+            bool isSaved = false;
+            try { 
+            _context.SaveChanges();
+                isSaved = true;
+            }
+            catch
+            {
+
+            }
+            return isSaved;
         }
     }
 }

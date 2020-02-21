@@ -207,8 +207,6 @@ namespace InsignisIllustrationGenerator.Controllers
             //    return Json(new { Error = isNull });
             //}
 
-
-
             var result = _illustrationHelper.GetIllustrationList(searchParams);
             if (result.Count()>0) return Json(new { Data = result, Success = true });
             return Json(new { Data = "Sorry, we couldn’t find any illustrations matching your search criteria.", Success = false });
@@ -236,8 +234,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
         }
 
-
-
         public IActionResult Calculate(IllustrationDetailViewModel model)
         {
             /*
@@ -246,10 +242,24 @@ namespace InsignisIllustrationGenerator.Controllers
              Returns:- View and Errors
              */
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            
             if (string.IsNullOrEmpty(model.PartnerName) && !string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
             {
                 model = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
+                var folio = JsonConvert.DeserializeObject<SCurveOutput>(HttpContext.Session.GetString("GeneratedPorposals"));
+
+
+                var scurve = _mapper.Map<Insignis.Asset.Management.Tools.Sales.SCurveOutput>(folio);
+
+
+
+                model.ProposedPortfolio = scurve;
+
+                return View(model);
+                
+
             }
+            
 
             if (ModelState.IsValid)
             {
@@ -625,19 +635,10 @@ namespace InsignisIllustrationGenerator.Controllers
             Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
             string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
 
-            //System.IO.File.Delete(filename);
-
-            //Presentation presentation = new Presentation();
-
-            //presentation.LoadFromFile(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pptx");
-            //presentation.SaveToFile(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf", Spire.Presentation.FileFormat.PDF);
-
-            //byte[] filedata = System.IO.File.ReadAllBytes(filename);
+            
 
             ViewBag.PDF = extendedReportContent.URI;
-
             return View();
-            //return File(filedata, "application/pdf");
         }
 
         private bool SaveIllustraion(IllustrationDetailViewModel model)
@@ -729,6 +730,25 @@ namespace InsignisIllustrationGenerator.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+
+
+        public JsonResult UpdateStatus(string comment,string referredBy,string status, string uniqueReferenceId)
+        {
+            /*
+             Update status of given illustration
+             Arguments:- 
+                premitive type 
+                comment
+                referredby
+                status
+                illustration id
+            Return:-
+                Json true/false on success
+             */
+            var result = _illustrationHelper.UpdateIllustrationStatus(comment, referredBy, status, uniqueReferenceId);
+            return Json(result);
         }
 
     }

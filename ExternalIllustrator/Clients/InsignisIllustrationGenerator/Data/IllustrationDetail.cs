@@ -32,5 +32,8 @@ namespace InsignisIllustrationGenerator.Data
         public double TotalDeposit { get; set; }
 
         public List<ProposedPortfolio> IllustrationProposedPortfolio { get; set; }
+
+        public string Comment { get; set; }
+        public string ReferredBy { get; set; }
     }
 }
