@@ -62,48 +62,19 @@
 </div>
 
 <script>
+    $(document).ready(function () { LoadData(); })
     $(document).on("click", "#btnSearch", function () {
-        var formData = $("#myform").serialize();
+        //var formData = $("#myform").serialize();
 
-        $.ajax({
-            url: "../../Home/SearchIllustration",
-            type: "POST",
-            data: {
-                AdvisorName: $("#AdvisorName").val(),
-                ClientName: $("#ClientName").val(),
-                CompanyName: $("#CompanyName").val(),
-                IllustrationUniqueReference: $("#IllustrationUniqueReference").val(),
-                IllustrationFrom: $("#IllustrationFrom").val(),
-                IllustrationTo: $("#IllustrationTo").val()
-            },
-
-            success: function (response, textStatus, jqXHR) {
-                debugger;
-                $('#tblbody').html("");
-                if (response.success === false) {
-                    $("#validationError").text(response.data);
-                    $('#tblbody').append('<tr><td>response.data</td>');
-                }
-                else {
-                    $.each(response.data, function () {
-                        $("#tblbody").append('<tr class="d-flex" id="bankDetailRow"    ><td class="col-2">' + this.adviserName + '</td><td class="col-2">' + this.clientName + '</td><td class="col-2">' + this.partnerOrganisation + '</td><td class="col-3">' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-2">' + this.generateDate + '</td><td class="col-1">' + this.status + '</td></tr>');
-                    });
-                    //var data = response.data;
-                    //for (var i = 0; i < data.length; i++) {
-                    //    $('#illustrationListTable tr:last').after('<tr class="d-flex" id="bankDetailRow" onclick="RedirectIllustrationDetail()"  ><td class="col-2">' + data[i].adviserName + '</td><td class="col-2">' + data[i].clientName + '</td><td class="col-2">' + data[i].partnerOrganisation + '</td><td class="col-3">' + data[i].illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + data[i].illustrationUniqueReference + '"/></td><td class="col-2">' + data[i].generateDate + '</td><td class="col-1">' + data[i].status + '</td></tr>');
-                    //}
-
-                }
-
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-
-            }
-        });
+        LoadData();
     });
-    $(document).on("click", "#bankDetailRow", function () {var illustrationUniqueReference = $(this).closest('tr').find('#item_IllustrationUniqueReference').val();
-   
-    window.location = "/Home/GetIllustration?uniqueReferenceId=" + illustrationUniqueReference; });
+
+
+    $(document).on("click", "#bankDetailRow", function () {
+        var illustrationUniqueReference = $(this).closest('tr').find('#item_IllustrationUniqueReference').val();
+
+        window.location = "/Home/GetIllustration?uniqueReferenceId=" + illustrationUniqueReference;
+    });
     $(document).on("click", "#GenerateCSV", function () {
 
         $.ajax({
@@ -136,7 +107,62 @@
             }
         });
     });
-   
 
+    var LoadData = function () {
+        $.ajax({
+            url: "../../Home/SearchIllustration",
+            type: "POST",
+            data: {
+                AdvisorName: $("#AdvisorName").val(),
+                ClientName: $("#ClientName").val(),
+                CompanyName: $("#CompanyName").val(),
+                IllustrationUniqueReference: $("#IllustrationUniqueReference").val(),
+                IllustrationFrom: $("#IllustrationFrom").val(),
+                IllustrationTo: $("#IllustrationTo").val()
+            },
+
+            success: function (response, textStatus, jqXHR) {
+                debugger;
+                $('#dvIllustration').html("");
+                var tbl = '<table id="illustrationListTable" class="table table-striped table-bordered table-responsive-sm illustrationListTable">';
+                tbl += '<thead class="thead-dark">';
+                tbl += '     <tr class="d-flex">';
+                tbl += '         <th class="col-2">Advisor Name</th>';
+                tbl += '         <th class="col-2">Client Name</th>';
+                tbl += '         <th class="col-2">Company Name</th>';
+                tbl += '         <th class="col-3">Illustration Unique Reference</th>';
+                tbl += '         <th class="col-2">Generation Date</th>';
+                tbl += '         <th class="col-1">Status</th>';
+                tbl += '      </tr>';
+                tbl += '  </thead><tbody id="tblbody"></tbody></table>';
+                $('#dvIllustration').html(tbl);
+                if (response.success === false) {
+                    $("#validationError").text(response.data);
+                    // $('#tblbody').append('<tr><td>'+response.data+'</td>');
+                }
+                else {
+                    $.each(response.data, function () {
+                        $("#tblbody").append('<tr class="d-flex" id="bankDetailRow"    ><td class="col-2">' + this.adviserName + '</td><td class="col-2">' + this.clientName + '</td><td class="col-2">' + this.partnerOrganisation + '</td><td class="col-3">' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-2">' + this.generateDate + '</td><td class="col-1">' + this.status + '</td></tr>');
+                    });
+                    //var data = response.data;
+                    //for (var i = 0; i < data.length; i++) {
+                    //    $('#illustrationListTable tr:last').after('<tr class="d-flex" id="bankDetailRow" onclick="RedirectIllustrationDetail()"  ><td class="col-2">' + data[i].adviserName + '</td><td class="col-2">' + data[i].clientName + '</td><td class="col-2">' + data[i].partnerOrganisation + '</td><td class="col-3">' + data[i].illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + data[i].illustrationUniqueReference + '"/></td><td class="col-2">' + data[i].generateDate + '</td><td class="col-1">' + data[i].status + '</td></tr>');
+                    //}
+
+                }
+                $('.illustrationListTable').DataTable({
+                    //  "dom": '<"top"i>rt<"bottom"flp><"clear">', //for using a search in buttom
+                    // "scrollY": "400px",
+                    "scrollX": true,
+                    "scrollCollapse": false,
+                    "paging": true,
+                    "searching": false
+                });
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    }
 
 </script>

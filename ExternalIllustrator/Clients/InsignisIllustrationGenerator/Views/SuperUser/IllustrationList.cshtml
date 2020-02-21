@@ -64,10 +64,12 @@
 
 </div>
 <script>
-   
-      $(document).on("click", "#bankDetailRow", function () {var illustrationUniqueReference = $(this).closest('tr').find('#item_IllustrationUniqueReference').val();
-   
-    window.location = "/Home/GetIllustration?uniqueReferenceId=" + illustrationUniqueReference; });
+    $(document).ready(function () { LoadData(); })
+    $(document).on("click", "#bankDetailRow", function () {
+        var illustrationUniqueReference = $(this).closest('tr').find('#item_IllustrationUniqueReference').val();
+
+        window.location = "/SuperUser/GetIllustration?uniqueReferenceId=" + illustrationUniqueReference;
+    });
     $(document).on("click", "#GenerateCSV", function () {
 
         $.ajax({
@@ -100,13 +102,15 @@
             }
         });
     });
- 
+
 
     $(document).on("click", "#btnSearch", function () {
-        var formData = $("#myform").serialize();
+        LoadData();
+    });
 
+    var LoadData = function () {
         $.ajax({
-            url: "../../SuperUser/SearchIllustration",
+            url: "../../Home/SearchIllustration",
             type: "POST",
             data: {
                 AdvisorName: $("#AdvisorName").val(),
@@ -119,10 +123,22 @@
 
             success: function (response, textStatus, jqXHR) {
                 debugger;
-                $('#tblbody').html("");
+                $('#dvIllustration').html("");
+                var tbl = '<table id="illustrationListTable" class="table table-striped table-bordered table-responsive-sm illustrationListTable">';
+                tbl += '<thead class="thead-dark">';
+                tbl += '     <tr class="d-flex">';
+                tbl += '         <th class="col-2">Advisor Name</th>';
+                tbl += '         <th class="col-2">Client Name</th>';
+                tbl += '         <th class="col-2">Company Name</th>';
+                tbl += '         <th class="col-3">Illustration Unique Reference</th>';
+                tbl += '         <th class="col-2">Generation Date</th>';
+                tbl += '         <th class="col-1">Status</th>';
+                tbl += '      </tr>';
+                tbl += '  </thead><tbody id="tblbody"></tbody></table>';
+                $('#dvIllustration').html(tbl);
                 if (response.success === false) {
                     $("#validationError").text(response.data);
-                    $('#tblbody').append('<tr><td>response.data</td>');
+                    // $('#tblbody').append('<tr><td>'+response.data+'</td>');
                 }
                 else {
                     $.each(response.data, function () {
@@ -134,13 +150,19 @@
                     //}
 
                 }
-
+                $('.illustrationListTable').DataTable({
+                    //  "dom": '<"top"i>rt<"bottom"flp><"clear">', //for using a search in buttom
+                    // "scrollY": "400px",
+                    "scrollX": true,
+                    "scrollCollapse": false,
+                    "paging": true,
+                    "searching": false
+                });
             },
             error: function (jqXHR, textStatus, errorThrown) {
 
             }
         });
-    });
-
+    }
 
 </script>
