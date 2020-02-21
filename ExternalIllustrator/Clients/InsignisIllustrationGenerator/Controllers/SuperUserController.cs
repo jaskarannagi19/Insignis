@@ -102,7 +102,7 @@ namespace InsignisIllustrationGenerator.Controllers
         }
 
 
-        public JsonResult SearchIllustrationAsync(SearchParameterViewModel searchParams)
+        public JsonResult SearchIllustration(SearchParameterViewModel searchParams)
         {
 
             //check model validation for any empty waitttttttt
