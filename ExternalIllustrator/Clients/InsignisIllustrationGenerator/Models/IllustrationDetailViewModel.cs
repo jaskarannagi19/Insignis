@@ -58,5 +58,8 @@ namespace InsignisIllustrationGenerator.Models
 
         public Insignis.Asset.Management.Tools.Sales.SCurveOutput ProposedPortfolio { get; set; }
         public string AdviserName { get; internal set; }
+        public DateTime GenerateDate { get; set; }
+
+        public string Status   { get; set; }
     }
 }

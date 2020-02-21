@@ -66,43 +66,43 @@
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="@Model.EasyAccess">Easy Access</label>
-                                        <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.EasyAccess" value="@Model.EasyAccess">
+                                        <input type="text" class="form-control price" id="" maxlength="8" placeholder="£0.00" asp-for="@Model.EasyAccess" value="@Model.EasyAccess">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="@Model.OneMonth">1 Month</label>
-                                        <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.OneMonth" value="@Model.OneMonth">
+                                        <input type="text" class="form-control price" id="" maxlength="8" placeholder="£0.00" asp-for="@Model.OneMonth" value="@Model.OneMonth">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="@Model.ThreeMonths">3 Months</label>
-                                        <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.ThreeMonths" value="@Model.ThreeMonths">
+                                        <input type="text" class="form-control price" id="" maxlength="8" placeholder="£0.00" asp-for="@Model.ThreeMonths" value="@Model.ThreeMonths">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="@Model.SixMonths">6 Months</label>
-                                        <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.SixMonths" value="@Model.SixMonths">
+                                        <input type="text" class="form-control price" id="" maxlength="8" placeholder="£0.00" asp-for="@Model.SixMonths" value="@Model.SixMonths">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="@Model.NineMonths">9 Months</label>
-                                        <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.NineMonths" value="@Model.NineMonths">
+                                        <input type="text" class="form-control price" id="" maxlength="8" placeholder="£0.00" asp-for="@Model.NineMonths" value="@Model.NineMonths">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="@Model.OneYear">1 Year</label>
-                                        <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.OneYear" value="@Model.OneYear">
+                                        <input type="text" class="form-control price" id="" maxlength="8" placeholder="£0.00" asp-for="@Model.OneYear" value="@Model.OneYear">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="@Model.TwoYears">2 Year</label>
-                                        <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.TwoYears" value="@Model.TwoYears">
+                                        <input type="text" class="form-control price" id="" maxlength="8" placeholder="£0.00" asp-for="@Model.TwoYears" value="@Model.TwoYears">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="@Model.ThreeYearsPlus">3+ Years</label>
-                                        <input type="text" class="form-control price" id="" placeholder="£0.00" asp-for="@Model.ThreeYearsPlus" value="@Model.ThreeYearsPlus">
+                                        <input type="text" class="form-control price" id="" maxlength="8" placeholder="£0.00" asp-for="@Model.ThreeYearsPlus" value="@Model.ThreeYearsPlus">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="@Model.TotalDeposit">Total Deposit</label>
-                                        <input type="text" class="form-control" id="txtTotalDeposit" placeholder="£0.00" asp-for="@Model.TotalDeposit" value="@Model.TotalDeposit" value="0.00"  readonly="readonly">
+                                        <input type="text" class="form-control" id="txtTotalDeposit"    placeholder="£0.00" asp-for="@Model.TotalDeposit" value="@Model.TotalDeposit" value="0.00"  readonly="readonly">
 
                                     </div>
                                     <div class="form-group col-md-6 margin-t-20">
-                                        @Html.ActionLink("Reset", "Index", "Home", new { @class = "btn btn-primary" })
+                                        @Html.ActionLink("Reset", "Reset", "Home",new { actionid="Index"}, new { @class = "btn btn-primary" })
                                         @*<input type="reset" class="btn btn-primary" value="Reset" />*@
                                         <button type="submit" class="btn btn-primary">Calculate</button>
                                     </div>
@@ -121,9 +121,7 @@
 <script>
 
     $('.price').keyup(function () {
-        debugger;
-
-        // initialize the sum (total price) to zero
+              // initialize the sum (total price) to zero
         var sum = 0;
 
         // we use jQuery each() to loop through all the textbox with 'price' class

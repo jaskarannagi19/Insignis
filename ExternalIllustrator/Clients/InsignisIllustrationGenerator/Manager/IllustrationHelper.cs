@@ -26,7 +26,7 @@ namespace InsignisIllustrationGenerator.Manager
         internal bool SaveIllustraionAsync(IllustrationDetailViewModel model)
         {
 
-            var illustrationDetail = _mapper.Map<IllustrationDetailViewModel,IllustrationDetail>(model);
+            var illustrationDetail = _mapper.Map<IllustrationDetailViewModel, IllustrationDetail>(model);
 
             illustrationDetail.IllustrationProposedPortfolio = new List<ProposedPortfolio>();
             ProposedPortfolio folio = new ProposedPortfolio();
@@ -50,29 +50,7 @@ namespace InsignisIllustrationGenerator.Manager
             _context.IllustrationDetails.Add(illustrationDetail);
             _context.SaveChanges();
             var IsSave = false;
-            return  IsSave;
-        }
-
-        internal async Task< IEnumerable<IllustrationListViewModel>> GetIllustrationListAsync(SearchParameterViewModel searchParameter)
-        {
-            var IllustrationDetails = await _context.IllustrationDetails.Include(x=>x.IllustrationProposedPortfolio).ToListAsync();
-
-            if (searchParameter != null) {
-                IllustrationDetails = IllustrationDetails.Where(f =>
-                //Advisor Search
-                (!string.IsNullOrEmpty(searchParameter.AdvisorName) | f.AdviserName.Contains(searchParameter.AdvisorName))
-                //Client Search
-                & (!string.IsNullOrEmpty(searchParameter.ClientName) | f.ClientName.Contains(searchParameter.ClientName))
-                //Company Search
-                & (!string.IsNullOrEmpty(searchParameter.CompanyName) | f.ClientName.Contains(searchParameter.CompanyName))).ToList();
-                //Company Search
-                //& ((searchParameter.IllustrationFrom.HasValue | f.GenerateDate > searchParameter.IllustrationFrom)
-                //& (searchParameter.IllustrationTo.HasValue | f.GenerateDate < searchParameter.IllustrationTo))).ToList();
-            }
-            List<IllustrationListViewModel> response = new List<IllustrationListViewModel>();
-            response = _mapper.Map(IllustrationDetails, response);
-
-            return response;
+            return IsSave;
         }
 
 
@@ -84,32 +62,32 @@ namespace InsignisIllustrationGenerator.Manager
         internal IEnumerable<IllustrationListViewModel> GetIllustrationList(SearchParameterViewModel searchParameter)
 
         {
-            var IllustrationDetails =  _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).ToList();
+            var IllustrationDetails = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).ToList();
 
-            DateTime? IllustrationFrom = Convert.ToDateTime(searchParameter.IllustrationFrom);
-            DateTime? IllustrationTo = Convert.ToDateTime(searchParameter.IllustrationTo);
+            //DateTime? IllustrationFrom = Convert.ToDateTime(searchParameter.IllustrationFrom);
+            //DateTime? IllustrationTo = Convert.ToDateTime(searchParameter.IllustrationTo);
 
-            searchParameter.ClientName = string.IsNullOrEmpty(searchParameter.ClientName) ? "" : searchParameter.ClientName.ToLower();
-            searchParameter.CompanyName = string.IsNullOrEmpty(searchParameter.CompanyName) ? "" : searchParameter.CompanyName.ToLower();
-            searchParameter.AdvisorName = string.IsNullOrEmpty(searchParameter.AdvisorName) ? "" : searchParameter.AdvisorName.ToLower();
+            //searchParameter.ClientName = string.IsNullOrEmpty(searchParameter.ClientName) ? "" : searchParameter.ClientName.ToLower();
+            //searchParameter.CompanyName = string.IsNullOrEmpty(searchParameter.CompanyName) ? "" : searchParameter.CompanyName.ToLower();
+            //searchParameter.AdvisorName = string.IsNullOrEmpty(searchParameter.AdvisorName) ? "" : searchParameter.AdvisorName.ToLower();
             searchParameter.IllustrationUniqueReference = string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) ? "" : searchParameter.IllustrationUniqueReference.ToLower();
-            
-            
+
+
             if (searchParameter != null)
             {
                 IllustrationDetails = IllustrationDetails.Where(f =>
-                
-                //Advisor Search
-                (string.IsNullOrEmpty(searchParameter.AdvisorName) | f.AdviserName.ToLower().Contains(searchParameter.AdvisorName))
-                //Client Search
-                &(string.IsNullOrEmpty(searchParameter.ClientName) | f.ClientName.ToLower().Contains(searchParameter.ClientName))
-                //Company Search
-                & (string.IsNullOrEmpty(searchParameter.CompanyName) | f.ClientName.ToLower().Contains(searchParameter.CompanyName))
-                //Company Search
-                &(string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) | f.IllustrationUniqueReference.ToLower().Contains(searchParameter.IllustrationUniqueReference))
 
-                & ((IllustrationFrom.HasValue | f.GenerateDate > IllustrationFrom)
-                & (IllustrationTo.HasValue | f.GenerateDate < IllustrationTo))).ToList();
+                //Advisor Search
+                (string.IsNullOrEmpty(searchParameter.AdvisorName) || (!string.IsNullOrEmpty(f.AdviserName) && f.AdviserName.ToLower().Contains(searchParameter.AdvisorName)))
+                //Client Search
+                & (string.IsNullOrEmpty(searchParameter.ClientName) || f.ClientName.ToLower().Contains(searchParameter.ClientName))
+                //Company Search
+                & (string.IsNullOrEmpty(searchParameter.CompanyName) || f.PartnerName.ToLower().Contains(searchParameter.CompanyName))
+                //Company Search
+                & (string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || f.IllustrationUniqueReference.ToLower().Contains(searchParameter.IllustrationUniqueReference))
+
+                & ((!searchParameter.IllustrationFrom.HasValue || f.GenerateDate > searchParameter.IllustrationFrom.Value)
+                & (!searchParameter.IllustrationTo.HasValue || f.GenerateDate < searchParameter.IllustrationTo.Value))).ToList();
             }
             List<IllustrationListViewModel> response = new List<IllustrationListViewModel>();
             response = _mapper.Map(IllustrationDetails, response);
@@ -117,7 +95,7 @@ namespace InsignisIllustrationGenerator.Manager
             return response;
         }
 
-        internal  IllustrationDetailViewModel GetIllustrationByByUniqueReference(string uniqueReferenceID)
+        internal IllustrationDetailViewModel GetIllustrationByByUniqueReference(string uniqueReferenceID)
         {
             /*
              Get illustration from unique reference id from db
@@ -126,7 +104,7 @@ namespace InsignisIllustrationGenerator.Manager
             Return:-
                 Illustration DetailViewModel
              */
-            IllustrationDetail dbIllustration = _context.IllustrationDetails.Include(x=>x.IllustrationProposedPortfolio).SingleOrDefault(x => x.IllustrationUniqueReference == uniqueReferenceID);
+            IllustrationDetail dbIllustration = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).SingleOrDefault(x => x.IllustrationUniqueReference == uniqueReferenceID);
             //map db entity to view model ProposedPortfolio. Investment count is 0 after Mapping
             IllustrationDetailViewModel result = _mapper.Map<IllustrationDetailViewModel>(dbIllustration);
             result.ProposedPortfolio = new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
@@ -134,7 +112,7 @@ namespace InsignisIllustrationGenerator.Manager
 
             Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
 
-            Insignis.Asset.Management.Clients.Helper.InvestmentTerm term= new Insignis.Asset.Management.Clients.Helper.InvestmentTerm();
+            Insignis.Asset.Management.Clients.Helper.InvestmentTerm term = new Insignis.Asset.Management.Clients.Helper.InvestmentTerm();
             foreach (var item in dbIllustration.IllustrationProposedPortfolio)
             {
                 row.AnnualInterest = item.AnnualInterest;

@@ -358,8 +358,8 @@ table th, table td {
 }
 .table .thead-dark th {
     color: #fff;
-    background-color: #6080b9;
-    border-color: #6080b9;
+    background-color: #6080b9!important;
+    border-color: #6080b9!important;
 	font-size: 16px;
 	font-weight: normal;
 }

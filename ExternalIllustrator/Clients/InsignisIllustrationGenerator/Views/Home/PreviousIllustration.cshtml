@@ -7,56 +7,136 @@
 <h1>Previous Illustration</h1>
 <div class="middle-section">
     <div class="container">
+        @*  <form id="myform" action="@Url.Action("PreviousIllustration","Home")" method="post">*@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="right"><a href="#" class="btn btn-primary">Generate CSV</a></div>
+                <div class="right"><input type="button" href="#" id="GenerateCSV" class="btn btn-primary" value="Generate CSV" /></div>
             </div>
             <div class="col-lg-12 col-sm-12">
                 <div class="illustration-generator">
                     <h4 class="heading-1">Search By:</h4>
                     <div class="gray-bg">
 
-                        <form>
-                            <div class="form-row">
-                                <div class="form-group col-lg-4">
-                                    <label for="inputEmail4">Advisor Name</label>
-                                    <input type="email" class="form-control" id="" placeholder="Advisor Name">
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <label for="inputPassword4">Client Name</label>
-                                    <input type="email" class="form-control" id="" placeholder="Client Name">
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <label for="inputPassword4">Company Name</label>
-                                    <input type="email" class="form-control" id="" placeholder="Company Name">
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <label for="inputPassword4">Illustration Unique Reference</label>
-                                    <input type="email" class="form-control" id="" placeholder="Illustration Unique Reference">
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <label for="inputPassword4">From Date</label>
-                                    <input type="email" class="form-control" id="" placeholder="dd-mm-yyyy">
-                                </div>
-                                <div class="form-group col-lg-4">
-                                    <label for="inputPassword4">To Date</label>
-                                    <input type="email" class="form-control" id="" placeholder="dd-mm-yyyy">
-                                </div>
+                        <div class="form-row">
+                            <div class="form-group col-lg-4">
+                                <label for="inputEmail4">Advisor Name</label>
+                                <input type="text" class="form-control" id="AdvisorName" placeholder="Advisor Name">
                             </div>
-                            <div class="col-lg-12 center">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                                <button type="submit" class="btn btn-primary">Reset</button>
+                            <div class="form-group col-lg-4">
+                                <label for="inputPassword4">Client Name</label>
+                                <input type="text" class="form-control" id="ClientName" placeholder="Client Name">
                             </div>
-                        </form>
+                            <div class="form-group col-lg-4">
+                                <label for="inputPassword4">Company Name</label>
+                                <input type="text" class="form-control" id="CompanyName" placeholder="Company Name">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="inputPassword4">Illustration Unique Reference</label>
+                                <input type="text" class="form-control" id="IllustrationUniqueReference" placeholder="Illustration Unique Reference">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="inputPassword4">From Date</label>
+                                <input type="date" class="form-control" id="IllustrationFrom" placeholder="dd-mm-yyyy">
+                            </div>
+                            <div class="form-group col-lg-4">
+                                <label for="inputPassword4">To Date</label>
+                                <input type="date" class="form-control" id="IllustrationTo" placeholder="dd-mm-yyyy">
+                            </div>
+                        </div>
+                        <div class="col-lg-12 center">
+                            <input id="btnSearch" type="button" class="btn btn-primary" value="Search" />
+                            <button type="reset" class="btn btn-primary">Reset</button>
+                        </div>
 
                     </div>
 
                 </div>
             </div>
         </div>
+        @*</form>*@
         <div class="clear1"></div>
         @Html.Partial("_IllustrationList", Model)
 
     </div>
 
 </div>
+
+<script>
+    $(document).on("click", "#btnSearch", function () {
+        var formData = $("#myform").serialize();
+
+        $.ajax({
+            url: "../../Home/SearchIllustration",
+            type: "POST",
+            data: {
+                AdvisorName: $("#AdvisorName").val(),
+                ClientName: $("#ClientName").val(),
+                CompanyName: $("#CompanyName").val(),
+                IllustrationUniqueReference: $("#IllustrationUniqueReference").val(),
+                IllustrationFrom: $("#IllustrationFrom").val(),
+                IllustrationTo: $("#IllustrationTo").val()
+            },
+
+            success: function (response, textStatus, jqXHR) {
+                debugger;
+                $('#tblbody').html("");
+                if (response.success === false) {
+                    $("#validationError").text(response.data);
+                    $('#tblbody').append('<tr><td>response.data</td>');
+                }
+                else {
+                    $.each(response.data, function () {
+                        $("#tblbody").append('<tr class="d-flex" id="bankDetailRow"    ><td class="col-2">' + this.adviserName + '</td><td class="col-2">' + this.clientName + '</td><td class="col-2">' + this.partnerOrganisation + '</td><td class="col-3">' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-2">' + this.generateDate + '</td><td class="col-1">' + this.status + '</td></tr>');
+                    });
+                    //var data = response.data;
+                    //for (var i = 0; i < data.length; i++) {
+                    //    $('#illustrationListTable tr:last').after('<tr class="d-flex" id="bankDetailRow" onclick="RedirectIllustrationDetail()"  ><td class="col-2">' + data[i].adviserName + '</td><td class="col-2">' + data[i].clientName + '</td><td class="col-2">' + data[i].partnerOrganisation + '</td><td class="col-3">' + data[i].illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + data[i].illustrationUniqueReference + '"/></td><td class="col-2">' + data[i].generateDate + '</td><td class="col-1">' + data[i].status + '</td></tr>');
+                    //}
+
+                }
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
+    $(document).on("click", "#bankDetailRow", function () {var illustrationUniqueReference = $(this).closest('tr').find('#item_IllustrationUniqueReference').val();
+   
+    window.location = "/Home/GetIllustration?uniqueReferenceId=" + illustrationUniqueReference; });
+    $(document).on("click", "#GenerateCSV", function () {
+
+        $.ajax({
+            url: "../../Home/ExportCSV",
+            type: "POST",
+            data: {
+                AdvisorName: $("#AdvisorName").val(),
+                ClientName: $("#ClientName").val(),
+                CompanyName: $("#CompanyName").val(),
+                IllustrationUniqueReference: $("#IllustrationUniqueReference").val(),
+                IllustrationFrom: $("#IllustrationFrom").val(),
+                IllustrationTo: $("#IllustrationTo").val()
+            },
+
+            success: function (response, textStatus, jqXHR) {
+                var element = document.createElement('a');
+                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + response.data);
+                element.setAttribute('download', response.fileName);
+
+                element.style.display = 'none';
+                document.body.appendChild(element);
+
+                element.click();
+
+                document.body.removeChild(element);
+
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+
+            }
+        });
+    });
+   
+
+
+</script>

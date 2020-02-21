@@ -7,6 +7,7 @@ namespace InsignisIllustrationGenerator.Manager
 {
     public class Session
     {
+        public bool SuperUser { get; set; }
         public string PartnerOrganisation { get; set; }
         public string PartnerName { get; set; }
         public string PartnerEmailAddress { get; set; }

@@ -24,8 +24,8 @@ namespace InsignisIllustrationGenerator.Models
         
         [RegularExpression(@"^[a-zA-Z0-9-]", ErrorMessage = "Invalid Illustration Number")]
         public string IllustrationUniqueReference { get; set; }
-        public string IllustrationFrom { get; set; }
-        public string IllustrationTo { get; set; }
+        public DateTime? IllustrationFrom { get; set; }
+        public DateTime? IllustrationTo { get; set; }
 
 
     }

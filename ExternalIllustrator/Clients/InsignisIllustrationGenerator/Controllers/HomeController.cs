@@ -19,6 +19,7 @@ using InsignisIllustrationGenerator.Scheduler;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
+using System.Text;
 
 namespace InsignisIllustrationGenerator.Controllers
 {
@@ -39,8 +40,47 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
         private FinancialAbstraction financialAbstraction { get; set; }
+        // [HttpPost, ActionName("PreviousIllustration")]
+        [HttpPost]
+        public ActionResult ExportCSV(SearchParameterViewModel searchParameter)
+        {
+            var result = _illustrationHelper.GetIllustrationList(searchParameter);
+            StringBuilder sbheader = new StringBuilder();
+            StringBuilder sb = new StringBuilder();
 
 
+            sbheader.Append(string.Format("{0},", "Company Name"));
+            sbheader.Append(string.Format("{0},", "Client Name"));
+            sbheader.Append(string.Format("{0},", "Client Type"));
+            sbheader.Append(string.Format("{0},", "Illustration Unique Reference"));
+            sbheader.Append(string.Format("{0},", "Generate Date"));
+            sbheader.Append(string.Format("{0},", "Status")).AppendLine(Environment.NewLine);
+
+
+
+            foreach (var data in result)
+            {
+
+                sb.Append(string.Format("{0},", data.PartnerOrganisation));
+                sb.Append(string.Format("{0},", data.ClientName));
+                sb.Append(string.Format("{0},", data.ClientType));
+                sb.Append(string.Format("{0},", data.IllustrationUniqueReference));
+                sb.Append(string.Format("{0},", data.GenerateDate));
+                sb.Append(string.Format("{0},", data.Status)).AppendLine(Environment.NewLine);
+
+            }
+
+
+          //  byte[] buffer = Encoding.ASCII.GetBytes();
+
+            return Json(new { Data = $"{string.Join(",", sbheader)}\r\n{sb.ToString()}", FileName = "Illustration.csv" });
+
+
+               /// File(buffer, "text/csv", "Illustration.csv");
+
+
+
+        }
 
         //Session State Management
         public void SetSession()
@@ -53,7 +93,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
             //Set Info in session
 
-            var session = new Session() { PartnerEmailAddress = "p.artner@partorg.com", PartnerName = "Peter Artner", PartnerOrganisation = "PartOrg Ltd.", PartnerTelephone = "01226 1234 567" };
+            var session = new Session() { PartnerEmailAddress = "p.artner@partorg.com", PartnerName = "Peter Artner", PartnerOrganisation = "PartOrg Ltd.", PartnerTelephone = "01226 1234 567", SuperUser = false };
 
             HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(session));
             //if (Session["_partnerOrganisation"] != null && Session["_partnerOrganisation"].ToString().Length > 0 &&
@@ -84,6 +124,13 @@ namespace InsignisIllustrationGenerator.Controllers
             _bankHelper = new BankHelper(mapper, _context);
             _illustrationHelper = new IllustrationHelper(mapper, _context);
 
+        }
+
+        public IActionResult Reset(string actionid)
+        {
+            HttpContext.Session.Remove("GeneratedPorposals");
+            HttpContext.Session.Remove("InputProposal");
+            return RedirectToAction(actionid, "Home");
         }
 
         public IActionResult Index()
@@ -129,30 +176,67 @@ namespace InsignisIllustrationGenerator.Controllers
             //render view
             return View(model);
         }
-        [HttpPost]
-        public async Task<IActionResult> PreviousIllustration(SearchParameterViewModel searchParameter)
-        {
+        //[HttpPost]
+        //public async Task<IActionResult> PreviousIllustration(SearchParameterViewModel searchParameter)
+        //{
 
 
-            IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync(searchParameter);
+        //    IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync(searchParameter);
 
-            return PartialView("_IllustrationList",   illustrationList.ToList());
+        //    return PartialView("_IllustrationList",   illustrationList.ToList());
 
-        }
+        //}
 
-        public async Task<IActionResult> PreviousIllustration()
+        public IActionResult PreviousIllustration(SearchParameterViewModel searchParams)
         {
             // IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
-            IEnumerable<IllustrationListViewModel> illustrationList = GetIllustrationListAsync().Result;
-            return View(illustrationList.ToList());
+            // IEnumerable<IllustrationListViewModel> illustrationList = GetIllustrationListAsync().Result;
+            var illustrationList = _illustrationHelper.GetIllustrationList(searchParams);
+            return View(illustrationList);
         }
-
-
-        private async Task<IEnumerable<IllustrationListViewModel>> GetIllustrationListAsync(SearchParameterViewModel searchParameter = null)
+        public IActionResult SearchIllustration(SearchParameterViewModel searchParams)
         {
 
-            return await _illustrationHelper.GetIllustrationListAsync(searchParameter);
+            //check model validation for any empty waitttttttt
+
+            //bool isNull = false;
+            //if (searchParams.AdvisorName == null & searchParams.ClientName == null & searchParams.CompanyName == null
+            //    & searchParams.IllustrationFrom == null & searchParams.IllustrationTo == null & searchParams.IllustrationUniqueReference == null)
+            //{
+            //    isNull = true;
+            //    return Json(new { Error = isNull });
+            //}
+
+
+
+            var result = _illustrationHelper.GetIllustrationList(searchParams);
+            if (result.Count()>0) return Json(new { Data = result, Success = true });
+            return Json(new { Data = "Sorry, we couldn’t find any illustrations matching your search criteria.", Success = false });
         }
+
+
+
+
+        public IActionResult GetIllustration(string uniqueReferenceId)
+        {
+            /*
+             Get summary details of Illustration from unique reference ID 
+             
+            Arguments:- 
+                unique illustration id eg:-
+             
+            Return:-
+                View with Illustration Details
+             */
+            var result = _illustrationHelper.GetIllustrationByByUniqueReference(uniqueReferenceId);
+
+            ViewBag.URL = AppSettings.illustrationOutputPublicFacingFolder + "/" + uniqueReferenceId + "/" + uniqueReferenceId + "_CashIllustration.pdf";
+
+            return View("_illustrationDetails", result);
+
+        }
+
+
 
         public IActionResult Calculate(IllustrationDetailViewModel model)
         {
@@ -162,53 +246,32 @@ namespace InsignisIllustrationGenerator.Controllers
              Returns:- View and Errors
              */
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            if (string.IsNullOrEmpty(model.PartnerName) && !string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
+            {
+                model = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
+            }
 
             if (ModelState.IsValid)
             {
-
-                illustrationInfo.ClientName = model.ClientName;
-                illustrationInfo.ClientType = model.ClientType;
-                illustrationInfo.Currency = model.Currency;
-                illustrationInfo.EasyAccess = model.EasyAccess;
-                illustrationInfo.OneMonth = model.OneMonth;
-                illustrationInfo.ThreeMonths = model.ThreeMonths;
-                illustrationInfo.SixMonths = model.SixMonths;
-                illustrationInfo.NineMonths = model.NineMonths;
-                illustrationInfo.OneYear = model.OneYear;
-                illustrationInfo.TwoYears = model.TwoYears;
-                illustrationInfo.ThreeYears = model.ThreeYearsPlus;
-                illustrationInfo.TotalDeposit = model.TotalDeposit;
-                illustrationInfo.AdvisorName = model.PartnerName;
-
-
-                model.ProposedPortfolio = null;
-
-
-
-                Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
-
-                scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
-                //scurve.LoadHeatmap(7, model.Currency, AppSettings.preferencesRoot);
-
-                Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
-
-                string fscsProtectionConfigFile = AppSettings.ClientConfigRoot;// ConfigurationManager.AppSettings["clientConfigRoot"];
-                if (fscsProtectionConfigFile.EndsWith("\\") == false)
-                    fscsProtectionConfigFile += "\\";
-                fscsProtectionConfigFile += "FSCSProtection.xml";
-
-                Octavo.Gate.Nabu.Preferences.Manager preferencesManager = new Octavo.Gate.Nabu.Preferences.Manager(AppSettings.preferencesRoot + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerOrganisation) + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerEmailAddress));
-                Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
-
-
-                
-                foreach (var childern in institutionInclusion.Children)
+                if (model.Id == 0)
                 {
-                    childern.Value = "true";
+
+                    illustrationInfo.ClientName = model.ClientName;
+                    illustrationInfo.ClientType = model.ClientType;
+                    illustrationInfo.Currency = model.Currency;
+                    illustrationInfo.EasyAccess = model.EasyAccess;
+                    illustrationInfo.OneMonth = model.OneMonth;
+                    illustrationInfo.ThreeMonths = model.ThreeMonths;
+                    illustrationInfo.SixMonths = model.SixMonths;
+                    illustrationInfo.NineMonths = model.NineMonths;
+                    illustrationInfo.OneYear = model.OneYear;
+                    illustrationInfo.TwoYears = model.TwoYears;
+                    illustrationInfo.ThreeYears = model.ThreeYearsPlus;
+                    illustrationInfo.TotalDeposit = model.TotalDeposit;
+                    illustrationInfo.AdvisorName = model.PartnerName;
+
+                    CalculateIllustration(model, illustrationInfo);
                 }
-
-                model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
-
                 SCurveOutput sStore = new SCurveOutput();
 
                 sStore = _mapper.Map(model.ProposedPortfolio, sStore);
@@ -222,10 +285,40 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 return View(model);
             }
-         
-            return View();
+
+            return View(model);
         }
 
+        private void CalculateIllustration(IllustrationDetailViewModel model, Session illustrationInfo)
+        {
+            model.ProposedPortfolio = null;
+
+
+
+            Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
+
+            scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
+            //scurve.LoadHeatmap(7, model.Currency, AppSettings.preferencesRoot);
+
+            Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
+
+            string fscsProtectionConfigFile = AppSettings.ClientConfigRoot;// ConfigurationManager.AppSettings["clientConfigRoot"];
+            if (fscsProtectionConfigFile.EndsWith("\\") == false)
+                fscsProtectionConfigFile += "\\";
+            fscsProtectionConfigFile += "FSCSProtection.xml";
+
+            Octavo.Gate.Nabu.Preferences.Manager preferencesManager = new Octavo.Gate.Nabu.Preferences.Manager(AppSettings.preferencesRoot + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerOrganisation) + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerEmailAddress));
+            Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
+
+
+
+            foreach (var childern in institutionInclusion.Children)
+            {
+                childern.Value = "true";
+            }
+
+            model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+        }
 
         public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(Session sessionData, bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
         {
@@ -448,12 +541,12 @@ namespace InsignisIllustrationGenerator.Controllers
              */
             IllustrationDetailViewModel model = null;
             //Getting Input Illustration from InputProposal Session
-            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))model = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
-           
+            if (!string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal"))) model = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
+
             var generatedInvestments = JsonConvert.DeserializeObject<SCurveOutput>(HttpContext.Session.GetString("GeneratedPorposals")); //scurve output
 
             //Insignis.Asset.Management.Tools.Sales.SCurveOutput _sc= new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
-           
+
 
             model.ProposedPortfolio = _mapper.Map(generatedInvestments, new Insignis.Asset.Management.Tools.Sales.SCurveOutput());
 
@@ -493,7 +586,7 @@ namespace InsignisIllustrationGenerator.Controllers
             string deposit = " ";
             string interest = " ";
 
-            for (int i = 0; i < 30; i++) 
+            for (int i = 0; i < 30; i++)
             {
                 institutionName = " ";
                 termDescription = " ";
@@ -524,7 +617,8 @@ namespace InsignisIllustrationGenerator.Controllers
             }
 
 
-            
+            model.Status = InsignisEnum.IllustrationStatus.Current.ToString();
+            model.GenerateDate = DateTime.Now;
             SaveIllustraion(model);
 
 
