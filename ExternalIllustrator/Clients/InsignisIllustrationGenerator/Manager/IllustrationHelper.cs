@@ -80,11 +80,11 @@ namespace InsignisIllustrationGenerator.Manager
                 //Advisor Search
                 (string.IsNullOrEmpty(searchParameter.AdvisorName) || (!string.IsNullOrEmpty(f.AdviserName) && f.AdviserName.ToLower().Contains(searchParameter.AdvisorName)))
                 //Client Search
-                & (string.IsNullOrEmpty(searchParameter.ClientName) || f.ClientName.ToLower().Contains(searchParameter.ClientName))
+                & (string.IsNullOrEmpty(searchParameter.ClientName) || f.ClientName.ToLower().Contains(searchParameter.ClientName.ToLower()))
                 //Company Search
-                & (string.IsNullOrEmpty(searchParameter.CompanyName) || f.PartnerName.ToLower().Contains(searchParameter.CompanyName))
+                & (string.IsNullOrEmpty(searchParameter.CompanyName) || f.PartnerName.ToLower().Contains(searchParameter.CompanyName.ToLower()))
                 //Company Search
-                & (string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || f.IllustrationUniqueReference.ToLower().Contains(searchParameter.IllustrationUniqueReference))
+                & (string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || f.IllustrationUniqueReference.ToLower().Contains(searchParameter.IllustrationUniqueReference.ToLower()))
 
                 & ((!searchParameter.IllustrationFrom.HasValue || f.GenerateDate > searchParameter.IllustrationFrom.Value)
                 & (!searchParameter.IllustrationTo.HasValue || f.GenerateDate < searchParameter.IllustrationTo.Value))).ToList();
@@ -114,7 +114,6 @@ namespace InsignisIllustrationGenerator.Manager
             foreach (var item in dbIllustration.IllustrationProposedPortfolio)
             {
                 Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
-
                 Insignis.Asset.Management.Clients.Helper.InvestmentTerm term = new Insignis.Asset.Management.Clients.Helper.InvestmentTerm();
                 row.AnnualInterest = item.AnnualInterest;
                 row.DepositSize = item.DepositSize;
@@ -131,13 +130,26 @@ namespace InsignisIllustrationGenerator.Manager
 
 
 
-        internal bool UpdateIllustrationStatus(string comment, string referredBy, string status, string uniqueReferenceId)
+        internal bool UpdateIllustrationStatus(UpdateStatusViewModel model)
         {
-            IllustrationDetail illustration = _context.IllustrationDetails.First(x => x.IllustrationUniqueReference == uniqueReferenceId);
+            IllustrationDetail illustration = _context.IllustrationDetails.First(x => x.IllustrationUniqueReference == model.UniqueReferenceId);
 
-            illustration.Status = status;
-            illustration.Comment = comment;
-            illustration.ReferredBy = referredBy;
+            if (illustration.Status.ToLower() == "chased" & (model.Status == "Accepted" || model.Status == "Deleted"))
+            {
+                illustration.Status = model.Status;
+            }
+
+            if (illustration.Status.ToLower() == "created" & (model.Status == "Deleted"||model.Status=="Chased"||model.Status=="Accepted"))
+            {
+                illustration.Status = model.Status;
+            }
+            if(illustration.Status.ToLower() == "accepted" & model.Status == "Deleted")
+            {
+                illustration.Status = model.Status;
+            }
+                
+            illustration.Comment = model.Comment;
+            illustration.ReferredBy = model.ReferredBy;
             bool isSaved = false;
             try { 
             _context.SaveChanges();

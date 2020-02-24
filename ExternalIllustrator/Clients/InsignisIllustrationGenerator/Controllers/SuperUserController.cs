@@ -44,19 +44,14 @@ namespace InsignisIllustrationGenerator.Controllers
         public ActionResult ExportCSV(SearchParameterViewModel searchParameter)
         {
             var result = _illustrationHelper.GetIllustrationList(searchParameter);
-            StringBuilder sbheader = new StringBuilder();
+            // StringBuilder sbheader = new StringBuilder();
             StringBuilder sb = new StringBuilder();
-
-
-            sbheader.Append(string.Format("{0},", "Company Name"));
-            sbheader.Append(string.Format("{0},", "Client Name"));
-            sbheader.Append(string.Format("{0},", "Client Type"));
-            sbheader.Append(string.Format("{0},", "Illustration Unique Reference"));
-            sbheader.Append(string.Format("{0},", "Generate Date"));
-            sbheader.Append(string.Format("{0},", "Status")).AppendLine(Environment.NewLine);
-
-
-
+            sb.Append(string.Format("{0},", "Company Name"));
+            sb.Append(string.Format("{0},", "Client Name"));
+            sb.Append(string.Format("{0},", "Client Type"));
+            sb.Append(string.Format("{0},", "Illustration Unique Reference"));
+            sb.Append(string.Format("{0},", "Generate Date"));
+            sb.Append(string.Format("{0},", "Status")).Append(Environment.NewLine);
             foreach (var data in result)
             {
 
@@ -65,16 +60,17 @@ namespace InsignisIllustrationGenerator.Controllers
                 sb.Append(string.Format("{0},", data.ClientType));
                 sb.Append(string.Format("{0},", data.IllustrationUniqueReference));
                 sb.Append(string.Format("{0},", data.GenerateDate));
-                sb.Append(string.Format("{0},", data.Status)).AppendLine(Environment.NewLine);
+                sb.Append(string.Format("{0},", data.Status)).Append(Environment.NewLine);
 
             }
 
 
             //  byte[] buffer = Encoding.ASCII.GetBytes();
 
-            return Json(new { Data = $"{string.Join(",", sbheader)}\r\n{sb.ToString()}", FileName = "Illustration.csv" });
+            return Json(new { Data = sb.ToString(), FileName = "Illustration.csv" });
 
         }
+
         //Get Single Illustration Details
 
         public IActionResult GetIllustration(string uniqueReferenceId)
@@ -102,19 +98,32 @@ namespace InsignisIllustrationGenerator.Controllers
 
             //check model validation for any empty waitttttttt
 
-            bool isNull = false;
-            if (searchParams.AdvisorName == null & searchParams.ClientName == null & searchParams.CompanyName == null
-                & searchParams.IllustrationFrom == null & searchParams.IllustrationTo == null & searchParams.IllustrationUniqueReference == null)
-            {
-                isNull = true;
-                return Json(new { Error = isNull });
-            }
+            //bool isNull = false;
+            //if (searchParams.AdvisorName == null & searchParams.ClientName == null & searchParams.CompanyName == null
+            //    & searchParams.IllustrationFrom == null & searchParams.IllustrationTo == null & searchParams.IllustrationUniqueReference == null)
+            //{
+            //    isNull = true;
+            //    return Json(new { Error = isNull });
+            //}
 
+
+            if (!ModelState.IsValid)
+            {
+                var errors = new List<string>();
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        errors.Add(error.ErrorMessage);
+                    }
+                }
+                return Json(new { Data = errors, Success = false });
+            }
 
 
             var result = _illustrationHelper.GetIllustrationList(searchParams);
 
-            return Json(result);
+            return Json(new { Data=result, Success=true });
         }
 
     }

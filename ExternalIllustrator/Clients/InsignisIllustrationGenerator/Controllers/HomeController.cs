@@ -140,11 +140,29 @@ namespace InsignisIllustrationGenerator.Controllers
              Arguments:- None
              Returns:- IllustrationModel and Display to user
              */
+
+            IllustrationDetailViewModel illustrationInfo = null;
+            //Check for old
+            if (!string.IsNullOrEmpty((HttpContext.Session.GetString("InputProposal")))){
+                illustrationInfo = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
+                return View(illustrationInfo);
+            }
+
+
+
+
+
+
+
+
+
+
+
             //Set Dumy Session
             SetSession();
             //Get Session Values;
             var partnerInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
-            IllustrationDetailViewModel illustrationInfo = null;
+            
 
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
             {
@@ -206,7 +224,18 @@ namespace InsignisIllustrationGenerator.Controllers
             //    isNull = true;
             //    return Json(new { Error = isNull });
             //}
-
+            if (!ModelState.IsValid)
+            {
+                var errors = new List<string>();
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        errors.Add(error.ErrorMessage);
+                    }
+                }
+                return Json(new { Data=errors, Success = false });
+            }
             var result = _illustrationHelper.GetIllustrationList(searchParams);
             if (result.Count()>0) return Json(new { Data = result, Success = true });
             return Json(new { Data = "Sorry, we couldn’t find any illustrations matching your search criteria.", Success = false });
@@ -230,6 +259,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
             ViewBag.URL = AppSettings.illustrationOutputPublicFacingFolder + "/" + uniqueReferenceId + "/" + uniqueReferenceId + "_CashIllustration.pdf";
 
+            ViewBag.User = "";
             return View("_illustrationDetails", result);
 
         }
@@ -241,23 +271,23 @@ namespace InsignisIllustrationGenerator.Controllers
              Arguments:- IllustrationDetailViewModel 
              Returns:- View and Errors
              */
-            var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+
+            var illustrationInfo = new Session();
+            if (!string.IsNullOrEmpty((HttpContext.Session.GetString("SessionPartner"))))
+            {
+                illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            }
             
             if (string.IsNullOrEmpty(model.PartnerName) && !string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
             {
                 model = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
                 var folio = JsonConvert.DeserializeObject<SCurveOutput>(HttpContext.Session.GetString("GeneratedPorposals"));
 
-
                 var scurve = _mapper.Map<Insignis.Asset.Management.Tools.Sales.SCurveOutput>(folio);
-
-
 
                 model.ProposedPortfolio = scurve;
 
                 return View(model);
-                
-
             }
             
 
@@ -286,14 +316,17 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 sStore = _mapper.Map(model.ProposedPortfolio, sStore);
 
-
                 //Database save our database Super User get 
-
 
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
                 HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
 
                 return View(model);
+            }
+            else
+            {
+                model.ProposedPortfolio = new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
+                return View("Index", model);
             }
 
             return View(model);
@@ -734,7 +767,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
 
-        public JsonResult UpdateStatus(string comment,string referredBy,string status, string uniqueReferenceId)
+        public JsonResult UpdateStatus(UpdateStatusViewModel model)
         {
             /*
              Update status of given illustration
@@ -747,8 +780,21 @@ namespace InsignisIllustrationGenerator.Controllers
             Return:-
                 Json true/false on success
              */
-            var result = _illustrationHelper.UpdateIllustrationStatus(comment, referredBy, status, uniqueReferenceId);
-            return Json(result);
+            if (!ModelState.IsValid)
+            {
+                var errors = new List<string>();
+                foreach (var state in ModelState)
+                {
+                    foreach (var error in state.Value.Errors)
+                    {
+                        errors.Add(error.ErrorMessage);
+                    }
+                }
+                return Json(new { Data = errors, Success = false });
+            }
+            
+            var result = _illustrationHelper.UpdateIllustrationStatus(model);
+            return Json(new { Data = result, Success = true });
         }
 
     }

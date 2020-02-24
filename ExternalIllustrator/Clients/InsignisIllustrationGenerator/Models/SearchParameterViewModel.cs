@@ -22,7 +22,7 @@ namespace InsignisIllustrationGenerator.Models
         public string CompanyName { get; set; }
 
         
-        [RegularExpression(@"^[a-zA-Z0-9-_]", ErrorMessage = "Invalid Illustration Number")]
+        [RegularExpression(@"^[a-zA-Z0-9\-]+$", ErrorMessage = "Invalid Illustration Number")]
         public string IllustrationUniqueReference { get; set; }
         public DateTime? IllustrationFrom { get; set; }
         public DateTime? IllustrationTo { get; set; }

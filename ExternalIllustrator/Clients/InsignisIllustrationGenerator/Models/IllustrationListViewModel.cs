@@ -19,6 +19,7 @@ namespace InsignisIllustrationGenerator.Models
         public string IllustrationUniqueReference { get; set; }
         public DateTime? GenerateDate { get; set; }
         public string Status { get; set; }
+        public string Comment { get; set; }
 
     }
 }

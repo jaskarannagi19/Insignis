@@ -18,9 +18,9 @@
                     <div class="gray-bg">
                         <p class="heading-1">Create a Portfolio</p>
                         <div asp-validation-summary="All" class="text-danger"></div>
-                       @* <form method="post" action="@Url.Action("Calculate","Home")">*@
-                            @using (Html.BeginForm("Calculate","Home"))
-                            {
+                        <form method="post" action="@Url.Action("Calculate","Home")">
+                            
+                            
                                 <div class="form-row">
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Partner Name</label>
@@ -29,11 +29,11 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputPassword4">Partner Organisation</label>
-                                        <input type="text" class="form-control" id="" placeholder="Partner Organisation" asp-for="@Model.PartnerOrganisation" value="@Model.PartnerOrganisation">
+                                        <input type="text" class="form-control" id="" placeholder="Partner Organisation" asp-for="@Model.PartnerOrganisation" value="@Model.PartnerOrganisation" readonly="readonly">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Partner Email</label>
-                                        <input type="email" class="form-control" id="" placeholder="Partner Email" asp-for="@Model.PartnerEmail" value="@Model.PartnerEmail">
+                                        <input type="email" class="form-control" id="" placeholder="Partner Email" asp-for="@Model.PartnerEmail" value="@Model.PartnerEmail" readonly="readonly">
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputPassword4">Client Name</label>
@@ -52,8 +52,8 @@
                                         <label for="inputEmail4">Currency</label>
                                         <select id="" class="form-control" asp-for="@Model.Currency">
                                             <option selected value="GBP">GBP - £</option>
-                                            <option value="EUR">EUR - €</option>
-                                            <option value="USD">USD - $</option>
+                                            @*<option value="EUR">EUR - €</option>
+                                            <option value="USD">USD - $</option>*@
                                         </select>
                                     </div>
 
@@ -98,8 +98,7 @@
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="@Model.TotalDeposit">Total Deposit</label>
-                                        <input type="text" class="form-control" id="txtTotalDeposit"    placeholder="£0.00" asp-for="@Model.TotalDeposit" value="@Model.TotalDeposit" value="0.00"  readonly="readonly">
-
+                                        <input type="text" class="form-control" id="txtTotalDeposit"    placeholder="£0.00" asp-for="@Model.TotalDeposit" value="@Model.TotalDeposit"  readonly="readonly">
                                     </div>
                                     <div class="form-group col-md-6 margin-t-20">
                                         @Html.ActionLink("Reset", "Reset", "Home",new { actionid="Index"}, new { @class = "btn btn-primary" })
@@ -108,8 +107,8 @@
                                     </div>
 
                                 </div>
-                            }
-                            @*</form>*@
+                            
+                            </form>
                     </div>
 
                 </div>

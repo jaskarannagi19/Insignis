@@ -21,7 +21,8 @@ namespace InsignisIllustrationGenerator.Models
 
         [Required(ErrorMessage = "Please enter client name.")]
         [Display(Name ="Client Name")]
-        [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,50}", ErrorMessage = "Invalid Client Name")]
+        [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,60}", ErrorMessage = "Invalid Client Name")]
+        [StringLengthAttribute(maximumLength: 60, MinimumLength = 1, ErrorMessage = "Client Name field allow upto 60 character")]
         public string ClientName { get; set; }
         
         [Required(ErrorMessage ="Client Type is required")]
@@ -50,7 +51,7 @@ namespace InsignisIllustrationGenerator.Models
         [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Three Years Plus")]
         public double? ThreeYearsPlus { get; set; }
         
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Total Deposits")]
+        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Please Enter at Least One Liquidity Amount")]
         [Range(1,double.MaxValue,ErrorMessage = "Please Enter at Least One Liquidity Amount")]
      
         public double TotalDeposit { get; set; }

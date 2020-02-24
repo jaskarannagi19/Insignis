@@ -14,7 +14,9 @@
             </div>
             <div class="col-lg-12 col-sm-12">
                 <div class="illustration-generator">
+
                     <h4 class="heading-1">Search By:</h4>
+                    <span id="validationError" class="text-danger"></span>
                     <div class="gray-bg">
 
                         <div class="form-row">
@@ -134,16 +136,23 @@
                 tbl += '         <th class="col-3">Illustration Unique Reference</th>';
                 tbl += '         <th class="col-2">Generation Date</th>';
                 tbl += '         <th class="col-1">Status</th>';
+                tbl += '         <th class="col-3">Comment</th>';
                 tbl += '      </tr>';
                 tbl += '  </thead><tbody id="tblbody"></tbody></table>';
                 $('#dvIllustration').html(tbl);
                 if (response.success === false) {
-                    $("#validationError").text(response.data);
+                    $("#validationError").text("");
+                    var span = $("#validationError");
+                    for (var i = 0; i < response.data.length; i++) {
+                        span.append(response.data[i])
+                    }
+
+                    
                     // $('#tblbody').append('<tr><td>'+response.data+'</td>');
                 }
                 else {
                     $.each(response.data, function () {
-                        $("#tblbody").append('<tr class="d-flex" id="bankDetailRow"    ><td class="col-2">' + this.adviserName + '</td><td class="col-2">' + this.clientName + '</td><td class="col-2">' + this.partnerOrganisation + '</td><td class="col-3">' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-2">' + this.generateDate + '</td><td class="col-1">' + this.status + '</td></tr>');
+                        $("#tblbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-2">' + this.adviserName + '</td><td class="col-2">' + this.clientName + '</td><td class="col-2">' + this.partnerOrganisation + '</td><td class="col-3">' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-2">' + this.generateDate + '</td><td class="col-1">' + this.status + '</td><td class="col-3">'+this.comment+'</td></tr>');
                     });
                     //var data = response.data;
                     //for (var i = 0; i < data.length; i++) {
@@ -157,6 +166,7 @@
                     "scrollX": true,
                     "scrollCollapse": false,
                     "paging": true,
+                    "pageLength": 25,
                     "searching": false,
                     "language": {
                         "emptyTable": "Sorry, we couldn’t find any illustrations matching your search criteria."
