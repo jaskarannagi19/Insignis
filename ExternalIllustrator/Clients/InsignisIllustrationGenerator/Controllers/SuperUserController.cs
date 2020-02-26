@@ -88,6 +88,7 @@ namespace InsignisIllustrationGenerator.Controllers
             
             ViewBag.URL = _appSettings.illustrationOutputPublicFacingFolder + "/" + uniqueReferenceId + "/" + uniqueReferenceId + "_CashIllustration.pdf";
 
+            
             return View("_illustrationDetails", result);
 
         }

@@ -178,12 +178,12 @@
                 var tbl = '<table class="table table-striped table-bordered table-responsive-sm illustrationListTable">';
                 tbl += '<thead class="thead-dark">';
                 tbl += '     <tr class="d-flex">';
-                tbl += '         <th class="col-md-1">Advisor Name</th>';
-                tbl += '         <th class="col-md-1">Client Name</th>';
-                tbl += '         <th class="col-md-2">Company Name</th>';
-                tbl += '         <th class="col-md-2">Illustration Unique Reference</th>';
-                tbl += '         <th class="col-md-2">Generation Date</th>';
-                tbl += '         <th class="col-md-1">Status</th>';
+                tbl += '         <th class="col-md-1" style="padding:10px;  min-width:112px;">Advisor Name</th>';
+                tbl += '         <th class="col-md-1"  style="padding:10px; min-width:130px;">Client Name</th>';
+                tbl += '         <th class="col-md-2"  style="padding:10px; min-width:180px;">Company Name</th>';
+                tbl += '         <th class="col-md-2"  style="padding:10px; min-width:260px;">Illustration Unique Reference</th>';
+                tbl += '         <th class="col-md-2"  style="padding:10px; min-width:170px;">Generation Date</th>';
+                tbl += '         <th class="col-md-1"  style="padding:10px; min-width:89px;">Status</th>';
                 tbl += '      </tr>';
                 tbl += '  </thead>';
                 tbl += '<tbody id="tblbody">';
@@ -199,7 +199,9 @@
                 }
                 else {
                     $.each(response.data, function () {
-                        $(".illustrationListTable tbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-md-1">' + this.adviserName + '</td><td class="col-md-1">' + this.clientName + '</td><td class="col-md-2">' + this.partnerOrganisation + '</td><td class="col-md-2">' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-2">' + this.generateDate + '</td><td class="col-md-1">' + this.status + '</td></tr>');
+
+                        
+                        $(".illustrationListTable tbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-md-1" style="min-width:112px;">' + this.adviserName + '</td><td class="col-md-1" style="min-width:130px">' + this.clientName + '</td><td class="col-md-2" style="min-width:180px">' + this.partnerOrganisation + '</td><td class="col-md-2" style="min-width:260px" >' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-2" style="min-width:170px">' + this.generateDate + '</td><td class="col-md-1" style="min-width:89px">' + this.status + '</td></tr>');
                     });
                 }
                 $('.illustrationListTable').DataTable({
