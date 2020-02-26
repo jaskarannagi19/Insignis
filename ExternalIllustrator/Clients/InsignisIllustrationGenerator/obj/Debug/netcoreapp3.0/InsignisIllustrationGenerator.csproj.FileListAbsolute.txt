@@ -204,3 +204,17 @@ D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.Views.pdb
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.dll
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.pdb
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\app.config
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\app.Debug.config
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\app.Release.config
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\appsettings.Development.json
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\appsettings.json
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\Properties\launchSettings.json
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\InsignisIllustrationGenerator.StaticWebAssets.xml
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\InsignisIllustrationGenerator.exe
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\InsignisIllustrationGenerator.dll.config
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\InsignisIllustrationGenerator.deps.json
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\InsignisIllustrationGenerator.runtimeconfig.json
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\InsignisIllustrationGenerator.runtimeconfig.dev.json
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\bin\Debug\netcoreapp3.0\InsignisIllustrationGenerator.Views.pdb
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.csproj.CopyComplete

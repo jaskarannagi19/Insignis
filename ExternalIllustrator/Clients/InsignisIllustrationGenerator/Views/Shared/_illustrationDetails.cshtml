@@ -29,13 +29,9 @@
                     </p>
                 </div>
 
-                <div class="col-lg-4 col-sm-6"><p>Illustration Status:<br><span>@Model.Status</span></p></div>
-
-
+                <div class="col-lg-4 col-sm-6"><p>Illustration Status:<br><span id="txtStatus">@Model.Status</span></p></div>
                 <hr class="blue-line">
                 <div class="col-lg-4 col-sm-6"><p>Illustration Reference Id:<br><span>@Model.IllustrationUniqueReference</span></p></div>
-                
-
             </div>
         </div>
         <h4 class="heading-1">Summary</h4>
@@ -51,7 +47,7 @@
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <p>
                         Comment:<br>
-                        <span>
+                        <span id="txtComment">
                             @Model.Comment
                         </span>
                     </p>
@@ -100,34 +96,26 @@
             @if (ViewBag.User == "")
             {
                 <a class="btn btn-primary" href="/Home/PreviousIllustration">Back</a>
-
-                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
                     Update Status
                 </button>
-
                 <button type="submit" class="btn btn-primary">Update Illustration</button>
-                
-                
-                <button type="submit" class="btn btn-primary">Create Client Pack</button>
-            
-                
+                @if (Model.Status.ToLower() == "accepted")
+                {
+                    <button type="submit" class="btn btn-primary">Create Client Pack</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-primary"  style="background-color:#ffa64d"  title="This is available for Accepted Illustration" disabled>Create Client Pack</button>
+                }
+
             }
             else
             {
                 <a class="btn btn-primary" href="/SuperUser/IllustrationList">Back</a>
                 <a class="btn btn-primary" target="_blank" href="@ViewBag.URL">Download Illustration</a>
             }
-
-
-
-
-
-
-
-
         </div>
-
-
         </div>
     </div>
 </div>
@@ -167,9 +155,15 @@
                         <label class="col-sm-4 col-form-label">Update Status</label>
                         <div class="col-sm-8">
                             <select id="status" name="status" class="form-control">
-                                <option value="Chased">Chased</option>
-                                <option value="Accepted">Accepted</option>
-                                <option value="Deleted">Deleted</option>
+                                @if (Model.Status.ToLower() == "created")
+                                {
+                                    <option value="Accepted">Accepted</option>
+                                    <option value="Deleted">Deleted</option>
+                                }
+                                else if (Model.Status.ToLower() == "accepted")
+                                {
+                                    <option value="Deleted">Deleted</option>
+                                }
                             </select>
                         </div>
                     </div>
@@ -225,8 +219,8 @@
 
                     if (success.success == true) {
                         $("#exampleModal").modal('hide');
-                        $("#").val();
-                        $("#").val();
+                        $("#txtComment").text(comment);
+                        $("#txtStatus").text(status);
                     } else {
                         for (var i = 0; i < success.data.length; i++) {
                             $("#validation").append(success.data[i]);
