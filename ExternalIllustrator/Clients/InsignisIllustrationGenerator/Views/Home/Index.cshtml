@@ -36,10 +36,10 @@
                                         <input type="email" class="form-control" id="" placeholder="Partner Email" asp-for="@Model.PartnerEmail" value="@Model.PartnerEmail" readonly="readonly">
                                     </div>
                                     <div class="form-group col-md-6">
-                                        <label for="inputPassword4">Client Name</label>
+                                        <label for="inputPassword4">Client Reference</label>
                                         @*<input type="text" class="form-control" id="" asp-for="@Model.ClientName" value="@Model.ClientName" placeholder="Client Name / Reference">*@
                                         @Html.TextBoxFor(model => model.ClientName,new { @class = "form-control" })
-                                        @Html.ValidationMessageFor(model => model.ClientName,null,new { @class = "text-danger" })
+                                        
                                     </div>
                                     <div class="form-group col-md-6">
                                         <label for="inputEmail4">Client Type (£85,000 per bank)</label>
@@ -61,7 +61,7 @@
 
                                 <div class="margin-t-20"></div>
                                 <p class="heading-1">Liquidity Requirements</p>
-                                @Html.ValidationMessageFor(model => model.TotalDeposit, "", new { @class = "text-danger" })
+                                
 
                                 <div class="form-row">
                                     <div class="form-group col-md-6">

@@ -1,4 +1,8 @@
 ﻿@model IllustrationDetailViewModel
+@using System.Globalization
+@{
+    CultureInfo gb = new CultureInfo("en-GB");
+}
 @*@{
         ViewData["Title"] = "Calculate";
         Layout = "~/Views/Shared/_Layout.cshtml";
@@ -17,10 +21,12 @@
                     <div class="col-lg-4 col-sm-6">
                         <p>
                             Client Type:<br>
-                            @if (Model.ClientType == 0){
+                            @if (Model.ClientType == 0)
+                            {
                                 <span>Individual</span>
                             }
-                            else{
+                            else
+                            {
                                 <span>Joint</span>
                             }
                         </p>
@@ -30,12 +36,12 @@
             <h4 class="heading-1">Summary</h4>
             <div class="summary-gray-backgrund">
                 <div class="row">
-                    <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit)</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.AnnualGrossInterestEarned)</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.AnnualNetInterestEarned)</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit.ToString("N", gb)</span>@*<span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit)</span>*@</p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.ProposedPortfolio.AnnualGrossInterestEarned.ToString("N", gb)</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.ProposedPortfolio.AnnualNetInterestEarned.ToString("N", gb)</span></p></div>
                     <hr class="gray-line">
-                    <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.GrossAverageYield)%</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@TextFormatter.FormatTwoDecimal(Model.ProposedPortfolio.NetAverageYield)%</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.ProposedPortfolio.GrossAverageYield.ToString("N", gb)%</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.ProposedPortfolio.NetAverageYield.ToString("N", gb)%</span></p></div>
                 </div>
             </div>
         </div>
@@ -60,9 +66,9 @@
                                     <a href="#">
                                         <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
                                         <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
-                                        <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate</td>
+                                        <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate %</td>
                                         <td class="col-3 right instituteDeposit">
-                                            @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize
+                                            @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize.ToString("N", gb)
                                             <input type="hidden" class="instituteID" value="@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID" />
                                         </td>
                                     </a>
@@ -74,7 +80,7 @@
                                 <td class="col-4">&nbsp;</td>
                                 <td class="col-3">&nbsp;</td>
                                 <td class="col-2 right">&nbsp;</td>
-                                <td class="col-3 right table-total">@TextFormatter.FormatTwoDecimal(Model.TotalDeposit)</td>
+                                <td class="col-3 right table-total">@Model.TotalDeposit.ToString("N", gb)</td>
                             </tr>
 
                         </tbody>

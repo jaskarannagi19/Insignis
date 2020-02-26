@@ -1,4 +1,8 @@
 ﻿@model IllustrationDetailViewModel
+@using System.Globalization
+@{
+    CultureInfo gb = new CultureInfo("en-GB");
+}
 
 
 <div class="middle-section">
@@ -9,21 +13,25 @@
                 <div class="col-lg-4 col-sm-6"><p>Organisation:<br><span>@Model.PartnerOrganisation</span></p></div>
                 <div class="col-lg-4 col-sm-12"><p>Email:<br><span>@Model.PartnerEmail</span></p></div>
                 <hr class="blue-line">
-                
-                
-                <div class="col-lg-4 col-sm-6"><p>Name / Reference:<br><span>@Model.ClientName</span></p></div>
-                
-                <div class="col-lg-4 col-sm-6"><p>Client Type:<br>@if(Model.ClientType == 0){
-                    <span>Individual</span>}
-                else
-                {
-                    <span>Join</span>
-                }
-                      </p></div>
 
-                <div class="col-lg-4 col-sm-6"><p>Current Status:<br><span>@Model.Status</span></p></div>
-                
-                
+
+                <div class="col-lg-4 col-sm-6"><p>Name / Reference:<br><span>@Model.ClientName</span></p></div>
+
+                <div class="col-lg-4 col-sm-6">
+                    <p>
+                        Client Type:<br>@if (Model.ClientType == 0)
+                        {
+                            <span>Individual</span>}
+                        else
+                        {
+                            <span>Joint</span>
+                        }
+                    </p>
+                </div>
+
+                <div class="col-lg-4 col-sm-6"><p>Illustration Status:<br><span>@Model.Status</span></p></div>
+
+
                 <hr class="blue-line">
                 <div class="col-lg-4 col-sm-6"><p>Illustration Reference Id:<br><span>@Model.IllustrationUniqueReference</span></p></div>
                 <div class="col-lg-4 col-sm-6"><p>Referred by:<br><span>@Model.ReferredBy</span></p></div>
@@ -33,12 +41,12 @@
         <h4 class="heading-1">Summary</h4>
         <div class="summary-gray-backgrund">
             <div class="row">
-                <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit</span></p></div>
-                <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.ProposedPortfolio.AnnualGrossInterestEarned</span></p></div>
-                <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.ProposedPortfolio.AnnualNetInterestEarned</span></p></div>
+                <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit.ToString("N",gb)</span></p></div>
+                <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.ProposedPortfolio.AnnualGrossInterestEarned.ToString("N",gb)</span></p></div>
+                <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.ProposedPortfolio.AnnualNetInterestEarned.ToString("N",gb)</span></p></div>
                 <hr class="gray-line">
-                <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.ProposedPortfolio.GrossAverageYield</span></p></div>
-                <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.ProposedPortfolio.NetAverageYield</span></p></div>
+                <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.ProposedPortfolio.GrossAverageYield.ToString("N",gb)</span></p></div>
+                <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.ProposedPortfolio.NetAverageYield.ToString("N",gb)</span></p></div>
                 <hr class="gray-line">
                 <div class="col-lg-12 col-md-12 col-sm-12">
                     <p>
@@ -71,8 +79,8 @@
                                 <a href="#">
                                     <td class="col-4">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
                                     <td class="col-3">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
-                                    <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate</td>
-                                    <td class="col-3 right">@Model.ProposedPortfolio.ProposedInvestments[i].DepositSize</td>
+                                    <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate %</td>
+                                    <td class="col-3 right">@Model.ProposedPortfolio.ProposedInvestments[i].DepositSize.ToString("N",gb)</td>
                                 </a>
                             </tr>
                         }
@@ -82,31 +90,31 @@
             </div>
             <div class="clear1"></div>
             @*<div class="right">
-                <a class="btn btn-primary">Back</a>
-                
-                <input id="btnUpdateStatus" class="btn btn-primary" value="Update Status" />
-            </div>*@
+                    <a class="btn btn-primary">Back</a>
+
+                    <input id="btnUpdateStatus" class="btn btn-primary" value="Update Status" />
+                </div>*@
 
 
-        <div class="center">
-            @if (ViewBag.User == "")
-            {
-                <a class="btn btn-primary" href="/Home/PreviousIllustration">Back</a>
-            }
-            else
-            {
-                <a class="btn btn-primary" href="/SuperUser/IllustrationList">Back</a>
-            }
+            <div class="center">
+                @if (ViewBag.User == "")
+                {
+                    <a class="btn btn-primary" href="/Home/PreviousIllustration">Back</a>
+                }
+                else
+                {
+                    <a class="btn btn-primary" href="/SuperUser/IllustrationList">Back</a>
+                }
 
 
 
-            <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                Update Status
-            </button>
-            <a class="btn btn-primary" target="_blank" href="@ViewBag.URL">Download Illustration</a>
-            <button type="submit" class="btn btn-primary">Update Illustration</button>
-            <button type="submit" class="btn btn-primary">Create Client Pack</button>
-        </div>
+                <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                    Update Status
+                </button>
+                <a class="btn btn-primary" target="_blank" href="@ViewBag.URL">Download Illustration</a>
+                <button type="submit" class="btn btn-primary">Update Illustration</button>
+                <button type="submit" class="btn btn-primary">Create Client Pack</button>
+            </div>
 
 
         </div>
@@ -125,7 +133,7 @@
 
 <!-- Modal popup -->
 
-<div  class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content modal-content-gray-bg">
             <div class="modal-header modal-header-bg">
@@ -141,7 +149,7 @@
                     </div>
                     <div class="form-group-popup row">
 
-                        <label for="inputEmail3" class="col-sm-4 col-form-label">Current Status</label>
+                        <label for="inputEmail3" class="col-sm-4 col-form-label">Illustration Status</label>
                         <div class="col-sm-8 col-form-label"><b>@Model.Status</b></div>
                     </div>
                     <div class="form-group-popup row">
@@ -192,27 +200,27 @@
             var referredBy = $("#referredBy").val();
             var status = $("#status").val();
             var uniqueId = $("#uniqueReferenceId").val();
-             $.ajax({
+            $.ajax({
                 type: "POST",
                 url: "../../Home/UpdateStatus",
-                 data: {
-                     comment: comment,
-                     referredBy: referredBy,
-                     status: status,
-                     uniqueReferenceId: uniqueId
-                 },
+                data: {
+                    comment: comment,
+                    referredBy: referredBy,
+                    status: status,
+                    uniqueReferenceId: uniqueId
+                },
                 success: function (success) {
                     debugger;
-                    
+
                     if (success.success == true) {
                         $("#exampleModal").modal('hide');
                     } else {
                         for (var i = 0; i < success.data.length; i++) {
                             $("#validation").append(success.data[i]);
                         }
-                        
+
                     }
-                    
+
                 },
 
             });

@@ -10,7 +10,7 @@
         @*  <form id="myform" action="@Url.Action("PreviousIllustration","Home")" method="post">*@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
-                <div class="right"><input type="button" href="#" id="GenerateCSV" class="btn btn-primary" value="Generate CSV" /></div>
+                <div class="right"><input type="button"  id="btnGenerateNewIllustration" class="btn btn-primary" value="Generate New Illustration" /></div>
             </div>
             <div class="col-lg-12 col-sm-12">
                 <div class="illustration-generator">
@@ -78,37 +78,10 @@
 
         window.location = "/Home/GetIllustration?uniqueReferenceId=" + illustrationUniqueReference;
     });
-    $(document).on("click", "#GenerateCSV", function () {
-
-        $.ajax({
-            url: "../../Home/ExportCSV",
-            type: "POST",
-            data: {
-                AdvisorName: $("#AdvisorName").val(),
-                ClientName: $("#ClientName").val(),
-                CompanyName: $("#CompanyName").val(),
-                IllustrationUniqueReference: $("#IllustrationUniqueReference").val(),
-                IllustrationFrom: $("#IllustrationFrom").val(),
-                IllustrationTo: $("#IllustrationTo").val()
-            },
-
-            success: function (response, textStatus, jqXHR) {
-                var element = document.createElement('a');
-                element.setAttribute('href', 'data:text/plain;charset=utf-8,' + response.data);
-                element.setAttribute('download', response.fileName);
-
-                element.style.display = 'none';
-                document.body.appendChild(element);
-
-                element.click();
-
-                document.body.removeChild(element);
-
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-
-            }
-        });
+    $(document).on("click", "#btnGenerateNewIllustration", function () {
+        debugger;
+        window.location = "/Home/Index";
+        
     });
 
     var LoadData = function () {

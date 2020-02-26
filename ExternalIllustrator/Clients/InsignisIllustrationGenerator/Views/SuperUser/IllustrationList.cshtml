@@ -175,17 +175,20 @@
                 debugger;
                 $('#validationerror').text("");
                 //if( $('#dvIllustration')!==undefined) $('#dvIllustration').html("");
-                var tbl = '<table id="illustrationListTable" class="table table-striped table-bordered table-responsive-sm illustrationListTable">';
+                var tbl = '<table class="table table-striped table-bordered table-responsive-sm illustrationListTable">';
                 tbl += '<thead class="thead-dark">';
                 tbl += '     <tr class="d-flex">';
-                tbl += '         <th class="col-2">Advisor Name</th>';
-                tbl += '         <th class="col-2">Client Name</th>';
-                tbl += '         <th class="col-2">Company Name</th>';
-                tbl += '         <th class="col-3">Illustration Unique Reference</th>';
-                tbl += '         <th class="col-2">Generation Date</th>';
-                tbl += '         <th class="col-1">Status</th>';
+                tbl += '         <th class="col-md-1">Advisor Name</th>';
+                tbl += '         <th class="col-md-1">Client Name</th>';
+                tbl += '         <th class="col-md-2">Company Name</th>';
+                tbl += '         <th class="col-md-2">Illustration Unique Reference</th>';
+                tbl += '         <th class="col-md-2">Generation Date</th>';
+                tbl += '         <th class="col-md-1">Status</th>';
                 tbl += '      </tr>';
-                tbl += '  </thead><tbody id="tblbody"></tbody></table>';
+                tbl += '  </thead>';
+                tbl += '<tbody id="tblbody">';
+                tbl += '</tbody>';
+                tbl += '</table>';
                 $('#dvIllustration').html(tbl);
                 if (response.success == false) {
                     //$("#validationError").text(response.data);
@@ -196,18 +199,13 @@
                 }
                 else {
                     $.each(response.data, function () {
-                        $("#tblbody").append('<tr class="d-flex" id="bankDetailRow"    ><td class="col-2">' + this.adviserName + '</td><td class="col-2">' + this.clientName + '</td><td class="col-2">' + this.partnerOrganisation + '</td><td class="col-3">' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-2">' + this.generateDate + '</td><td class="col-1">' + this.status + '</td></tr>');
+                        $(".illustrationListTable tbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-md-1">' + this.adviserName + '</td><td class="col-md-1">' + this.clientName + '</td><td class="col-md-2">' + this.partnerOrganisation + '</td><td class="col-md-2">' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-2">' + this.generateDate + '</td><td class="col-md-1">' + this.status + '</td></tr>');
                     });
-                    //var data = response.data;
-                    //for (var i = 0; i < data.length; i++) {
-                    //    $('#illustrationListTable tr:last').after('<tr class="d-flex" id="bankDetailRow" onclick="RedirectIllustrationDetail()"  ><td class="col-2">' + data[i].adviserName + '</td><td class="col-2">' + data[i].clientName + '</td><td class="col-2">' + data[i].partnerOrganisation + '</td><td class="col-3">' + data[i].illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + data[i].illustrationUniqueReference + '"/></td><td class="col-2">' + data[i].generateDate + '</td><td class="col-1">' + data[i].status + '</td></tr>');
-                    //}
-
                 }
                 $('.illustrationListTable').DataTable({
                     //  "dom": '<"top"i>rt<"bottom"flp><"clear">', //for using a search in buttom
                     // "scrollY": "400px",
-                    "scrollX": true,
+                    "scrollX": false,
                     "scrollCollapse": false,
                     "paging": true,
                     "searching": false,

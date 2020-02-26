@@ -20,6 +20,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Text;
+using System.Globalization;
 
 namespace InsignisIllustrationGenerator.Controllers
 {

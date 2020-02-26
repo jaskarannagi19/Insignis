@@ -20,8 +20,8 @@ namespace InsignisIllustrationGenerator.Models
         public string IllustrationUniqueReference { get; set; }
 
         [Required(ErrorMessage = "Please enter client name.")]
-        [Display(Name ="Client Name")]
-        [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,60}", ErrorMessage = "Invalid Client Name")]
+        [Display(Name ="Client Reference")]
+        [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,60}", ErrorMessage = "Allowed characters in Client Name are: Alphabets, Numbers, Hyphen (-), Underscore (_), Comma (,), Double Quote (“), Pound Sign (£), Dollar Sign ($), Forward Slash (/), Back Slash (\\), Space and Full Stop (.)")]
         [StringLengthAttribute(maximumLength: 60, MinimumLength = 1, ErrorMessage = "Client Name field allow upto 60 character")]
         public string ClientName { get; set; }
         
