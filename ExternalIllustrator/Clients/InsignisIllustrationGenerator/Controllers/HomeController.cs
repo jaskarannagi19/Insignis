@@ -21,6 +21,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using System.Text;
 using System.Globalization;
+using Insignis.Asset.Management.Clients.Helper;
 
 namespace InsignisIllustrationGenerator.Controllers
 {
@@ -360,8 +361,13 @@ namespace InsignisIllustrationGenerator.Controllers
             {
                 childern.Value = "true";
             }
-
+            var feeMatrix = new FeeMatrix(fscsProtectionConfigFile + "FeeMatrix.xml");
             model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+            model.ProposedPortfolio.NetAverageYield = (model.ProposedPortfolio.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
+
+            model.ProposedPortfolio.Fee = (model.ProposedPortfolio.TotalDeposited * (decimal)(model.ProposedPortfolio.FeePercentage / 100));
+
+            model.ProposedPortfolio.AnnualNetInterestEarned = (model.ProposedPortfolio.AnnualGrossInterestEarned - model.ProposedPortfolio.Fee);
         }
 
         public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(Session sessionData, bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
