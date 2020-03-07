@@ -84,7 +84,7 @@ namespace InsignisIllustrationGenerator.Controllers
             Return:-
                 View with Illustration Details
              */
-            var result = _illustrationHelper.GetIllustrationByByUniqueReference(uniqueReferenceId);
+            var result = _illustrationHelper.GetIllustrationByUniqueReferenceId(uniqueReferenceId);
             
             ViewBag.URL = _appSettings.illustrationOutputPublicFacingFolder + "/" + uniqueReferenceId + "/" + uniqueReferenceId + "_CashIllustration.pdf";
 
@@ -118,6 +118,13 @@ namespace InsignisIllustrationGenerator.Controllers
                         errors.Add(error.ErrorMessage);
                     }
                 }
+                return Json(new { Data = errors, Success = false });
+            }
+
+            if(searchParams.IllustrationFrom > searchParams.IllustrationTo)
+            {
+                var errors = new List<string>();
+                errors.Add("To date cannot be less than the from date.");
                 return Json(new { Data = errors, Success = false });
             }
 

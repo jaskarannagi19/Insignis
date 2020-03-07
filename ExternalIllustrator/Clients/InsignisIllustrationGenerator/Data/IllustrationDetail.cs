@@ -35,5 +35,12 @@ namespace InsignisIllustrationGenerator.Data
 
         public string Comment { get; set; }
         public string ReferredBy { get; set; }
+        
+        
+        //Interest fields
+        public decimal AnnualGrossInterestEarned { get; set; }
+        public decimal AnnualNetInterestEarned { get; set; }
+        public decimal GrossAverageYield { get; set; }
+        public decimal NetAverageYield { get; set; }
     }
 }

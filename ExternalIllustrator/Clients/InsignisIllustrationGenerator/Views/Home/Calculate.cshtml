@@ -36,7 +36,7 @@
             <h4 class="heading-1">Summary</h4>
             <div class="summary-gray-backgrund">
                 <div class="row">
-                    <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit.ToString("N", gb)</span>@*<span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit)</span>*@</p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit.Value.ToString("N", gb)</span>@*<span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit)</span>*@</p></div>
                     <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.ProposedPortfolio.AnnualGrossInterestEarned.ToString("N", gb)</span></p></div>
                     <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.ProposedPortfolio.AnnualNetInterestEarned.ToString("N", gb)</span></p></div>
                     <hr class="gray-line">
@@ -65,7 +65,11 @@
                                 <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
                                     <a href="#">
                                         <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
+                                        
+                                        
                                         <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
+                                        
+                                        
                                         <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate %</td>
                                         <td class="col-3 right instituteDeposit">
                                             @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize.ToString("N", gb)
@@ -80,7 +84,7 @@
                                 <td class="col-4">&nbsp;</td>
                                 <td class="col-3">&nbsp;</td>
                                 <td class="col-2 right">&nbsp;</td>
-                                <td class="col-3 right table-total">@Model.TotalDeposit.ToString("N", gb)</td>
+                                <td class="col-3 right table-total">@Model.TotalDeposit.Value.ToString("N", gb)</td>
                             </tr>
 
                         </tbody>

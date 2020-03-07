@@ -8,7 +8,7 @@ namespace InsignisIllustrationGenerator.Models
 {
     public class UpdateStatusViewModel
     {
-        [RegularExpression(@"^[a-zA-Z0-9-,.$£€/\\. ""]{0,512}", ErrorMessage = "Invalid Comment")]
+        [RegularExpression(@"^[a-zA-Z0-9-,_.$£€/\\. ""]{0,512}", ErrorMessage = "Invalid Comment")]
         public string Comment { get; set; }
 
         public string Status { get; set; }

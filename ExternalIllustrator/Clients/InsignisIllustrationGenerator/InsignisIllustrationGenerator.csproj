@@ -90,6 +90,9 @@
     <Reference Include="NabuEntities">
       <HintPath>..\..\InsignisConsoleApps\InsignisLoaderConfig\bin\Debug\NabuEntities.dll</HintPath>
     </Reference>
+    <Reference Include="NabuOfficeInterface">
+      <HintPath>..\..\Admin\InsignisPowerPointGenerator\bin\Debug\NabuOfficeInterface.dll</HintPath>
+    </Reference>
     <Reference Include="NabuPreferences">
       <HintPath>..\..\ExternalIllustrator\ExternalIllustrator\bin\NabuPreferences.dll</HintPath>
     </Reference>

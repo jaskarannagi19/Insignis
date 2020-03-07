@@ -22,6 +22,7 @@ using System.Threading.Tasks;
 using System.Text;
 using System.Globalization;
 using Insignis.Asset.Management.Clients.Helper;
+using System.IO;
 
 namespace InsignisIllustrationGenerator.Controllers
 {
@@ -150,16 +151,6 @@ namespace InsignisIllustrationGenerator.Controllers
                 return View(illustrationInfo);
             }
 
-
-
-
-
-
-
-
-
-
-
             //Set Dumy Session
             SetSession();
             //Get Session Values;
@@ -257,7 +248,7 @@ namespace InsignisIllustrationGenerator.Controllers
             Return:-
                 View with Illustration Details
              */
-            var result = _illustrationHelper.GetIllustrationByByUniqueReference(uniqueReferenceId);
+            var result = _illustrationHelper.GetIllustrationByUniqueReferenceId(uniqueReferenceId);
 
             ViewBag.URL = AppSettings.illustrationOutputPublicFacingFolder + "/" + uniqueReferenceId + "/" + uniqueReferenceId + "_CashIllustration.pdf";
 
@@ -274,6 +265,7 @@ namespace InsignisIllustrationGenerator.Controllers
              Returns:- View and Errors
              */
 
+            
             var illustrationInfo = new Session();
             if (!string.IsNullOrEmpty((HttpContext.Session.GetString("SessionPartner"))))
             {
@@ -319,6 +311,24 @@ namespace InsignisIllustrationGenerator.Controllers
                 sStore = _mapper.Map(model.ProposedPortfolio, sStore);
 
                 //Database save our database Super User get 
+                model.TotalDeposit = Convert.ToDouble(sStore.TotalDeposited);
+
+
+                foreach (var m in model.ProposedPortfolio.ProposedInvestments)
+                {
+                    if (string.IsNullOrEmpty(m.InvestmentTerm.TermText))
+                    {
+                        if(m.InvestmentTerm.investmentAccountType == Insignis.Asset.Management.Clients.Helper.InvestmentAccountType.InstantAccessAccount)
+                        {
+                            m.InvestmentTerm.TermText = "Instant Access";
+                        }
+                        else
+                        {
+                        m.InvestmentTerm.TermText = m.InvestmentTerm.NoticeText;
+                        }
+                    }
+                }
+
 
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
                 HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
@@ -390,7 +400,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             Octavo.Gate.Nabu.Preferences.Preference prefMaximumDepositInAnyOneInstitution = scurvePreferences.GetChildPreference("MaximumDepositInAnyOneInstitution");
-            prefMaximumDepositInAnyOneInstitution.Value = "85000";
+            prefMaximumDepositInAnyOneInstitution.Value = sessionData.ClientType == 0?"85000":"175000";
 
 
 
@@ -409,20 +419,17 @@ namespace InsignisIllustrationGenerator.Controllers
 
             List<string> _liquidityAmount = new List<string>();
             //DONOT CHANGE THE ORDER
-            _liquidityAmount.Add(sessionData.EasyAccess.ToString());
-            _liquidityAmount.Add(sessionData.ThreeMonths.ToString());
-            _liquidityAmount.Add(sessionData.NineMonths.ToString());
-            _liquidityAmount.Add(sessionData.TwoYears.ToString());
-            _liquidityAmount.Add(sessionData.OneMonth.ToString());
-            _liquidityAmount.Add(sessionData.SixMonths.ToString());
-            _liquidityAmount.Add(sessionData.OneYear.ToString());
-            _liquidityAmount.Add(sessionData.ThreeYears.ToString());
-
-            //9th , 10th, 11th unknown fields find more.
-            _liquidityAmount.Add("");
-            _liquidityAmount.Add("");
-            _liquidityAmount.Add("");
-
+            _liquidityAmount.Add("");//5 year bond
+            _liquidityAmount.Add("");//4 year bond
+            _liquidityAmount.Add(sessionData.ThreeYears.ToString());//3 year bond
+            _liquidityAmount.Add(sessionData.TwoYears.ToString());// 2 year bond
+            _liquidityAmount.Add("");//18 month bonds
+            _liquidityAmount.Add(sessionData.OneYear.ToString());//1 year bond
+            _liquidityAmount.Add(sessionData.NineMonths.ToString());//9 months
+            _liquidityAmount.Add(sessionData.SixMonths.ToString());// 6 months bond
+            _liquidityAmount.Add(sessionData.ThreeMonths.ToString());// 3 months
+            _liquidityAmount.Add(sessionData.OneMonth.ToString());//1 month
+            _liquidityAmount.Add(sessionData.EasyAccess.ToString());//Easy Access
 
 
             for (int i = 1; i <= Convert.ToInt32(prefNumberOfLiquidityRequirements.Value); i++)
@@ -597,21 +604,29 @@ namespace InsignisIllustrationGenerator.Controllers
 
             //Insignis.Asset.Management.Tools.Sales.SCurveOutput _sc= new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
 
-
             model.ProposedPortfolio = _mapper.Map(generatedInvestments, new Insignis.Asset.Management.Tools.Sales.SCurveOutput());
 
-
-
-
             Octavo.Gate.Nabu.Encryption.EncryptorDecryptor decryptor = new Octavo.Gate.Nabu.Encryption.EncryptorDecryptor();
+            
+            //illustration template
             string qsTemplateFile = "C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Template\\1\\illustration.pptx";
             System.IO.FileInfo templateFile = new System.IO.FileInfo(qsTemplateFile);
 
-            string prefixName = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + DateTime.Now.ToString("HHmmss");
+            string prefixName = string.Empty; //"ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + "20000"; //last number here
+            if (!string.IsNullOrEmpty(model.IllustrationUniqueReference))
+            {
+                prefixName = model.IllustrationUniqueReference;
+            }
+            else
+            {
+                prefixName = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-"+ _illustrationHelper.GetNextIllustrationRefernce().ToString();//Get Last prefix number from db
+            }
+
+
             model.IllustrationUniqueReference = prefixName;
             string requiredOutputNameWithoutExtension = prefixName + "_CashIllustration";
 
-            Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction powerpointRenderAbstraction = new Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction(AppSettings.illustrationOutputInternalFolder, AppSettings.illustrationOutputPublicFacingFolder);
+
             List<KeyValuePair<string, string>> textReplacements = new List<KeyValuePair<string, string>>();
 
             //var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
@@ -646,7 +661,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 try
                 {
-
                     institutionName = model.ProposedPortfolio.ProposedInvestments[i].InstitutionName;
                     termDescription = model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.GetText();// heatmapTerm.InvestmentTerm.GetText();
                     rate = model.ProposedPortfolio.ProposedInvestments[i].Rate.ToString("0.00") + "%";
@@ -666,9 +680,24 @@ namespace InsignisIllustrationGenerator.Controllers
 
             }
 
+            //check if ppt or pdf.................exist..............//
+            if (Directory.Exists(AppSettings.illustrationOutputInternalFolder +"\\"+ prefixName))
+            {
+                Directory.Delete(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName,true);
+            }
+
+
+
+            Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction powerpointRenderAbstraction = new Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction(AppSettings.illustrationOutputInternalFolder, AppSettings.illustrationOutputPublicFacingFolder);
+
+            
+
 
             model.Status = InsignisEnum.IllustrationStatus.Current.ToString();
             model.GenerateDate = DateTime.Now;
+            
+            
+            
             SaveIllustraion(model);
 
 
@@ -802,6 +831,28 @@ namespace InsignisIllustrationGenerator.Controllers
             
             var result = _illustrationHelper.UpdateIllustrationStatus(model);
             return Json(new { Data = result, Success = true });
+        }
+
+
+
+
+
+        public IActionResult UpdateIllustration(string uniqueReferenceId)
+        {
+            /*
+             Update Illustration 
+            
+            Arguments:-
+                Unique Illustration Id
+            
+            Return:-
+                View with model
+             */
+
+            var response = _illustrationHelper.GetIllustrationByUniqueReferenceId(uniqueReferenceId);
+            ViewBag.IllustrationId = uniqueReferenceId;
+            return View("Index", response);
+
         }
 
     }

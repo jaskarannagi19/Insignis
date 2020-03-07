@@ -19,9 +19,9 @@ namespace InsignisIllustrationGenerator.Models
 
         public string IllustrationUniqueReference { get; set; }
 
-        [Required(ErrorMessage = "Please enter client name.")]
+        [Required(ErrorMessage = "Please enter client reference.")]
         [Display(Name ="Client Reference")]
-        [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,60}", ErrorMessage = "Allowed characters in Client Name are: Alphabets, Numbers, Hyphen (-), Underscore (_), Comma (,), Double Quote (“), Pound Sign (£), Dollar Sign ($), Forward Slash (/), Back Slash (\\), Space and Full Stop (.)")]
+        [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,60}", ErrorMessage = "Allowed characters in Client reference are: Alphabets, Numbers, Hyphen (-), Underscore (_), Comma (,), Double Quote (“), Pound Sign (£), Dollar Sign ($), Forward Slash (/), Back Slash (\\), Space and Full Stop (.)")]
         [StringLengthAttribute(maximumLength: 60, MinimumLength = 1, ErrorMessage = "Client Name field allow upto 60 character")]
         public string ClientName { get; set; }
         
@@ -31,30 +31,55 @@ namespace InsignisIllustrationGenerator.Models
         [Required(ErrorMessage = "Please select a Currency")]
         public string Currency { get; set; }
 
+        
         //Liquidity Requirements
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Easy Access")]
+        
+        
+        
+        [Range(0, 99999999.99, ErrorMessage = " Maximum value allowed in easy access amount field is 99999999.99")]
         public double? EasyAccess { get; set; }
 
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for One Month")]
+        
+        
+        
+        [Range(0, 99999999.99, ErrorMessage = " Maximum value allowed in 1 month amount field is 99999999.99")]
         public double? OneMonth { get; set; }
 
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Three Months")]
+        
+        
+        
+        [Range(0, 99999999.99, ErrorMessage = " Maximum value allowed in 3 months amount field is 99999999.99")]
         public double? ThreeMonths { get; set; }
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Six Months")]
+        
+        
+        
+        [Range(0, 99999999.99, ErrorMessage = " Maximum value allowed in 6 months amount field is 99999999.99")]
         public double? SixMonths { get; set; }
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Nine Months")]
+        
+        
+        
+        [Range(0, 99999999.99, ErrorMessage = " Maximum value allowed in 9 months amount field is 99999999.99")]
         public double? NineMonths { get; set; }
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for One Year")]
+        
+        
+        
+        [Range(0, 99999999.99, ErrorMessage = " Maximum value allowed in 1 year amount field is 99999999.99")]
         public double? OneYear { get; set; }
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Two Years")]
+        
+        
+        
+        [Range(0, 99999999.99, ErrorMessage = " Maximum value allowed in 2 years amount field is 99999999.99")]
         public double? TwoYears { get; set; }
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Invalid Amount for Three Years Plus")]
+        
+        
+        
+        [Range(0, 99999999.99, ErrorMessage = " Maximum value allowed in 3+ years amount field is 99999999.99")]
         public double? ThreeYearsPlus { get; set; }
         
-        [RegularExpression(@"[0-9]{0,8}.[0-9]{2}", ErrorMessage = "Please Enter at Least One Liquidity Amount")]
-        [Range(1,double.MaxValue,ErrorMessage = "Please Enter at Least One Liquidity Amount")]
-     
-        public double TotalDeposit { get; set; }
+        //[RegularExpression(@"[0]", ErrorMessage = "Please enter at least one amount in the liquidity requirements section.")]
+        [Required(ErrorMessage = "Please enter at least one amount in the liquidity requirements section.")]
+        //[Range(1, 799999999.92‬, ErrorMessage = "Maximum value allowed in total amount field is 799999999.92")]
+        public double? TotalDeposit { get; set; }
 
         public Insignis.Asset.Management.Tools.Sales.SCurveOutput ProposedPortfolio { get; set; }
         public string AdviserName { get; internal set; }
@@ -63,5 +88,14 @@ namespace InsignisIllustrationGenerator.Models
         public string Status   { get; set; }
         public string Comment { get; set; }
         public string ReferredBy { get; set; }
+
+        
+        //Interest fields
+        public decimal AnnualGrossInterestEarned { get; set; }
+        public decimal AnnualNetInterestEarned { get; set; }
+        public decimal GrossAverageYield { get; set; }
+        public decimal NetAverageYield { get; set; }
+
+
     }
 }

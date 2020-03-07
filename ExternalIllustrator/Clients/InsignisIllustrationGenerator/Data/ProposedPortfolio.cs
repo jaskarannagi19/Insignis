@@ -20,5 +20,7 @@ namespace InsignisIllustrationGenerator.Data
         public string InvestmentTerm { get; set; }
         public decimal AnnualInterest { get; set; }
         public IllustrationDetail IllustrationDetail { get; set; }
+
+        
     }
 }

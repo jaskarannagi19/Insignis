@@ -26,31 +26,94 @@ namespace InsignisIllustrationGenerator.Manager
         internal bool SaveIllustraionAsync(IllustrationDetailViewModel model)
         {
 
-            var illustrationDetail = _mapper.Map<IllustrationDetailViewModel, IllustrationDetail>(model);
-
-            illustrationDetail.Status = "Created";
-            illustrationDetail.IllustrationProposedPortfolio = new List<ProposedPortfolio>();
-            
-            foreach (var item in model.ProposedPortfolio.ProposedInvestments)
+            //check for existence
+            bool exits = _context.IllustrationDetails.Any(x => x.IllustrationUniqueReference == model.IllustrationUniqueReference);
+            var illustrationDetail =new IllustrationDetail();
+            if (exits)
             {
-                ProposedPortfolio folio = new ProposedPortfolio();
-                folio.InvestmentTerm = item.InvestmentTerm.TermText;
-                folio.AnnualInterest = item.AnnualInterest;
-                folio.DepositSize = item.DepositSize;
-                folio.IllustrationID = model.Id;
-                folio.InstitutionID = item.InstitutionID;
-                folio.InstitutionName = item.InstitutionName;
-                folio.InstitutionShortName = item.InstitutionShortName;
-                folio.Rate = item.Rate;
-                illustrationDetail.IllustrationProposedPortfolio.Add(folio);
+                illustrationDetail = _context.IllustrationDetails.FirstOrDefault(x => x.IllustrationUniqueReference == model.IllustrationUniqueReference);
 
+
+
+
+                illustrationDetail.AdviserName = model.AdviserName;
+                illustrationDetail.ClientName = model.ClientName;
+                illustrationDetail.ClientType = model.ClientType;
+
+                illustrationDetail.Currency = model.Currency;
+                illustrationDetail.EasyAccess =Convert.ToDouble(model.EasyAccess);
+                illustrationDetail.GenerateDate = model.GenerateDate;
+                
+                
+                
+                illustrationDetail.NineMonths = Convert.ToDouble(model.NineMonths);
+                illustrationDetail.OneMonth = Convert.ToDouble(model.OneMonth);
+                illustrationDetail.OneYear = Convert.ToDouble(model.OneYear);
+                illustrationDetail.PartnerEmail = model.PartnerEmail;
+                illustrationDetail.PartnerName = model.PartnerName;
+                illustrationDetail.PartnerOrganisation = model.PartnerOrganisation;
+                illustrationDetail.ReferredBy = model.ReferredBy;
+                illustrationDetail.SixMonths = Convert.ToDouble(model.SixMonths);
+                illustrationDetail.Status = model.Status;
+                illustrationDetail.ThreeMonths = Convert.ToDouble(model.ThreeMonths);
+                illustrationDetail.ThreeYearsPlus = Convert.ToDouble(model.ThreeYearsPlus);
+                illustrationDetail.TotalDeposit = Convert.ToDouble(model.TotalDeposit);
+                illustrationDetail.TwoYears = Convert.ToDouble(model.TwoYears);
+                    
+
+
+
+                illustrationDetail.Status = "Created";
+                //Save interests
+                illustrationDetail.AnnualGrossInterestEarned = model.ProposedPortfolio.AnnualGrossInterestEarned;
+                illustrationDetail.AnnualNetInterestEarned = model.ProposedPortfolio.AnnualNetInterestEarned;
+                illustrationDetail.GrossAverageYield = model.ProposedPortfolio.GrossAverageYield;
+                illustrationDetail.NetAverageYield = model.ProposedPortfolio.GrossAverageYield;
+                illustrationDetail.IllustrationProposedPortfolio = new List<ProposedPortfolio>();
+                foreach (var item in model.ProposedPortfolio.ProposedInvestments)
+                {
+                    ProposedPortfolio folio = new ProposedPortfolio();
+                    folio.InvestmentTerm = item.InvestmentTerm.TermText;
+                    folio.AnnualInterest = item.AnnualInterest;
+                    folio.DepositSize = item.DepositSize;
+                    folio.IllustrationID = model.Id;
+                    folio.InstitutionID = item.InstitutionID;
+                    folio.InstitutionName = item.InstitutionName;
+                    folio.InstitutionShortName = item.InstitutionShortName;
+                    folio.Rate = item.Rate;
+                    illustrationDetail.IllustrationProposedPortfolio.Add(folio);
+
+                }
+            }
+            else
+            {
+                illustrationDetail = _mapper.Map<IllustrationDetailViewModel, IllustrationDetail>(model);
+                illustrationDetail.Status = "Created";
+                //Save interests
+                illustrationDetail.AnnualGrossInterestEarned = model.ProposedPortfolio.AnnualGrossInterestEarned;
+                illustrationDetail.AnnualNetInterestEarned = model.ProposedPortfolio.AnnualNetInterestEarned;
+                illustrationDetail.GrossAverageYield = model.ProposedPortfolio.GrossAverageYield;
+                illustrationDetail.NetAverageYield = model.ProposedPortfolio.GrossAverageYield;
+                illustrationDetail.IllustrationProposedPortfolio = new List<ProposedPortfolio>();
+                foreach (var item in model.ProposedPortfolio.ProposedInvestments)
+                {
+                    ProposedPortfolio folio = new ProposedPortfolio();
+                    folio.InvestmentTerm = item.InvestmentTerm.TermText;
+                    folio.AnnualInterest = item.AnnualInterest;
+                    folio.DepositSize = item.DepositSize;
+                    folio.IllustrationID = model.Id;
+                    folio.InstitutionID = item.InstitutionID;
+                    folio.InstitutionName = item.InstitutionName;
+                    folio.InstitutionShortName = item.InstitutionShortName;
+                    folio.Rate = item.Rate;
+                    illustrationDetail.IllustrationProposedPortfolio.Add(folio);
+
+                }
+                _context.IllustrationDetails.Add(illustrationDetail);
             }
 
-            //illustrationDetail.IllustrationProposedPortfolio = model.ProposedPortfolio.ProposedInvestments.;
-
-            _context.IllustrationDetails.Add(illustrationDetail);
             _context.SaveChanges();
-            var IsSave = false;
+            var IsSave = true;
             return IsSave;
         }
 
@@ -63,7 +126,7 @@ namespace InsignisIllustrationGenerator.Manager
         internal IEnumerable<IllustrationListViewModel> GetIllustrationList(SearchParameterViewModel searchParameter)
         {
             var IllustrationDetails = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x=>x.GenerateDate).ToList();
-
+            
             //DateTime? IllustrationFrom = Convert.ToDateTime(searchParameter.IllustrationFrom);
             //DateTime? IllustrationTo = Convert.ToDateTime(searchParameter.IllustrationTo);
 
@@ -82,12 +145,12 @@ namespace InsignisIllustrationGenerator.Manager
                 //Client Search
                 & (string.IsNullOrEmpty(searchParameter.ClientName) || f.ClientName.ToLower().Contains(searchParameter.ClientName.ToLower()))
                 //Company Search
-                & (string.IsNullOrEmpty(searchParameter.CompanyName) || f.PartnerName.ToLower().Contains(searchParameter.CompanyName.ToLower()))
+                & (string.IsNullOrEmpty(searchParameter.CompanyName) || f.PartnerOrganisation.ToLower().Contains(searchParameter.CompanyName.ToLower()))
                 //Company Search
                 & (string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || f.IllustrationUniqueReference.ToLower().Contains(searchParameter.IllustrationUniqueReference.ToLower()))
 
-                & ((!searchParameter.IllustrationFrom.HasValue || f.GenerateDate > searchParameter.IllustrationFrom.Value)
-                & (!searchParameter.IllustrationTo.HasValue || f.GenerateDate < searchParameter.IllustrationTo.Value))).ToList();
+                & ((!searchParameter.IllustrationFrom.HasValue || f.GenerateDate >= searchParameter.IllustrationFrom.Value)
+                & (!searchParameter.IllustrationTo.HasValue || f.GenerateDate <= searchParameter.IllustrationTo.Value))).ToList();
             }
             List<IllustrationListViewModel> response = new List<IllustrationListViewModel>();
             response = _mapper.Map(IllustrationDetails, response);
@@ -95,7 +158,7 @@ namespace InsignisIllustrationGenerator.Manager
             return response;
         }
 
-        internal IllustrationDetailViewModel GetIllustrationByByUniqueReference(string uniqueReferenceID)
+        internal IllustrationDetailViewModel GetIllustrationByUniqueReferenceId(string uniqueReferenceID)
         {
             /*
              Get illustration from unique reference id from db
@@ -104,7 +167,7 @@ namespace InsignisIllustrationGenerator.Manager
             Return:-
                 Illustration DetailViewModel
              */
-            IllustrationDetail dbIllustration = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).SingleOrDefault(x => x.IllustrationUniqueReference == uniqueReferenceID);
+            IllustrationDetail dbIllustration = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).FirstOrDefault(x => x.IllustrationUniqueReference == uniqueReferenceID);
             //map db entity to view model ProposedPortfolio. Investment count is 0 after Mapping
             IllustrationDetailViewModel result = _mapper.Map<IllustrationDetailViewModel>(dbIllustration);
             result.ProposedPortfolio = new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
@@ -126,6 +189,22 @@ namespace InsignisIllustrationGenerator.Manager
             }
 
             return result;
+        }
+
+
+
+        internal int GetNextIllustrationRefernce()
+        {
+            /*
+             Get next illustration reference number
+             Arguments:-
+                None
+            Return:-
+                String reference number
+             */
+            string lastReference = _context.IllustrationDetails.OrderBy(x => x.IllustrationUniqueReference).First().IllustrationUniqueReference;
+            int number = Convert.ToInt32(lastReference.Split("-")[2]) + 1;
+            return number;
         }
 
 
