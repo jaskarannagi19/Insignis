@@ -218,3 +218,4 @@ D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.csproj.CopyComplete
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.dll
 D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\InsignisIllustrationGenerator.pdb
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustrationGenerator\obj\Debug\netcoreapp3.0\Razor\Views\Home\Login.cshtml.g.cs

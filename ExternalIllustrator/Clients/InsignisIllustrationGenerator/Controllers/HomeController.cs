@@ -13,14 +13,9 @@ using InsignisIllustrationGenerator.Helper;
 using Microsoft.Extensions.Options;
 using Octavo.Gate.Nabu.Abstraction;
 using Octavo.Gate.Nabu.Entities.Financial;
-using Spire.Presentation;
 using InsignisIllustrationGenerator.Data;
-using InsignisIllustrationGenerator.Scheduler;
 using System.Linq;
-using Microsoft.EntityFrameworkCore;
-using System.Threading.Tasks;
 using System.Text;
-using System.Globalization;
 using Insignis.Asset.Management.Clients.Helper;
 using System.IO;
 
@@ -86,33 +81,24 @@ namespace InsignisIllustrationGenerator.Controllers
         }
 
         //Session State Management
-        public void SetSession()
+        public void SetSession(string email, string name, string organisation, string telephone)
         {
             /*Sets user session
-             Arguments:- None
+             Arguments:- 
+                Email:- Partner Email
+                Name:- Partner Name
+                Organisation: Partner Organisation
+                Telephone: Partner Telephone
              Returns:- None
              
              */
 
             //Set Info in session
 
-            var session = new Session() { PartnerEmailAddress = "p.artner@partorg.com", PartnerName = "Peter Artner", PartnerOrganisation = "PartOrg Ltd.", PartnerTelephone = "01226 1234 567", SuperUser = false };
+            var session = new Session() { PartnerEmailAddress = email, PartnerName = name, PartnerOrganisation = organisation, PartnerTelephone = telephone, SuperUser = false };
 
             HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(session));
-            //if (Session["_partnerOrganisation"] != null && Session["_partnerOrganisation"].ToString().Length > 0 &&
-            //   Session["_partnerName"] != null && Session["_partnerName"].ToString().Length > 0 &&
-            //   Session["_partnerEmailAddress"] != null && Session["_partnerEmailAddress"].ToString().Length > 0 &&
-            //   Session["_partnerTelephone"] != null && Session["_partnerTelephone"].ToString().Length > 0)
-            //{
-            //    Octavo.Gate.Nabu.Preferences.Manager preferencesManager = new Octavo.Gate.Nabu.Preferences.Manager(ConfigurationManager.AppSettings["preferencesRoot"].ToString() + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(Session["_partnerOrganisation"].ToString()) + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(Session["_partnerEmailAddress"].ToString()), false);
-            //    Octavo.Gate.Nabu.Preferences.Preference scurveBuilder = preferencesManager.GetPreference("Sales.Tools.SCurve.Builder", 1, "Settings");
-            //    if (scurveBuilder == null)
-            //        Response.Redirect("SCurveAvailableTo.aspx?reset=true");
-            //    else
-            //        Response.Redirect("SCurveAvailableTo.aspx");
-            //}
-
-
+            
         }
 
         //private readonly BankHelper _bankHelper;
@@ -151,9 +137,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 return View(illustrationInfo);
             }
 
-            //Set Dumy Session
-            SetSession();
-            //Get Session Values;
+            
             var partnerInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
             
 
@@ -833,10 +817,6 @@ namespace InsignisIllustrationGenerator.Controllers
             return Json(new { Data = result, Success = true });
         }
 
-
-
-
-
         public IActionResult UpdateIllustration(string uniqueReferenceId)
         {
             /*
@@ -852,6 +832,27 @@ namespace InsignisIllustrationGenerator.Controllers
             var response = _illustrationHelper.GetIllustrationByUniqueReferenceId(uniqueReferenceId);
             ViewBag.IllustrationId = uniqueReferenceId;
             return View("Index", response);
+
+        }
+
+
+        public IActionResult Login()
+        {
+            /*
+             Login page for session transfer
+             Arguments:-
+                None
+            Returns:-
+                View
+             */
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Login(Session session)
+        {
+            SetSession(session.PartnerEmailAddress, session.PartnerName, session.PartnerOrganisation, session.PartnerTelephone);
+
+            return RedirectToAction("Index");
 
         }
 
