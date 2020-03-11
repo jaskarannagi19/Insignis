@@ -400,7 +400,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             Octavo.Gate.Nabu.Preferences.Preference prefMaximumDepositInAnyOneInstitution = scurvePreferences.GetChildPreference("MaximumDepositInAnyOneInstitution");
-            prefMaximumDepositInAnyOneInstitution.Value = sessionData.ClientType == 0?"85000":"175000";
+            prefMaximumDepositInAnyOneInstitution.Value = sessionData.ClientType == 0?"85000":"170000";
 
 
 
