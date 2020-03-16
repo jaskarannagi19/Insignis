@@ -14,7 +14,7 @@ namespace InsignisIllustrationGenerator.Data
         public string PartnerEmail { get; set; }
         public string ClientName { get; set; }
         public int ClientType { get; set; }
-        public string AdviserName { get; set; }
+        
         public string IllustrationUniqueReference { get; set; }
         public DateTime GenerateDate { get; set; }
         public string Status { get; set; }

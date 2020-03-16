@@ -10,7 +10,7 @@ namespace InsignisIllustrationGenerator.Models
     {
 
         [RegularExpression(@"^[a-z]{0,60}", ErrorMessage = "Invalid advisor name")]
-        public string AdvisorName { get; set; }
+        public string PartnerName { get; set; }
 
         
         
@@ -33,6 +33,8 @@ namespace InsignisIllustrationGenerator.Models
         
         
         public DateTime? IllustrationTo { get; set; }
+
+        public string PartnerEmail { get; set; }
 
 
     }

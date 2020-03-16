@@ -42,7 +42,7 @@ namespace InsignisIllustrationGenerator.Controllers
         [HttpPost]
         public ActionResult ExportCSV(SearchParameterViewModel searchParameter)
         {
-            var result = _illustrationHelper.GetIllustrationList(searchParameter);
+            var result = _illustrationHelper.GetIllustrationList(searchParameter,false);
             StringBuilder sbheader = new StringBuilder();
             StringBuilder sb = new StringBuilder();
 
@@ -81,7 +81,7 @@ namespace InsignisIllustrationGenerator.Controllers
         }
 
         //Session State Management
-        public void SetSession(string email, string name, string organisation, string telephone)
+        public void SetSession(string email, string name, string organisation, string telephone, bool superUser)
         {
             /*Sets user session
              Arguments:- 
@@ -95,7 +95,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
             //Set Info in session
 
-            var session = new Session() { PartnerEmailAddress = email, PartnerName = name, PartnerOrganisation = organisation, PartnerTelephone = telephone, SuperUser = false };
+            var session = new Session() { PartnerEmailAddress = email, PartnerName = name, PartnerOrganisation = organisation, PartnerTelephone = telephone, SuperUser = superUser };
 
             HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(session));
             
@@ -147,7 +147,7 @@ namespace InsignisIllustrationGenerator.Controllers
             }
             IllustrationDetailViewModel model = new IllustrationDetailViewModel();
 
-            model.AdviserName = partnerInfo.PartnerName; ;
+            //model.AdviserName = partnerInfo.PartnerName; ;
             model.PartnerEmail = partnerInfo.PartnerEmailAddress;
             model.PartnerName = partnerInfo.PartnerName;
             model.PartnerOrganisation = partnerInfo.PartnerOrganisation;
@@ -184,9 +184,17 @@ namespace InsignisIllustrationGenerator.Controllers
 
         public IActionResult PreviousIllustration(SearchParameterViewModel searchParams)
         {
-            // IEnumerable<IllustrationListViewModel> illustrationList = await GetIllustrationListAsync();
-            // IEnumerable<IllustrationListViewModel> illustrationList = GetIllustrationListAsync().Result;
-            var illustrationList = _illustrationHelper.GetIllustrationList(searchParams);
+            /*
+             Returns list of previous illustration
+
+            Arguments:-
+                Search Params
+            
+            Returns:-
+                View with previous list
+             */
+
+            var illustrationList = _illustrationHelper.GetIllustrationList(searchParams,false);
             return View(illustrationList);
         }
         public IActionResult SearchIllustration(SearchParameterViewModel searchParams)
@@ -213,7 +221,11 @@ namespace InsignisIllustrationGenerator.Controllers
                 }
                 return Json(new { Data=errors, Success = false });
             }
-            var result = _illustrationHelper.GetIllustrationList(searchParams);
+
+
+            var partnerInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            searchParams.PartnerEmail = partnerInfo.PartnerEmailAddress;
+            var result = _illustrationHelper.GetIllustrationList(searchParams,false);
             if (result.Count()>0) return Json(new { Data = result, Success = true });
             return Json(new { Data = "Sorry, we couldn’t find any illustrations matching your search criteria.", Success = false });
         }
@@ -357,6 +369,8 @@ namespace InsignisIllustrationGenerator.Controllers
             }
             var feeMatrix = new FeeMatrix(fscsProtectionConfigFile + "FeeMatrix.xml");
             model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+            
+            model.ProposedPortfolio.FeePercentage = 0.250M;
             model.ProposedPortfolio.NetAverageYield = (model.ProposedPortfolio.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
 
             model.ProposedPortfolio.Fee = (model.ProposedPortfolio.TotalDeposited * (decimal)(model.ProposedPortfolio.FeePercentage / 100));
@@ -593,13 +607,19 @@ namespace InsignisIllustrationGenerator.Controllers
             Octavo.Gate.Nabu.Encryption.EncryptorDecryptor decryptor = new Octavo.Gate.Nabu.Encryption.EncryptorDecryptor();
             
             //illustration template
-            string qsTemplateFile = "C:\\InsignisAM\\NET\\ExternalIllustrator\\ExternalIllustrator\\Template\\1\\illustration.pptx";
+            string qsTemplateFile = ConfigurationManager.AppSettings.Get("illustrationTemplateRoot") +"\\"+ model.PartnerOrganisation+"\\"+ model.PartnerOrganisation+".pptx";
+
+            if (!System.IO.File.Exists(qsTemplateFile)) qsTemplateFile = ConfigurationManager.AppSettings.Get("illustrationTemplateRoot") + "\\Insignis\\Insignis.pptx";
+
+
             System.IO.FileInfo templateFile = new System.IO.FileInfo(qsTemplateFile);
 
-            string prefixName = string.Empty; //"ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + "20000"; //last number here
+            string prefixName = string.Empty; 
+
             if (!string.IsNullOrEmpty(model.IllustrationUniqueReference))
             {
-                prefixName = model.IllustrationUniqueReference;
+                //prefixName = model.IllustrationUniqueReference;
+                prefixName = "ICS-" + DateTime.Now.ToString("yyyyMMdd") + "-" + _illustrationHelper.GetNextIllustrationRefernce().ToString();//Get Last prefix number from db
             }
             else
             {
@@ -850,9 +870,40 @@ namespace InsignisIllustrationGenerator.Controllers
         [HttpPost]
         public IActionResult Login(Session session)
         {
-            SetSession(session.PartnerEmailAddress, session.PartnerName, session.PartnerOrganisation, session.PartnerTelephone);
+            SetSession(session.PartnerEmailAddress, session.PartnerName, session.PartnerOrganisation, session.PartnerTelephone,false);
 
             return RedirectToAction("Index");
+
+        }
+
+        [HttpPost]
+        public IActionResult SuperLogin(Session session)
+        {
+            SetSession(session.PartnerEmailAddress, session.PartnerName, session.PartnerOrganisation, session.PartnerTelephone, true);
+
+            return RedirectToAction("Illustrationlist","Superuser");
+
+        }
+
+        public IActionResult Logo()
+        {
+            /*
+             Return redirected view
+             Arguments:- 
+                None
+            Returns:-
+                View
+             */
+            var sessionData = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            if(sessionData.SuperUser == true)
+            {
+                return RedirectToAction("Illustrationlist", "Superuser");
+            }
+            else
+            {
+                return  RedirectToAction("Index", "Home");
+            }
+
 
         }
 

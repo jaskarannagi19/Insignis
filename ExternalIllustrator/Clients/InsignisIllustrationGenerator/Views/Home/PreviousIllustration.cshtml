@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Previous Illustration</h1>
 <div class="middle-section">
     <div class="container">
         <div class="row">
@@ -194,7 +193,8 @@
                         if (this.comment == null) {
                             this.comment = "";
                         }
-                        $("#tblbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-md-1">' + this.clientName + '</td><td class="col-md-3">' + this.illustrationUniqueReference + '</td><td class="col-md-2" style="min-width:220px;" >' + this.generateDate.split("T")[0] + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-1" style="min-width:110px;">' + this.status + '</td><td class="col-md-2" style="min-width:284px;">' + this.comment + '</td></tr>');
+                        var date = this.generateDate.split("T")[0].split("-");
+                        $("#tblbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-md-1">' + this.clientName + '</td><td class="col-md-3">' + this.illustrationUniqueReference + '</td><td class="col-md-2" style="min-width:220px;" >' + date[2]+"-"+date[1]+"-"+date[0]  + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-1" style="min-width:110px;">' + this.status + '</td><td class="col-md-2" style="min-width:284px;">' + this.comment + '</td></tr>');
                     });
                     //var data = response.data;
                     //for (var i = 0; i < data.length; i++) {
@@ -210,6 +210,7 @@
                     "paging": true,
                     "pageLength": 25,
                     "searching": false,
+                    "order": [],
                     "language": {
                         "emptyTable": "Sorry, we couldn’t find any illustrations matching your search criteria."
                     }

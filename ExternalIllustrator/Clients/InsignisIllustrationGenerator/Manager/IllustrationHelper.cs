@@ -2,9 +2,11 @@
 using InsignisIllustrationGenerator.Data;
 using InsignisIllustrationGenerator.Helper;
 using InsignisIllustrationGenerator.Models;
+
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +38,7 @@ namespace InsignisIllustrationGenerator.Manager
 
 
 
-                illustrationDetail.AdviserName = model.AdviserName;
+                //illustrationDetail.AdviserName = model.AdviserName;
                 illustrationDetail.ClientName = model.ClientName;
                 illustrationDetail.ClientType = model.ClientType;
 
@@ -123,25 +125,31 @@ namespace InsignisIllustrationGenerator.Manager
 
 
 
-        internal IEnumerable<IllustrationListViewModel> GetIllustrationList(SearchParameterViewModel searchParameter)
+        internal IEnumerable<IllustrationListViewModel> GetIllustrationList(SearchParameterViewModel searchParameter,bool isSuperUser)
         {
-            var IllustrationDetails = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x=>x.GenerateDate).ToList();
-            
-            //DateTime? IllustrationFrom = Convert.ToDateTime(searchParameter.IllustrationFrom);
-            //DateTime? IllustrationTo = Convert.ToDateTime(searchParameter.IllustrationTo);
 
-            //searchParameter.ClientName = string.IsNullOrEmpty(searchParameter.ClientName) ? "" : searchParameter.ClientName.ToLower();
-            //searchParameter.CompanyName = string.IsNullOrEmpty(searchParameter.CompanyName) ? "" : searchParameter.CompanyName.ToLower();
-            //searchParameter.AdvisorName = string.IsNullOrEmpty(searchParameter.AdvisorName) ? "" : searchParameter.AdvisorName.ToLower();
+            var IllustrationDetails = new List<IllustrationDetail>();
+            
+            
+            if (!isSuperUser)
+                IllustrationDetails = _context.IllustrationDetails.Where(x=>x.PartnerEmail == searchParameter.PartnerEmail).Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x=>x.GenerateDate).ToList();
+            else
+                IllustrationDetails = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x => x.GenerateDate).ToList();
+
             searchParameter.IllustrationUniqueReference = string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) ? "" : searchParameter.IllustrationUniqueReference.ToLower();
 
 
-            if (searchParameter != null)
+            if(searchParameter.IllustrationFrom !=null && searchParameter.IllustrationTo != null) { 
+                if(searchParameter.IllustrationFrom.Value.Date == searchParameter.IllustrationTo.Value.Date) 
+                    searchParameter.IllustrationTo=searchParameter.IllustrationTo.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
+            }
+
+            if (!string.IsNullOrEmpty(searchParameter.ClientName) || !string.IsNullOrEmpty(searchParameter.CompanyName) || !string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || searchParameter.IllustrationTo != null || searchParameter.IllustrationFrom !=null)
             {
                 IllustrationDetails = IllustrationDetails.Where(f =>
 
                 //Advisor Search
-                (string.IsNullOrEmpty(searchParameter.AdvisorName) || (!string.IsNullOrEmpty(f.AdviserName) && f.AdviserName.ToLower().Contains(searchParameter.AdvisorName)))
+                (string.IsNullOrEmpty(searchParameter.PartnerName) || (!string.IsNullOrEmpty(f.PartnerName) && f.PartnerName.ToLower().Contains(searchParameter.PartnerName)))
                 //Client Search
                 & (string.IsNullOrEmpty(searchParameter.ClientName) || f.ClientName.ToLower().Contains(searchParameter.ClientName.ToLower()))
                 //Company Search
@@ -154,7 +162,7 @@ namespace InsignisIllustrationGenerator.Manager
             }
             List<IllustrationListViewModel> response = new List<IllustrationListViewModel>();
             response = _mapper.Map(IllustrationDetails, response);
-
+            
             return response;
         }
 
@@ -202,7 +210,7 @@ namespace InsignisIllustrationGenerator.Manager
             Return:-
                 String reference number
              */
-            string lastReference = _context.IllustrationDetails.OrderBy(x => x.IllustrationUniqueReference).First().IllustrationUniqueReference;
+            string lastReference = _context.IllustrationDetails.OrderByDescending(x => x.IllustrationUniqueReference).First().IllustrationUniqueReference;
             int number = Convert.ToInt32(lastReference.Split("-")[2]) + 1;
             return number;
         }

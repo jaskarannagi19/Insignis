@@ -4,8 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>IllustrationList</h1>
-
 <div class="middle-section">
     <div class="container">
 
@@ -202,7 +200,9 @@
                         if (this.comment == null) {
                             this.comment = "";
                         }
-                        $(".illustrationListTable tbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-md-1" style="min-width:112px;">' + this.adviserName + '</td><td class="col-md-1" style="min-width:130px">' + this.clientName + '</td><td class="col-md-2" style="min-width:180px">' + this.partnerOrganisation + '</td><td class="col-md-2" style="min-width:260px" >' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-2" style="min-width:170px">' + this.generateDate.split("T")[0] + '</td><td class="col-md-1" style="min-width:89px">' + this.status + '</td></tr>');
+                        var date = this.generateDate.split("T")[0].split("-");
+                        
+                        $(".illustrationListTable tbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-md-1" style="min-width:112px;">' + this.partnerName + '</td><td class="col-md-1" style="min-width:130px">' + this.clientName + '</td><td class="col-md-2" style="min-width:180px">' + this.partnerOrganisation + '</td><td class="col-md-2" style="min-width:260px" >' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-2" style="min-width:170px">' + date[2]+"/"+date[1]+"/"+date[0]  + '</td><td class="col-md-1" style="min-width:89px">' + this.status + '</td></tr>');
                     });
                 }
                 $('.illustrationListTable').DataTable({
@@ -213,6 +213,7 @@
                     "paging": true,
                     "searching": false,
                     "pageLength": 25,
+                    "order": [],
                     language: {
                         "emptyTable": "Sorry, we couldn’t find any illustrations matching your search criteria."
                     }

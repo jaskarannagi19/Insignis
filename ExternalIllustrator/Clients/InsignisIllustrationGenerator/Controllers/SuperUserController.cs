@@ -35,7 +35,7 @@ namespace InsignisIllustrationGenerator.Controllers
         public IActionResult IllustrationList(SearchParameterViewModel searchParams)
         {
             //GetIllustrationList
-            var illustrationList = _illustrationHelper.GetIllustrationList(searchParams).ToList();
+            var illustrationList = _illustrationHelper.GetIllustrationList(searchParams,true).ToList();
             return View(illustrationList);
         
         }
@@ -43,7 +43,7 @@ namespace InsignisIllustrationGenerator.Controllers
         [HttpPost]
         public ActionResult ExportCSV(SearchParameterViewModel searchParameter)
         {
-            var result = _illustrationHelper.GetIllustrationList(searchParameter);
+            var result = _illustrationHelper.GetIllustrationList(searchParameter,true);
             // StringBuilder sbheader = new StringBuilder();
             StringBuilder sb = new StringBuilder();
             sb.Append(string.Format("{0},", "Company Name"));
@@ -129,7 +129,7 @@ namespace InsignisIllustrationGenerator.Controllers
             }
 
 
-            var result = _illustrationHelper.GetIllustrationList(searchParams);
+            var result = _illustrationHelper.GetIllustrationList(searchParams,true);
 
             return Json(new { Data=result, Success=true });
         }

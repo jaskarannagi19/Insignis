@@ -37,22 +37,29 @@
         <h4 class="heading-1">Summary</h4>
         <div class="summary-gray-backgrund">
             <div class="row">
-                <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit.Value.ToString("N",gb)</span></p></div>
-                <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.AnnualGrossInterestEarned.ToString("N",gb)</span></p></div>
-                <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.AnnualNetInterestEarned.ToString("N",gb)</span></p></div>
+                <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit.Value.ToString("N", gb)</span></p></div>
+                <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.AnnualGrossInterestEarned.ToString("N", gb)</span></p></div>
+                <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.AnnualNetInterestEarned.ToString("N", gb)</span></p></div>
                 <hr class="gray-line">
-                <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.GrossAverageYield.ToString("N",gb) %</span></p></div>
-                <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.NetAverageYield.ToString("N",gb) %</span></p></div>
-                <hr class="gray-line">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <p>
-                        Comment:<br>
-                        <span id="txtComment">
-                            @Model.Comment
-                        </span>
-                    </p>
+                <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.GrossAverageYield.ToString("N", gb) %</span></p></div>
+                <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.NetAverageYield.ToString("N", gb) %</span></p></div>
+
+
+
+                @if (ViewBag.User == "")
+                {
+                    <hr class="gray-line">
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <p>
+                            Comment:<br>
+                            <span id="txtComment">
+                                @Model.Comment
+                            </span>
+                        </p>
+                    </div>
+                }
                 </div>
-            </div>
         </div>
     </div>
     <div class="container">
@@ -82,7 +89,7 @@
                         }
                     </tbody>
                 </table>
-                <p class="gray-light-small">*Please click on a row to update deposit details</p>
+                @*<p class="gray-light-small">*Please click on a row to update deposit details</p>*@
             </div>
             <div class="clear1"></div>
             @*<div class="right">
@@ -96,19 +103,22 @@
             @if (ViewBag.User == "")
             {
                 <a class="btn btn-primary" href="/Home/PreviousIllustration">Back</a>
-                @if (Model.Status.ToLower()!= "deleted") { 
-                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-                    Update Status
-                </button>
+                @if (Model.Status.ToLower() != "deleted")
+                {
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                        Update Status
+                    </button>
                 }
                 <a href="@ViewBag.URL" target="_blank" class="btn btn-primary">Download Illustration</a>
                 <a href="@Url.Action("UpdateIllustration","Home", new {uniqueReferenceId= @Model.IllustrationUniqueReference })" class="btn btn-primary">Update Illustration</a>
+
                 @if (Model.Status.ToLower() == "accepted")
                 {
                     <a href="https://www.insigniscash.com/partner/LoggedOut/Landing.aspx" target="_blank" class="btn btn-primary">Create Client Pack</a>
                 }
                 else
                 {
+                    
                     <button type="submit" class="btn btn-primary" style="background-color:#ffa64d" title="This is available for Accepted Illustration" disabled>Create Client Pack</button>
                 }
 
