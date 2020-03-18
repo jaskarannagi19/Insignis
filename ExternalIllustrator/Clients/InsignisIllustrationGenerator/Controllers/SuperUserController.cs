@@ -124,7 +124,7 @@ namespace InsignisIllustrationGenerator.Controllers
             if(searchParams.IllustrationFrom > searchParams.IllustrationTo)
             {
                 var errors = new List<string>();
-                errors.Add("To date cannot be less than the from date.");
+                errors.Add("To Date cannot be less than the From Date.");
                 return Json(new { Data = errors, Success = false });
             }
 

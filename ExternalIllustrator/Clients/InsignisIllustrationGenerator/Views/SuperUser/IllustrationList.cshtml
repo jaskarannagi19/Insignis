@@ -20,7 +20,7 @@
                         <div class="form-row">
                             <div class="form-group col-lg-4">
                                 <label for="inputEmail4">Advisor Name</label>
-                                <input type="text" class="form-control" id="AdvisorName" name="AdvisorName" placeholder="Advisor Name">
+                                <input type="text" class="form-control" id="PartnerName" name="PartnerName" placeholder="Advisor Name">
                             </div>
                             <div class="form-group col-lg-4">
                                 <label for="inputPassword4">Client Name</label>
@@ -161,7 +161,7 @@
             url: "../../SuperUser/SearchIllustration",
             type: "POST",
             data: {
-                AdvisorName: $("#AdvisorName").val(),
+                PartnerName: $("#PartnerName").val(),
                 ClientName: $("#ClientName").val(),
                 CompanyName: $("#CompanyName").val(),
                 IllustrationUniqueReference: $("#IllustrationUniqueReference").val(),

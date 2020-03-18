@@ -35,6 +35,7 @@ namespace InsignisIllustrationGenerator.Models
         public DateTime? IllustrationTo { get; set; }
 
         public string PartnerEmail { get; set; }
+        public string PartnerOrganisation { get; set; }
 
 
     }

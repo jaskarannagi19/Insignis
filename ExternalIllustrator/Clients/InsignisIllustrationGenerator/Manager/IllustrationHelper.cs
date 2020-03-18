@@ -132,7 +132,7 @@ namespace InsignisIllustrationGenerator.Manager
             
             
             if (!isSuperUser)
-                IllustrationDetails = _context.IllustrationDetails.Where(x=>x.PartnerEmail == searchParameter.PartnerEmail).Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x=>x.GenerateDate).ToList();
+                IllustrationDetails = _context.IllustrationDetails.Where(x=>x.PartnerEmail == searchParameter.PartnerEmail && x.PartnerOrganisation == searchParameter.PartnerOrganisation).Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x=>x.GenerateDate).ToList();
             else
                 IllustrationDetails = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x => x.GenerateDate).ToList();
 
@@ -140,11 +140,10 @@ namespace InsignisIllustrationGenerator.Manager
 
 
             if(searchParameter.IllustrationFrom !=null && searchParameter.IllustrationTo != null) { 
-                if(searchParameter.IllustrationFrom.Value.Date == searchParameter.IllustrationTo.Value.Date) 
-                    searchParameter.IllustrationTo=searchParameter.IllustrationTo.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
+                searchParameter.IllustrationTo=searchParameter.IllustrationTo.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
             }
 
-            if (!string.IsNullOrEmpty(searchParameter.ClientName) || !string.IsNullOrEmpty(searchParameter.CompanyName) || !string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || searchParameter.IllustrationTo != null || searchParameter.IllustrationFrom !=null)
+            if (!string.IsNullOrEmpty(searchParameter.PartnerName) || !string.IsNullOrEmpty(searchParameter.CompanyName) || !string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || searchParameter.IllustrationTo != null || searchParameter.IllustrationFrom !=null)
             {
                 IllustrationDetails = IllustrationDetails.Where(f =>
 

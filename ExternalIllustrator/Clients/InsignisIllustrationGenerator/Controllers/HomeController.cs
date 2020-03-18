@@ -122,13 +122,26 @@ namespace InsignisIllustrationGenerator.Controllers
             return RedirectToAction(actionid, "Home");
         }
 
-        public IActionResult Index()
+        public IActionResult Index(bool reset)
         {
             /*
              Create Illusration Detail Page
              Arguments:- None
              Returns:- IllustrationModel and Display to user
              */
+
+            var partnerInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            IllustrationDetailViewModel model = new IllustrationDetailViewModel();
+            model.PartnerEmail = partnerInfo.PartnerEmailAddress;
+            model.PartnerName = partnerInfo.PartnerName;
+            model.PartnerOrganisation = partnerInfo.PartnerOrganisation;
+
+
+            if (reset)
+            {
+                HttpContext.Session.Remove("InputProposal");
+                return View(model);
+            }
 
             IllustrationDetailViewModel illustrationInfo = null;
             //Check for old
@@ -138,20 +151,17 @@ namespace InsignisIllustrationGenerator.Controllers
             }
 
             
-            var partnerInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            
             
 
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
             {
                 illustrationInfo = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
             }
-            IllustrationDetailViewModel model = new IllustrationDetailViewModel();
+            
 
             //model.AdviserName = partnerInfo.PartnerName; ;
-            model.PartnerEmail = partnerInfo.PartnerEmailAddress;
-            model.PartnerName = partnerInfo.PartnerName;
-            model.PartnerOrganisation = partnerInfo.PartnerOrganisation;
-
+            
 
             if (illustrationInfo != null)
             {
@@ -225,6 +235,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
             var partnerInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
             searchParams.PartnerEmail = partnerInfo.PartnerEmailAddress;
+            searchParams.PartnerOrganisation = partnerInfo.PartnerOrganisation;
             var result = _illustrationHelper.GetIllustrationList(searchParams,false);
             if (result.Count()>0) return Json(new { Data = result, Success = true });
             return Json(new { Data = "Sorry, we couldn’t find any illustrations matching your search criteria.", Success = false });
@@ -308,6 +319,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 //Database save our database Super User get 
                 model.TotalDeposit = Convert.ToDouble(sStore.TotalDeposited);
+                
 
 
                 foreach (var m in model.ProposedPortfolio.ProposedInvestments)
@@ -359,7 +371,90 @@ namespace InsignisIllustrationGenerator.Controllers
             fscsProtectionConfigFile += "FSCSProtection.xml";
 
             Octavo.Gate.Nabu.Preferences.Manager preferencesManager = new Octavo.Gate.Nabu.Preferences.Manager(AppSettings.preferencesRoot + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerOrganisation) + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerEmailAddress));
-            Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
+
+            preferencesManager.DeletePreferences("Sales.Tools.SCurve.Settings", 1);
+
+            Octavo.Gate.Nabu.Preferences.Preference scurveBuilder = preferencesManager.GetPreference("Sales.Tools.SCurve.Builder", 1, "Settings");
+            int availableToHubAccountTypeID = -1;
+            if (scurveBuilder != null)
+            {
+                if (scurveBuilder.GetChildPreference("AvailableTo") != null && scurveBuilder.GetChildPreference("AvailableTo").Value.Trim().Length > 0)
+                {
+                    try
+                    {
+                        availableToHubAccountTypeID = Convert.ToInt32(scurveBuilder.GetChildPreference("AvailableTo").Value);
+                    }
+                    catch
+                    {
+                    }
+                }
+                else
+                {
+                    availableToHubAccountTypeID = financialAbstraction.GetAccountTypeByAlias("ACT_PERSONALHUBACCOUNT", (int)multiLingual.language.LanguageID).AccountTypeID.Value;
+                    scurveBuilder.SetChildPreference(new Octavo.Gate.Nabu.Preferences.Preference("AvailableTo", availableToHubAccountTypeID.ToString()));
+                }
+            }
+            preferencesManager.DeletePreferences("Sales.Tools.SCurve.Institutions", 1);
+            Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = new Octavo.Gate.Nabu.Preferences.Preference("Institutions", "");
+            Institution[] allInstitutions = financialAbstraction.ListInstitutions((int)multiLingual.language.LanguageID);
+            foreach (Institution institution in allInstitutions)
+            {
+                if (institution.ShortName.CompareTo("NationalSavingsInvestments") != 0)
+                    institutionInclusion.SetChildPreference(new Octavo.Gate.Nabu.Preferences.Preference(institution.PartyID.ToString(), "true"));
+                else
+                    institutionInclusion.SetChildPreference(new Octavo.Gate.Nabu.Preferences.Preference(institution.PartyID.ToString(), "false"));
+            }
+            preferencesManager.SetPreference("Sales.Tools.SCurve.Institutions", 1, institutionInclusion);
+
+            preferencesManager.DeletePreferences("Sales.Tools.SCurve.Properties." + availableToHubAccountTypeID, 1);
+
+            Octavo.Gate.Nabu.Preferences.Preference scurveBuilderDeposits = preferencesManager.GetPreference("Sales.Tools.SCurve.Builder." + availableToHubAccountTypeID, 1, "Deposits");
+            if (scurveBuilderDeposits != null && scurveBuilderDeposits.Children.Count > 0)
+            {
+                scurveBuilderDeposits.Children.Clear();
+                preferencesManager.SetPreference("Sales.Tools.SCurve.Builder." + availableToHubAccountTypeID, 1, scurveBuilderDeposits);
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            //Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
 
 
@@ -370,12 +465,27 @@ namespace InsignisIllustrationGenerator.Controllers
             var feeMatrix = new FeeMatrix(fscsProtectionConfigFile + "FeeMatrix.xml");
             model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
             
-            model.ProposedPortfolio.FeePercentage = 0.250M;
-            model.ProposedPortfolio.NetAverageYield = (model.ProposedPortfolio.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
+            model.AnnualGrossInterestEarned = 0;
+
+            foreach (var investment in model.ProposedPortfolio.ProposedInvestments)
+            {
+                model.AnnualGrossInterestEarned += investment.AnnualInterest;
+            }
+
+            model.GrossAverageYield  = (model.ProposedPortfolio.AnnualGrossInterestEarned / model.ProposedPortfolio.TotalDeposited) * 100;
+
+
+
+            model.NetAverageYield = (model.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
+
+            model.ProposedPortfolio.FeePercentage = 0.20M;
 
             model.ProposedPortfolio.Fee = (model.ProposedPortfolio.TotalDeposited * (decimal)(model.ProposedPortfolio.FeePercentage / 100));
 
-            model.ProposedPortfolio.AnnualNetInterestEarned = (model.ProposedPortfolio.AnnualGrossInterestEarned - model.ProposedPortfolio.Fee);
+            model.AnnualNetInterestEarned = (model.ProposedPortfolio.AnnualGrossInterestEarned - model.ProposedPortfolio.Fee);
+
+
+
         }
 
         public Insignis.Asset.Management.Tools.Sales.SCurveSettings ProcessPostback(Session sessionData, bool pSkipPostback, Insignis.Asset.Management.Tools.Helper.Heatmap pHeatmap)
@@ -645,17 +755,19 @@ namespace InsignisIllustrationGenerator.Controllers
             textReplacements.Add(new KeyValuePair<string, string>("CHARGE", ""));
             textReplacements.Add(new KeyValuePair<string, string>("TOTAL", model.TotalDeposit.ToString()));
             textReplacements.Add(new KeyValuePair<string, string>("PROTECTION", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", model.ProposedPortfolio.GrossAverageYield.ToString()));
-            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", model.ProposedPortfolio.AnnualGrossInterestEarned.ToString()));
-            textReplacements.Add(new KeyValuePair<string, string>("NETYIELD", model.ProposedPortfolio.NetAverageYield.ToString()));
-            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", model.ProposedPortfolio.AnnualNetInterestEarned.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", model.GrossAverageYield.ToString("#.###")));
+            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", model.AnnualGrossInterestEarned.ToString("#.###")));
+            textReplacements.Add(new KeyValuePair<string, string>("NETYIELD", model.NetAverageYield.ToString("#.###")));
+            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", model.AnnualNetInterestEarned.ToString("#.###")));
+
             string institutionName = " ";
             string termDescription = " ";
             string rate = " ";
             string deposit = " ";
             string interest = " ";
 
-            for (int i = 0; i < 30; i++)
+
+            for (int i = 1; i < 30; i++)
             {
                 institutionName = " ";
                 termDescription = " ";
@@ -665,11 +777,11 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 try
                 {
-                    institutionName = model.ProposedPortfolio.ProposedInvestments[i].InstitutionName;
-                    termDescription = model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.GetText();// heatmapTerm.InvestmentTerm.GetText();
-                    rate = model.ProposedPortfolio.ProposedInvestments[i].Rate.ToString("0.00") + "%";
-                    deposit = model.ProposedPortfolio.ProposedInvestments[i].DepositSize.ToString();
-                    interest = model.ProposedPortfolio.ProposedInvestments[i].AnnualInterest.ToString();
+                    institutionName = model.ProposedPortfolio.ProposedInvestments[i-1].InstitutionName;
+                    termDescription = model.ProposedPortfolio.ProposedInvestments[i-1].InvestmentTerm.GetText();// heatmapTerm.InvestmentTerm.GetText();
+                    rate = model.ProposedPortfolio.ProposedInvestments[i-1].Rate.ToString("0.00") + "%";
+                    deposit = "£"+ model.ProposedPortfolio.ProposedInvestments[i-1].DepositSize.ToString("00");
+                    interest = "£"+ model.ProposedPortfolio.ProposedInvestments[i-1].AnnualInterest.ToString("00");
                 }
                 catch
                 {
@@ -722,13 +834,19 @@ namespace InsignisIllustrationGenerator.Controllers
         public IActionResult Update(string includeBank, string bankId, string updatedAmount)
         {
 
-            var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("InputProposal"));
+
+            var partnerEmail = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
+
+            illustrationInfo.PartnerEmailAddress = partnerEmail.PartnerEmail;
             IllustrationDetailViewModel model = new IllustrationDetailViewModel();
 
             model.ProposedPortfolio = null;
             Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
             scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
 
+            
+            
             Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
 
 
@@ -775,6 +893,31 @@ namespace InsignisIllustrationGenerator.Controllers
             }
 
 
+
+
+
+            model.AnnualGrossInterestEarned = 0;
+
+            foreach (var investment in model.ProposedPortfolio.ProposedInvestments)
+            {
+                model.AnnualGrossInterestEarned += investment.AnnualInterest;
+            }
+
+            model.GrossAverageYield = (model.ProposedPortfolio.AnnualGrossInterestEarned / model.ProposedPortfolio.TotalDeposited) * 100;
+
+
+
+            model.NetAverageYield = (model.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
+
+            model.ProposedPortfolio.FeePercentage = 0.20M;
+
+            model.ProposedPortfolio.Fee = (model.ProposedPortfolio.TotalDeposited * (decimal)(model.ProposedPortfolio.FeePercentage / 100));
+
+            model.AnnualNetInterestEarned = (model.ProposedPortfolio.AnnualGrossInterestEarned - model.ProposedPortfolio.Fee);
+
+
+
+
             model.ClientName = illustrationInfo.ClientName;
             model.TotalDeposit = Convert.ToDouble(total);
             model.ClientType = illustrationInfo.ClientType;
@@ -790,6 +933,14 @@ namespace InsignisIllustrationGenerator.Controllers
             model.ThreeMonths = illustrationInfo.ThreeMonths;
             model.ThreeYearsPlus = illustrationInfo.ThreeYears;
             model.TwoYears = illustrationInfo.TwoYears;
+
+
+            SCurveOutput sStore = new SCurveOutput();
+
+            sStore = _mapper.Map(model.ProposedPortfolio, sStore);
+
+            HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
+            HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
             return View("Calculate", model);
 
         }
@@ -895,7 +1046,8 @@ namespace InsignisIllustrationGenerator.Controllers
                 View
              */
             var sessionData = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
-            if(sessionData.SuperUser == true)
+            HttpContext.Session.Remove("InputProposal");
+            if (sessionData.SuperUser == true)
             {
                 return RedirectToAction("Illustrationlist", "Superuser");
             }

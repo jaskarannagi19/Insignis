@@ -37,11 +37,11 @@
             <div class="summary-gray-backgrund">
                 <div class="row">
                     <div class="col-lg-4 col-sm-4"><p>Total deposited:<br><span>@Model.TotalDeposit.Value.ToString("N", gb)</span>@*<span>@TextFormatter.FormatTwoDecimal(Model.TotalDeposit)</span>*@</p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.ProposedPortfolio.AnnualGrossInterestEarned.ToString("N", gb)</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.ProposedPortfolio.AnnualNetInterestEarned.ToString("N", gb)</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual gross interest earned:<br><span>@Model.AnnualGrossInterestEarned.ToString("N", gb)</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Annual net interest earned:<br><span>@Model.AnnualNetInterestEarned.ToString("N", gb)</span></p></div>
                     <hr class="gray-line">
-                    <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.ProposedPortfolio.GrossAverageYield.ToString("N", gb)%</span></p></div>
-                    <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.ProposedPortfolio.NetAverageYield.ToString("N", gb)%</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Gross average yield:<br><span>@Model.GrossAverageYield.ToString("#.###", gb)%</span></p></div>
+                    <div class="col-lg-4 col-sm-4"><p>Net average yield:<br><span>@Model.NetAverageYield.ToString("#.###", gb)%</span></p></div>
                 </div>
             </div>
         </div>
@@ -63,19 +63,13 @@
                             {
 
                                 <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
-                                    <a href="#">
                                         <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
-                                        
-                                        
                                         <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
-                                        
-                                        
                                         <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate %</td>
                                         <td class="col-3 right instituteDeposit">
                                             @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize.ToString("N", gb)
                                             <input type="hidden" class="instituteID" value="@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID" />
                                         </td>
-                                    </a>
                                 </tr>
                             }
 
@@ -111,7 +105,7 @@
 
 <!-- Modal popup -->
 
-<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg modal-dialog-centered" role="document">
         <div class="modal-content modal-content-gray-bg">
             <div class="modal-header modal-header-bg">
@@ -174,15 +168,16 @@
 <script>
     $(document).ready(function () {
         $(document).on("click", "#bankDetailRow", function () {
+            debugger;
             var instName = $(event.target).closest('tr').find('.instituteName').text();
             var liquidity = $(event.target).closest('tr').find('.instituteLiquidity').text();
-            var deposit = $(event.target).closest('tr').find('.instituteDeposit').text();
+            var deposit = $(event.target).closest('tr').find('.instituteDeposit').text().trim();
             var bankID = $(event.target).closest('tr').find('.instituteID').val();
             $("#bankName").text(instName);
             $("#liquidity").text(liquidity);
             $("#updatedAmount").val(deposit);
             $("#bankID").val(bankID)
-            //$('#exampleModal').modal('show');
+            $('#exampleModal').modal('show');
         });
     });
 

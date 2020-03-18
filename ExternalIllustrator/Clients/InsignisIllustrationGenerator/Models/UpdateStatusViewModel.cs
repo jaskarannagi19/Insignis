@@ -8,7 +8,7 @@ namespace InsignisIllustrationGenerator.Models
 {
     public class UpdateStatusViewModel
     {
-        [RegularExpression(@"^[a-zA-Z0-9-,_.$£€/\\. ""]{0,512}", ErrorMessage = "Invalid Comment")]
+        [RegularExpression(@"^[a-zA-Z0-9-,_.$£€/\\. ""]{0,512}", ErrorMessage = "Allowed characters in Comments are: Alphabets, Numbers, Hyphen (-), Underscore (_), Comma (,), Double Quote (“), Pound Sign (£), Dollar Sign ($), Forward Slash (/), Back Slash (\\), Space and Full Stop (.)")]
         public string Comment { get; set; }
 
         public string Status { get; set; }
