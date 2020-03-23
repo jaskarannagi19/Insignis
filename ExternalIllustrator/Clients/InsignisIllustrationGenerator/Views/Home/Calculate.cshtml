@@ -141,6 +141,9 @@
                                     <td class="col-4 right">
                                         <input type="text" class="form-control" id="updatedAmount" placeholder="00.000" name="updatedAmount" />
                                         <input type="hidden" id="bankID" name="bankID" />
+                                        <input type="hidden" id="instituteName" name="instituteName" />
+                                        <input type="hidden" id="investmentTerm" name="investmentTerm"/>
+
                                     </td>
                                 </tr>
                                 <tr class="d-flex">
@@ -173,10 +176,15 @@
             var liquidity = $(event.target).closest('tr').find('.instituteLiquidity').text();
             var deposit = $(event.target).closest('tr').find('.instituteDeposit').text().trim();
             var bankID = $(event.target).closest('tr').find('.instituteID').val();
+
             $("#bankName").text(instName);
             $("#liquidity").text(liquidity);
             $("#updatedAmount").val(deposit);
             $("#bankID").val(bankID)
+
+            $("#instituteName").val(instName)
+            $("#investmentTerm").val(liquidity)
+
             $('#exampleModal').modal('show');
         });
     });

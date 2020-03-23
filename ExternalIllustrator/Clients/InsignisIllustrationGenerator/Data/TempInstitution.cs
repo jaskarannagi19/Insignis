@@ -11,6 +11,7 @@ namespace InsignisIllustrationGenerator.Data
         public int BankId { get; set; }
         public string InstitutionName { get; set; }
         public string InvestmentTerm { get; set; }
+        public decimal Amount { get; set; }
 
         // Client Info
         public string ClientName { get; set; }

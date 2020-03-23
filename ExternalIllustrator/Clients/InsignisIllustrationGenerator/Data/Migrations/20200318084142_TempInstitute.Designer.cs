@@ -4,14 +4,16 @@ using InsignisIllustrationGenerator.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace InsignisIllustrationGenerator.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200318084142_TempInstitute")]
+    partial class TempInstitute
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,30 +35,6 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                     b.HasKey("BankID");
 
                     b.ToTable("Bank");
-                });
-
-            modelBuilder.Entity("InsignisIllustrationGenerator.Data.ExcludedInstitute", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("ClientReference")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("InstituteId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("PartnerEmail")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PartnerOrganisation")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ExcludedInstitutes");
                 });
 
             modelBuilder.Entity("InsignisIllustrationGenerator.Data.IllustrationDetail", b =>
@@ -141,24 +119,6 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IllustrationDetails");
-                });
-
-            modelBuilder.Entity("InsignisIllustrationGenerator.Data.InvestmentTermMapper", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("InvestmentTerm")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("InvestmentText")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("InvestmentTermMapper");
                 });
 
             modelBuilder.Entity("InsignisIllustrationGenerator.Data.Product", b =>
@@ -304,9 +264,6 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("decimal(18,2)");
 
                     b.Property<int>("BankId")
                         .HasColumnType("int");

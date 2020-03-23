@@ -25,5 +25,7 @@ namespace InsignisIllustrationGenerator.Data
         public DbSet<Bank> Bank { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<TempInstitution>TempInstitution { get; set; }
+        public DbSet<InvestmentTermMapper> InvestmentTermMapper { get; set; }
+        public DbSet<ExcludedInstitute> ExcludedInstitutes { get; set; }
     }
 }

@@ -296,7 +296,6 @@ namespace InsignisIllustrationGenerator.Controllers
             {
                 if (model.Id == 0)
                 {
-
                     illustrationInfo.ClientName = model.ClientName;
                     illustrationInfo.ClientType = model.ClientType;
                     illustrationInfo.Currency = model.Currency;
@@ -312,6 +311,7 @@ namespace InsignisIllustrationGenerator.Controllers
                     illustrationInfo.AdvisorName = model.PartnerName;
 
                     CalculateIllustration(model, illustrationInfo);
+
                 }
                 SCurveOutput sStore = new SCurveOutput();
 
@@ -414,45 +414,6 @@ namespace InsignisIllustrationGenerator.Controllers
                 scurveBuilderDeposits.Children.Clear();
                 preferencesManager.SetPreference("Sales.Tools.SCurve.Builder." + availableToHubAccountTypeID, 1, scurveBuilderDeposits);
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
             //Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
@@ -831,25 +792,109 @@ namespace InsignisIllustrationGenerator.Controllers
             return _illustrationHelper.SaveIllustraionAsync(model);
         }
 
-        public IActionResult Update(string includeBank, string bankId, string updatedAmount)
+        public IActionResult Update(string includeBank, string bankId, string updatedAmount,string instituteName, string investmentTerm)
         {
+
+            
 
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("InputProposal"));
 
             var partnerEmail = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
 
+            
+            //............Save if institute excluded................................................................................
+            if(includeBank == null) {
+
+                bool alreadyExcluded = _context.ExcludedInstitutes.Any(x => x.InstituteId == Convert.ToInt32(bankId) && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.ClientReference == partnerEmail.ClientName);
+                if (!alreadyExcluded) { 
+                ExcludedInstitute inst = new ExcludedInstitute();
+                inst.ClientReference = partnerEmail.ClientName;
+                inst.PartnerEmail = partnerEmail.PartnerEmail;
+                inst.PartnerOrganisation = partnerEmail.PartnerOrganisation;
+                inst.InstituteId = Convert.ToInt32(bankId);
+
+                _context.Add(inst);
+                _context.SaveChanges();
+                }
+            }
+            //......................................................................................................................
+
+
+
+            //STEP1:.............save updated amount and bank to database..............
+            if(includeBank != null) { 
+                TempInstitution temp = new TempInstitution();
+                temp.BankId = Convert.ToInt32(bankId);
+                temp.ClientName = illustrationInfo.ClientName;
+                temp.Amount =Convert.ToDecimal(updatedAmount);
+                temp.InstitutionName = instituteName;
+                temp.InvestmentTerm = investmentTerm;
+                temp.PartnerEmail = partnerEmail.PartnerEmail;
+                temp.PartnerName = illustrationInfo.PartnerName;
+                temp.PartnerOrganisation = illustrationInfo.PartnerOrganisation;
+                _context.TempInstitution.Add(temp);
+
+                //bank saved to database
+                _context.SaveChanges();
+            }
+
+
+            //CHECK IF CASE IS INCLUDED AND BANK AMOUNT IS BEING CHANGED
+            //STEP2:................................Delete saved investment from calculation..............................
+            var dbInvestment = _context.InvestmentTermMapper.Where(x => x.InvestmentText == investmentTerm).SingleOrDefault();
+            
+            //CASE 1: Update on calcuate page
+            //Old Amount and New Amount
+            if(includeBank != null ) { 
+
+            if (investmentTerm == "Instant Access")
+                illustrationInfo.EasyAccess -= Convert.ToDouble(updatedAmount);
+            
+
+            if (dbInvestment.InvestmentTerm == "One Month")
+                illustrationInfo.OneMonth -= Convert.ToDouble(updatedAmount);
+
+
+            if (dbInvestment.InvestmentTerm == "Three Months")
+                illustrationInfo.ThreeMonths -= Convert.ToDouble(updatedAmount);
+
+
+            if (dbInvestment.InvestmentTerm == "Six Months")
+                illustrationInfo.SixMonths -= Convert.ToDouble(updatedAmount);
+
+
+            if (dbInvestment.InvestmentTerm == "Nine Months")
+                illustrationInfo.NineMonths -= Convert.ToDouble(updatedAmount);
+
+
+            if (dbInvestment.InvestmentTerm == "One Year")
+                illustrationInfo.OneYear -= Convert.ToDouble(updatedAmount);
+
+            if (dbInvestment.InvestmentTerm == "Two Years")
+                illustrationInfo.TwoYears -= Convert.ToDouble(updatedAmount);
+
+            if (dbInvestment.InvestmentTerm == "Three Years")
+                illustrationInfo.ThreeYears -= Convert.ToDouble(updatedAmount);
+
+
+
+            illustrationInfo.TotalDeposit -= Convert.ToDouble(updatedAmount);
+
+            }
+
             illustrationInfo.PartnerEmailAddress = partnerEmail.PartnerEmail;
             IllustrationDetailViewModel model = new IllustrationDetailViewModel();
 
             model.ProposedPortfolio = null;
+
+            
+
             Insignis.Asset.Management.Tools.Sales.SCurve scurve = new Insignis.Asset.Management.Tools.Sales.SCurve(multiLingual.GetAbstraction(), multiLingual.language);
+
             scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
+            //scurve.LoadHeatmap(7, model.Currency, AppSettings.preferencesRoot);
 
-            
-            
             Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
-
-
 
             string fscsProtectionConfigFile = AppSettings.ClientConfigRoot;// ConfigurationManager.AppSettings["clientConfigRoot"];
             if (fscsProtectionConfigFile.EndsWith("\\") == false)
@@ -858,43 +903,68 @@ namespace InsignisIllustrationGenerator.Controllers
 
             Octavo.Gate.Nabu.Preferences.Manager preferencesManager = new Octavo.Gate.Nabu.Preferences.Manager(AppSettings.preferencesRoot + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerOrganisation) + "\\" + Helper.TextFormatter.RemoveNonAlphaNumericCharacters(illustrationInfo.PartnerEmailAddress));
 
-            Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
+            preferencesManager.DeletePreferences("Sales.Tools.SCurve.Settings", 1);
 
-
-
-            foreach (var childern in institutionInclusion.Children)
+            Octavo.Gate.Nabu.Preferences.Preference scurveBuilder = preferencesManager.GetPreference("Sales.Tools.SCurve.Builder", 1, "Settings");
+            int availableToHubAccountTypeID = -1;
+            if (scurveBuilder != null)
             {
-                if (childern.Name != bankId || includeBank == "on")
+                if (scurveBuilder.GetChildPreference("AvailableTo") != null && scurveBuilder.GetChildPreference("AvailableTo").Value.Trim().Length > 0)
                 {
-                    childern.Value = "true";
+                    try
+                    {
+                        availableToHubAccountTypeID = Convert.ToInt32(scurveBuilder.GetChildPreference("AvailableTo").Value);
+                    }
+                    catch
+                    {
+                    }
                 }
                 else
                 {
-                    childern.Value = "false";
+                    availableToHubAccountTypeID = financialAbstraction.GetAccountTypeByAlias("ACT_PERSONALHUBACCOUNT", (int)multiLingual.language.LanguageID).AccountTypeID.Value;
+                    scurveBuilder.SetChildPreference(new Octavo.Gate.Nabu.Preferences.Preference("AvailableTo", availableToHubAccountTypeID.ToString()));
                 }
             }
-
-
-            model.ProposedPortfolio = illustrationInfo.ProposedPortfolio;
-            model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
-
-            decimal? moneyLeft = null;
-            decimal total = 0;
-
-            var newInvest = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
-            foreach (var investment in model.ProposedPortfolio.ProposedInvestments)
+            preferencesManager.DeletePreferences("Sales.Tools.SCurve.Institutions", 1);
+            Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = new Octavo.Gate.Nabu.Preferences.Preference("Institutions", "");
+            Institution[] allInstitutions = financialAbstraction.ListInstitutions((int)multiLingual.language.LanguageID);
+            foreach (Institution institution in allInstitutions)
             {
-                if (investment.DepositSize != Convert.ToDecimal(updatedAmount) && investment.InstitutionID == Convert.ToInt32(bankId))
-                {
-                    moneyLeft = investment.DepositSize - Convert.ToDecimal(updatedAmount);
-                    investment.DepositSize = Convert.ToDecimal(updatedAmount);
-                }
-                total = total + investment.DepositSize;
+                if (institution.ShortName.CompareTo("NationalSavingsInvestments") != 0)
+                    institutionInclusion.SetChildPreference(new Octavo.Gate.Nabu.Preferences.Preference(institution.PartyID.ToString(), "true"));
+                else
+                    institutionInclusion.SetChildPreference(new Octavo.Gate.Nabu.Preferences.Preference(institution.PartyID.ToString(), "false"));
+            }
+            preferencesManager.SetPreference("Sales.Tools.SCurve.Institutions", 1, institutionInclusion);
+
+            preferencesManager.DeletePreferences("Sales.Tools.SCurve.Properties." + availableToHubAccountTypeID, 1);
+
+            Octavo.Gate.Nabu.Preferences.Preference scurveBuilderDeposits = preferencesManager.GetPreference("Sales.Tools.SCurve.Builder." + availableToHubAccountTypeID, 1, "Deposits");
+            if (scurveBuilderDeposits != null && scurveBuilderDeposits.Children.Count > 0)
+            {
+                scurveBuilderDeposits.Children.Clear();
+                preferencesManager.SetPreference("Sales.Tools.SCurve.Builder." + availableToHubAccountTypeID, 1, scurveBuilderDeposits);
             }
 
 
+            //get list of excluded institutes
+            var excludedInstituteIds = _context.ExcludedInstitutes.Where(x => x.ClientReference == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation).Select(x=>x.InstituteId).ToList();
 
+            foreach (var childern in institutionInclusion.Children)
+            {
+                
+                if (childern.Name != bankId)
+                    childern.Value = "true";
+                if (childern.Name == bankId && includeBank == "on")//Exclusion of bank
+                    childern.Value = "false";
+                if (excludedInstituteIds.Contains(Convert.ToInt32(childern.Name)))
+                    childern.Value = "false";
 
+                //string x = "DONOT MOVE FOEA";
+            }
+
+            var feeMatrix = new FeeMatrix(fscsProtectionConfigFile + "FeeMatrix.xml");
+            model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
 
             model.AnnualGrossInterestEarned = 0;
 
@@ -905,8 +975,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
             model.GrossAverageYield = (model.ProposedPortfolio.AnnualGrossInterestEarned / model.ProposedPortfolio.TotalDeposited) * 100;
 
-
-
             model.NetAverageYield = (model.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
 
             model.ProposedPortfolio.FeePercentage = 0.20M;
@@ -915,11 +983,8 @@ namespace InsignisIllustrationGenerator.Controllers
 
             model.AnnualNetInterestEarned = (model.ProposedPortfolio.AnnualGrossInterestEarned - model.ProposedPortfolio.Fee);
 
-
-
-
             model.ClientName = illustrationInfo.ClientName;
-            model.TotalDeposit = Convert.ToDouble(total);
+            
             model.ClientType = illustrationInfo.ClientType;
             model.Currency = illustrationInfo.Currency;
             model.EasyAccess = illustrationInfo.EasyAccess;
@@ -937,8 +1002,98 @@ namespace InsignisIllustrationGenerator.Controllers
 
             SCurveOutput sStore = new SCurveOutput();
 
+            
+
+
+
+            ////add saved one to display
+
             sStore = _mapper.Map(model.ProposedPortfolio, sStore);
 
+
+            //check db for any saved bank
+            bool savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation);
+            if (savedBank)
+            {
+                var tempBanks = _context.TempInstitution.Where(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation).ToList();
+                foreach (var bank in tempBanks)
+                {
+                    Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
+                    row.InstitutionName = bank.InstitutionName;
+                    row.InvestmentTerm = new InvestmentTerm();
+                    row.InvestmentTerm.TermText = bank.InvestmentTerm;
+                    row.DepositSize = bank.Amount;
+
+                    sStore.ProposedInvestments.Add(row);
+                    model.ProposedPortfolio.ProposedInvestments.Add(row);
+                }
+            
+            
+            }
+
+
+            //if(includeBank != null) { 
+            //Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
+            //row.InstitutionName = temp.InstitutionName;
+            //row.InvestmentTerm = new InvestmentTerm();
+            //row.InvestmentTerm.TermText = temp.InvestmentTerm;
+            //row.DepositSize = Convert.ToDecimal(updatedAmount);
+            
+            //sStore.ProposedInvestments.Add(row);
+            //model.ProposedPortfolio.ProposedInvestments.Add(row);
+            //}
+
+            decimal total = 0;
+            //investment term
+            foreach (var m in model.ProposedPortfolio.ProposedInvestments)
+            {
+                total += m.DepositSize;
+                if (string.IsNullOrEmpty(m.InvestmentTerm.TermText))
+                {
+                    if (m.InvestmentTerm.investmentAccountType == Insignis.Asset.Management.Clients.Helper.InvestmentAccountType.InstantAccessAccount)
+                    {
+                        m.InvestmentTerm.TermText = "Instant Access";
+                    }
+                    else
+                    {
+                        m.InvestmentTerm.TermText = m.InvestmentTerm.NoticeText;
+                    }
+                }
+            }
+
+            model.TotalDeposit =Convert.ToDouble(total);
+            if(includeBank != null) { 
+
+            if (dbInvestment.InvestmentTerm == "Instant Access")
+                model.EasyAccess -= Convert.ToDouble(updatedAmount);
+
+
+            if (dbInvestment.InvestmentTerm == "One Month")
+                model.OneMonth -= Convert.ToDouble(updatedAmount);
+
+
+            if (dbInvestment.InvestmentTerm == "Three Months")
+                model.ThreeMonths -= Convert.ToDouble(updatedAmount);
+
+
+            if (dbInvestment.InvestmentTerm == "Six Months")
+                model.SixMonths -= Convert.ToDouble(updatedAmount);
+
+
+            if (dbInvestment.InvestmentTerm == "Nine Months")
+                model.NineMonths -= Convert.ToDouble(updatedAmount);
+
+
+            if (dbInvestment.InvestmentTerm == "One Year")
+                model.OneYear -= Convert.ToDouble(updatedAmount);
+
+            if (dbInvestment.InvestmentTerm == "Two Years")
+                model.TwoYears -= Convert.ToDouble(updatedAmount);
+
+            if (dbInvestment.InvestmentTerm == "Three Years")
+                model.ThreeYearsPlus -= Convert.ToDouble(updatedAmount);
+
+            }
             HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
             HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
             return View("Calculate", model);
