@@ -306,7 +306,7 @@ namespace InsignisIllustrationGenerator.Controllers
                     illustrationInfo.NineMonths = model.NineMonths;
                     illustrationInfo.OneYear = model.OneYear;
                     illustrationInfo.TwoYears = model.TwoYears;
-                    illustrationInfo.ThreeYears = model.ThreeYearsPlus;
+                    illustrationInfo.ThreeYearsPlus = model.ThreeYearsPlus;
                     illustrationInfo.TotalDeposit = model.TotalDeposit;
                     illustrationInfo.AdvisorName = model.PartnerName;
 
@@ -490,7 +490,7 @@ namespace InsignisIllustrationGenerator.Controllers
             //DONOT CHANGE THE ORDER
             _liquidityAmount.Add("");//5 year bond
             _liquidityAmount.Add("");//4 year bond
-            _liquidityAmount.Add(sessionData.ThreeYears.ToString());//3 year bond
+            _liquidityAmount.Add(sessionData.ThreeYearsPlus.ToString());//3 year bond
             _liquidityAmount.Add(sessionData.TwoYears.ToString());// 2 year bond
             _liquidityAmount.Add("");//18 month bonds
             _liquidityAmount.Add(sessionData.OneYear.ToString());//1 year bond
@@ -709,17 +709,17 @@ namespace InsignisIllustrationGenerator.Controllers
             textReplacements.Add(new KeyValuePair<string, string>("REFERENCE", prefixName));
             textReplacements.Add(new KeyValuePair<string, string>("DATE", DateTime.Now.ToString("dd/MM/yyyy")));
             textReplacements.Add(new KeyValuePair<string, string>("CLIENTNAME", model.ClientName));
-            textReplacements.Add(new KeyValuePair<string, string>("CLIENTTYPE", model.ClientType.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("CLIENTTYPE", model.ClientType==0?"Individual":"Joint"));
             textReplacements.Add(new KeyValuePair<string, string>("INTROORG", ""));
             textReplacements.Add(new KeyValuePair<string, string>("FEEDISCOUNT", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("FEE", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("FEE", model.ProposedPortfolio.FeePercentage.ToString()));
             textReplacements.Add(new KeyValuePair<string, string>("CHARGE", ""));
-            textReplacements.Add(new KeyValuePair<string, string>("TOTAL", model.TotalDeposit.ToString()));
-            textReplacements.Add(new KeyValuePair<string, string>("PROTECTION", ""));
+            textReplacements.Add(new KeyValuePair<string, string>("TOTAL", "£" + model.TotalDeposit.ToString()));
+            textReplacements.Add(new KeyValuePair<string, string>("PROTECTION", "100"));
             textReplacements.Add(new KeyValuePair<string, string>("GROSSYIELD", model.GrossAverageYield.ToString("#.###")));
-            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", model.AnnualGrossInterestEarned.ToString("#.###")));
+            textReplacements.Add(new KeyValuePair<string, string>("GROSSINTEREST", "£" + model.AnnualGrossInterestEarned.ToString("#.###")));
             textReplacements.Add(new KeyValuePair<string, string>("NETYIELD", model.NetAverageYield.ToString("#.###")));
-            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", model.AnnualNetInterestEarned.ToString("#.###")));
+            textReplacements.Add(new KeyValuePair<string, string>("NETINTEREST", "£" + model.AnnualNetInterestEarned.ToString("#.###")));
 
             string institutionName = " ";
             string termDescription = " ";
@@ -739,7 +739,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 try
                 {
                     institutionName = model.ProposedPortfolio.ProposedInvestments[i-1].InstitutionName;
-                    termDescription = model.ProposedPortfolio.ProposedInvestments[i-1].InvestmentTerm.GetText();// heatmapTerm.InvestmentTerm.GetText();
+                    termDescription = model.ProposedPortfolio.ProposedInvestments[i-1].InvestmentTerm.GetText()== "n/a"? model.ProposedPortfolio.ProposedInvestments[i - 1].InvestmentTerm .TermText: model.ProposedPortfolio.ProposedInvestments[i - 1].InvestmentTerm.GetText();// heatmapTerm.InvestmentTerm.GetText();
                     rate = model.ProposedPortfolio.ProposedInvestments[i-1].Rate.ToString("0.00") + "%";
                     deposit = "£"+ model.ProposedPortfolio.ProposedInvestments[i-1].DepositSize.ToString("00");
                     interest = "£"+ model.ProposedPortfolio.ProposedInvestments[i-1].AnnualInterest.ToString("00");
@@ -763,25 +763,15 @@ namespace InsignisIllustrationGenerator.Controllers
                 Directory.Delete(AppSettings.illustrationOutputInternalFolder + "\\" + prefixName,true);
             }
 
-
-
             Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction powerpointRenderAbstraction = new Insignis.Asset.Management.PowerPoint.Generator.RenderAbstraction(AppSettings.illustrationOutputInternalFolder, AppSettings.illustrationOutputPublicFacingFolder);
-
-            
-
 
             model.Status = InsignisEnum.IllustrationStatus.Current.ToString();
             model.GenerateDate = DateTime.Now;
             
-            
-            
             SaveIllustraion(model);
-
 
             Insignis.Asset.Management.Reports.Helper.ExtendedReportContent extendedReportContent = powerpointRenderAbstraction.MergeDataWithPowerPointTemplate(prefixName, textReplacements, templateFile.FullName, requiredOutputNameWithoutExtension, true);
             string filename = AppSettings.illustrationOutputInternalFolder + "\\" + prefixName + "\\" + requiredOutputNameWithoutExtension + ".pdf";
-
-            
 
             ViewBag.PDF = extendedReportContent.URI;
             return View();
@@ -792,13 +782,10 @@ namespace InsignisIllustrationGenerator.Controllers
             return _illustrationHelper.SaveIllustraionAsync(model);
         }
 
-        public IActionResult Update(string includeBank, string bankId, string updatedAmount,string instituteName, string investmentTerm,string updatePage)
+        public IActionResult Update(string includeBank, string bankId, string updatedAmount,string instituteName, string investmentTerm,string rate, string annualInterest)
         {
 
-            
-
             var illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("InputProposal"));
-
             var partnerEmail = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
 
             //Check if any deposit exists before allotment
@@ -827,8 +814,6 @@ namespace InsignisIllustrationGenerator.Controllers
                         _context.Add(inst);
                         _context.SaveChanges();
 
-
-
                         if (_dbInvestment.InvestmentTerm == "Instant Access")
                         {
                             illustrationInfo.EasyAccess -=Convert.ToDouble(bank.Amount);
@@ -841,11 +826,12 @@ namespace InsignisIllustrationGenerator.Controllers
                             amount = bank.Amount;
                             whichTerm = "One Month";
                         }
+            
                         if (_dbInvestment.InvestmentTerm == "Three Months")
                         {
                             illustrationInfo.ThreeMonths -= Convert.ToDouble(bank.Amount);
                             amount = bank.Amount;
-                            whichTerm = "Three Month";
+                            whichTerm = "Three Months";
                         }
                         if (_dbInvestment.InvestmentTerm == "Six Months")
                         {
@@ -873,7 +859,7 @@ namespace InsignisIllustrationGenerator.Controllers
                         }
                         if (_dbInvestment.InvestmentTerm == "Three Years")
                         {
-                            illustrationInfo.ThreeYears -= Convert.ToDouble(bank.Amount);
+                            illustrationInfo.ThreeYearsPlus -= Convert.ToDouble(bank.Amount);
                             amount = bank.Amount;
                             whichTerm = "Three Years";
                         }
@@ -904,7 +890,8 @@ namespace InsignisIllustrationGenerator.Controllers
                 inst.PartnerOrganisation = partnerEmail.PartnerOrganisation;
                 inst.InstituteId = Convert.ToInt32(bankId);
 
-                _context.Add(inst);
+
+                _context.ExcludedInstitutes.Add(inst);
                 _context.SaveChanges();
                 }
             }
@@ -923,10 +910,23 @@ namespace InsignisIllustrationGenerator.Controllers
                 temp.PartnerEmail = partnerEmail.PartnerEmail;
                 temp.PartnerName = illustrationInfo.PartnerName;
                 temp.PartnerOrganisation = illustrationInfo.PartnerOrganisation;
+                var _rate = rate.Split(" ");
+                temp.Rate = Convert.ToDecimal(_rate[0]);
+                temp.AnnualInterest = Convert.ToDecimal(annualInterest);
                 _context.TempInstitution.Add(temp);
 
                 //bank saved to database
+
+                ExcludedInstitute inst = new ExcludedInstitute();
+                inst.ClientReference = partnerEmail.ClientName;
+                inst.PartnerEmail = partnerEmail.PartnerEmail;
+                inst.PartnerOrganisation = partnerEmail.PartnerOrganisation;
+                inst.InstituteId = Convert.ToInt32(bankId);
+
+                _context.ExcludedInstitutes.Add(inst);
+
                 _context.SaveChanges();
+                //save to exclude
             }
 
 
@@ -936,7 +936,7 @@ namespace InsignisIllustrationGenerator.Controllers
             
             if(includeBank != null ) { 
 
-            if (investmentTerm == "Instant Access")
+            if (dbInvestment.InvestmentTerm == "Instant Access")
                 illustrationInfo.EasyAccess -= Convert.ToDouble(updatedAmount);
             
 
@@ -963,7 +963,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 illustrationInfo.TwoYears -= Convert.ToDouble(updatedAmount);
 
             if (dbInvestment.InvestmentTerm == "Three Years")
-                illustrationInfo.ThreeYears -= Convert.ToDouble(updatedAmount);
+                illustrationInfo.ThreeYearsPlus -= Convert.ToDouble(updatedAmount);
 
 
 
@@ -1050,8 +1050,6 @@ namespace InsignisIllustrationGenerator.Controllers
                 //    childern.Value = "false";
                 if (excludedInstituteIds.Contains(Convert.ToInt32(childern.Name)))
                     childern.Value = "false";
-
-                //string x = "DONOT MOVE FOEA";
             }
 
             var feeMatrix = new FeeMatrix(fscsProtectionConfigFile + "FeeMatrix.xml");
@@ -1087,7 +1085,7 @@ namespace InsignisIllustrationGenerator.Controllers
             model.PartnerOrganisation = illustrationInfo.PartnerOrganisation;
             model.SixMonths = illustrationInfo.SixMonths;
             model.ThreeMonths = illustrationInfo.ThreeMonths;
-            model.ThreeYearsPlus = illustrationInfo.ThreeYears;
+            model.ThreeYearsPlus = illustrationInfo.ThreeYearsPlus;
             model.TwoYears = illustrationInfo.TwoYears;
 
 
@@ -1109,7 +1107,9 @@ namespace InsignisIllustrationGenerator.Controllers
                     row.InstitutionName = bank.InstitutionName;
                     row.InvestmentTerm = new InvestmentTerm();
                     row.InvestmentTerm.TermText = bank.InvestmentTerm;
+                    row.Rate = bank.Rate;
                     row.DepositSize = bank.Amount;
+                    row.AnnualInterest = bank.AnnualInterest;
 
                     sStore.ProposedInvestments.Add(row);
                     model.ProposedPortfolio.ProposedInvestments.Add(row);

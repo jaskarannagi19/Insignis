@@ -12,6 +12,8 @@ namespace InsignisIllustrationGenerator.Data
         public string InstitutionName { get; set; }
         public string InvestmentTerm { get; set; }
         public decimal Amount { get; set; }
+        public decimal Rate { get; set; }
+        public decimal AnnualInterest { get; set; }
 
         // Client Info
         public string ClientName { get; set; }
@@ -21,6 +23,7 @@ namespace InsignisIllustrationGenerator.Data
         public string PartnerName { get; set; }
         public string PartnerEmail { get; set; }
         public string PartnerOrganisation { get; set; }
+
         
     }
 }

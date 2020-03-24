@@ -65,10 +65,11 @@
                                 <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
                                         <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
                                         <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
-                                        <td class="col-2 right">@Model.ProposedPortfolio.ProposedInvestments[i].Rate %</td>
+                                        <td class="col-2 right rate">@Model.ProposedPortfolio.ProposedInvestments[i].Rate %</td>
                                         <td class="col-3 right instituteDeposit">
                                             @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize.ToString("N", gb)
                                             <input type="hidden" class="instituteID" value="@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID" />
+                                            <input type="hidden" class="annualInterest" value="@Model.ProposedPortfolio.ProposedInvestments[i].AnnualInterest" />
                                         </td>
                                 </tr>
                             }
@@ -143,6 +144,8 @@
                                         <input type="hidden" id="bankID" name="bankID" />
                                         <input type="hidden" id="instituteName" name="instituteName" />
                                         <input type="hidden" id="investmentTerm" name="investmentTerm"/>
+                                        <input type="hidden" id="rate" name="rate"/>
+                                        <input type="hidden" id="annualInterest" name="annualInterest"/>
 
                                     </td>
                                 </tr>
@@ -175,15 +178,20 @@
             var instName = $(event.target).closest('tr').find('.instituteName').text();
             var liquidity = $(event.target).closest('tr').find('.instituteLiquidity').text();
             var deposit = $(event.target).closest('tr').find('.instituteDeposit').text().trim();
-            var bankID = $(event.target).closest('tr').find('.instituteID').val();
+            var bankID = $(event.target).closest('tr').find('.instituteID').val(); 
+
+            var annualInterest = $(event.target).closest('tr').find('.annualInterest').val();
+            var rate = $(event.target).closest('tr').find('.rate').text();
 
             $("#bankName").text(instName);
             $("#liquidity").text(liquidity);
             $("#updatedAmount").val(deposit);
             $("#bankID").val(bankID)
+            $("#rate").val(rate)
 
             $("#instituteName").val(instName)
             $("#investmentTerm").val(liquidity)
+            $("#annualInterest").val(annualInterest)
 
             $('#exampleModal').modal('show');
         });
