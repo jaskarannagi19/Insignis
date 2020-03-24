@@ -1114,8 +1114,6 @@ namespace InsignisIllustrationGenerator.Controllers
                     sStore.ProposedInvestments.Add(row);
                     model.ProposedPortfolio.ProposedInvestments.Add(row);
                 }
-            
-            
             }
 
             decimal total = 0;
