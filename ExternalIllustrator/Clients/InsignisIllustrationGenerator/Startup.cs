@@ -44,6 +44,7 @@ namespace InsignisIllustrationGenerator
             {
                 // Set a short timeout for easy testing.
                 options.IdleTimeout = TimeSpan.FromDays(365);
+                
                 options.Cookie.HttpOnly = true;
                 // Make the session cookie essential
                 options.Cookie.IsEssential = true;

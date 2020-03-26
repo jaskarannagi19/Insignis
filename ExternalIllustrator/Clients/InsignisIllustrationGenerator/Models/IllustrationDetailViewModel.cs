@@ -15,6 +15,7 @@ namespace InsignisIllustrationGenerator.Models
 
         public string PartnerOrganisation { get; set; }
         public string PartnerEmail { get; set; }
+        public Guid SessionId { get; set; }
 
 
         public string IllustrationUniqueReference { get; set; }
