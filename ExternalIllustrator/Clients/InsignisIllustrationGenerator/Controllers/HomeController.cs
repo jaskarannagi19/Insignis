@@ -119,6 +119,14 @@ namespace InsignisIllustrationGenerator.Controllers
         {
             HttpContext.Session.Remove("GeneratedPorposals");
             HttpContext.Session.Remove("InputProposal");
+
+
+            //Create new session ID
+            Session session = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            session.SessionId = Guid.NewGuid();
+
+            HttpContext.Session.Remove("SessionPartner");
+            HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(session));
             return RedirectToAction(actionid, "Home");
         }
 
@@ -136,7 +144,6 @@ namespace InsignisIllustrationGenerator.Controllers
             model.PartnerName = partnerInfo.PartnerName;
             model.PartnerOrganisation = partnerInfo.PartnerOrganisation;
 
-
             if (reset)
             {
                 HttpContext.Session.Remove("InputProposal");
@@ -150,20 +157,10 @@ namespace InsignisIllustrationGenerator.Controllers
                 illustrationInfo = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
                 return View(illustrationInfo);
             }
-
-
-
-
-
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
             {
                 illustrationInfo = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
             }
-
-
-            //model.AdviserName = partnerInfo.PartnerName; ;
-
-
             if (illustrationInfo != null)
             {
                 model.ClientName = illustrationInfo.ClientName;
@@ -815,10 +812,7 @@ namespace InsignisIllustrationGenerator.Controllers
         public IActionResult Update(string includeBank, string bankId, string updatedAmount, string instituteName, string investmentTerm, string rate, string annualInterest, string clientType)
         {
 
-
-            
-
-            if (clientType=="0"&&Convert.ToDecimal(updatedAmount)>85000)
+            if ((clientType=="0" && Convert.ToDecimal(updatedAmount)>85000) || (clientType == "1" && Convert.ToDecimal(updatedAmount)>175000))
             {
                 ModelState.AddModelError("error", "The amount entered exceeds funds protected under the FSCS scheme. Please raise an Illustration Request and a member of the Account Management team will be in touch.");
                 
@@ -833,11 +827,6 @@ namespace InsignisIllustrationGenerator.Controllers
                 ViewBag.AnnualInterest = annualInterest;
                 ViewBag.ClientType = clientType;
                 
-
-
-
-
-
                 SCurveOutput _sStore = new SCurveOutput();
 
                 _sStore = JsonConvert.DeserializeObject<SCurveOutput>(HttpContext.Session.GetString("GeneratedPorposals"));
@@ -847,10 +836,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
                 _model.ProposedPortfolio = _mapper.Map(_sStore, _model.ProposedPortfolio);
-
-
-
-
 
                 return View("Calculate",_model);
 
@@ -954,7 +939,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             //............Save if institute excluded................................................................................
-            if (includeBank == null)
+            if (includeBank == null || updatedAmount == "0")
             {
 
                 bool alreadyExcluded = _context.ExcludedInstitutes.Any(x => x.InstituteId == Convert.ToInt32(bankId) && x.SessionId == illustrationInfo.SessionId && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.ClientReference == partnerEmail.ClientName);
@@ -976,7 +961,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             //STEP1:.............save updated amount and bank to database..............
-            if (includeBank != null)
+            if (includeBank != null && Convert.ToDecimal(updatedAmount) > 0)
             {
                 TempInstitution temp = new TempInstitution();
                 temp.BankId = Convert.ToInt32(bankId);
@@ -1011,7 +996,7 @@ namespace InsignisIllustrationGenerator.Controllers
             //STEP2:................................Delete saved investment from calculation..............................
             var dbInvestment = _context.InvestmentTermMapper.Where(x => x.InvestmentText == investmentTerm).SingleOrDefault();
 
-            if (includeBank != null)
+            if (includeBank != null && Convert.ToDecimal(updatedAmount) > 0)
             {
 
                 if (dbInvestment.InvestmentTerm == "Instant Access")
@@ -1114,14 +1099,10 @@ namespace InsignisIllustrationGenerator.Controllers
             var excludedInstituteIds = _context.ExcludedInstitutes.Where(x => x.ClientReference == partnerEmail.ClientName && x.SessionId == illustrationInfo.SessionId && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation).Select(x => x.InstituteId).ToList();
 
 
-
             foreach (var childern in institutionInclusion.Children)
             {
-
                 if (childern.Name != bankId)
                     childern.Value = "true";
-                //if (childern.Name == bankId && includeBank == "on")//Exclusion of bank
-                //    childern.Value = "false";
                 if (excludedInstituteIds.Contains(Convert.ToInt32(childern.Name)))
                     childern.Value = "false";
             }
@@ -1129,25 +1110,8 @@ namespace InsignisIllustrationGenerator.Controllers
             var feeMatrix = new FeeMatrix(fscsProtectionConfigFile + "FeeMatrix.xml");
             model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
 
-            model.AnnualGrossInterestEarned = 0;
-
-            foreach (var investment in model.ProposedPortfolio.ProposedInvestments)
-            {
-                model.AnnualGrossInterestEarned += investment.AnnualInterest;
-            }
-
-            model.GrossAverageYield = (model.ProposedPortfolio.AnnualGrossInterestEarned / model.ProposedPortfolio.TotalDeposited) * 100;
-
-            model.NetAverageYield = (model.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
-
-            model.ProposedPortfolio.FeePercentage = 0.20M;
-
-            model.ProposedPortfolio.Fee = (model.ProposedPortfolio.TotalDeposited * (decimal)(model.ProposedPortfolio.FeePercentage / 100));
-
-            model.AnnualNetInterestEarned = (model.ProposedPortfolio.AnnualGrossInterestEarned - model.ProposedPortfolio.Fee);
 
             model.ClientName = illustrationInfo.ClientName;
-
             model.ClientType = illustrationInfo.ClientType;
             model.Currency = illustrationInfo.Currency;
             model.EasyAccess = illustrationInfo.EasyAccess;
@@ -1210,7 +1174,7 @@ namespace InsignisIllustrationGenerator.Controllers
             }
 
             model.TotalDeposit = Convert.ToDouble(total);
-            if (includeBank != null)
+            if (includeBank != null && Convert.ToDecimal(updatedAmount) > 0)
             {
 
                 if (dbInvestment.InvestmentTerm == "Instant Access")
@@ -1245,8 +1209,6 @@ namespace InsignisIllustrationGenerator.Controllers
             }
 
 
-
-
             if (sessionVariable == true)
             {
                 if (whichTerm == "Instant Access")
@@ -1265,7 +1227,26 @@ namespace InsignisIllustrationGenerator.Controllers
                     model.TwoYears += Convert.ToDouble(amount);
                 if (whichTerm == "Three Years")
                     model.ThreeYearsPlus += Convert.ToDouble(amount);
+
             }
+
+            model.AnnualGrossInterestEarned = 0;
+            foreach (var investment in model.ProposedPortfolio.ProposedInvestments)
+            {
+                model.AnnualGrossInterestEarned += investment.AnnualInterest;
+            }
+
+            //divi
+            model.GrossAverageYield = (model.ProposedPortfolio.AnnualGrossInterestEarned /Convert.ToDecimal(model.TotalDeposit)) * 100;
+            model.ProposedPortfolio.FeePercentage = 0.20M;
+            model.NetAverageYield = (model.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
+            model.ProposedPortfolio.Fee = (Convert.ToDecimal(model.TotalDeposit) * (decimal)(model.ProposedPortfolio.FeePercentage / 100));
+            model.AnnualNetInterestEarned = (model.ProposedPortfolio.AnnualGrossInterestEarned - model.ProposedPortfolio.Fee);
+
+
+
+
+            
             HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
             HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));
             return View("Calculate", model);
