@@ -14,12 +14,15 @@ namespace InsignisIllustrationGenerator.Models
         public string ClientName { get; set; }
         public string ClientType { get; set; }
         public string PartnerName { get; set; }
-        public string Email { get; set; }
+        public string PartnerEmail { get; set; }
 
         public string IllustrationUniqueReference { get; set; }
         public DateTime? GenerateDate { get; set; }
         public string Status { get; set; }
         public string Comment { get; set; }
+
+
+        public double TotalDeposit { get; set; }
 
     }
 }

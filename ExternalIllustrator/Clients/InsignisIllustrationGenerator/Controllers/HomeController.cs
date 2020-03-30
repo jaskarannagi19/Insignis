@@ -46,25 +46,53 @@ namespace InsignisIllustrationGenerator.Controllers
             StringBuilder sbheader = new StringBuilder();
             StringBuilder sb = new StringBuilder();
 
-
-            sbheader.Append(string.Format("{0},", "Company Name"));
-            sbheader.Append(string.Format("{0},", "Client Name"));
-            sbheader.Append(string.Format("{0},", "Client Type"));
-            sbheader.Append(string.Format("{0},", "Illustration Unique Reference"));
-            sbheader.Append(string.Format("{0},", "Generate Date"));
-            sbheader.Append(string.Format("{0},", "Status")).AppendLine(Environment.NewLine);
-
+            sbheader.Append(string.Format("{0},", "Introducer"));
+            sbheader.Append(string.Format("{0},", "Account Reference"));
+            sbheader.Append(string.Format("{0},", "Account Name"));
+            sbheader.Append(string.Format("{0},", "Lead Type or Name"));
+            sbheader.Append(string.Format("{0},", "Last Name"));
+            sbheader.Append(string.Format("{0},", "Name"));
+            sbheader.Append(string.Format("{0},", "Adviser's Email Address"));
+            sbheader.Append(string.Format("{0},", "Marketing Source"));
+            sbheader.Append(string.Format("{0},", "Categories"));
+            sbheader.Append(string.Format("{0},", "Client Category"));
+            sbheader.Append(string.Format("{0},", "Marketing Source"));
+            sbheader.Append(string.Format("{0},", "Categories"));
+            sbheader.Append(string.Format("{0},", "Client Category"));
+            sbheader.Append(string.Format("{0},", "Saleperson"));
+            sbheader.Append(string.Format("{0},", "Account Manager"));
+            sbheader.Append(string.Format("{0},", "Minimum Deposit"));
+            sbheader.Append(string.Format("{0},", "Maximum Deposit"));
+            sbheader.Append(string.Format("{0},", "Source Function"));
+            sbheader.Append(string.Format("{0},", "Advisor"));
+            sbheader.Append(string.Format("{0},", "Introducer Account"));
+            sbheader.Append(string.Format("{0},", "Umbrella Organisation")).AppendLine(Environment.NewLine);
 
 
             foreach (var data in result)
             {
-
-                sb.Append(string.Format("{0},", data.PartnerOrganisation));
-                sb.Append(string.Format("{0},", data.ClientName));
-                sb.Append(string.Format("{0},", data.ClientType));
+                sb.Append(string.Format("{0},", "No"));
                 sb.Append(string.Format("{0},", data.IllustrationUniqueReference));
-                sb.Append(string.Format("{0},", data.GenerateDate));
-                sb.Append(string.Format("{0},", data.Status)).AppendLine(Environment.NewLine);
+                sb.Append(string.Format("{0},", data.ClientName));
+                sb.Append(string.Format("{0},", "Personal"));
+
+                sb.Append(string.Format("{0},", ""));//Last Name
+                sb.Append(string.Format("{0},", ""));//First Name
+                sb.Append(string.Format("{0},", data.PartnerEmail));
+                sb.Append(string.Format("{0},", "Introducer Referral"));
+                sb.Append(string.Format("{0},", "Client"));
+                sb.Append(string.Format("{0},", data.ClientType));
+                sb.Append(string.Format("{0},", ""));
+                sb.Append(string.Format("{0},", ""));
+                sb.Append(string.Format("{0},", data.TotalDeposit));
+                sb.Append(string.Format("{0},", data.TotalDeposit));
+                sb.Append(string.Format("{0},", "Introducer"));
+                sb.Append(string.Format("{0},", data.PartnerName));
+                sb.Append(string.Format("{0},", data.PartnerOrganisation));
+                sb.Append(string.Format("{0},", "")).AppendLine(Environment.NewLine);
+
+
+                
 
             }
 
