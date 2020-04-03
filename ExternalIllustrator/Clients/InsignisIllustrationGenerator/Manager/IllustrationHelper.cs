@@ -143,12 +143,12 @@ namespace InsignisIllustrationGenerator.Manager
                 searchParameter.IllustrationTo=searchParameter.IllustrationTo.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
             }
 
-            if (!string.IsNullOrEmpty(searchParameter.PartnerName) || !string.IsNullOrEmpty(searchParameter.CompanyName) || !string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || searchParameter.IllustrationTo != null || searchParameter.IllustrationFrom !=null)
+            if ( !string.IsNullOrEmpty(searchParameter.ClientName)||!string.IsNullOrEmpty(searchParameter.PartnerName) || !string.IsNullOrEmpty(searchParameter.CompanyName) || !string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || searchParameter.IllustrationTo != null || searchParameter.IllustrationFrom !=null)
             {
                 IllustrationDetails = IllustrationDetails.Where(f =>
 
                 //Advisor Search
-                (string.IsNullOrEmpty(searchParameter.PartnerName) || (!string.IsNullOrEmpty(f.PartnerName) && f.PartnerName.ToLower().Contains(searchParameter.PartnerName)))
+                (string.IsNullOrEmpty(searchParameter.PartnerName) || (!string.IsNullOrEmpty(f.PartnerName) && f.PartnerName.ToLower().Contains(searchParameter.PartnerName.ToLower())))
                 //Client Search
                 & (string.IsNullOrEmpty(searchParameter.ClientName) || f.ClientName.ToLower().Contains(searchParameter.ClientName.ToLower()))
                 //Company Search

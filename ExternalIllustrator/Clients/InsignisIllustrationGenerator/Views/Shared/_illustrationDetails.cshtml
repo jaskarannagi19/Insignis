@@ -119,7 +119,7 @@
                 else
                 {
                     
-                    <button type="submit" class="btn btn-primary" style="background-color:#ffa64d" title="This is available for Accepted Illustration" disabled>Create Client Pack</button>
+                    <button id="btnClientPack" type="submit" class="btn btn-primary" style="background-color:#ffa64d" title="This is available for Accepted Illustration" disabled>Create Client Pack</button>
                 }
 
             }
@@ -204,7 +204,14 @@
 <script>
     $(document).ready(function () {
 
+
+        $('#exampleModal').on('shown.bs.modal', function () {
+            $("#validation").text("");
+            $("#comment").val("");
+        })
+
         $(document).on("click", "#btnUpdateStatus", function () {
+            
             var comment = $("#comment").val();
             var referredBy = $("#referredBy").val();
             var status = $("#status").val();
@@ -225,6 +232,10 @@
                         $("#exampleModal").modal('hide');
                         $("#txtComment").text(comment);
                         $("#txtStatus").text(status);
+                        if ($("#txtStatus").text(status) == "Accepted") {
+                            //$("btnClientPack").
+
+                        }
                     } else {
                         $("#validation").text("");
                         for (var i = 0; i < success.data.length; i++) {

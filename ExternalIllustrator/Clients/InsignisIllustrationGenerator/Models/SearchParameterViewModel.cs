@@ -9,9 +9,8 @@ namespace InsignisIllustrationGenerator.Models
     public class SearchParameterViewModel
     {
 
-        [RegularExpression(@"^[a-z]{0,60}", ErrorMessage = "Invalid advisor name")]
+        [RegularExpression(@"^[A-Za-z ]{0,60}", ErrorMessage = "Invalid advisor name")]
         public string PartnerName { get; set; }
-
         
         
         [RegularExpression(@"^[a-zA-Z0-9-_,£$/\\. ""]{0,60}", ErrorMessage = "Invalid client name")]
