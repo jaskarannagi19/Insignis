@@ -172,6 +172,7 @@ namespace InsignisIllustrationGenerator.Controllers
             model.PartnerEmail = partnerInfo.PartnerEmailAddress;
             model.PartnerName = partnerInfo.PartnerName;
             model.PartnerOrganisation = partnerInfo.PartnerOrganisation;
+            model.SessionId = partnerInfo.SessionId;
 
             if (reset)
             {
@@ -1220,15 +1221,12 @@ namespace InsignisIllustrationGenerator.Controllers
                     {
                         _model.ThreeYearsPlus += Convert.ToDouble(updatedAmount);
                     }
-
                 }
 
 
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(_sStore));
                 HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(_model));
                 return View("Calculate", _model);
-
-
             }
             //................................................Update Increase Case END...........................................................................................................
 
@@ -1260,9 +1258,6 @@ namespace InsignisIllustrationGenerator.Controllers
                 return View("Calculate",_model);
 
             }
-
-
-            
 
             //Check if any deposit exists before allotment
             bool _savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation);
