@@ -948,48 +948,64 @@ namespace InsignisIllustrationGenerator.Controllers
                 var _dbInvestment = _context.InvestmentTermMapper.Where(x => x.InvestmentText == investmentTerm).SingleOrDefault();
 
 
-                
+                bool additionData = false;
                 if (_dbInvestment.InvestmentTerm == "Instant Access")
                 {
-                    illustrationInfo.EasyAccess += Convert.ToDouble(updatedAmount);
-                    
+                    illustrationInfo.EasyAccess += Convert.ToDouble(differenceAmount);
+                    illustrationInfo.EasyAccess -= Convert.ToDouble(updatedAmount);
+                    additionData = true;
                 }
                 if (_dbInvestment.InvestmentTerm == "One Month")
                 {
-                    illustrationInfo.OneMonth += Convert.ToDouble(updatedAmount);
-                    
+                    illustrationInfo.OneMonth += Convert.ToDouble(differenceAmount);
+                    illustrationInfo.OneMonth -= Convert.ToDouble(updatedAmount);
+                    additionData = true;
+
                 }
 
                 if (_dbInvestment.InvestmentTerm == "Three Months")
                 {
-                    illustrationInfo.ThreeMonths += Convert.ToDouble(updatedAmount);
-                    
+                    illustrationInfo.ThreeMonths += Convert.ToDouble(differenceAmount);
+                    illustrationInfo.ThreeMonths -= Convert.ToDouble(updatedAmount);
+                    additionData = true;
+
                 }
                 if (_dbInvestment.InvestmentTerm == "Six Months")
                 {
-                    illustrationInfo.SixMonths += Convert.ToDouble(updatedAmount);
-                    
+                    illustrationInfo.SixMonths += Convert.ToDouble(differenceAmount);
+                    illustrationInfo.SixMonths -= Convert.ToDouble(updatedAmount);
+                    additionData = true;
+
                 }
                 if (_dbInvestment.InvestmentTerm == "Nine Months")
                 {
                     illustrationInfo.NineMonths += Convert.ToDouble(differenceAmount);
                     illustrationInfo.NineMonths -= Convert.ToDouble(updatedAmount);
-                    
+                    additionData = true;
+
                 }
                 if (_dbInvestment.InvestmentTerm == "One Year")
                 {
-                    illustrationInfo.OneYear += Convert.ToDouble(updatedAmount);
-                    
+                    illustrationInfo.OneYear += Convert.ToDouble(differenceAmount);
+                    illustrationInfo.OneYear -= Convert.ToDouble(updatedAmount);
+                    additionData = true;
+
+
                 }
                 if (_dbInvestment.InvestmentTerm == "Two Years")
                 {
-                    illustrationInfo.TwoYears += Convert.ToDouble(updatedAmount);
-                    
+                    illustrationInfo.TwoYears += Convert.ToDouble(differenceAmount);
+                    illustrationInfo.TwoYears -= Convert.ToDouble(updatedAmount);
+                    additionData = true;
+
+
                 }
                 if (_dbInvestment.InvestmentTerm == "Three Years")
                 {
-                    illustrationInfo.ThreeYearsPlus += Convert.ToDouble(updatedAmount);
-                    
+                    illustrationInfo.ThreeYearsPlus += Convert.ToDouble(differenceAmount);
+                    illustrationInfo.ThreeYearsPlus -= Convert.ToDouble(updatedAmount);
+                    additionData = true;
+
                 }
 
 
@@ -1148,7 +1164,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 {
                     _model.AnnualGrossInterestEarned += investment.AnnualInterest;
                 }
-
+                _model.ProposedPortfolio.AnnualGrossInterestEarned = _model.AnnualGrossInterestEarned;
                 //divi
                 _model.GrossAverageYield = (_model.ProposedPortfolio.AnnualGrossInterestEarned / Convert.ToDecimal(_model.TotalDeposit)) * 100;
                 _model.ProposedPortfolio.FeePercentage = 0.25M;
@@ -1157,7 +1173,55 @@ namespace InsignisIllustrationGenerator.Controllers
                 _model.AnnualNetInterestEarned = (_model.ProposedPortfolio.AnnualGrossInterestEarned - _model.ProposedPortfolio.Fee);
 
 
+                if (additionData)
+                {
 
+                    if (_dbInvestment.InvestmentTerm == "Instant Access")
+                    {
+                        
+                        _model.EasyAccess += Convert.ToDouble(updatedAmount);
+                        
+                     
+                    }
+                    if (_dbInvestment.InvestmentTerm == "One Month")
+                    {
+
+                        _model.OneMonth += Convert.ToDouble(updatedAmount);
+
+                    }
+
+                    if (_dbInvestment.InvestmentTerm == "Three Months")
+                    {
+
+                        _model.ThreeMonths += Convert.ToDouble(updatedAmount);
+                     
+
+                    }
+                    if (_dbInvestment.InvestmentTerm == "Six Months")
+                    {
+
+                        _model.SixMonths += Convert.ToDouble(updatedAmount);
+                     
+
+                    }
+                    if (_dbInvestment.InvestmentTerm == "Nine Months")
+                    {
+                        _model.NineMonths += Convert.ToDouble(updatedAmount);
+                    }
+                    if (_dbInvestment.InvestmentTerm == "One Year")
+                    {
+                        _model.OneYear += Convert.ToDouble(updatedAmount);
+                    }
+                    if (_dbInvestment.InvestmentTerm == "Two Years")
+                    {
+                        _model.TwoYears += Convert.ToDouble(updatedAmount);
+                    }
+                    if (_dbInvestment.InvestmentTerm == "Three Years")
+                    {
+                        _model.ThreeYearsPlus += Convert.ToDouble(updatedAmount);
+                    }
+
+                }
 
 
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(_sStore));
