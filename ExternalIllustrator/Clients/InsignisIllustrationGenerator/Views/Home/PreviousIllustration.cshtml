@@ -193,14 +193,14 @@
                         if (this.comment == null) {
                             this.comment = "";
                         }
+                        var deletedClass = ""
+                        var status = this.status;
+                        if (status == "Deleted") {
+                            deletedClass = "disabled-gray";
+                        }
                         var date = this.generateDate.split("T")[0].split("-");
-                        $("#tblbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-md-1">' + this.clientName + '</td><td class="col-md-3">' + this.illustrationUniqueReference + '</td><td class="col-md-2" style="min-width:220px;" >' + date[2]+"-"+date[1]+"-"+date[0]  + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-1" style="min-width:110px;">' + this.status + '</td><td class="col-md-2" style="min-width:284px;">' + this.comment + '</td></tr>');
+                        $("#tblbody").append('<tr class="d-flex '+deletedClass+'" id="bankDetailRow"><td class="col-md-1">' + this.clientName + '</td><td class="col-md-3">' + this.illustrationUniqueReference + '</td><td class="col-md-2" style="min-width:220px;" >' + date[2]+"-"+date[1]+"-"+date[0]  + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-1" style="min-width:110px;">' + this.status + '</td><td class="col-md-2" style="min-width:284px;">' + this.comment + '</td></tr>');
                     });
-                    //var data = response.data;
-                    //for (var i = 0; i < data.length; i++) {
-                    //    $('#illustrationListTable tr:last').after('<tr class="d-flex" id="bankDetailRow" onclick="RedirectIllustrationDetail()"  ><td class="col-2">' + data[i].adviserName + '</td><td class="col-2">' + data[i].clientName + '</td><td class="col-2">' + data[i].partnerOrganisation + '</td><td class="col-3">' + data[i].illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + data[i].illustrationUniqueReference + '"/></td><td class="col-2">' + data[i].generateDate + '</td><td class="col-1">' + data[i].status + '</td></tr>');
-                    //}
-
                 }
                 $('.illustrationListTable').DataTable({
                     //  "dom": '<"top"i>rt<"bottom"flp><"clear">', //for using a search in buttom

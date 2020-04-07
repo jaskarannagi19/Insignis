@@ -63,14 +63,14 @@
                             {
 
                                 <tr data-id=@i id="bankDetailRow" class="d-flex" data-target=".bd-example-modal-lg">
-                                        <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
-                                        <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
-                                        <td class="col-2 right rate">@Model.ProposedPortfolio.ProposedInvestments[i].Rate %</td>
-                                        <td class="col-3 right instituteDeposit">
-                                            @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize.ToString("N", gb)
-                                            <input type="hidden" class="instituteID" value="@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID" />
-                                            <input type="hidden" class="annualInterest" value="@Model.ProposedPortfolio.ProposedInvestments[i].AnnualInterest" />
-                                        </td>
+                                    <td class="col-4 instituteName">@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionName</td>
+                                    <td class="col-3 instituteLiquidity">@Model.ProposedPortfolio.ProposedInvestments[i].InvestmentTerm.TermText</td>
+                                    <td class="col-2 right rate">@Model.ProposedPortfolio.ProposedInvestments[i].Rate %</td>
+                                    <td class="col-3 right instituteDeposit">
+                                        @Model.ProposedPortfolio.ProposedInvestments[i].DepositSize.ToString("N", gb)
+                                        <input type="hidden" class="instituteID" value="@Model.ProposedPortfolio.ProposedInvestments[i].InstitutionID" />
+                                        <input type="hidden" class="annualInterest" value="@Model.ProposedPortfolio.ProposedInvestments[i].AnnualInterest" />
+                                    </td>
                                 </tr>
                             }
 
@@ -113,10 +113,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="post" action="@Url.Action("Update","Home")">
+            <form id="editForm" method="post" action="@Url.Action("Update","Home")">
                 <div class="modal-body">
                     <div class="edit-deposit-table">
-                        @Html.ValidationMessage("error", new {@class="text-danger" })
+                        @Html.ValidationMessage("error", new { @class = "text-danger" })
                         <table class="table table-bordered">
                             <thead class="thead-dark">
                                 <tr class="d-flex">
@@ -147,7 +147,7 @@
                                         <input type="hidden" id="annualInterest" name="annualInterest" />
                                         <input type="hidden" id="clientType" name="clientType" value="@Model.ClientType" />
                                         <input type="hidden" id="oldAmount" name="oldAmount" />
-                                        
+
                                     </td>
                                 </tr>
                                 <tr class="d-flex">
@@ -156,7 +156,7 @@
                                     <td class="col-3 center">&nbsp;</td>
                                     <td class="col-4 right ipad-button">
                                         <button type="button" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary" id="updateInstitution">Update</button>
+                                        <button type="submit" class="btn btn-primary" id="">Update</button>
                                     </td>
                                 </tr>
 
@@ -172,15 +172,44 @@
         </div>
     </div>
 </div>
+
+
+
+
+<!-- Modal Popup -->
+<div class="modal" id="excludeBankPopUp" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alert</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Do you want to exclude this bank from the portfolio?
+            </div>
+            <div class="modal-footer">
+                <input id="btnSubmit" type="button" class="btn btn-primary btn-black" value="Yes" />
+                <button type="button" class="btn btn-primary btn-black" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+
+
+
+
+
+
+
+
 <script>
     $(document).ready(function () {
-
-
         debugger;
         if ('@TempData["error"]' == "true") {
-
-            debugger;
-            
             $("#updatedAmount").val('@ViewBag.UpdatedAmount')
             $("#bankID").val('@ViewBag.BankId')
             $("#rate").val('@ViewBag.Rate')
@@ -189,25 +218,44 @@
             $("#investmentTerm").val('@ViewBag.InvestmentTerm')
             $("#annualInterest").val('@ViewBag.AnnualInterest')
 
-
             $("#bankName").text('@ViewBag.InstituteName')
             $("#liquidity").text('@ViewBag.InvestmentTerm');
-
-
             $("#exampleModal").modal('show')
-
         }
         else {
             $("#exampleModal").modal('hide')
         }
-    
+
+        $(document).on("click", "#updateInstitution", function () {
+            debugger;
+            //$("#exampleModal").modal('hide');
+            //$("#excludeBankPopUp").modal('toggle');
+            
+
+
+
+        })
+
+        //$(document).on("click", "#btnSubmit", function () {
+        //    debugger;
+            
+        //    $(document).on("submit", "#editForm", function (response) {
+        //        alert(response);
+        //    })
+        //    $("#editForm").submit(function(){
+        //      alert("Submitted");
+        //    });
+
+        //})
+
+
 
         $(document).on("click", "#bankDetailRow", function () {
             debugger;
             var instName = $(event.target).closest('tr').find('.instituteName').text();
             var liquidity = $(event.target).closest('tr').find('.instituteLiquidity').text();
             var deposit = $(event.target).closest('tr').find('.instituteDeposit').text().trim();
-            var bankID = $(event.target).closest('tr').find('.instituteID').val(); 
+            var bankID = $(event.target).closest('tr').find('.instituteID').val();
 
             var annualInterest = $(event.target).closest('tr').find('.annualInterest').val();
             var rate = $(event.target).closest('tr').find('.rate').text();

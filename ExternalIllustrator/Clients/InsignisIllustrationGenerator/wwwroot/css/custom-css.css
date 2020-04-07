@@ -523,3 +523,12 @@ margin: 0px 0px 0px 2px;
 padding: 10px 10px;
 }
 }
+.disabled-gray {
+    background-color: #d0cfcf !important;
+}
+
+.btn-secondary.disabled, .btn-secondary:disabled {
+    color: #fff;
+    background-color: #c0c2c3;
+    border-color: #c0c2c3;
+}

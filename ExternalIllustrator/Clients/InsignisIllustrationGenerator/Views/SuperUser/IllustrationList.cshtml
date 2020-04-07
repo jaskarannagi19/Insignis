@@ -173,6 +173,9 @@
                 debugger;
                 $('#validationerror').text("");
                 //if( $('#dvIllustration')!==undefined) $('#dvIllustration').html("");
+
+
+                
                 var tbl = '<table class="table table-striped table-bordered table-responsive-sm illustrationListTable">';
                 tbl += '<thead class="thead-dark">';
                 tbl += '     <tr class="d-flex">';
@@ -187,10 +190,14 @@
                 tbl += '<tbody id="tblbody">';
                 tbl += '</tbody>';
                 tbl += '</table>';
+
+
+
                 $('#dvIllustration').html(tbl);
                 if (response.success == false) {
                     //$("#validationError").text(response.data);
                     for (var i = 0; i < response.data.length; i++) {
+                        
                         $('#validationerror').append("<br>"+response.data[i]);
                     }
                      
@@ -201,8 +208,16 @@
                             this.comment = "";
                         }
                         var date = this.generateDate.split("T")[0].split("-");
+                        debugger
+                        var deletedClass = ""
+                        var status = this.status;
+                        if (status == "Deleted") {
+                            deletedClass = "disabled-gray";
+                        }
                         
-                        $(".illustrationListTable tbody").append('<tr class="d-flex" id="bankDetailRow"><td class="col-md-1" style="min-width:112px;">' + this.partnerName + '</td><td class="col-md-1" style="min-width:130px">' + this.clientName + '</td><td class="col-md-2" style="min-width:180px">' + this.partnerOrganisation + '</td><td class="col-md-2" style="min-width:260px" >' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-2" style="min-width:170px">' + date[2]+"/"+date[1]+"/"+date[0]  + '</td><td class="col-md-1" style="min-width:89px">' + this.status + '</td></tr>');
+                        $(".illustrationListTable tbody").append('<tr class="d-flex '+deletedClass +'" id="bankDetailRow"><td class="col-md-1" style="min-width:112px;">' + this.partnerName + '</td><td class="col-md-1" style="min-width:130px">' + this.clientName + '</td><td class="col-md-2" style="min-width:180px">' + this.partnerOrganisation + '</td><td class="col-md-2" style="min-width:260px" >' + this.illustrationUniqueReference + '<input type="hidden" id="item_IllustrationUniqueReference" value="' + this.illustrationUniqueReference + '"/></td><td class="col-md-2" style="min-width:170px">' + date[2] + "/" + date[1] + "/" + date[0] + '</td><td class="col-md-1" style="min-width:89px" />' + status + '</td></tr>');
+                        
+
                     });
                 }
                 $('.illustrationListTable').DataTable({
