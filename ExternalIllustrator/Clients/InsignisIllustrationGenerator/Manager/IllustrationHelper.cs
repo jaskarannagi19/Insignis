@@ -30,7 +30,7 @@ namespace InsignisIllustrationGenerator.Manager
 
             //check for existence
             bool exits = _context.IllustrationDetails.Any(x => x.IllustrationUniqueReference == model.IllustrationUniqueReference);
-            var illustrationDetail =new IllustrationDetail();
+            var illustrationDetail = new IllustrationDetail();
             if (exits)
             {
                 illustrationDetail = _context.IllustrationDetails.FirstOrDefault(x => x.IllustrationUniqueReference == model.IllustrationUniqueReference);
@@ -43,11 +43,11 @@ namespace InsignisIllustrationGenerator.Manager
                 illustrationDetail.ClientType = model.ClientType;
 
                 illustrationDetail.Currency = model.Currency;
-                illustrationDetail.EasyAccess =Convert.ToDouble(model.EasyAccess);
+                illustrationDetail.EasyAccess = Convert.ToDouble(model.EasyAccess);
                 illustrationDetail.GenerateDate = model.GenerateDate;
-                
-                
-                
+
+
+
                 illustrationDetail.NineMonths = Convert.ToDouble(model.NineMonths);
                 illustrationDetail.OneMonth = Convert.ToDouble(model.OneMonth);
                 illustrationDetail.OneYear = Convert.ToDouble(model.OneYear);
@@ -61,7 +61,7 @@ namespace InsignisIllustrationGenerator.Manager
                 illustrationDetail.ThreeYearsPlus = Convert.ToDouble(model.ThreeYearsPlus);
                 illustrationDetail.TotalDeposit = Convert.ToDouble(model.TotalDeposit);
                 illustrationDetail.TwoYears = Convert.ToDouble(model.TwoYears);
-                    
+
 
 
 
@@ -125,25 +125,25 @@ namespace InsignisIllustrationGenerator.Manager
 
 
 
-        internal IEnumerable<IllustrationListViewModel> GetIllustrationList(SearchParameterViewModel searchParameter,bool isSuperUser)
+        internal IEnumerable<IllustrationListViewModel> GetIllustrationList(SearchParameterViewModel searchParameter, bool isSuperUser)
         {
 
             var IllustrationDetails = new List<IllustrationDetail>();
-            
-            
+
+
             if (!isSuperUser)
-                IllustrationDetails = _context.IllustrationDetails.Where(x=>x.PartnerEmail == searchParameter.PartnerEmail && x.PartnerOrganisation == searchParameter.PartnerOrganisation).Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x=>x.GenerateDate).ToList();
+                IllustrationDetails = _context.IllustrationDetails.Where(x => x.PartnerEmail == searchParameter.PartnerEmail && x.PartnerOrganisation == searchParameter.PartnerOrganisation).Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x => x.GenerateDate).ToList();
             else
                 IllustrationDetails = _context.IllustrationDetails.Include(x => x.IllustrationProposedPortfolio).OrderByDescending(x => x.GenerateDate).ToList();
 
             searchParameter.IllustrationUniqueReference = string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) ? "" : searchParameter.IllustrationUniqueReference.ToLower();
 
 
-            if(searchParameter.IllustrationFrom !=null && searchParameter.IllustrationTo != null) { 
-                searchParameter.IllustrationTo=searchParameter.IllustrationTo.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
+            if (searchParameter.IllustrationFrom != null && searchParameter.IllustrationTo != null) {
+                searchParameter.IllustrationTo = searchParameter.IllustrationTo.Value.AddHours(23).AddMinutes(59).AddSeconds(59);
             }
 
-            if ( !string.IsNullOrEmpty(searchParameter.ClientName)||!string.IsNullOrEmpty(searchParameter.PartnerName) || !string.IsNullOrEmpty(searchParameter.CompanyName) || !string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || searchParameter.IllustrationTo != null || searchParameter.IllustrationFrom !=null)
+            if (!string.IsNullOrEmpty(searchParameter.ClientName) || !string.IsNullOrEmpty(searchParameter.PartnerName) || !string.IsNullOrEmpty(searchParameter.CompanyName) || !string.IsNullOrEmpty(searchParameter.IllustrationUniqueReference) || searchParameter.IllustrationTo != null || searchParameter.IllustrationFrom != null)
             {
                 IllustrationDetails = IllustrationDetails.Where(f =>
 
@@ -161,7 +161,7 @@ namespace InsignisIllustrationGenerator.Manager
             }
             List<IllustrationListViewModel> response = new List<IllustrationListViewModel>();
             response = _mapper.Map(IllustrationDetails, response);
-            
+
             return response;
         }
 
@@ -180,7 +180,7 @@ namespace InsignisIllustrationGenerator.Manager
             result.ProposedPortfolio = new Insignis.Asset.Management.Tools.Sales.SCurveOutput();
             //result.ProposedPortfolio.ProposedInvestments = new List<Insignis.Asset.Management.Tools.Sales.SCurveOutputRow>();
 
-            
+
             foreach (var item in dbIllustration.IllustrationProposedPortfolio)
             {
                 Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
@@ -192,8 +192,42 @@ namespace InsignisIllustrationGenerator.Manager
                 row.InvestmentTerm = term;
                 row.InvestmentTerm.TermText = item.InvestmentTerm;
                 row.InstitutionShortName = item.InstitutionShortName;
+
                 result.ProposedPortfolio.ProposedInvestments.Add(row);
             }
+
+
+
+
+            result.AnnualGrossInterestEarned = 0;
+
+            foreach (var investment in result.ProposedPortfolio.ProposedInvestments)
+            {
+                result.AnnualGrossInterestEarned += investment.AnnualInterest;
+            }
+
+            result.ProposedPortfolio.AnnualGrossInterestEarned = result.AnnualGrossInterestEarned;
+
+            result.GrossAverageYield = (result.ProposedPortfolio.AnnualGrossInterestEarned / Convert.ToDecimal(result.TotalDeposit)) * 100;
+
+            if (result.TotalDeposit.Value >= 50000 && result.TotalDeposit <= 299999)
+                result.ProposedPortfolio.FeePercentage = 0.25M;
+
+            if (result.TotalDeposit.Value >= 300000 && result.TotalDeposit <= 999999)
+                result.ProposedPortfolio.FeePercentage = 0.20M;
+
+            result.NetAverageYield = (result.GrossAverageYield - result.ProposedPortfolio.FeePercentage);
+
+
+            result.ProposedPortfolio.TotalDeposited =Convert.ToDecimal(result.TotalDeposit);
+            result.ProposedPortfolio.Fee = (result.ProposedPortfolio.TotalDeposited * (decimal)(result.ProposedPortfolio.FeePercentage / 100));
+
+            result.AnnualNetInterestEarned = (result.ProposedPortfolio.AnnualGrossInterestEarned - result.ProposedPortfolio.Fee);
+
+
+
+
+
 
             return result;
         }

@@ -177,6 +177,8 @@ namespace InsignisIllustrationGenerator.Controllers
             if (reset)
             {
                 HttpContext.Session.Remove("InputProposal");
+                
+                
                 return View(model);
             }
 
@@ -185,6 +187,11 @@ namespace InsignisIllustrationGenerator.Controllers
             if (!string.IsNullOrEmpty((HttpContext.Session.GetString("InputProposal"))))
             {
                 illustrationInfo = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
+                partnerInfo.SessionId = Guid.NewGuid();
+
+                HttpContext.Session.Remove("SessionPartner");
+                HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(partnerInfo));
+
                 return View(illustrationInfo);
             }
             if (!string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
@@ -472,8 +479,11 @@ namespace InsignisIllustrationGenerator.Controllers
 
             model.GrossAverageYield = (model.ProposedPortfolio.AnnualGrossInterestEarned / Convert.ToDecimal(model.TotalDeposit)) * 100;
 
+            if(model.TotalDeposit.Value >= 50000 && model.TotalDeposit <= 299999)
+                model.ProposedPortfolio.FeePercentage = 0.25M;
 
-            model.ProposedPortfolio.FeePercentage = 0.25M;
+            if (model.TotalDeposit.Value >= 300000 && model.TotalDeposit <= 999999)
+                model.ProposedPortfolio.FeePercentage = 0.20M;
 
             model.NetAverageYield = (model.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
 
@@ -852,7 +862,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
             if (TempData["AllowEdit"].ToString() == "False" && includeBank != null)
             {
-                ModelState.AddModelError("error", "Cannot edit more than once");
+                ModelState.AddModelError("error", "Please create a new version of this illustration if you need to change the amount.");
 
                 TempData["error"] = "true";
                 TempData["AllowEdit"] = TempData["AllowEdit"];
@@ -1168,7 +1178,11 @@ namespace InsignisIllustrationGenerator.Controllers
                 _model.ProposedPortfolio.AnnualGrossInterestEarned = _model.AnnualGrossInterestEarned;
                 //divi
                 _model.GrossAverageYield = (_model.ProposedPortfolio.AnnualGrossInterestEarned / Convert.ToDecimal(_model.TotalDeposit)) * 100;
-                _model.ProposedPortfolio.FeePercentage = 0.25M;
+                if (_model.TotalDeposit.Value >= 50000 && _model.TotalDeposit <= 299999)
+                    _model.ProposedPortfolio.FeePercentage = 0.25M;
+
+                if (_model.TotalDeposit.Value >= 300000 && _model.TotalDeposit <= 999999)
+                    _model.ProposedPortfolio.FeePercentage = 0.20M;
                 _model.NetAverageYield = (_model.GrossAverageYield - _model.ProposedPortfolio.FeePercentage);
                 _model.ProposedPortfolio.Fee = (Convert.ToDecimal(_model.TotalDeposit) * (decimal)(_model.ProposedPortfolio.FeePercentage / 100));
                 _model.AnnualNetInterestEarned = (_model.ProposedPortfolio.AnnualGrossInterestEarned - _model.ProposedPortfolio.Fee);
@@ -1289,6 +1303,77 @@ namespace InsignisIllustrationGenerator.Controllers
                         _context.SaveChanges();
                         //HttpContext.Session.SetString("ExcludedInstitution", JsonConvert.SerializeObject(inst));
 
+                        
+                        if(_dbInvestment.InvestmentText != investmentTerm)
+                        {
+
+
+                            if (_dbInvestment.InvestmentTerm == "Instant Access")
+                            {
+                                illustrationInfo.EasyAccess -= Convert.ToDouble(bank.Amount);
+                                amount = bank.Amount;
+                                whichTerm = "Instant Access";
+                                illustrationInfo.TotalDeposit -= Convert.ToDouble(bank.Amount);
+                            }
+                            if (_dbInvestment.InvestmentTerm == "One Month")
+                            {
+                                illustrationInfo.OneMonth -= Convert.ToDouble(bank.Amount);
+                                amount = bank.Amount;
+                                whichTerm = "One Month";
+                                illustrationInfo.TotalDeposit -= Convert.ToDouble(bank.Amount);
+                            }
+
+                            if (_dbInvestment.InvestmentTerm == "Three Months")
+                            {
+                                illustrationInfo.ThreeMonths -= Convert.ToDouble(bank.Amount);
+                                amount = bank.Amount;
+                                whichTerm = "Three Months";
+                                illustrationInfo.TotalDeposit -= Convert.ToDouble(bank.Amount);
+                            }
+                            if (_dbInvestment.InvestmentTerm == "Six Months" )
+                            {
+                                illustrationInfo.SixMonths -= Convert.ToDouble(bank.Amount);
+                                amount = bank.Amount;
+                                whichTerm = "Six Months";
+                                illustrationInfo.TotalDeposit -= Convert.ToDouble(bank.Amount);
+                            }
+                            if (_dbInvestment.InvestmentTerm == "Nine Months" )
+                            {
+                                illustrationInfo.NineMonths -= Convert.ToDouble(bank.Amount);
+                                amount = bank.Amount;
+                                whichTerm = "Nine Months";
+                                illustrationInfo.TotalDeposit -= Convert.ToDouble(bank.Amount);
+                            }
+                            if (_dbInvestment.InvestmentTerm == "One Year")
+                            {
+                                illustrationInfo.OneYear -= Convert.ToDouble(bank.Amount);
+                                amount = bank.Amount;
+                                whichTerm = "One Year";
+                                illustrationInfo.TotalDeposit -= Convert.ToDouble(bank.Amount);
+                            }
+                            if (_dbInvestment.InvestmentTerm == "Two Years")
+                            {
+                                illustrationInfo.TwoYears -= Convert.ToDouble(bank.Amount);
+                                amount = bank.Amount;
+                                whichTerm = "Two Years";
+                                illustrationInfo.TotalDeposit -= Convert.ToDouble(bank.Amount);
+                            }
+                            if (_dbInvestment.InvestmentTerm == "Three Years")
+                            {
+                                illustrationInfo.ThreeYearsPlus -= Convert.ToDouble(bank.Amount);
+                                amount = bank.Amount;
+                                whichTerm = "Three Years";
+                                illustrationInfo.TotalDeposit -= Convert.ToDouble(bank.Amount);
+                            }
+
+
+
+
+                        }
+                        
+                        
+                        
+                        
                         if (_dbInvestment.InvestmentTerm == "Instant Access" && _dbInvestment.InvestmentText == investmentTerm)
                         {
                             illustrationInfo.EasyAccess -= Convert.ToDouble(bank.Amount);
@@ -1375,10 +1460,10 @@ namespace InsignisIllustrationGenerator.Controllers
                     _context.ExcludedInstitutes.Add(inst);
                     _context.SaveChanges();
                 }
-                bool _tempBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation);
+                bool _tempBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.InstitutionName == instituteName);
                 if (_tempBank)
                 {
-                    var remov= _context.TempInstitution.Single(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation);
+                    var remov= _context.TempInstitution.Single(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.InstitutionName == instituteName);
                     _context.TempInstitution.Remove(remov);
                     _context.SaveChanges();
 
@@ -1742,7 +1827,11 @@ namespace InsignisIllustrationGenerator.Controllers
             model.ProposedPortfolio.AnnualGrossInterestEarned = model.AnnualGrossInterestEarned;
             //divi
             model.GrossAverageYield = (model.AnnualGrossInterestEarned /Convert.ToDecimal(model.TotalDeposit)) * 100;
-            model.ProposedPortfolio.FeePercentage = 0.25M;
+            if (model.TotalDeposit.Value >= 50000 && model.TotalDeposit <= 299999)
+                model.ProposedPortfolio.FeePercentage = 0.25M;
+
+            if (model.TotalDeposit.Value >= 300000 && model.TotalDeposit <= 999999)
+                model.ProposedPortfolio.FeePercentage = 0.20M;
             model.NetAverageYield = (model.GrossAverageYield - model.ProposedPortfolio.FeePercentage);
             
             model.ProposedPortfolio.Fee = (Convert.ToDecimal(model.TotalDeposit) * (decimal)(model.ProposedPortfolio.FeePercentage / 100));

@@ -119,8 +119,10 @@
                 else
                 {
                     
-                    <button id="btnClientPack" type="submit" class="btn btn-secondary disabled" title="This is available for Accepted Illustration" disabled>Create Client Pack</button>
-                }
+                    <button id="btnClientPack" type="submit" class="btn btn-secondary disabled" onclick="window.location.href = 'https://www.insigniscash.com/partner/LoggedOut/Landing.aspx';" value="w3docs" title="This is available for Accepted Illustration" disabled formtarget="_blank">Create Client Pack</button>
+                
+                    
+                    }
 
             }
             else
@@ -232,8 +234,9 @@
                         $("#exampleModal").modal('hide');
                         $("#txtComment").text(comment);
                         $("#txtStatus").text(status);
-                        if ($("#txtStatus").text(status) == "Accepted") {
-                            $("btnClientPack").removeClass("btnClientPack");
+                        if (status == "Accepted") {
+                            $("#btnClientPack").removeClass("disabled");
+                            $("#btnClientPack").attr("disabled", false);
 
                         }
                     } else {
