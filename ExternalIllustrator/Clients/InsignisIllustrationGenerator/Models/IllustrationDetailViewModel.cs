@@ -79,7 +79,7 @@ namespace InsignisIllustrationGenerator.Models
         
         //[RegularExpression(@"[0]", ErrorMessage = "Please enter at least one amount in the liquidity requirements section.")]
         [Required(ErrorMessage = "Please enter at least one amount in the liquidity requirements section.")]
-        [Range(1, 999999.99‬, ErrorMessage = "The total deposit cannot be more than £999,999.99")]
+        [Range(1, 999999.99, ErrorMessage = "The total deposit cannot be more than £999,999.99")]
         public double? TotalDeposit { get; set; }
 
         public Insignis.Asset.Management.Tools.Sales.SCurveOutput ProposedPortfolio { get; set; }
