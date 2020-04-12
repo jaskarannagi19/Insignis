@@ -61,30 +61,7 @@ namespace InsignisIllustrationGenerator.Data
                 
                 
                 new InvestmentTermMapper { Id = 28, InvestmentText = "4 Year Bond", InvestmentTerm = "Three Years" },
-                new InvestmentTermMapper { Id = 29, InvestmentText = "5 Year Bond", InvestmentTerm = "Three Years" }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                );
+                new InvestmentTermMapper { Id = 29, InvestmentText = "5 Year Bond", InvestmentTerm = "Three Years" });
 
             modelBuilder.Entity<IllustrationDetail>().HasData(
                 new IllustrationDetail {Id =1,PartnerEmail=" ",PartnerName=" ",ClientName=" ",Currency="GBP",PartnerOrganisation=" ",Status="Invalid" ,ClientType=0,IllustrationUniqueReference= "ICS-20200218-199999", TotalDeposit=0,TwoYears=0,ThreeYearsPlus=0,NineMonths=0,SixMonths=0,ThreeMonths=0,OneMonth=0,OneYear=0,EasyAccess=0 });
