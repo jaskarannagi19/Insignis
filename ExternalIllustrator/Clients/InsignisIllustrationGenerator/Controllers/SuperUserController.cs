@@ -72,9 +72,16 @@ namespace InsignisIllustrationGenerator.Controllers
 
             foreach (var data in result)
             {
-                string[] name = data.ClientName.Split(" ");
+                string[] name;
                 string fname = string.Empty;
                 string LName = string.Empty;
+                if (!string.IsNullOrEmpty(data.ClientName)) { 
+                if (data.ClientName.Contains(" ")) { 
+                name = data.ClientName.Split(" ");
+                
+                
+                
+                
                 if (name.Length > 1) { 
                 List<string> fName = name.Take(name.Length - 1).ToList();
 
@@ -86,11 +93,12 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 LName = name.Last();
                 }
+                }
                 else
                 {
                     fname = data.ClientName;
                 }
-
+                }
 
 
                 sb.Append(string.Format("{0},", "No"));
