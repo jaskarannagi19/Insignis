@@ -87,7 +87,7 @@ namespace InsignisIllustrationGenerator.Data
                 );
 
             modelBuilder.Entity<IllustrationDetail>().HasData(
-                new IllustrationDetail {Id =1, ClientType=0,IllustrationUniqueReference= "ICS-20200218-199999", TotalDeposit=0,TwoYears=0,ThreeYearsPlus=0,NineMonths=0,SixMonths=0,ThreeMonths=0,OneMonth=0,OneYear=0,EasyAccess=0 });
+                new IllustrationDetail {Id =1,PartnerEmail=" ",PartnerName=" ",ClientName=" ",Currency="GBP",PartnerOrganisation=" ",Status="Invalid" ,ClientType=0,IllustrationUniqueReference= "ICS-20200218-199999", TotalDeposit=0,TwoYears=0,ThreeYearsPlus=0,NineMonths=0,SixMonths=0,ThreeMonths=0,OneMonth=0,OneYear=0,EasyAccess=0 });
 
             base.OnModelCreating(modelBuilder);
             
