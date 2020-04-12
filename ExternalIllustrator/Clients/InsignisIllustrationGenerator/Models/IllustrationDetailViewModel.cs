@@ -37,49 +37,49 @@ namespace InsignisIllustrationGenerator.Models
         
         
         
-        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in easy access amount field is 999999.99")]
+        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in easy access amount field is £999,999.99")]
         public double? EasyAccess { get; set; }
 
         
         
         
-        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 1 month amount field is 999999.99")]
+        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 1 month amount field is £999,999.99")]
         public double? OneMonth { get; set; }
 
         
         
         
-        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 3 months amount field is 999999.99")]
+        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 3 months amount field is £999,999.99")]
         public double? ThreeMonths { get; set; }
         
         
         
-        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 6 months amount field is 999999.99")]
+        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 6 months amount field is £999,999.99")]
         public double? SixMonths { get; set; }
         
         
         
-        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 9 months amount field is 999999.99")]
+        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 9 months amount field is £999,999.99")]
         public double? NineMonths { get; set; }
         
         
         
-        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 1 year amount field is 999999.99")]
+        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 1 year amount field is £999,999.99")]
         public double? OneYear { get; set; }
         
         
         
-        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 2 years amount field is 999999.99")]
+        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 2 years amount field is £999,999.99")]
         public double? TwoYears { get; set; }
         
         
         
-        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 3+ years amount field is 999999.99")]
+        [Range(0, 999999.99, ErrorMessage = " Maximum value allowed in 3+ years amount field is £999,999.99")]
         public double? ThreeYearsPlus { get; set; }
         
         //[RegularExpression(@"[0]", ErrorMessage = "Please enter at least one amount in the liquidity requirements section.")]
         [Required(ErrorMessage = "Please enter at least one amount in the liquidity requirements section.")]
-        //[Range(1, 799999999.92‬, ErrorMessage = "Maximum value allowed in total amount field is 799999999.92")]
+        [Range(1, 999999.99‬, ErrorMessage = "The total deposit cannot be more than £999,999.99")]
         public double? TotalDeposit { get; set; }
 
         public Insignis.Asset.Management.Tools.Sales.SCurveOutput ProposedPortfolio { get; set; }
