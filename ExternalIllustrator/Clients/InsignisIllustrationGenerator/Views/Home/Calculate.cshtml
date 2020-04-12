@@ -118,11 +118,6 @@
                     <div class="edit-deposit-table">
                         @Html.ValidationMessage("error", new { @class = "text-danger" })
 
-                        <p>
-                            *Please note that excluding the bank
-                            or reducing funds will re-allocate your deposit to another bank
-                        </p>
-
                         <table class="table table-bordered">
                             <thead class="thead-dark">
                                 <tr class="d-flex">
@@ -169,6 +164,10 @@
                             </tbody>
 
                         </table>
+                        <p class="gray-light-small">
+                            *Please note that excluding the bank
+                            or reducing funds will re-allocate your deposit to another bank
+                        </p>
                     </div>
                 </div>
             </form>
