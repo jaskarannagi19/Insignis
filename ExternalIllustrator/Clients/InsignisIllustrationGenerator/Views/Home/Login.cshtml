@@ -1,0 +1,104 @@
+﻿@model InsignisIllustrationGenerator.Manager.Session
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+    <div class="middle-section">
+        <div class="container">
+            <form method="post" action="@Url.Action("Login","Home")">
+                <table>
+                    <tr>
+                        <td>
+                            <p>Partner Organisation</p>
+                        </td>
+                        <td>
+                            <input type="text" asp-for="PartnerOrganisation" value="PartOrg Ltd." />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Partner Name</p>
+                        </td>
+                        <td>
+                            <input type="text" asp-for="PartnerName" value="Peter Artner" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Partner Email Address</p>
+                        </td>
+                        <td>
+                            <input type="text" asp-for="PartnerEmailAddress" value="p.artner@partorg.com" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Partner Phone</p>
+                        </td>
+                        <td>
+                            <input type="text" asp-for="PartnerTelephone" value="01226 1234 567" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" id="_buttonSubmit" value="Simulated PRC/Introducer Login" />
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+
+
+
+
+
+        <h2>Super user log in</h2>
+        <form method="post" action="@Url.Action("SuperLogin","Home")">
+            <table>
+                <tr>
+                    <td>
+                        <p>Partner Organisation</p>
+                    </td>
+                    <td>
+                        <input type="text" asp-for="PartnerOrganisation" value="PartOrg Ltd." />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Partner Name</p>
+                    </td>
+                    <td>
+                        <input type="text" asp-for="PartnerName" value="Peter Artner" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Partner Email Address</p>
+                    </td>
+                    <td>
+                        <input type="text" asp-for="PartnerEmailAddress" value="p.artner@partorg.com" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Partner Phone</p>
+                    </td>
+                    <td>
+                        <input type="text" asp-for="PartnerTelephone" value="01226 1234 567" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" id="_buttonSubmit" value="Simulated PRC/Introducer Login" />
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+
+
+
+    </div>
+
+
+

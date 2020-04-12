@@ -23,12 +23,22 @@
 
 
 
+
+
+
+
+
 <body>
     <header>
         <nav class="navbar fixed-top navbar-expand-lg header-background fixed-top">
             <div class="container">
                 <div class="col-md-4 col-sm-5 padding-left-0">
-                    <a href="#"><img src="images/Insignis-logo.png" alt="" class="img-responsive"></a>
+
+
+                    <a href="@Url.Action("Logo","Home")"><img src="/images/Insignis-logo.png" alt="" class="img-responsive"></a>
+
+
+
                 </div>
                 <div class="col-md-8 col-sm-7 right">
                     <div class="header-right-section">
@@ -55,8 +65,13 @@
         </div>
         <!-- /.container -->
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    @*<script src="~/lib/jquery/dist/jquery.min.js"></script>*@
+    @*<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+        <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>*@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @RenderSection("Scripts", required: false)
 </body>

@@ -1,0 +1,50 @@
+﻿@model InsignisIllustrationGenerator.Models.SearchParameterViewModel
+
+<h4>SearchParameterViewModel</h4>
+<hr />
+@using (Html.BeginForm("PreviousIllustration", "Home"))
+{
+    <div class="row">
+        <div class="col-md-12">
+          
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="PartnerName" class="control-label"></label>
+                    <input asp-for="PartnerName" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="ClientName" class="control-label"></label>
+                    <input asp-for="ClientName" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="CompanyName" class="control-label"></label>
+                    <input asp-for="CompanyName" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="IllustrationUniqueReference" class="control-label"></label>
+                    <input asp-for="IllustrationUniqueReference" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="IllustrationFrom" class="control-label"></label>
+                    <input asp-for="IllustrationFrom" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="IllustrationTo" class="control-label"></label>
+                    <input asp-for="IllustrationTo" class="form-control" />
+
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Search" class="btn btn-primary" />
+                    <input type="button" value="Reset" class="btn btn-primary" />
+                </div>
+         
+        </div>
+    </div>
+}
+
+

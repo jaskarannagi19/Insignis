@@ -358,8 +358,8 @@ table th, table td {
 }
 .table .thead-dark th {
     color: #fff;
-    background-color: #6080b9;
-    border-color: #6080b9;
+    background-color: #6080b9!important;
+    border-color: #6080b9!important;
 	font-size: 16px;
 	font-weight: normal;
 }
@@ -522,4 +522,13 @@ i.fa.fa-file-pdf-o {
 margin: 0px 0px 0px 2px;
 padding: 10px 10px;
 }
+}
+.disabled-gray {
+    background-color: #d0cfcf !important;
+}
+
+.btn-secondary.disabled, .btn-secondary:disabled {
+    color: #fff;
+    background-color: #c0c2c3;
+    border-color: #c0c2c3;
 }

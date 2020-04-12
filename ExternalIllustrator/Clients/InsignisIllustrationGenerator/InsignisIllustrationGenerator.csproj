@@ -14,6 +14,12 @@
     <Compile Remove="Data\Migrations\20200205101222_BankDetails.Designer.cs" />
     <Compile Remove="Data\Migrations\20200205113951_ProductBankRelation.cs" />
     <Compile Remove="Data\Migrations\20200205113951_ProductBankRelation.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200412225304_correctedseeddata.cs" />
+    <Compile Remove="Data\Migrations\20200412225304_correctedseeddata.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200412230247_correctedseeddata1.cs" />
+    <Compile Remove="Data\Migrations\20200412230247_correctedseeddata1.Designer.cs" />
+    <Compile Remove="Data\Migrations\20200412230716_correctedseeddata.cs" />
+    <Compile Remove="Data\Migrations\20200412230716_correctedseeddata.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -47,6 +53,7 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="DocumentFormat.OpenXml" Version="2.8.1" />
+    <PackageReference Include="FreeSpire.Presentation" Version="4.1.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.1" />
@@ -58,8 +65,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="3.0.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.0.0" />
-    <PackageReference Include="Spire.PDF" Version="6.1.8" />
-    <PackageReference Include="Spire.Presentation" Version="5.1.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.0" />
   </ItemGroup>
@@ -90,6 +95,9 @@
     </Reference>
     <Reference Include="NabuEntities">
       <HintPath>..\..\InsignisConsoleApps\InsignisLoaderConfig\bin\Debug\NabuEntities.dll</HintPath>
+    </Reference>
+    <Reference Include="NabuOfficeInterface">
+      <HintPath>..\..\Admin\InsignisPowerPointGenerator\bin\Debug\NabuOfficeInterface.dll</HintPath>
     </Reference>
     <Reference Include="NabuPreferences">
       <HintPath>..\..\ExternalIllustrator\ExternalIllustrator\bin\NabuPreferences.dll</HintPath>

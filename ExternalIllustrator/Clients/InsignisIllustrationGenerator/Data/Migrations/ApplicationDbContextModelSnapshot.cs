@@ -35,6 +35,36 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                     b.ToTable("Bank");
                 });
 
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.ExcludedInstitute", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ClientReference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InstituteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("PartnerEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartnerOrganisation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("SessionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UniqueReferenceId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExcludedInstitutes");
+                });
+
             modelBuilder.Entity("InsignisIllustrationGenerator.Data.IllustrationDetail", b =>
                 {
                     b.Property<int>("Id")
@@ -42,17 +72,38 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<decimal>("AnnualGrossInterestEarned")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("AnnualNetInterestEarned")
+                        .HasColumnType("decimal(18,2)");
+
                     b.Property<string>("ClientName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("ClientType")
                         .HasColumnType("int");
 
+                    b.Property<string>("Comment")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Currency")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("EasyAccess")
                         .HasColumnType("float");
+
+                    b.Property<DateTime>("GenerateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("GrossAverageYield")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("IllustrationUniqueReference")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("NetAverageYield")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<double>("NineMonths")
                         .HasColumnType("float");
@@ -72,8 +123,14 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                     b.Property<string>("PartnerOrganisation")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("ReferredBy")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("SixMonths")
                         .HasColumnType("float");
+
+                    b.Property<string>("Status")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double>("ThreeMonths")
                         .HasColumnType("float");
@@ -90,6 +147,228 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("IllustrationDetails");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AnnualGrossInterestEarned = 0m,
+                            AnnualNetInterestEarned = 0m,
+                            ClientName = " ",
+                            ClientType = 0,
+                            Currency = "GBP",
+                            EasyAccess = 0.0,
+                            GenerateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            GrossAverageYield = 0m,
+                            IllustrationUniqueReference = "ICS-20200218-199999",
+                            NetAverageYield = 0m,
+                            NineMonths = 0.0,
+                            OneMonth = 0.0,
+                            OneYear = 0.0,
+                            PartnerEmail = " ",
+                            PartnerName = " ",
+                            PartnerOrganisation = " ",
+                            SixMonths = 0.0,
+                            Status = "Invalid",
+                            ThreeMonths = 0.0,
+                            ThreeYearsPlus = 0.0,
+                            TotalDeposit = 0.0,
+                            TwoYears = 0.0
+                        });
+                });
+
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.InvestmentTermMapper", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("InvestmentTerm")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InvestmentText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("InvestmentTermMapper");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            InvestmentTerm = "Instant Access",
+                            InvestmentText = "Instant Access"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            InvestmentTerm = "One Month",
+                            InvestmentText = "35 Day"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            InvestmentTerm = "One Month",
+                            InvestmentText = "1 Week"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            InvestmentTerm = "One Month",
+                            InvestmentText = "1 Week Bond"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            InvestmentTerm = "One Month",
+                            InvestmentText = "1 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            InvestmentTerm = "One Month",
+                            InvestmentText = "30 Day"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            InvestmentTerm = "One Months",
+                            InvestmentText = "45 Day"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            InvestmentTerm = "Three Months",
+                            InvestmentText = "2 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            InvestmentTerm = "Three Months",
+                            InvestmentText = "90 Day"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            InvestmentTerm = "Three Months",
+                            InvestmentText = "3 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            InvestmentTerm = "Three Months",
+                            InvestmentText = "95 Day"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            InvestmentTerm = "Three Months",
+                            InvestmentText = "100 Day"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            InvestmentTerm = "Six Months",
+                            InvestmentText = "4 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            InvestmentTerm = "Six Months",
+                            InvestmentText = "5 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            InvestmentTerm = "Six Months",
+                            InvestmentText = "6 Month"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            InvestmentTerm = "Six Months",
+                            InvestmentText = "6 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            InvestmentTerm = "Six Months",
+                            InvestmentText = "185 Day"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            InvestmentTerm = "Nine Months",
+                            InvestmentText = "7 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            InvestmentTerm = "Nine Months",
+                            InvestmentText = "8 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            InvestmentTerm = "Nine Months",
+                            InvestmentText = "270 Day"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            InvestmentTerm = "Nine Months",
+                            InvestmentText = "9 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            InvestmentTerm = "One Year",
+                            InvestmentText = "10 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            InvestmentTerm = "One Year",
+                            InvestmentText = "11 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            InvestmentTerm = "One Year",
+                            InvestmentText = "1 Year Bond"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            InvestmentTerm = "Two Years",
+                            InvestmentText = "18 Month Bond"
+                        },
+                        new
+                        {
+                            Id = 26,
+                            InvestmentTerm = "Two Years",
+                            InvestmentText = "2 Year Bond"
+                        },
+                        new
+                        {
+                            Id = 27,
+                            InvestmentTerm = "Three Years",
+                            InvestmentText = "3 Year Bond"
+                        },
+                        new
+                        {
+                            Id = 28,
+                            InvestmentTerm = "Three Years",
+                            InvestmentText = "4 Year Bond"
+                        },
+                        new
+                        {
+                            Id = 29,
+                            InvestmentTerm = "Three Years",
+                            InvestmentText = "5 Year Bond"
+                        });
                 });
 
             modelBuilder.Entity("InsignisIllustrationGenerator.Data.Product", b =>
@@ -186,6 +465,92 @@ namespace InsignisIllustrationGenerator.Data.Migrations
                     b.HasIndex("BankID");
 
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.ProposedPortfolio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("AnnualInterest")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("DepositSize")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("IllustrationDetailId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IllustrationID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("InstitutionID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("InstitutionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InstitutionShortName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InvestmentTerm")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IllustrationDetailId");
+
+                    b.ToTable("ProposedPortfolio");
+                });
+
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.TempInstitution", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("AnnualInterest")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("BankId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ClientName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InstitutionName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("InvestmentTerm")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartnerEmail")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartnerName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PartnerOrganisation")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<decimal>("Rate")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<Guid>("SessionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TempInstitution");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -386,9 +751,16 @@ namespace InsignisIllustrationGenerator.Data.Migrations
 
             modelBuilder.Entity("InsignisIllustrationGenerator.Data.Product", b =>
                 {
-                    b.HasOne("InsignisIllustrationGenerator.Data.Bank", null)
+                    b.HasOne("InsignisIllustrationGenerator.Data.Bank", "Bank")
                         .WithMany("Products")
                         .HasForeignKey("BankID");
+                });
+
+            modelBuilder.Entity("InsignisIllustrationGenerator.Data.ProposedPortfolio", b =>
+                {
+                    b.HasOne("InsignisIllustrationGenerator.Data.IllustrationDetail", "IllustrationDetail")
+                        .WithMany("IllustrationProposedPortfolio")
+                        .HasForeignKey("IllustrationDetailId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -1,0 +1,22 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ExternalIllustrator/Clients/InsignisIllustrationGenerator/bin/Debug/netcoreapp3.0
+/ExternalIllustrator/ExternalIllustrator/.vs/ExternalIllustrator
+/ExternalIllustrator/ExternalIllustrator/.vs
+/ExternalIllustrator/ExternalIllustrator/ExternalIllustrator/Output
+################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ExternalIllustrator/Clients/InsignisIllustrationGenerator/bin/Debug/netcoreapp3.0
+/ExternalIllustrator/ExternalIllustrator/.vs/ExternalIllustrator
+/ExternalIllustrator/ExternalIllustrator/.vs
+/ExternalIllustrator/ExternalIllustrator/ExternalIllustrator/Output
+/ExternalIllustrator/Clients/InsignisIllustrationGenerator/obj
+/ExternalIllustrator/ExternalIllustrator/ExternalIllustrator/bin
+/ExternalIllustrator/ExternalIllustrator/ExternalIllustrator/obj
+/.vs
+/ExternalIllustrator/Clients/InsignisFSCSConfig/obj/Debug
+/ExternalIllustrator/InsignisConsoleApps/InsignisLoaderConfig/obj/Debug

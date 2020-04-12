@@ -1,0 +1,5 @@
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\bin\Release\InsignisIllustratorInterface.dll
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\bin\Release\InsignisIllustratorInterface.pdb
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\obj\Release\InsignisIllustratorInterface.csprojAssemblyReference.cache
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\obj\Release\InsignisIllustratorInterface.dll
+D:\insignis\ExternalIllustrator\Clients\InsignisIllustratorInterface\obj\Release\InsignisIllustratorInterface.pdb
