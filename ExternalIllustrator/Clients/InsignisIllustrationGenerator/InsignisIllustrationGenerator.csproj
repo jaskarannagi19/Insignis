@@ -91,7 +91,7 @@
       <HintPath>..\..\InsignisConsoleApps\InsignisLoaderConfig\bin\Debug\NabuDOL.dll</HintPath>
     </Reference>
     <Reference Include="NabuEncryption">
-      <HintPath>..\..\ExternalIllustrator\ExternalIllustrator\bin\NabuEncryption.dll</HintPath>
+      <HintPath>..\..\Admin\InsignisPowerPointGenerator\bin\Debug\NabuEncryption.dll</HintPath>
     </Reference>
     <Reference Include="NabuEntities">
       <HintPath>..\..\InsignisConsoleApps\InsignisLoaderConfig\bin\Debug\NabuEntities.dll</HintPath>
