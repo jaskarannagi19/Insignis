@@ -1711,6 +1711,7 @@ namespace InsignisIllustrationGenerator.Controllers
             model.ThreeMonths = illustrationInfo.ThreeMonths;
             model.ThreeYearsPlus = illustrationInfo.ThreeYearsPlus;
             model.TwoYears = illustrationInfo.TwoYears;
+            model.SessionId = illustrationInfo.SessionId;
 
 
             SCurveOutput sStore = new SCurveOutput();
