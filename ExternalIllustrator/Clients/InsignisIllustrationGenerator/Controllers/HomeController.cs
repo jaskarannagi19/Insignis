@@ -291,6 +291,14 @@ namespace InsignisIllustrationGenerator.Controllers
                 View with Illustration Details
              */
             var result = _illustrationHelper.GetIllustrationByUniqueReferenceId(uniqueReferenceId);
+            //Change session id here to exclude banks
+            var partnerInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+            partnerInfo.SessionId = _illustrationHelper.GetSessionIdForIllustration(uniqueReferenceId);
+
+            HttpContext.Session.Remove("SessionPartner");
+            HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(partnerInfo));
+
+
 
             ViewBag.URL = AppSettings.illustrationOutputPublicFacingFolder + "/" + uniqueReferenceId + "/" + uniqueReferenceId + "_CashIllustration.pdf";
 

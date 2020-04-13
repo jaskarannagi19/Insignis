@@ -232,6 +232,10 @@ namespace InsignisIllustrationGenerator.Manager
             return result;
         }
 
+        internal Guid GetSessionIdForIllustration(string uniqueReferenceId)
+        {
+            return _context.ExcludedInstitutes.Where(x => x.UniqueReferenceId == uniqueReferenceId).Last().SessionId;
+        }
 
 
         internal int GetNextIllustrationRefernce()
