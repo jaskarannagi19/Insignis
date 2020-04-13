@@ -1136,8 +1136,8 @@ namespace InsignisIllustrationGenerator.Controllers
                 bool __savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId== partnerEmail.SessionId);
                 if (__savedBank)
                 {
-                    var tempBanks = _context.TempInstitution.Where(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation).ToList();
-
+                    var tempBanks = _context.TempInstitution.Where(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId == partnerEmail.SessionId).ToList();
+                    TempData["AllowEdit"] = false;
                     foreach (var bank in tempBanks)
                     {
                         Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
