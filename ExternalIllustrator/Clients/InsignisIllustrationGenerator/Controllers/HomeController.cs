@@ -720,7 +720,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
              */
 
-
+            
 
 
             IllustrationDetailViewModel model = null;
@@ -956,7 +956,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 _context.ExcludedInstitutes.Add(inst);
                 _context.SaveChanges();
-
 
                 //................................................................Update total amount.........................
                 string differenceAmount = (Convert.ToDecimal(updatedAmount) - Convert.ToDecimal(oldAmount)).ToString();
@@ -1577,7 +1576,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 inst.PartnerEmail = partnerEmail.PartnerEmail;
                 inst.PartnerOrganisation = partnerEmail.PartnerOrganisation;
                 inst.InstituteId = Convert.ToInt32(bankId);
-                inst.SessionId = illustrationInfo.SessionId;
+                inst.SessionId = partnerEmail.SessionId;
 
                 _context.ExcludedInstitutes.Add(inst);
                 _context.SaveChanges();
