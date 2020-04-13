@@ -1126,7 +1126,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
                 //check db for any saved bank
-                bool __savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId== partnerEmail.SessionId );
+                bool __savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId== partnerEmail.SessionId);
                 if (__savedBank)
                 {
                     var tempBanks = _context.TempInstitution.Where(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId == partnerEmail.SessionId).ToList();
