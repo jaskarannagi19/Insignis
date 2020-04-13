@@ -320,9 +320,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 HttpContext.Session.Remove("SessionPartner");
                 HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(illustrationInfo));
-
-
-
             }
 
             if (string.IsNullOrEmpty(model.PartnerName) && !string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
@@ -719,9 +716,6 @@ namespace InsignisIllustrationGenerator.Controllers
                 View
 
              */
-
-            
-
 
             IllustrationDetailViewModel model = null;
             CultureInfo gb = new CultureInfo("en-GB");
