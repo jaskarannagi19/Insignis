@@ -1274,7 +1274,7 @@ namespace InsignisIllustrationGenerator.Controllers
             }
 
             //Check if any deposit exists before allotment
-            bool _savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation);
+            bool _savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId == partnerEmail.SessionId);
 
 
             bool sessionVariable = false;
