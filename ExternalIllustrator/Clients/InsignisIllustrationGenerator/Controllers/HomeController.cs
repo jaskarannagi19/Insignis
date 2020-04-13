@@ -1126,10 +1126,10 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
                 //check db for any saved bank
-                bool __savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation);
+                bool __savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId== partnerEmail.SessionId );
                 if (__savedBank)
                 {
-                    var tempBanks = _context.TempInstitution.Where(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation).ToList();
+                    var tempBanks = _context.TempInstitution.Where(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId == partnerEmail.SessionId).ToList();
 
                     foreach (var bank in tempBanks)
                     {
@@ -1559,7 +1559,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 temp.PartnerOrganisation = illustrationInfo.PartnerOrganisation;
                 var _rate = rate.Split(" ");
                 temp.Rate = Convert.ToDecimal(_rate[0]);
-
+                temp.SessionId = illustrationInfo.SessionId;
                 temp.AnnualInterest = Convert.ToDecimal(annualInterest);
                 _context.TempInstitution.Add(temp);
                 TempData["AllowEdit"] = false;
@@ -1721,10 +1721,10 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             //check db for any saved bank
-            bool savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation);
+            bool savedBank = _context.TempInstitution.Any(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId == partnerEmail.SessionId);
             if (savedBank)
             {
-                var tempBanks = _context.TempInstitution.Where(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation).ToList();
+                var tempBanks = _context.TempInstitution.Where(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.SessionId == partnerEmail.SessionId).ToList();
 
                 foreach (var bank in tempBanks)
                 {
