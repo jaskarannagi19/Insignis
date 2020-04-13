@@ -315,15 +315,21 @@ namespace InsignisIllustrationGenerator.Controllers
             if (!string.IsNullOrEmpty((HttpContext.Session.GetString("SessionPartner"))))
             {
                 illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+
+                illustrationInfo.SessionId = Guid.NewGuid();
+
+                HttpContext.Session.Remove("SessionPartner");
+                HttpContext.Session.SetString("SessionPartner", JsonConvert.SerializeObject(illustrationInfo));
+
+
+
             }
 
             if (string.IsNullOrEmpty(model.PartnerName) && !string.IsNullOrEmpty(HttpContext.Session.GetString("InputProposal")))
             {
                 model = JsonConvert.DeserializeObject<IllustrationDetailViewModel>(HttpContext.Session.GetString("InputProposal"));
                 var folio = JsonConvert.DeserializeObject<SCurveOutput>(HttpContext.Session.GetString("GeneratedPorposals"));
-
                 var scurve = _mapper.Map<Insignis.Asset.Management.Tools.Sales.SCurveOutput>(folio);
-
                 model.ProposedPortfolio = scurve;
 
                 return View(model);
