@@ -234,7 +234,7 @@ namespace InsignisIllustrationGenerator.Manager
 
         internal Guid GetSessionIdForIllustration(string uniqueReferenceId)
         {
-            return _context.ExcludedInstitutes.Where(x => x.UniqueReferenceId == uniqueReferenceId).Last().SessionId;
+            return _context.ExcludedInstitutes.Where(x=>x.UniqueReferenceId == uniqueReferenceId).ToList().Last().SessionId;
         }
 
 
