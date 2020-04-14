@@ -474,8 +474,6 @@ namespace InsignisIllustrationGenerator.Controllers
 
             //Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
-
-            //which bank excluded TODO
             var excludedInstituteIds = _context.ExcludedInstitutes.Where(x => x.SessionId == illustrationInfo.SessionId).Select(x => x.InstituteId).ToList();
 
             foreach (var childern in institutionInclusion.Children)
@@ -490,18 +488,35 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             //Check for any saved banks TODO
+            var tempBanks = _context.TempInstitution.Where(x=>x.SessionId == illustrationInfo.SessionId).ToList();
+            
+            foreach (var bank in tempBanks)
+            {
+                Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
+                row.InstitutionName = bank.InstitutionName;
+                row.InstitutionID = bank.BankId;
+                row.InvestmentTerm = new InvestmentTerm();
+                row.InvestmentTerm.TermText = bank.InvestmentTerm;
+                row.Rate = bank.Rate;
+                row.DepositSize = bank.Amount;
+                row.AnnualInterest = ((bank.Rate / 100) * bank.Amount);
 
+                //_sStore.ProposedInvestments.Add(row);
+                model.ProposedPortfolio.ProposedInvestments.Add(row);
+            }
 
 
             model.AnnualGrossInterestEarned = 0;
+            model.TotalDeposit = 0;
 
             foreach (var investment in model.ProposedPortfolio.ProposedInvestments)
             {
                 model.AnnualGrossInterestEarned += investment.AnnualInterest;
+                model.TotalDeposit +=Convert.ToDouble(investment.DepositSize);
             }
 
             model.ProposedPortfolio.AnnualGrossInterestEarned = model.AnnualGrossInterestEarned;
-
+            model.ProposedPortfolio.TotalDeposited =Convert.ToDecimal(model.TotalDeposit);
             model.GrossAverageYield = (model.ProposedPortfolio.AnnualGrossInterestEarned / Convert.ToDecimal(model.TotalDeposit)) * 100;
 
             if(model.TotalDeposit.Value >= 50000 && model.TotalDeposit <= 299999)
