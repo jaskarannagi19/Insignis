@@ -4,6 +4,258 @@
     "D:\\insignis\\ExternalIllustrator\\Clients\\WebService\\WebService.csproj": {}
   },
   "projects": {
+    "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj",
+        "projectName": "InsignisActionLogging",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj"
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj",
+        "projectName": "InsignisPowerPointGenerator",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj",
+        "frameworks": {
+          "net461": {
+            "projectReferences": {
+              "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj",
+        "projectName": "InsignisFSCSConfig",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj",
+        "projectName": "InsignisHelper",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj",
+        "projectName": "InsignisIllustrationGenerator",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj",
+        "packagesPath": "C:\\Users\\singh\\.nuget\\packages\\",
+        "outputPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\singh\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.0": {
+            "projectReferences": {
+              "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisActionLogging\\InsignisActionLogging.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.0": {
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[7.0.0, )"
+            },
+            "DocumentFormat.OpenXml": {
+              "target": "Package",
+              "version": "[2.8.1, )"
+            },
+            "FreeSpire.Presentation": {
+              "target": "Package",
+              "version": "[4.1.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.1, )"
+            },
+            "Microsoft.Extensions.Logging.Debug": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.0.0, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[4.7.0, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj",
+        "projectName": "InsignisIllustratorInterface",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustratorInterface\\InsignisIllustratorInterface.csproj"
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj",
+        "projectName": "InsignisReports",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj",
+        "frameworks": {
+          "net461": {
+            "projectReferences": {
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj",
+        "projectName": "InsignisTools",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj",
+        "frameworks": {
+          "net461": {
+            "projectReferences": {
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    },
     "D:\\insignis\\ExternalIllustrator\\Clients\\WebService\\WebService.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -26,7 +278,11 @@
         },
         "frameworks": {
           "netcoreapp3.0": {
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisIllustrationGenerator\\InsignisIllustrationGenerator.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -37,6 +293,12 @@
       },
       "frameworks": {
         "netcoreapp3.0": {
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -57,6 +319,49 @@
           },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.0.100\\RuntimeIdentifierGraph.json"
         }
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj",
+        "projectName": "ExternalIllustrator",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator\\ExternalIllustrator.csproj",
+        "frameworks": {
+          "net461": {
+            "projectReferences": {
+              "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Admin\\InsignisPowerPointGenerator\\InsignisPowerPointGenerator.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisFSCSConfig\\InsignisFSCSConfig.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisHelper\\InsignisHelper.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisReports\\InsignisReports.csproj"
+              },
+              "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj": {
+                "projectPath": "D:\\insignis\\ExternalIllustrator\\Clients\\InsignisTools\\InsignisTools.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net461": {}
+      }
+    },
+    "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj",
+        "projectName": "InsignisLoaderConfig",
+        "projectPath": "D:\\insignis\\ExternalIllustrator\\InsignisConsoleApps\\InsignisLoaderConfig\\InsignisLoaderConfig.csproj"
+      },
+      "frameworks": {
+        "net461": {}
       }
     }
   }
