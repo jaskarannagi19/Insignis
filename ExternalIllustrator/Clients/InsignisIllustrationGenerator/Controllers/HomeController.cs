@@ -303,6 +303,7 @@ namespace InsignisIllustrationGenerator.Controllers
             ViewBag.URL = AppSettings.illustrationOutputPublicFacingFolder + "/" + uniqueReferenceId + "/" + uniqueReferenceId + "_CashIllustration.pdf";
 
             ViewBag.User = "";
+            TempData["PreserverSession"] = true;
             return View("_illustrationDetails", result);
 
         }
@@ -318,9 +319,19 @@ namespace InsignisIllustrationGenerator.Controllers
             
             TempData["error"] = "false";
             TempData["AllowEdit"] = true;
-
+            bool PreserverSession = false;
             var illustrationInfo = new Session();
-            if (!string.IsNullOrEmpty((HttpContext.Session.GetString("SessionPartner"))))
+
+            if (TempData["PreserverSession"] != null)
+            {
+                illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
+                PreserverSession = true;
+
+                TempData["PreserverSession"] = TempData["PreserverSession"];
+            }
+
+            
+            if (!string.IsNullOrEmpty((HttpContext.Session.GetString("SessionPartner"))) && !PreserverSession)
             {
                 illustrationInfo = JsonConvert.DeserializeObject<Session>(HttpContext.Session.GetString("SessionPartner"));
 
@@ -465,9 +476,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             //which bank excluded TODO
-
-
-            var excludedInstituteIds = _context.ExcludedInstitutes.Where(x => x.ClientReference == illustrationInfo.ClientName && x.SessionId == illustrationInfo.SessionId && x.PartnerEmail == illustrationInfo.PartnerEmailAddress && x.PartnerOrganisation == illustrationInfo.PartnerOrganisation).Select(x => x.InstituteId).ToList();
+            var excludedInstituteIds = _context.ExcludedInstitutes.Where(x => x.SessionId == illustrationInfo.SessionId).Select(x => x.InstituteId).ToList();
 
             foreach (var childern in institutionInclusion.Children)
             {
@@ -478,6 +487,11 @@ namespace InsignisIllustrationGenerator.Controllers
             
             var feeMatrix = new FeeMatrix(fscsProtectionConfigFile + "FeeMatrix.xml");
             model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
+
+
+            //Check for any saved banks TODO
+
+
 
             model.AnnualGrossInterestEarned = 0;
 
