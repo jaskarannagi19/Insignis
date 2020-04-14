@@ -177,8 +177,6 @@ namespace InsignisIllustrationGenerator.Controllers
             if (reset)
             {
                 HttpContext.Session.Remove("InputProposal");
-                
-                
                 return View(model);
             }
 
@@ -420,6 +418,54 @@ namespace InsignisIllustrationGenerator.Controllers
             scurve.LoadHeatmap(7, "GBP", AppSettings.preferencesRoot);
             //scurve.LoadHeatmap(7, model.Currency, AppSettings.preferencesRoot);
 
+            //Changes here for saved banks in illustrationInfo
+            if(_context.TempInstitution.Any(x => x.SessionId == illustrationInfo.SessionId)){
+                var savedBank = _context.TempInstitution.OrderByDescending(x => x.Id).First(x => x.SessionId == illustrationInfo.SessionId);
+                string dbInvestmentTerm = _context.InvestmentTermMapper.First(x => x.InvestmentText == savedBank.InvestmentTerm).InvestmentTerm;
+
+                if (dbInvestmentTerm == "Instant Access")
+                {
+                    illustrationInfo.EasyAccess -= Convert.ToDouble(savedBank.Amount);
+                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+                }
+                
+                if (dbInvestmentTerm == "One Month")
+                {
+                    illustrationInfo.OneMonth -= Convert.ToDouble(savedBank.Amount);
+                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+                }
+
+                if (dbInvestmentTerm == "Three Months")
+                {
+                    illustrationInfo.ThreeMonths -= Convert.ToDouble(savedBank.Amount);
+                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+                }
+                
+                if (dbInvestmentTerm == "Six Months")
+                {
+                    illustrationInfo.SixMonths -= Convert.ToDouble(savedBank.Amount);
+                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+                }
+
+                if (dbInvestmentTerm == "One Year")
+                {
+                    illustrationInfo.OneYear -= Convert.ToDouble(savedBank.Amount);
+                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+                }
+
+                if (dbInvestmentTerm == "Two Years")
+                {
+                    illustrationInfo.TwoYears -= Convert.ToDouble(savedBank.Amount);
+                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+                }
+                
+                if (dbInvestmentTerm == "Three Years")
+                {
+                    illustrationInfo.ThreeYearsPlus -= Convert.ToDouble(savedBank.Amount);
+                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+                }
+            }
+
             Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
 
             string fscsProtectionConfigFile = AppSettings.ClientConfigRoot;// ConfigurationManager.AppSettings["clientConfigRoot"];
@@ -484,10 +530,18 @@ namespace InsignisIllustrationGenerator.Controllers
             }
             
             var feeMatrix = new FeeMatrix(fscsProtectionConfigFile + "FeeMatrix.xml");
+
+            
+
+
+
+
+
+
+
+
             model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
 
-
-            //Check for any saved banks TODO
             var tempBanks = _context.TempInstitution.Where(x=>x.SessionId == illustrationInfo.SessionId).ToList();
             
             foreach (var bank in tempBanks)
@@ -505,6 +559,9 @@ namespace InsignisIllustrationGenerator.Controllers
                 model.ProposedPortfolio.ProposedInvestments.Add(row);
             }
 
+
+            //Check for any saved banks TODO
+            
 
             model.AnnualGrossInterestEarned = 0;
             model.TotalDeposit = 0;
