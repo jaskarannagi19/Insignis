@@ -1211,6 +1211,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 _model.ThreeYearsPlus = illustrationInfo.ThreeYearsPlus;
                 _model.TwoYears = illustrationInfo.TwoYears;
 
+                _model.SessionId = illustrationInfo.SessionId;
 
                 SCurveOutput _sStore = new SCurveOutput();
 
@@ -1264,7 +1265,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
                 _model.AnnualGrossInterestEarned = 0;
                 //Saved bank da rate again gross interest calculate 
-
+                
                 foreach (var investment in _model.ProposedPortfolio.ProposedInvestments)
                 {
                     _model.AnnualGrossInterestEarned += investment.AnnualInterest;
@@ -1331,7 +1332,7 @@ namespace InsignisIllustrationGenerator.Controllers
                     }
                 }
 
-
+                _model.IllustrationUniqueReference = partnerEmail.IllustrationUniqueReference;
                 HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(_sStore));
                 HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(_model));
                 return View("Calculate", _model);
@@ -1542,6 +1543,8 @@ namespace InsignisIllustrationGenerator.Controllers
             {
                 TempData["AllowEdit"] = TempData["AllowEdit"];
                 bool alreadyExcluded = _context.ExcludedInstitutes.Any(x => x.InstituteId == Convert.ToInt32(bankId) && x.SessionId == illustrationInfo.SessionId && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation && x.ClientReference == partnerEmail.ClientName);
+
+
                 if (!alreadyExcluded)
                 {
                     ExcludedInstitute inst = new ExcludedInstitute();
@@ -1779,12 +1782,17 @@ namespace InsignisIllustrationGenerator.Controllers
             var excludedInstituteIds = _context.ExcludedInstitutes.Where(x => x.ClientReference == partnerEmail.ClientName && x.SessionId == illustrationInfo.SessionId && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation).Select(x => x.InstituteId).ToList();
 
 
+            var savedexcludedInstituteIds = _context.ExcludedInstitutes.Where(x => x.SessionId == illustrationInfo.SessionId).Select(x => x.InstituteId).ToList();
+
             foreach (var childern in institutionInclusion.Children)
             {
                 if (childern.Name != bankId)
                     childern.Value = "true";
                 if (excludedInstituteIds.Contains(Convert.ToInt32(childern.Name)))
                     childern.Value = "false";
+                if (savedexcludedInstituteIds.Contains(Convert.ToInt32(childern.Name)))
+                    childern.Value = "false";
+
             }
 
             var feeMatrix = new FeeMatrix(fscsProtectionConfigFile + "FeeMatrix.xml");
@@ -1935,6 +1943,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
 
             model.SessionId = illustrationInfo.SessionId;
+            model.IllustrationUniqueReference = partnerEmail.IllustrationUniqueReference;
             
             HttpContext.Session.SetString("GeneratedPorposals", JsonConvert.SerializeObject(sStore));
             HttpContext.Session.SetString("InputProposal", JsonConvert.SerializeObject(model));

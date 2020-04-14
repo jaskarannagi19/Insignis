@@ -37,8 +37,8 @@ namespace InsignisIllustrationGenerator.Scheduler
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
-          //  while (!cancellationToken.IsCancellationRequested)
-          //  {
+            while (!cancellationToken.IsCancellationRequested)
+            {
                 var result = await _dataProvider.UpdateString();
 
                 using (IServiceScope scope = _serviceProvider.CreateScope())
@@ -49,8 +49,8 @@ namespace InsignisIllustrationGenerator.Scheduler
                     _bankHelper.SaveBankAndProducts(result);
                 }
 
-                await Task.Delay(TimeSpan.FromSeconds(15), cancellationToken);
-           // }
+                await Task.Delay(TimeSpan.FromHours(23), cancellationToken);
+            }
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
