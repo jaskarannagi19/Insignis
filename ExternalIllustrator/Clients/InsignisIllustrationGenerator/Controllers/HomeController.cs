@@ -520,7 +520,7 @@ namespace InsignisIllustrationGenerator.Controllers
 
             //Octavo.Gate.Nabu.Preferences.Preference institutionInclusion = preferencesManager.GetPreference("Sales.Tools.SCurve.Institutions", 1, "Institutions");
 
-            var excludedInstituteIds = _context.ExcludedInstitutes.Where(x => x.SessionId == illustrationInfo.SessionId).Select(x => x.InstituteId).ToList();
+            var excludedInstituteIds = _context.ExcludedInstitutes.Where(x => x.SessionId == illustrationInfo.SessionId && x.IsUpdatedBank == false).Select(x => x.InstituteId).ToList();
 
             foreach (var childern in institutionInclusion.Children)
             {
@@ -1379,7 +1379,9 @@ namespace InsignisIllustrationGenerator.Controllers
             if (_savedBank)
             {
                 TempData["AllowEdit"] = TempData["AllowEdit"];
+                
                 var _list = _context.TempInstitution.Where(x => x.ClientName == partnerEmail.ClientName && x.PartnerEmail == partnerEmail.PartnerEmail && x.PartnerOrganisation == partnerEmail.PartnerOrganisation).ToList();
+                
                 if (_list.Count > 0)
                 {
 
@@ -1668,6 +1670,7 @@ namespace InsignisIllustrationGenerator.Controllers
                 inst.PartnerOrganisation = partnerEmail.PartnerOrganisation;
                 inst.InstituteId = Convert.ToInt32(bankId);
                 inst.SessionId = partnerEmail.SessionId;
+                inst.IsUpdatedBank = true;
 
                 _context.ExcludedInstitutes.Add(inst);
                 _context.SaveChanges();
