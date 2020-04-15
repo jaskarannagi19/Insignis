@@ -14,7 +14,6 @@ namespace InsignisIllustrationGenerator.Manager
         public string PartnerEmailAddress { get; set; }
         public string PartnerTelephone { get; set; }
 
-
         //Illustration Seesoin Fields
         public string ClientName { get; set; }
         public int ClientType { get; set; }
