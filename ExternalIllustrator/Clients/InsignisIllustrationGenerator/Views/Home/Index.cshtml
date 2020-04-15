@@ -46,11 +46,11 @@
                                     <label for="inputEmail4" id="lbClientType">Client Type (£85,000 per bank)</label>
 
                                     <select id="sbClientType" class="form-control" disabled="@_readonly">
-                                        <option selected value=0>Individual</option>
-                                        <option value=1>Joint</option>
+                                        <option value=0 selected="@(Model.ClientType == 0)">Individual</option>
+                                        <option value=1 selected="@(Model.ClientType == 1)">Joint</option>
                                     </select>
 
-                                    <input id="txtClientType" type="hidden" asp-for="@Model.ClientType" />
+                                    <input id="txtClientType" type="hidden"  asp-for="@Model.ClientType" />
 
                                 </div>
                                 <div class="form-group col-md-6">
