@@ -419,52 +419,52 @@ namespace InsignisIllustrationGenerator.Controllers
             //scurve.LoadHeatmap(7, model.Currency, AppSettings.preferencesRoot);
 
             //Changes here for saved banks in illustrationInfo
-            if(_context.TempInstitution.Any(x => x.SessionId == illustrationInfo.SessionId)){
-                var savedBank = _context.TempInstitution.OrderByDescending(x => x.Id).First(x => x.SessionId == illustrationInfo.SessionId);
-                string dbInvestmentTerm = _context.InvestmentTermMapper.First(x => x.InvestmentText == savedBank.InvestmentTerm).InvestmentTerm;
+            //if(_context.TempInstitution.Any(x => x.SessionId == illustrationInfo.SessionId)){
+            //    var savedBank = _context.TempInstitution.OrderByDescending(x => x.Id).First(x => x.SessionId == illustrationInfo.SessionId);
+            //    string dbInvestmentTerm = _context.InvestmentTermMapper.First(x => x.InvestmentText == savedBank.InvestmentTerm).InvestmentTerm;
 
-                if (dbInvestmentTerm == "Instant Access")
-                {
-                    illustrationInfo.EasyAccess -= Convert.ToDouble(savedBank.Amount);
-                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
-                }
+            //    if (dbInvestmentTerm == "Instant Access")
+            //    {
+            //        illustrationInfo.EasyAccess -= Convert.ToDouble(savedBank.Amount);
+            //        illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+            //    }
                 
-                if (dbInvestmentTerm == "One Month")
-                {
-                    illustrationInfo.OneMonth -= Convert.ToDouble(savedBank.Amount);
-                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
-                }
+            //    if (dbInvestmentTerm == "One Month")
+            //    {
+            //        illustrationInfo.OneMonth -= Convert.ToDouble(savedBank.Amount);
+            //        illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+            //    }
 
-                if (dbInvestmentTerm == "Three Months")
-                {
-                    illustrationInfo.ThreeMonths -= Convert.ToDouble(savedBank.Amount);
-                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
-                }
+            //    if (dbInvestmentTerm == "Three Months")
+            //    {
+            //        illustrationInfo.ThreeMonths -= Convert.ToDouble(savedBank.Amount);
+            //        illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+            //    }
                 
-                if (dbInvestmentTerm == "Six Months")
-                {
-                    illustrationInfo.SixMonths -= Convert.ToDouble(savedBank.Amount);
-                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
-                }
+            //    if (dbInvestmentTerm == "Six Months")
+            //    {
+            //        illustrationInfo.SixMonths -= Convert.ToDouble(savedBank.Amount);
+            //        illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+            //    }
 
-                if (dbInvestmentTerm == "One Year")
-                {
-                    illustrationInfo.OneYear -= Convert.ToDouble(savedBank.Amount);
-                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
-                }
+            //    if (dbInvestmentTerm == "One Year")
+            //    {
+            //        illustrationInfo.OneYear -= Convert.ToDouble(savedBank.Amount);
+            //        illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+            //    }
 
-                if (dbInvestmentTerm == "Two Years")
-                {
-                    illustrationInfo.TwoYears -= Convert.ToDouble(savedBank.Amount);
-                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
-                }
+            //    if (dbInvestmentTerm == "Two Years")
+            //    {
+            //        illustrationInfo.TwoYears -= Convert.ToDouble(savedBank.Amount);
+            //        illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+            //    }
                 
-                if (dbInvestmentTerm == "Three Years")
-                {
-                    illustrationInfo.ThreeYearsPlus -= Convert.ToDouble(savedBank.Amount);
-                    illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
-                }
-            }
+            //    if (dbInvestmentTerm == "Three Years")
+            //    {
+            //        illustrationInfo.ThreeYearsPlus -= Convert.ToDouble(savedBank.Amount);
+            //        illustrationInfo.TotalDeposit -= Convert.ToDouble(savedBank.Amount);
+            //    }
+            //}
 
             Insignis.Asset.Management.Tools.Sales.SCurveSettings settings = ProcessPostback(illustrationInfo, false, scurve.heatmap);
 
@@ -542,22 +542,22 @@ namespace InsignisIllustrationGenerator.Controllers
 
             model.ProposedPortfolio = scurve.Process(settings, fscsProtectionConfigFile, institutionInclusion);
 
-            var tempBanks = _context.TempInstitution.Where(x=>x.SessionId == illustrationInfo.SessionId).ToList();
+            //var tempBanks = _context.TempInstitution.Where(x=>x.SessionId == illustrationInfo.SessionId).ToList();
             
-            foreach (var bank in tempBanks)
-            {
-                Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
-                row.InstitutionName = bank.InstitutionName;
-                row.InstitutionID = bank.BankId;
-                row.InvestmentTerm = new InvestmentTerm();
-                row.InvestmentTerm.TermText = bank.InvestmentTerm;
-                row.Rate = bank.Rate;
-                row.DepositSize = bank.Amount;
-                row.AnnualInterest = ((bank.Rate / 100) * bank.Amount);
+            //foreach (var bank in tempBanks)
+            //{
+            //    Insignis.Asset.Management.Tools.Sales.SCurveOutputRow row = new Insignis.Asset.Management.Tools.Sales.SCurveOutputRow();
+            //    row.InstitutionName = bank.InstitutionName;
+            //    row.InstitutionID = bank.BankId;
+            //    row.InvestmentTerm = new InvestmentTerm();
+            //    row.InvestmentTerm.TermText = bank.InvestmentTerm;
+            //    row.Rate = bank.Rate;
+            //    row.DepositSize = bank.Amount;
+            //    row.AnnualInterest = ((bank.Rate / 100) * bank.Amount);
 
-                //_sStore.ProposedInvestments.Add(row);
-                model.ProposedPortfolio.ProposedInvestments.Add(row);
-            }
+            //    //_sStore.ProposedInvestments.Add(row);
+            //    model.ProposedPortfolio.ProposedInvestments.Add(row);
+            //}
 
 
             //Check for any saved banks TODO

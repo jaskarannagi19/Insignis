@@ -25,5 +25,8 @@ namespace InsignisIllustrationGenerator.Data
         
         public Guid SessionId { get; set; } 
 
+        //Updation flag
+        public bool IsUpdatedBank { get; set; }
+
     }
 }
